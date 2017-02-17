@@ -204,5 +204,8 @@ $GLOBALS['allow_issue_menu_link'] = ((acl_check('encounters','notes','','write')
         });
     });
 </script>
+
+<?php do_action( 'after_main_box' ); ?>
+
 </body>
 </html>

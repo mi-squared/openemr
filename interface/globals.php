@@ -1,5 +1,4 @@
 <?php
-
 // Default values for optional variables that are allowed to be set by callers.
 
 //This is to help debug the ssl mysql connection. This will send messages to php log to show if mysql connections have a cipher set up.
@@ -511,4 +510,5 @@ if ($fake_register_globals) {
   extract($_GET,EXTR_SKIP);
   extract($_POST,EXTR_SKIP);
 }
-?>
+
+include_once __DIR__ . '/../library/pluginsystem/bootstrap.php';

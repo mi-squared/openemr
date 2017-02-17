@@ -22,10 +22,30 @@ class ComposerStaticInit22ddb69348c7ed922c96325249cef3d0
         array (
             'Zend\\' => 5,
         ),
-        'D' => 
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\Debug\\' => 24,
+            'Symfony\\Component\\Console\\' => 26,
+        ),
+        'P' => 
+        array (
+            'PluginSystem\\' => 13,
+            'Psr\\Log\\' => 8,
+        ),
+        'I' => 
+        array (
+            'Illuminate\\Support\\' => 19,
+            'Illuminate\\Contracts\\' => 21,
+        ),
+        'D' =>
         array (
             'Dompdf\\' => 7,
             'Doctrine\\Common\\Cache\\' => 22,
+        ),
+        'F' =>
+        array (
+            'Framework\\' => 10,
         ),
     );
 
@@ -46,6 +66,22 @@ class ComposerStaticInit22ddb69348c7ed922c96325249cef3d0
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+        'Adldap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/adldap2/adldap2/src',
+        ),
+        'PluginSystem\\' =>
+            array (
+                0 => __DIR__ . '/../..' . '/library/pluginsystem',
+            ),
+        'Framework\\' =>
+            array (
+                0 => __DIR__ . '/..' . '/libreehr/Framework',
+            ),
     );
 
     public static $prefixesPsr0 = array (

@@ -29,9 +29,42 @@
         "phing/phing": "2.14.0"
 
     },
+    "autoload": {
+        "exclude-from-classmap": ["library/classes/ClinicalTypes/",
+            "library/classes/rulesets/",
+            "library/classes/smtp/",
+            "library/classes/Prescription.class.php"
+        ],
+        "classmap": ["library/classes", "services"],
+        "files": [
+            "library/htmlspecialchars.inc.php",
+            "library/formdata.inc.php",
+            "library/sanitize.inc.php",
+            "library/date_functions.php",
+            "library/validation/validate_core.php",
+            "library/translation.inc.php"
+        ],
+        "psr-4": {
+            "common\\": "common",
+            "common\\database\\": "common/database",
+            "common\\logging\\": "common/logging",
+            "entities\\": "entities",
+            "services\\": "services",
+            "repositories\\": "repositories",
+            "PluginSystem\\": "library/pluginsystem/",
+            "Framework\\": "vendor/libreehr/Framework/"
+        }
+    },
     "config": {
         "preferred-install": {
             "doctrine/couchdb": "dist"
         }
-    }
+    },
+    "plugin-dirs" : [
+        "interface/plugins/"
+    ],
+    "plugins" : [
+        "interface/tags_filters",
+        "interface/casa"
+    ]
 }

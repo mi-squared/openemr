@@ -236,7 +236,7 @@ foreach ($ISSUE_TYPES as $focustype => $focustitles) {
     }
     echo "  <td>" . text($row['referredby']) . "</td>\n";
     echo "  <td>" . text($row['modifydate']) . "</td>\n";
-    echo "  <td>" . text($row['comments']) . "</td>\n";
+    echo "  <td>" . nl2br(text($row['comments'])) . "</td>\n";
     echo "  <td id='e_$rowid' class='noclick center' title='" . xla('View related encounters') . "'>";
     echo "  <input type='button' value='" . attr($ierow['count']) . "' class='editenc' id='" . attr($rowid) . "' />";
     echo "  </td>";

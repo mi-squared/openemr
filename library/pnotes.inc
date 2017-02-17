@@ -73,13 +73,13 @@ function getPnotesByUser($activity="1",$show_all="no",$user='',$count=false,$sor
           patient_data.fname as patient_data_fname, patient_data.lname as patient_data_lname
           FROM ((pnotes LEFT JOIN users ON pnotes.user = users.username)
           LEFT JOIN patient_data ON pnotes.pid = patient_data.pid) WHERE $activity_query
-          pnotes.deleted != '1' AND pnotes.assigned_to LIKE ?";
+          pnotes.deleted != '1' AND pnotes.assigned_to LIKE ? OR pnotes.assigned_to = ?";
   if (!empty($sortby) || !empty($sortorder)  || !empty($begin) || !empty($listnumber)) {
     $sql .= " order by ".escape_sql_column_name($sortby,array('users','patient_data','pnotes'),TRUE).
             " ".escape_sort_order($sortorder).
             " limit ".escape_limit($begin).", ".escape_limit($listnumber);
   }
-  $result = sqlStatement($sql, array($usrvar));
+  $result = sqlStatement($sql, array($usrvar, 'intern_group'));
 
   // return the results
   if ($count) {

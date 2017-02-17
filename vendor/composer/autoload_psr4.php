@@ -10,4 +10,8 @@ return array(
     'Zend\\' => array($vendorDir . '/zendframework/zendframework/library/Zend'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
+    'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations'),
+    'Adldap\\' => array($vendorDir . '/adldap2/adldap2/src'),
+    'PluginSystem\\' => array($baseDir . '/library/pluginsystem'),
+    'Framework\\' => array($vendorDir . '/libreehr/Framework'),
 );

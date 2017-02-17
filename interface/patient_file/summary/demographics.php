@@ -680,6 +680,7 @@ if ($GLOBALS['patient_id_category_name']) {
                 <div style='float:left; margin-right:20px'>
 
                     <table cellspacing=0 cellpadding=0>
+                    <?php do_action( 'demographics_before_first_table_row' ); ?>
                     <?php if (!$GLOBALS['hide_billing_widget'])  { ?>
                         <tr>
                             <td>
@@ -1667,4 +1668,5 @@ checkSkipConditions();
 </script>
 
 </body>
+<?php do_action( 'demographics_before_html_end', $args = [ 'pid' => $pid ] ); ?>
 </html>

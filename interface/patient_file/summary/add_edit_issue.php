@@ -795,7 +795,7 @@ function divclick(cb, divid) {
  <tr id='row_comments'>
   <td valign='top' nowrap><b><?php echo xlt('Comments'); ?>:</b></td>
   <td>
-   <textarea name='form_comments' rows='4' cols='40' wrap='virtual' style='width:100%'><?php echo text($irow['comments']) ?></textarea>
+   <textarea name='form_comments' rows='4' cols='40' wrap='virtual' style='width:100%'><?php echo nl2br(text($irow['comments'])) ?></textarea>
   </td>
  </tr>
 
@@ -809,7 +809,7 @@ function divclick(cb, divid) {
  </tr>
 
  <tr<?php if ($GLOBALS['ippf_specific']) echo " style='display:none;'"; ?>>
-  <td valign='top' nowrap><b><?php echo xlt('Destination'); ?>:</b></td>
+  <td valign='top' nowrap><b><?php echo xlt('Destination'); ?>:</b></td>ne
   <td>
 <?php if (true) { ?>
    <input type='text' size='40' name='form_destination' value='<?php echo attr($irow['destination']) ?>'

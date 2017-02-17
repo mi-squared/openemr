@@ -25,6 +25,7 @@ include_once("$srcdir/registry.inc");
 $menu_update_map=array();
 $menu_update_map["Visit Forms"]="update_visit_forms";
 $menu_update_map["Modules"]="update_modules_menu";
+do_action( 'menu_update', $menu_update_map );
 
 function update_modules_menu(&$menu_list)
 {
@@ -105,7 +106,13 @@ function menu_update_entries(&$menu_list)
         {
             if(isset($menu_update_map[$entry->label]))
             {
-                $menu_update_map[$entry->label]($entry);
+                if ( is_array( $menu_update_map[$entry->label] ) ) {
+                    foreach ( $menu_update_map[$entry->label] as $callback ) {
+                        $callback($entry);
+                    }
+                } else {
+                    $menu_update_map[$entry->label]($entry);
+                }
             }
         }
         // Translate the labels

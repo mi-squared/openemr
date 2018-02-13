@@ -108,7 +108,7 @@ foreach ($aColumns as $colname) {
   if ($colname == 'name') {
     $sellist .= "lname, fname, mname";
   } else if ( $colname == 'tags' ) {
-      $sellist .= " GROUP_CONCAT(`tf_tags`.`tag_name` ORDER BY `tf_tags`.`tag_name` ASC SEPARATOR ','  ) as `tags` ";
+      $sellist .= " COALESCE(`tf_tags`.`tag_name`, NULL  ) as `tags` ";
   }
   else {
     $sellist .= "`" . escape_sql_column_name($colname,array('patient_data')) . "`";

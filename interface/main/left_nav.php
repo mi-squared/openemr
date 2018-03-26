@@ -690,7 +690,7 @@ function clearactive() {
   // in the general menu at some future time.
   //
   //function reloadIssues() {
- //<?php
+ //<?php /*
    //if ($GLOBALS['athletic_team']) {
      // Generates a menu item for each active issue that this patient
      // has of each issue type.  Each one looks like this:
@@ -714,6 +714,8 @@ function clearactive() {
  //<?php
     // }
   // }
+
+     */
  //?>
   //} // end function reloadIssues
  

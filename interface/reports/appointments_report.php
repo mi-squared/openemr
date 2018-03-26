@@ -1,5 +1,5 @@
 <?php
-// Copyright (C) 2005-2016 Rod Roark <rod@sunsetsystems.com>
+// Copyright (C) 2005-2010 Rod Roark <rod@sunsetsystems.com>
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 // Reminders related stuff
 $incl_reminders = isset($_POST['incl_reminders']) ? 1 : 0;
 function fetch_rule_txt ($list_id, $option_id) {
-    $rs = sqlQuery('SELECT title, seq from list_options WHERE list_id = ? AND option_id = ? AND activity = 1',
+    $rs = sqlQuery('SELECT title, seq from list_options WHERE list_id=? AND option_id=?',
             array($list_id, $option_id));
     $rs['title'] = xl_list_label($rs['title']);
     return $rs;
@@ -107,8 +107,8 @@ function fetch_reminders($pid, $appt_date) {
 
 <script type="text/javascript" src="../../library/overlib_mini.js"></script>
 <script type="text/javascript" src="../../library/textformat.js"></script>
-<script type="text/javascript" src="../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
-<script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-3-2/index.js"></script>
+<script type="text/javascript" src="../../library/dialog.js"></script>
+<script type="text/javascript" src="../../library/js/jquery.1.3.2.js"></script>
 
 <script type="text/javascript">
 
@@ -127,7 +127,7 @@ function fetch_reminders($pid, $appt_date) {
  }
 
  function oldEvt(eventid) {
-    dlgopen('../main/calendar/add_edit_event.php?eid=' + eventid, 'blank', 775, 500);
+    dlgopen('../main/calendar/add_edit_event.php?eid=' + eventid, 'blank', 775, 375);
  }
 
  function refreshme() {
@@ -344,7 +344,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 	<tbody>
 		<!-- added for better print-ability -->
 	<?php
-
+	
 	$lastdocname = "";
 	//Appointment Status Checking
         $form_apptstatus = $_POST['form_apptstatus'];
@@ -377,7 +377,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 
 	$appointments = sortAppointments( $appointments, $form_orderby );
     $pid_list = array();  // Initialize list of PIDs for Superbill option
-    $totalAppontments = count($appointments);
+    $totalAppontments = count($appointments);   
 	
 	foreach ( $appointments as $appointment ) {
                 array_push($pid_list,$appointment['pid']);
@@ -448,7 +448,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 	</tr>
 	<?php
     } // End of row 2 display
-
+    
 	$lastdocname = $docname;
 	}
 	// assign the session key with the $pid_list array - note array might be empty -- handle on the printed_fee_sheet.php page.

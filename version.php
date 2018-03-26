@@ -1,4 +1,6 @@
 <?php
+//This is the customer version of the Idaho Behavioral Health custom Mental Health version
+
 // Software version identification.
 // This is used for display purposes, and also the major/minor/patch
 // numbers are stored in the database and used to determine which sql

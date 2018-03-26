@@ -1,0 +1,139 @@
+
+/* add_edit_event.php */
+
+
+.icopay {
+	padding:2px;
+	background-color:rgba(255,255,255, .3);
+}
+
+.appt-warning {
+	color: #a20000;
+    background-color: #f5e457;
+    padding: 4px;
+    font-size: 12px;
+    margin-bottom: 4px;
+    border: 1px dashed black;
+}
+
+.icopay p, .prior-auths h4 {
+	font-size:14px;
+	line-height:100%;
+	color:#cc0000;
+	font-weight:normal;
+	padding:0;
+	margin:4px 0;
+}
+
+.icopay .prior-auths {
+	
+}
+
+.icopay.prior-auths {
+	display:none;
+}
+
+.icopay .prior-auths {
+
+}
+
+.aee-table td {
+	font-size:12px;
+	padding:4px;
+}
+
+.aee-table td:first-child {
+	text-align:right;
+}
+
+
+.icopay .prior-auths-list {
+	border-collapse:collapse;
+	background-color:#f0f0f0;
+	width:95%;
+	margin:4px auto;
+}
+
+
+
+.icopay .prior-auths-list th {
+	background-color:#1c7c00;
+	color:white;
+	font-weight:normal;
+	font-size:11px;
+	text-align:left;
+}
+
+.icopay .prior-auths-list th, .icopay .prior-auths-list td {
+	padding:4px;
+}
+
+.icopay .prior-auths-list td {
+	font-size:12px;
+	color:#333;
+}
+.pa-code {
+		
+		 -webkit-border-radius: 2px;
+	  -moz-border-radius: 2px;
+	  border-radius: 2px;
+	  margin-right:3px;
+	 font-size: 12px;
+	 padding: 2px 4px;
+}
+.pa-code.cold-code {
+background-color:#ccc;
+	color:#686868;
+}
+
+.pa-warning {
+	display:none;
+	background-color:#fabdbd;
+	color:#8a0505;
+	padding:4px;
+			 -webkit-border-radius: 2px;
+	  -moz-border-radius: 2px;
+	  border-radius: 2px;
+	  width:95%;
+	  margin:2px auto;
+	  text-align:center;
+}
+
+.pa-code.hot-code {
+	background-color:#fabdbd;
+	color:#8a0505;
+}
+
+#checkins {
+	width: 90%;
+    margin: 0 auto;
+}
+
+#checkins div {
+	color: #a20000;
+    background-color: #f5e457;
+    padding: 4px;
+    font-size: 12px;
+    margin-bottom: 4px;
+    border: 1px dashed black;
+}
+
+h4.add-edit-warning {
+	color:#ffffff;
+	background-color:#f32323;
+	padding:4px;
+	font-size:14px;
+	text-align:center;
+}
+
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+
+

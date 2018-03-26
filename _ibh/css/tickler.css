@@ -1,0 +1,323 @@
+
+	body {
+		font-family:Courier;
+		background-color:#f0f0f0;
+	}
+	
+	.patient_list {
+		margin:64px 32px;
+		clear:both;
+	}
+	
+	.group:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+	
+	.pl-item {
+		border-bottom:1px dotted #ccc;
+		padding:8px 12px;
+		width:100%;	
+	}
+	
+	.controls {
+		font-size:12px;
+		margin-top:12px;
+	}
+	
+	.navi {
+		float:right;
+		font-size:11px;
+		
+	}
+	
+	.pl-dob {
+		color:#555;
+		float:right;
+	}
+	
+	.pl-rem {
+		color:#f73333;
+		float:right;
+		margin-left:18px;
+		cursor:pointer;
+	}
+	
+	.pl-rem:hover {
+		color:#e49898;
+	}
+	
+	.new-patient {
+		padding:18px;
+		background-color:#036606;
+		color:white;
+		float:right;
+		display:none;
+	}
+	
+	.new_patient_row {
+		float:right;
+		clear:both;
+		color:#6aa337;
+		margin:14px 0;
+		font-size:11px;
+	}
+	
+	.wrapper {
+		width:900px;
+		margin:32px auto;
+		padding:32px;
+		border:1px solid #ccc;
+		background-color:#fff;
+	}
+	
+	
+		.ibh-tickler-table {
+		width:100%;
+		background-color:#fff;
+		border:1px solid #ccc;
+		border-collapse:collapse;
+		margin:32px auto;
+	}
+	
+	
+	.ibh-tickler-table  th{
+		background-color:#333;
+		color:white;
+		text-align:left;
+		font-weight:normal;
+		font-family:Arial, Helvetica, sans-serif;
+		text-align:center;
+		padding:8px 0;
+		font-size:12px;
+	}
+	
+	
+	.ibh-tickler-table  td{
+		border:1px solid #ccc;
+		padding:8px;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:12px;
+		vertical-align:top;
+		height:90px;
+	}
+	.ibh-tickler-table  td.ibh-tick-patient{
+		width:150px;
+	}
+	
+	td.active {
+		position:relative;
+	}
+	
+	.ibh-choose-cda.active, .ibh-choose-tx0.active {
+		background-color:#111;
+	}
+	
+	.overdue-1 {
+		background-color:#ffc002;
+	}
+	
+	.overdue-15 {
+		background-color:#ff0201;
+	}
+	
+	.overdue-30 {
+		background-color:#a11b2f;
+	}
+	
+	.birthday-soon {
+		background-color:#ab96fc;
+	}
+	
+	.birthday-recent {
+		background-color:#d4e830;
+	}
+	
+	.birthday-day {
+		background-color:#5310ec;
+		color:white;
+	}
+	
+	.patient-dob {
+		color:#777;
+		font-size:.9em;
+	}
+	 
+	.choose-form, .choose-cda, .choose-tx {
+		color:#000000;
+		font-size:11px;
+	}
+	
+	.date_selector {
+		position:absolute;
+		top:400px;
+		left:-600px;
+		width:305px;
+		border:1px solid #333;
+		background-color:#ecebce;
+		padding:12px;
+		z-index:99999;
+		
+		-webkit-box-shadow: 10px 10px 14px -4px rgba(0,0,0,0.68);
+		-moz-box-shadow: 10px 10px 14px -4px rgba(0,0,0,0.68);
+		box-shadow: 10px 10px 14px -4px rgba(0,0,0,0.68);
+
+	}
+	
+	.form-link {
+		    color: #d9e7c2;
+			font-size: 10px;
+			padding: 2px;
+			position: absolute;
+			top: -14px;
+			right: -8px;
+	}
+	
+	.ds_cancel {
+		cursor:pointer;
+		color:red;
+		float:right;
+	}
+	
+	.ds_clear {
+		cursor:pointer;
+		color:#525252;
+		float:right;
+		margin-right:18px;
+	}
+	
+	.comp-date {
+		/* completed date */
+		color:white;
+		margin:2px 0;
+		font-size:11px;
+	}
+	
+	.form-list-items {
+		margin-top:20px;
+		max-height:300px;
+		overflow-y:scroll;
+	}
+	.form-list-item {
+		cursor:pointer;
+		padding:4px 0;
+		
+		color:#7086d1;
+		font-size:12px;
+		font-family:Arial, Helvetica, sans-serif;
+		border-bottom:1px solid #ccc;
+	}
+	
+	.form-list-item:hover {
+		opacity:.7;
+	}
+	
+	.form-list-provider {
+		color:#7b6910;
+	}
+	
+	.form-list-date {
+		color:#4a4a4a;
+	}
+	
+	.mini-form-name {
+		font-size:11px;
+		color:#d68c08;
+		position:relative;
+		margin-top:8px;
+	}
+	
+	.ibh-tickler-table  td.ibh-tick-target {
+		background-color:#fff;
+		text-align:right;
+		border-left:3px solid #000;
+		border-top:3px solid #000;
+		border-bottom:3px solid #000;
+		width:68px;
+		vertical-align:top;
+	}
+	
+	.ibh-tickler-table td.ibh-choose-d90-comp, .ibh-tickler-table td.ibh-choose-d270-comp, .ibh-tickler-table td.ibh-choose-d180-comp, .ibh-tickler-table td.ibh-choose-d360-comp {
+		border-right:3px solid #000;
+		border-top:3px solid #000;
+		border-bottom:3px solid #000;
+	} 
+	
+	.ibh-choose-tx0, .ibh-choose-cda {
+		background-color:#fff;
+	}
+	
+	.hilite {
+		background-color:pink;
+	}
+	
+	.upcoming_15_or_more {
+		background-color:#82d283;
+	}
+	
+	.upcoming_two_week_window {
+		background-color:#429259;
+	}
+	
+	.upcoming_today {
+		background-color:#d1d270;
+	}
+	
+	.overdue_1_to_15 {
+		background-color:#d2cd3c;
+	}
+	
+	.overdue_16_to_30 {
+		background-color:#e84944;
+	}
+	.overdue_31 {
+		background-color:#c6160e;
+	}
+	
+	.overdue_31 small, .overdue_16_to_30 small {
+		color:black;
+	}
+	
+	.completed {
+		background-color:#5240ce;
+		position:relative;
+	}
+	td small {
+		color:#007611;
+	}
+	.completed small {
+		color:#ccc;
+		display:block;
+	}
+	
+	th.sorted.ascending:after {
+    content: "  \2191";
+}
+ 
+th.sorted.descending:after {
+    content: " \2193";
+}
+
+.f-sign {
+	width:20px;
+	height:20px;
+	border:1px dotted #fff;
+	background-color:#fff;
+	cursor:pointer;
+	font-size:20px;
+	position:absolute;
+	bottom:0;
+	right:0;
+	text-align:center;
+}
+
+.f-sign.signed:before {
+	content: "S";
+	color:green;
+	text-align:center;
+}
+
+
+
+

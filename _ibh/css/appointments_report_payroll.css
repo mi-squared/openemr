@@ -1,0 +1,111 @@
+
+
+#report_results table.expando-table {
+	
+	width:80%;
+	margin:8px auto;
+	
+}
+
+#report_results table.expando-table tr td {
+	padding:8px;
+	background:#f0f0f0;
+	color:#555;
+	padding-left:12px;
+	vertical-align:top;
+}
+
+#report_results table.expando-table tr.appt-head td {
+	background-color:#444;
+	color:#ccc;
+	font-weight:bold;
+}
+
+#report_results table.expando-table tr td.billing-date {
+	width:10%;
+}
+
+#report_results table.expando-table tr td.provider {
+	width:10%;
+}
+
+#report_results table.expando-table tr td.patient-name {
+	width:25%;
+}
+
+#report_results table.expando-table tr td.tail-1 {
+	width:45%;
+}
+
+
+#report_results table.expando-table tr td span.total-hours {
+	float:right;
+}
+
+
+#report_results table.expando-table tr td.tail-2 {
+	width:20%;
+}
+
+#report_results table.expando-table tr td.tail-3 {
+	width:15%;
+}
+
+#report_results table.expando-table tr.grand-total td {
+	text-align:right;
+	font-weight:bold;
+	background-color:white;
+	border-top:3px solid green;
+}
+
+.details-row {
+	display:none;
+}
+
+#report_results table td small {
+	font-size:11px;
+	color:#777;
+}
+
+
+#report_results table.expando-table tr td.nonbillables-header {
+	background-color:#cbba00;
+	text-transform:uppercase;
+}
+
+#report_results table.expando-table tr.details-row.details-header td {
+	background-color:#ccc;
+}
+
+#report_results table.expando-table .appt-tail td {
+	padding-bottom:14px;
+	background-color:white;
+	font-weight:bold;
+}
+
+
+#report_results table.expando-table tr.nonbillable td {
+	background-color:#554e07;
+}
+
+
+.appt-tail-labels {
+	color:#999;
+}
+
+.nav-table td {
+	border:1px dotted green;
+}
+
+.expando-table tr.appt-head td {
+	background-color:#333;
+	color:white;
+	font-size:16px;
+}
+
+.toggle-details {
+	float:right;
+	cursor:pointer;
+	color:#5ef300;
+	margin-right:18px;
+}

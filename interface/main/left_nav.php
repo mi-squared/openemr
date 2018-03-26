@@ -1118,6 +1118,13 @@ if (!empty($reg)) {
 
     </ul>
   </li>
+   <li><a class="collapsed" id="feeimg" ><span><?php xl('Employee','e') ?></span></a>
+       <ul>
+       <?php  if (acl_check('admin', 'super'    )) genMiscLink('RBot', 'adm', '0', xl('Payroll'), 'reports/appointments_report_payroll.php' ); ?>
+	   <?php  genMiscLink('RBot', 'rep', '0', xl('PTO, Milage'), 'payroll/misc_payroll_entry.php' ); ?>
+	   </ul>
+   </li>
+
   <?php // TajEmo Work by CB 2012/06/21 10:41:15 AM hides fees if disabled in globals ?>
   <?php if(!isset($GLOBALS['enable_fees_in_left_menu']) || $GLOBALS['enable_fees_in_left_menu'] == 1){ ?>
   <li><a class="collapsed" id="feeimg" ><span><?php xl('Fees','e') ?></span></a>

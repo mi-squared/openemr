@@ -722,10 +722,11 @@ function lookup_code_descriptions($codes,$desc_detail="code_text") {
     }
   }
      //IBH Custome Code: Changed by sherwin to include the orginal code 5/11/2016
-     //return $code." - ".$code_text;
+    //This was changed because billing sheet does not include descriptions of ICD10 diags
+     return $code." - ".$code_text;
 
-    //Removed IBH Custom Code and left original.  Text was redundant
-    return $code;
+    //Original Code
+    //return $code;
 }
 
 /**

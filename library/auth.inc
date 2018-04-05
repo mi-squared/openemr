@@ -96,7 +96,7 @@ else
 }
 
 if (!isset($_SESSION["last_update"])) {
-    authLoginScreen();
+    authLoginScreen(true);
 } else {
      //if page has not been updated in a given period of time, we call login screen
      //--Note can't perform nice logout if skip_timeout_reset is set since these are called

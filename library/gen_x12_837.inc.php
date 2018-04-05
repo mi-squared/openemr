@@ -7,6 +7,11 @@
 // of the License, or (at your option) any later version.
 
 require_once("Claim.class.php");
+
+// IBH_DEV
+// -- prior auth hooks
+// -- billing location change for certain billing codes
+
 function stripZipCode($zip)
 {
     return preg_replace('/[-\s]*/','',$zip);
@@ -532,12 +537,21 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
   }
 
   ++$edicount;
+
+  // OLD, using facility db, all set to 11
+  // $location = $claim->facilityPOS();
+
+  // IBH_DEV
+  // conditional location added by mikeydev to handle
+  // certain treatments that are community-based
+  $location = ibh_get_location($claim, $claim->facilityPOS());
+
   $out .= "CLM" .       // Loop 2300 Claim
     "*$pid-$encounter" .
     "*"  . sprintf("%.2f",$clm_total_charges) . // Zirmed computes and replaces this
     "*"  .
     "*"  .
-    "*"  . sprintf('%02d', $claim->facilityPOS()) . ":" .
+    "*"  . $location . ":" .
            ($CMS_5010 ? "B" : "") . ":" .
            $claim->frequencyTypeCode() . // Changed to correct single digit output
     "*Y" .
@@ -608,26 +622,41 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
   // Segment REF*EW (Mammography Certification Number) omitted.
   // Segment REF*9F (Referral Number) omitted.
 
+
+//**comment added by Daniel Pflieger:  Not sure about the priorAuthz method.
+    //**This may be needed to replace with original code
+  //IBH_DEV Added by sherwin 3/22/2016 for form_prior_auth behavioral health
+
+  // If there is a prior_auth associated with this billing code
+  // that's current & valid for the patient, add this REF line
+  // IBH_DEV
+  // ADDED _A HERE TO TEST
+  if ($claim->priorAuthz()) {
+    ++$edicount;
+    $out .= "REF" .
+      "*G1" .
+      "*" . $claim->priorAuthz() .
+      "~\n";
+  }
+
+  /**********End to changes************/
+
+  // IBH_DEV
+  // This is the original priorAuth function which seems to be unused
+  // in our scenario, where prior_auth records are NOT using LBF forms
+
   if ($claim->priorAuth()) {
     ++$edicount;
-    $out .= "REF" .     // Prior Authorization Number
+    error_log("Method 1: ".$claim->billing_options['icn_resubmission_number'], 0);
+    $out .= "REF" .
       "*G1" .
       "*" . $claim->priorAuth() .
       "~\n";
   }
 
-  // Segment REF*F8 Payer Claim Control Number for claim re-submission.icn_resubmission_number
 
-  #if($claim->billing_options['replacement_claim'] == '1'){
-  if(trim($claim->billing_options['icn_resubmission_number']) > 3){
-    ++$edicount;
-    error_log("Method 1: ".$claim->billing_options['icn_resubmission_number'], 0);
-    $out .= "REF" .
-      "*F8" .
-      "*" . $claim->icnResubmissionNumber() .
-      "~\n";
-  }
 
+  // Segment REF*F8 (Payer Claim Control Number) omitted.
 
   if ($claim->cliaCode() && ($CMS_5010 || $claim->claimType() === 'MB')) {
     // Required by Medicare when in-house labs are done.
@@ -1236,28 +1265,51 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
     // Used if the rendering provider for this service line is different
     // from that in loop 2310B.
     //
+
+
+
+
+/******************************* Added by Sherwin 08-21-2016 ***********************************/
+
+	if($claim->provider_id == 15){
+
+		//If the insurer is medicare do nothing because the below statement will be true and add extra lines
+		//that are not needed. If the insurer is other than medicare proceed as normal.
+
+	} else {
+
+
     if ($claim->providerNPI() != $claim->providerNPI($prockey)) {
+
       ++$edicount;
       $out .= "NM1" .       // Loop 2310B Rendering Provider
-        "*82" .
+				"*82" .             // Second
         "*1" .
         "*" . $claim->providerLastName($prockey) .
         "*" . $claim->providerFirstName($prockey) .
         "*" . $claim->providerMiddleName($prockey) .
         "*" .
         "*";
-      if ($CMS_5010 || $claim->providerNPI($prockey)) { $out .=
-        "*XX" .
-        "*" . $claim->providerNPI($prockey);
-      } else { $out .=
-        "*34" .                         // Not allowed for 5010
-        "*" . $claim->providerSSN($prockey);
+
+				//
+
+				if ($CMS_5010 || $claim->providerNPI($prockey)) {
+					$out .= "*XX*" . $claim->providerNPI($prockey);
+				} else {
+					// Not allowed for 5010
+					$out .= "*34*" . $claim->providerSSN($prockey);
       }
+				//
+		}
+
+		// BLOCK ABOVE WAS HERE... IF ABOVE if DIDN'T FIRE, THERE WAS NO SEGMENT TAG
+
       if (!$claim->providerNPI($prockey)) {
         $log .= "*** Rendering provider has no NPI.\n";
       }
-      $out .= "~\n";
 
+      $out .= "~\n";
+//**Comment added by Daniel Pflieger:  IBH dev Sherwin removed this.  Not sure why.
       if ($claim->providerTaxonomy($prockey)) {
         ++$edicount;
         $out .= "PRV" .
@@ -1298,8 +1350,7 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
     // Loop 2430, adjudication by previous payers.
     //
     for ($ins = 1; $ins < $claim->payerCount(); ++$ins) {
-      if ($claim->payerSequence($ins) > $claim->payerSequence())
-        continue; // payer is future, not previous
+      if ($claim->payerSequence($ins) > $claim->payerSequence()) continue; // payer is future, not previous
 
       $payerpaid = $claim->payerTotals($ins, $claim->cptKey($prockey));
       $aarr = $claim->payerAdjustments($ins, $claim->cptKey($prockey));

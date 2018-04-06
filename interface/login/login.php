@@ -108,6 +108,13 @@ require_once("../globals.php");
 
 </head>
 <body class="login">
+<header class="navbar">
+    <div class="col-sm-36">
+
+            <img class="img-responsive center-block" src="<?php echo $GLOBALS['images_static_relative']; ?>/logo.gif" />
+
+    </div>
+</header>
     <div class="container">
         <form method="POST" id="login_form"
             action="../main/main_screen.php?auth=login&site=<?php echo attr($_SESSION['site_id']); ?>"

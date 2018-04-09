@@ -28,7 +28,7 @@ require_once('../../globals.php');
 require_once("$srcdir/htmlspecialchars.inc.php");
 require_once("$srcdir/dated_reminder_functions.php");
 
-        $days_to_show = 5;
+        $days_to_show = 14;
         $alerts_to_show = $GLOBALS['dated_reminders_max_alerts_to_show'];
         $updateDelay = 60; // time is seconds 
 
@@ -37,7 +37,7 @@ require_once("$srcdir/dated_reminder_functions.php");
         $today = strtotime(date('Y/m/d'));
         
  // ----- set $hasAlerts to false, this is used for auto-hiding reminders if there are no due or overdue reminders        
-        $hasAlerts = false;
+        $hasAlerts = true;
 
 // mulitply $updateDelay by 1000 to get miliseconds             
         $updateDelay = $updateDelay * 1000;
@@ -95,11 +95,11 @@ require_once("$srcdir/dated_reminder_functions.php");
             $(".hideDR").click(function(){
               if($(this).html() == "<span><?php echo xla('Hide Reminders') ?></span>"){  
                 $(this).html("<span><?php echo xla('Show Reminders') ?></span>"); 
-                $(".drHide").slideUp("slow");
+                $(".drHide").hide();
               }
               else{  
                 $(this).html("<span><?php echo xla('Hide Reminders') ?></span>");  
-                $(".drHide").slideDown("slow");
+                $(".drHide").show();
               }
             }) 
            // run updater after 30 seconds
@@ -136,7 +136,8 @@ require_once("$srcdir/dated_reminder_functions.php");
                   if(id > 0){
                     $(".drTD").html('<p style="text-size:3em; margin-left:200px; color:black; font-weight:bold;"><?php echo xla("Refreshing Reminders") ?> ...</p>');
                   }
-                  $(".drTD").html(data); 
+                  $(".drTD").html('<div class="dated-reminders-list">' + data + '</div>');
+
                 }   
               // run updater every refreshInterval seconds 
               var repeater = setTimeout("updateme(0)", refreshInterval); 
@@ -165,10 +166,13 @@ require_once("$srcdir/dated_reminder_functions.php");
                         <div class="drHide">'.
                         '<p><a title="'.xla('View Past and Future Reminders').'" onclick="openLogScreen()" class="css_button_small" href="#"><span>'.xlt('View Log').'</span></a><br /></p>'
                         .'<p><a onclick="openAddScreen(0)" class="css_button_small" href="#"><span>'.xlt('Send A Dated Reminder').'</span></a></p></div> 
-                        </td><td class="drHide drTD">';
+                        </td><td class="drHide drTD"><div class="dated-reminders-list">';
                         
           $pdHTML .= getRemindersHTML($reminders,$today);
-          $pdHTML .= '</td></tr></table></div>';
+
+          $pdHTML .= '</div></td></tr></table></div>';
+
+
           // print output
           echo $pdHTML;
         ?> 

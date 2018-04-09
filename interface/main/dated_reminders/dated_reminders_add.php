@@ -54,7 +54,40 @@
   $dateRanges['1_year'] = xl('1 Year From Now');
   $dateRanges['2_year'] = xl('2 Years From Now');
   
-// --- need to add a check to ensure the post is being sent from the correct location ??? 
+
+
+
+  $dateRanges2 = array();
+
+
+  $dateRanges2['1'] =  xl('1 Day From Today');
+  $dateRanges2['2'] = xl('2 Days From Today');
+  $dateRanges2['3'] = xl('3 Days From Today');
+  $dateRanges2['4'] = xl('4 Days From Today');
+  $dateRanges2['5'] = xl('5 Days From Today');
+  $dateRanges2['6'] = xl('6 Days From Today');
+  $dateRanges2['7'] = xl('1 Week From Today');
+  $dateRanges2['14'] = xl('2 Weeks From Today');
+  $dateRanges2['21'] = xl('3 Weeks From Today');
+  $dateRanges2['28'] = xl('4 Weeks From Today');
+  $dateRanges2['35'] = xl('5 Weeks From Today');
+  $dateRanges2['42'] = xl('6 Weeks From Today');
+  $dateRanges2['30'] = xl('1 Month From Today');
+  $dateRanges2['60'] = xl('2 Months From Today');
+
+
+  $dateRanges2['90'] = xl('** 3 Months From Today **');
+  $dateRanges2['120'] = xl('4 Months From Today');
+  $dateRanges2['150'] = xl('5 Months From Today');
+  $dateRanges2['180'] = xl('** 6 Months From Today **');
+  $dateRanges2['210'] = xl('7 Months From Today');
+  $dateRanges2['240'] = xl('8 Months From Today');
+  $dateRanges2['270'] = xl('** 9 Months From Today **');
+  $dateRanges2['360'] = xl('1 Year From Today');
+  $dateRanges2['720'] = xl('2 Years From Today');
+
+
+// --- need to add a check to ensure the post is being sent from the correct location ???
 
 // default values for $this_message    
     $this_message = array('message'=>'','message_priority'=>3,'dueDate'=>'');
@@ -71,8 +104,14 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
 
 // ---------------END FORWARDING MESSAGES ----------------   
 
-       
-      
+       function ibh_get_days_out_date($start_date, $days_out, $format="Y-m-d") {
+
+	       $time = strtotime($start_date);
+	       $seconds = $days_out * 86400;
+	       return date($format, $time + $seconds);
+
+	   }
+
 // --- add reminders 
       if($_POST){
 // --- initialize $output as blank      
@@ -86,6 +125,8 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
         $this_message['dueDate'] = (isset($_POST['dueDate']) ? $_POST['dueDate'] : '');
         
          
+        $mssg = "";
+
 // --------------------------------------------------------------------------------------------------------------------------
 // --- check for the post, if it is valid, commit to the database, close this window and run opener.Handeler 
          if(
@@ -105,14 +146,48 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
            $message = $_POST['message'];
            $fromID = $_SESSION['authId'];
            $patID = $_POST['PatientID'];
+
+
            if(isset($_POST['sendSeperately']) and $_POST['sendSeperately']){
              foreach($sendTo as $st){
                $ReminderSent = sendReminder(array($st),$fromID,$message,$dueDate,$patID,$priority);
+
+               if (isset($_POST['dueDate2']) && strlen($_POST['dueDate2']) == 10) {
+
+	               sendReminder(array($st),$fromID,$message,$_POST['dueDate2'],$patID,$priority);
+	               $mssg .= " Additional DR on " . $_POST['dueDate2'] . ".";
+
              }
+
+	           if (isset($_POST['dueDate3']) && strlen($_POST['dueDate3']) == 10) {
+		           sendReminder(array($st),$fromID,$message,$_POST['dueDate3'],$patID,$priority);
+	               $mssg .= " Additional DR on " . $_POST['dueDate3'] . ".";
            }
-           else{
+
+             }
+           } else {
 // -------- Send the reminder           
              $ReminderSent = sendReminder($sendTo,$fromID,$message,$dueDate,$patID,$priority);
+
+
+
+			   // Messages You have sent Today
+			   if (isset($_POST['addl_1']) && $_POST['addl_1'] > 0) {
+
+	               $dd1 = ibh_get_days_out_date($dueDate, $_POST['addl_1']);
+	               sendReminder($sendTo,$fromID,$message,$dd1,$patID,$priority);
+	               $mssg .= " Additional DR on " . $dd1 . ".";
+
+	           }
+
+	           if (isset($_POST['addl_2']) && $_POST['addl_2'] > 0) {
+		           $dd2 = ibh_get_days_out_date($dueDate, $_POST['addl_2']);
+		           sendReminder($sendTo,$fromID,$message,$dd2,$patID,$priority);
+	               $mssg .= " Additional DR on " . $dd2 . ".";
+	           }
+
+
+
             }
 // --------------------------------------------------------------------------------------------------------------------------
            if(!$ReminderSent){
@@ -125,7 +200,7 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
 // ------------ 1) refresh parent window this updates if sent to self 
              echo '  if (opener && !opener.closed && opener.updateme) opener.updateme("new");';
 // ------------ 2) communicate with user      
-             echo '   alert("'.addslashes(xl('Message Sent')).'");';
+             echo '   alert("' . addslashes(xl('Dated Reminder Sent. ')) . $mssg . '");';
 // ------------ 3) close this window 
              echo '  window.close();';
              echo '</script></body></html>';
@@ -272,6 +347,13 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
         }
     </script> 
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
+
+<!-- IBF_DEV add link to stylesheet -->
+<link rel="stylesheet" href="/openemr/_ibh/css/messages.css" type="text/css">
+
+
+
+
   </head>
   <body class="body_top">    
 <!-- Required for the popup date selectors -->
@@ -305,13 +387,28 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
               <select style="width:100%" id="sendTo" name="sendTo[]" multiple="multiple">
                 <option value="<?php echo attr(intval($_SESSION['authId'])); ?>"><?php echo xlt('Myself') ?></option>
                 <?php //     
+	                /*
                     $uSQL = sqlStatement('SELECT id, fname,	mname, lname  FROM  `users` WHERE  `active` = 1 AND `facility_id` > 0 AND id != ?',array(intval($_SESSION['authId'])));
                     for($i=2; $uRow=sqlFetchArray($uSQL); $i++){
                       echo '<option value="',attr($uRow['id']),'">',text($uRow['fname'].' '.$uRow['mname'].' '.$uRow['lname']),'</option>';
+                      */
+
+                      // IBH_DEV_CHG
+// We're ordering the list by last name, first name
+// and also changing the criteria for selecting, so
+// instead of where `active`=1
+// we're changing it to where 'authorized`=1
+
+				   $uSQL = sqlStatement('SELECT id, fname,	mname, lname  FROM  `users` WHERE  `authorized` = 1 AND `facility_id` > 0 AND id != ? ORDER BY lname, fname', array(intval($_SESSION['authId'])));
+				    for($i=2; $uRow=sqlFetchArray($uSQL); $i++){
+				        echo '<option value="',attr($uRow['id']),'">',text($uRow['lname'].', '.$uRow['fname'].' '.$uRow['mname']),'</option>';
                     }
                 ?>    
-              </select> <br /> 
-              <input title="<?php echo xlt('Selecting this will create a message that needs to be processed by each recipient individually (this is not a group task).') ?>" type="checkbox" name="sendSeperately" id="sendSeperately" />  <label title="<?php echo xlt('Selecting this will create a message that needs to be processed by each recipient individually (this is not a group task).') ?>" for="sendSeperately">(<?php echo xlt('Each recipient must set their own messages as completed.') ?>)</label>                                       
+
+
+              </select> <br />
+              <!-- IBH_DEV changed below to hidden, "checked" by default so that no matter what, all members of a group have to confirm their messages individually -->
+              <input type="hidden" name="sendSeperately" id="sendSeperately" value='1'/>  <label title="<?php echo xlt('Selecting this will create a message that needs to be processed by each recipient individually (this is not a group task).') ?>">(<?php echo xlt('Each recipient must set their own messages as completed.') ?>)</label>
             </td>
             <td style="text-align:right"> 
               <a class="css_button_small" style="cursor:pointer" onclick="selectAll();" ><span><?php echo xlt('Send to all') ?></span></a>
@@ -337,11 +434,45 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
           </td>  
     </fieldset>   
      
-                
-      <br />  
+    <fieldset  class="added-reminder">
+	   Additional reminder, due:
+
+			<input type='text' name='dueDate2' id="dueDate2" size='20' onkeyup='datekeyup(this,mypcc)' title='<?php echo htmlspecialchars( xl('yyyy-mm-dd'), ENT_QUOTES); ?>' />
       
-      
-      
+			<select id="addl_1" name="addl_1" class='date-ranger'>
+
+			<option value="">OR...</option>
+			<?php
+			$optionTxt = '';
+			foreach($dateRanges2 as $val=>$txt){
+			$optionTxt .= '<option value="'.attr($val).'">'.text($txt).'</option>';
+			}
+			echo $optionTxt;
+			?>
+		</select>
+	</fieldset>
+
+    <fieldset class="added-reminder">
+
+		Additional reminder, due:
+
+			<input type='text' name='dueDate3' id="dueDate3" size='20' onkeyup='datekeyup(this,mypcc)' title='<?php echo htmlspecialchars( xl('yyyy-mm-dd'), ENT_QUOTES); ?>' />
+			<select id="addl_2" name="addl_2" class='date-ranger'>
+			<option value="">OR...</option>
+			<?php
+			$optionTxt = '';
+			foreach($dateRanges2 as $val=>$txt){
+			$optionTxt .= '<option value="'.attr($val).'">'.text($txt).'</option>';
+			}
+			echo $optionTxt;
+			?>
+	</select>
+
+
+
+
+   	</fieldset>
+
     <fieldset>
             <?php echo xlt('Priority') ?> :    
              <input <?php echo ($this_message['message_priority'] == 3 ? 'checked="checked"' : '') ?> type="radio" name="priority" id="priority_3" value='3'> <label for="priority_3"><?php echo xlt('Low') ?></label> 
@@ -421,5 +552,33 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
 <script language="Javascript"> 
   Calendar.setup({inputField:"dueDate", ifFormat:"%Y-%m-%d", button:"img_begin_date", showsTime:'false'}); 
+   Calendar.setup({inputField:"dueDate2", ifFormat:"%Y-%m-%d", button:"img_begin_date", showsTime:'false'});
+    Calendar.setup({inputField:"dueDate3", ifFormat:"%Y-%m-%d", button:"img_begin_date", showsTime:'false'});
 </script>
+
+<script type="text/javascript">
+
+
+	jQuery(document).ready(function(){
+		var $ = jQuery;
+		var today = "<?=date("Y-m-d H:i:s");?>";
+
+		$(".date-ranger").change(function() {
+			var pd = $(this).val();
+			var secs_out = pd * 86400;
+
+			fdate = Math.round(new Date(today).getTime()/1000);
+			var fdate = fdate + secs_out;
+
+			var fwd_date = new Date(fdate*1000).toISOString().slice(0, 10);
+
+
+			$(this).closest("fieldset").find("input").val(fwd_date);
+		});
+
+	});
+</script>
+
+
+
 </html>

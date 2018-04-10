@@ -1,4 +1,7 @@
 <?php
+
+	// ini_set("display_errors", 1);
+
 /**
  * Message and Reminder Center UI
  *
@@ -43,21 +46,38 @@ require_once("$srcdir/formdata.inc.php");
 require_once("$srcdir/classes/Document.class.php");
 require_once("$srcdir/gprelations.inc.php");
 require_once("$srcdir/formatting.inc.php");
-?>
-<html>
+
+
+
+// IBH_DEV
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+
+
+?><html>
 <head>
 
 <?php html_header_show();?>
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 <script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
-<script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
+
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/_ibh/js/jquery_latest.min.js"></script>
+
+
+<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
+
+
+<!-- IBH_DEV -->
+<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+
+
 </head>
 
 <body class="body_top">
 
-<span class="title"><?php echo xlt('Message and Reminder Center'); ?></span>
-<br /><br />
+
+<!-- <span class="title"><?php echo xlt('Message and Reminder Center'); ?></span> -->
+
 <span class="title"><?php echo xlt('Reminders'); ?></span>
 
 <?php
@@ -162,7 +182,7 @@ switch($task) {
             }
             // There's no note ID, and/or it's assigned to the patient.
             // In these cases a new note is created.
-            addPnote($reply_to, $note, $userauthorized, '1', $form_note_type, $assigned_to, '', $form_message_status);
+            addPnote($reply_to, $note, $userauthorized, '1', $form_note_type, $assigned_to, '', $form_message_status, "");
           }
         }
     } break;
@@ -216,6 +236,11 @@ echo "
 <input type=hidden name=task id=task value=add>";
 ?>
 <div id="pnotes"><center>
+
+<?php if ($title) { ?>
+<h5 style="width:675px; text-align:left;color:white;background-color:black; padding:8px; margin-bottom:8px"><?=$title?></h5>
+<?php } ?>
+
 <table border='0' cellspacing='8'>
  <tr>
   <td class='text'>
@@ -338,8 +363,8 @@ if ($noteid) {
 <?php
 
 if ($noteid) {
-    $body = preg_replace('/(:\d{2}\s\()'.$result['pid'].'(\sto\s)/','${1}'.$patientname.'${2}',$body);
-    $body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
+    // $body = preg_replace('/(:\d{2}\s\()'.$result['pid'].'(\sto\s)/','${1}'.$patientname.'${2}',$body);
+    // $body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
     echo "<div class='text' style='background-color:white; color: gray; border:1px solid #999; padding: 5px; width: 640px;'>".$body."</div>";
 }
 
@@ -377,18 +402,18 @@ $(document).ready(function(){
 
     var NewNote = function () {
         top.restoreSession();
-      if (document.forms[0].reply_to.value.length == 0 || document.forms[0].reply_to.value == '0') {
-       alert('<?php echo htmlspecialchars( xl('Please choose a patient'), ENT_QUOTES); ?>');
-      }
-      else if (document.forms[0].assigned_to.value.length == 0 &&
-       document.getElementById("form_message_status").value != 'Done')
-      {
-       alert('<?php echo addslashes(xl('Recipient required unless status is Done')); ?>');
-      }
-      else
-      {
+      //if (document.forms[0].reply_to.value.length == 0 || document.forms[0].reply_to.value == '0') {
+       //	alert('<?php echo htmlspecialchars( xl('Please choose a patient'), ENT_QUOTES); ?>');
+      //}
+      // else
+      //if (document.forms[0].assigned_to.value.length == 0 &&
+      // document.getElementById("form_message_status").value != 'Done') {
+      // alert('<?php echo addslashes(xl('Recipient required unless status is Done')); ?>');
+      //}
+      //else
+      //{
         $("#new_note").submit();
-      }
+      //}
     }
 
     var PrintNote = function () {
@@ -491,8 +516,13 @@ else {
 
     // This is for sorting the records.
     $sort = array("users.lname", "patient_data.lname", "pnotes.title", "pnotes.date", "pnotes.message_status");
-    $sortby = (isset($_REQUEST['sortby']) && ($_REQUEST['sortby']!="")) ? $_REQUEST['sortby'] : $sort[0];
-    $sortorder = (isset($_REQUEST['sortorder'])  && ($_REQUEST['sortorder']!="")) ? $_REQUEST['sortorder']  : "asc";
+
+    $sortby = (isset($_REQUEST['sortby']) && ($_REQUEST['sortby']!="")) ? $_REQUEST['sortby'] : $sort[3];
+
+
+    $sortorder = (isset($_REQUEST['sortorder'])  && ($_REQUEST['sortorder']!="")) ? $_REQUEST['sortorder']  : "desc";
+
+
     $begin = isset($_REQUEST['begin']) ? $_REQUEST['begin'] : 0;
 
     for($i = 0; $i < count($sort); $i++) {
@@ -537,7 +567,7 @@ else {
     }
     // Display the Messages table header.
     echo "
-    <table width=100%><tr><td><table border=0 cellpadding=1 cellspacing=0 width=90%  style=\"border-left: 1px #000000 solid; border-right: 1px #000000 solid; border-top: 1px #000000 solid;\">
+    <table class='messages-table'><tr><td><table width='100%' border=0 cellpadding=1 cellspacing=0 style=\"border-left: 1px #000000 solid; border-right: 1px #000000 solid; border-top: 1px #000000 solid;\">
     <form name=MessageList action=\"messages.php?showall=".attr($showall)."&sortby=".attr($sortby)."&sortorder=".attr($sortorder)."&begin=".attr($begin)."&$activity_string_html\" method=post>
     <input type=hidden name=task value=delete>
         <tr height=\"24\" style=\"background:lightgrey\">
@@ -601,6 +631,16 @@ else {
         </tr>
     </table></td></tr></table><br>";
 ?>
+
+
+
+	<!-- IBH_DEV:: SECTION FOR SUPERVISOR ASSIGNMENTS -->
+	<?php
+		include($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/interface/messages.php");
+	?>
+
+
+
 <script language="javascript">
 // This is to confirm delete action.
 function confirmDeleteSelected() {

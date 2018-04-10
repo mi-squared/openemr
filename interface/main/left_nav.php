@@ -603,7 +603,11 @@ function clearactive() {
 	  }
 	});
     
-	$(parent.Title.document.getElementById('clear_active')).hide();
+	// $(parent.Title.document.getElementById('clear_active')).hide();
+
+	$(parent.Title.document.getElementById('current_patient')).html("");
+
+
 }
  // Reference to the search.php window.
  var my_window;
@@ -772,21 +776,28 @@ function clearactive() {
 
   $(parent.Title.document.getElementById('clear_active')).show();//To display Clear Active Patient button on selecting a patient
  }
- function setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray) {
+
+
+ function setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray,EncounterTimeArray) {
+
  //This function lists all encounters of the patient.
  //This function writes the drop down in the top frame.
  //It is called when a new patient is create/selected from the search menu.
   var str = '<Select class="text" id="EncounterHistory" onchange="{top.restoreSession();toencounter(this.options[this.selectedIndex].value)}">';
   str+='<option value=""><?php echo htmlspecialchars( xl('Encounter History'), ENT_QUOTES) ?></option>';
-  str+='<option value="New Encounter"><?php echo htmlspecialchars( xl('New Encounter'), ENT_QUOTES) ?></option>';
+  // str+='<option value="New Encounter"><?php echo htmlspecialchars( xl('New Encounter'), ENT_QUOTES) ?></option>';
   str+='<option value="Past Encounter List"><?php echo htmlspecialchars( xl('Past Encounter List'), ENT_QUOTES) ?></option>';
   for(CountEncounter=0;CountEncounter<EncounterDateArray.length;CountEncounter++)
    {
-    str+='<option value="'+EncounterIdArray[CountEncounter]+'~'+EncounterDateArray[CountEncounter]+'">'+EncounterDateArray[CountEncounter]+'-'+CalendarCategoryArray[CountEncounter]+'</option>';
+    str+='<option value="'+EncounterIdArray[CountEncounter]+'~'+EncounterDateArray[CountEncounter]+'">'+EncounterDateArray[CountEncounter]+'-'+CalendarCategoryArray[CountEncounter]+' - '+EncounterTimeArray[CountEncounter]+'</option>';
    }
   str+='</Select>';
   $(parent.Title.document.getElementById('past_encounter_block')).show();
+
+  setTimeout(function() {
   top.window.parent.Title.document.getElementById('past_encounter').innerHTML=str;
+  }, 300)
+
  }
 
 function loadCurrentPatientFromTitle() {
@@ -1254,7 +1265,14 @@ if (!empty($reg)) {
           <?php if (acl_check('admin', 'super'   )) genMiscLink('RTop','adm','0',xl('Native Data Loads'),'../interface/super/load_codes.php'); ?>
           <?php if (acl_check('admin', 'super'   )) genMiscLink('RTop','adm','0',xl('External Data Loads'),'../interface/code_systems/dataloads_ajax.php'); ?>
           <?php if (acl_check('admin', 'super'   )) genMiscLink('RTop','adm','0',xl('Merge Patients'),'patient_file/merge_patients.php'); ?>
-          <?php if (acl_check('admin', 'super'   )) genMiscLink('RTop','adm','0',xl('Import Holidays'),'../interface/main/holidays/import_holidays.php'); ?>
+
+          <?php
+
+	          // IBH_DEV
+	          if (acl_check('admin', 'super')) genMiscLink('RTop','adm','0',xl('Prior Auths'),'../_ibh/interface/prior_auths_overview.php');
+	      ?>
+
+
 		  <?php if ($GLOBALS['enable_auditlog_encryption']) genMiscLink('RTop','rep','0',xl('Audit Log Tamper'),'reports/audit_log_tamper_report.php'); ?>
         </ul>
       </li>
@@ -1317,6 +1335,10 @@ if (!empty($reg)) {
           <?php if ($GLOBALS['enable_amc']) genMiscLink('RTop','rep','0',xl('Automated Measures (AMC)'),'reports/cqm.php?type=amc'); ?>
           <?php if ($GLOBALS['enable_amc_tracking']) genMiscLink('RTop','rep','0',xl('AMC Tracking'),'reports/amc_tracking.php'); ?>
           <?php if ($GLOBALS['enable_cdr'] && $GLOBALS['enable_alert_log'] ) genMiscLink('RTop','rep','0',xl('Alerts Log'),'reports/cdr_log.php'); ?>
+
+          <li><a href="/openemr/_ibh/interface/tickler.php" id="tickler" target="_blank">Ticklers</a></li>
+
+
         </ul>
       </li>
       <li><a class="collapsed_lv2"><span><?php xl('Visits','e') ?></span></a>

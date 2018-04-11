@@ -64,11 +64,11 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/_ibh/js/jquery_latest.min.js"></script>
 
 
-<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="/_ibh/js/jquery.tablesort.js"></script>
 
 
 <!-- IBH_DEV -->
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="/_ibh/css/encounter.css" type="text/css">
 
 
 </head>

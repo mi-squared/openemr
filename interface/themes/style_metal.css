@@ -3,6 +3,9 @@ body {
     /* set the base font and size for all DOM children */
     font-family: sans-serif; 
     font-size: 1em;  /* set the base font size for all DOM children */
+
+    /*background-color:#bce0f5;*/
+
 }
 
 a {
@@ -188,7 +191,7 @@ a:hover {
 .textcolor11 { background-color: #222; }    /* $GLOBALS['style']['TEXTCOLOR11'] */
 .highlightcolor { background-color: #ddd; } /* $GLOBALS['style']['HIGHLIGHTCOLOR'] */
 .bottom_line { background: url('../pic/aquabg.gif') repeat; }    /* $GLOBALS['style']['BOTTOM_BG_LINE'] */
-.logobar { background-color: #24262c; height: 110px; }                 /* $GLOBALS['logoBarHeight'] */
+.logobar { background-color: #99bcf4; height: 110px; }                 /* $GLOBALS['logoBarHeight'] */
 .navbar { height: 22px; }                   /* $GLOBALS['navBarHeight'] */
 .titlebar { height: 20px; }                 /* $GLOBALS['titleBarHeight'] */
 
@@ -357,6 +360,7 @@ font-weight: bold;
     vertical-align: top;
     padding: 5px;
     margin: 5px;
+    padding-bottom: 3px;
 }
 
 
@@ -617,18 +621,15 @@ font-weight: bold;
  * CSS BUTTONS
 */
 .css_button_small {
-    background: #063f80;
-    color: #ffffff !important;
-    display: inline-block;
-    font-weight: 300;
+    background: transparent url( '../../images/bg_button_a_small.gif' ) no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: bold 9px arial, sans-serif;
+    height: 19px;
     margin-right: 3px;
     /* sliding doors padding */
     text-decoration: none;
-    padding: 2px 7px 2px;
-    border: none;
-    font-size: 0.7em;
-    box-shadow: 2px 1px 4px #88888B;
-    border-radius: 5px;
 }
 
 .css_button_small span {
@@ -716,7 +717,7 @@ ul.tabNav li.current a { background:#D7DFE7 ;padding: 8px; }
 div.tabContainer { clear: both; float: left; width: 100%; }
 div.tabContainer div.tab { border: 1px solid #FFFFFF; color: #000; display: none; padding: 10px; }
 div.tabContainer div.current { display: block; }
-div.tab { 	min-height: 180px; background: #FFFFFF none repeat scroll 0 0; margin-bottom: 10px;width:665px;}
+div.tab { 	min-height: 180px; background: #FFFFFF none repeat scroll 0 0; margin-bottom: 10px;width:1200px;}
 div.tab_long { 	min-height: 180px; background: #FFFFFF none repeat scroll 0 0; margin-bottom: 10px;width:100%;}
 div.tab p:last-child { margin-bottom: 0; }
 
@@ -724,16 +725,22 @@ div.tab table td {
 	padding-right: 1px; padding-bottom: 0px
 }
 
+div.tab table td.groupname {
+	width:60px;
+
+}
+
 div.tab table td.label {
-	min-width:80px;
+	min-width:60px;
 }
 
 div.tab table td.data {
-	min-width:120px; /*170px*/
+	width:720px; /*170px*/
 }
 
 div.notab {
-    background: #D7DFE7 none repeat scroll 0 0; margin-bottom: 10px; width:100%;
+    background: #F0F0F0 none repeat scroll 0 0; margin-bottom: 10px; width:100%;
+    padding:8px;
 }
 
 div.notab-right {
@@ -946,16 +953,25 @@ font-size:9pt;
     background: -moz-linear-gradient(top,  #dae9ef,  #6aa4bf); /* for firefox 3.6+ */
 }
 
+#sddm {
+	margin: 0;
+	padding: 0;
+	z-index: 30;
+
+}
+
 #sddm li
 {	margin: 0;
 	padding: 0;
 	list-style: none;
         float:left;
         border: 1px solid #8CACBB;
-        background: #999; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2D566A', endColorstr='#B6D2E0'); /* for IE */
-        background: -webkit-gradient(linear, left top, left bottom, from(#2D566A), to(#B6D2E0)); /* for webkit browsers */
-        background: -moz-linear-gradient(top,  #2D566A,  #B6D2E0); /* for firefox 3.6+ */
+        background: #fff; /* for non-css3 browsers */
+        /*
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2D566A', endColorstr='#B6D2E0');
+        background: -webkit-gradient(linear, left top, left bottom, from(#2D566A), to(#B6D2E0));
+        background: -moz-linear-gradient(top,  #2D566A,  #B6D2E0);
+        */
 }
 
 #sddm li a
@@ -1002,6 +1018,7 @@ font-size:9pt;
     color: #2875DE;
     font-size: 0.8em;
     font-weight:normal;
+	z-index: 90;
 }
 
 #sddm div a:hover

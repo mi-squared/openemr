@@ -89,8 +89,10 @@ require_once("$srcdir/dated_reminder_functions.php");
            text-decoration: underline;
          }
       </style> 
+
       <script type="text/javascript">
-         $(document).ready(function (){ 
+
+         $(document).ready(function (){
             <?php if(!$hasAlerts) echo '$(".hideDR").html("<span>'.xla('Show Reminders').'</span>"); $(".drHide").hide();'; ?> 
             $(".hideDR").click(function(){
               if($(this).html() == "<span><?php echo xla('Hide Reminders') ?></span>"){  
@@ -106,6 +108,8 @@ require_once("$srcdir/dated_reminder_functions.php");
            var updater = setTimeout("updateme(0)", 1);
          }) 
            
+
+
            function openAddScreen(id){
              if(id == 0){
                top.restoreSession();
@@ -116,7 +120,9 @@ require_once("$srcdir/dated_reminder_functions.php");
              }
            }
            
-           function updateme(id){ 
+
+
+           function updateme(id){
              refreshInterval = <?php echo $updateDelay ?>;
              if(id > 0){
               $(".drTD").html('<p style="text-size:3em; margin-left:200px; color:black; font-weight:bold;"><?php echo xla("Processing") ?>...</p>'); 

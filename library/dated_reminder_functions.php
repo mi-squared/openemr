@@ -164,10 +164,8 @@ function RemindersArray($days_to_show,$today,$alerts_to_show,$userID = false){
             }
             // end check if reminder is due or overdue
             // apend to html string 
-            $pdHTML .= '<p id="p_'.attr($r['messageID']).'">
-                          <a class="dnRemover css_button_small" onclick="updateme('."'".attr($r['messageID'])."'".')" id="'.attr($r['messageID']).'" href="#">
-                            <span>'.xlt('Set As Completed').'</span>
-                          </a> 
+            $pdHTML .= '<p class="dr-list group" id="p_'.attr($r['messageID']).'">
+                           
                           <span title="'.($r['PatientID'] > 0 ? xla('Click Patient Name to Open Patient File') : '').'" class="'.attr($class).'">'.
                             $warning.'         
                             <span onclick="goPid('.attr($r['PatientID']).')" class="patLink" id="'.attr($r['PatientID']).'">'.
@@ -176,6 +174,9 @@ function RemindersArray($days_to_show,$today,$alerts_to_show,$userID = false){
                             text($r['message']).' - ['.text($r['fromName']).']
                           </span> -----> 
                           <a onclick="openAddScreen('.attr($r['messageID']).')" class="dnForwarder" id="'.attr($r['messageID']).'" href="#">[ '.xlt('Forward').' ]</a>
+                          <a class="dnRemover css_button_small" onclick="updateme('."'".attr($r['messageID'])."'".')" id="'.attr($r['messageID']).'" href="#">
+                            <span>'.xlt('Set As Completed').'</span>
+                          </a>
                         </p>';
           }
       return ($pdHTML == '' ? '<p class="alert"><br />'.xlt('No Reminders').'</p>' : $pdHTML);
@@ -295,6 +296,8 @@ function logRemindersArray(){
         $where = '';
         $sentBy = $_GET['sentBy'];
         $sentTo = $_GET['sentTo'];
+
+        $orderBy = $_GET['orderBy'] ? " ORDER BY " . $_GET['orderBy']: " ORDER BY dr_message_sent_date DESC";
 //------------------------------------------
 // ----- HANDLE SENT BY FILTER 
           if(!empty($sentBy)){
@@ -346,16 +349,18 @@ function logRemindersArray(){
         $reminders = array();
         
 // ----- sql statement for getting uncompleted reminders (sorts by date, then by priority)  
+// IBH_DEV added dr_from_ID into query
+
           $drSQL = sqlStatement(
                             "SELECT 
-                                    dr.pid, dr.dr_id, dr.dr_message_text, dr.dr_message_due_date dDate, dr.dr_message_sent_date sDate,dr.processed_date processedDate, dr.dr_processed_by,
+                                    dr.pid, dr.dr_from_ID, dr.dr_id, dr.dr_message_text, dr.dr_message_due_date dDate, dr.dr_message_sent_date sDate,dr.processed_date processedDate, dr.dr_processed_by,
                                     u.fname ffname, u.mname fmname, u.lname flname,
                                     tu.fname tfname, tu.mname tmname, tu.lname tlname 
                             FROM `dated_reminders` dr       
                             JOIN `dated_reminders_link` drl ON dr.dr_id = drl.dr_id        
                             JOIN `users` u ON dr.dr_from_ID = u.id  
                             JOIN `users` tu ON drl.to_id = tu.id        
-                            $where"
+                            $where" . $orderBy
                             ,$input);
 // --------- loop through the results
         for($i=0; $drRow=sqlFetchArray($drSQL); $i++){
@@ -367,6 +372,7 @@ function logRemindersArray(){
           $prRow = sqlFetchArray($prSQL );
           
 // --------- fill the $reminders array 
+		$reminders[$i]['senderID'] = $drRow['dr_from_ID'];
       		$reminders[$i]['messageID'] = $drRow['dr_id'];
           $reminders[$i]['PatientID'] = $drRow['pid'];
           

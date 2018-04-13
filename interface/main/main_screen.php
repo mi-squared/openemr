@@ -158,6 +158,8 @@ function allFramesLoaded() {
  // Change this number if more frames participate in reporting.
  return loadedFrameCount >= 2;
 }
+
+window.onbeforeunload = function() { return; };
 </script>
 
 </head>

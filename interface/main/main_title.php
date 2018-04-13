@@ -92,8 +92,14 @@ $res = sqlQuery("select * from users where username='".$_SESSION{"authUser"}."'"
 		<a href='' class="css_button_small" style="margin:0px;vertical-align:top;" id='new0' onClick=" return top.window.parent.left_nav.loadFrame2('new0','RTop','new/new.php')">
 		<span><?php echo htmlspecialchars( xl('NEW PATIENT'), ENT_QUOTES); ?></span></a>
     </td>
+    <!--
     <td style="vertical-align:text-bottom;">
-            <a href='' class="css_button_small" style="margin:0px;vertical-align:top;display:none;" id='clear_active' onClick="javascript:parent.left_nav.clearactive();return false;">
+		<a href='' class="css_button_small" style="margin:0px;vertical-align:top;" id='new0' onClick=" return top.window.parent.left_nav.loadFrame2('new0','RTop','reports/encounters_report.php')">
+		<span><?php echo htmlspecialchars( xl('Undocumented Encounter Report'), ENT_QUOTES); ?></span></a>
+    </td>
+    -->
+    <td style="vertical-align:text-bottom;">
+            <a href='' class="css_button_small" style="margin:0px;vertical-align:top;" id='clear_active' onClick="javascript:parent.left_nav.clearactive();return false;">
             <span><?php echo htmlspecialchars( xl('CLEAR ACTIVE PATIENT'), ENT_QUOTES); ?></span></a>
     </td>
 </tr>
@@ -128,7 +134,7 @@ $res = sqlQuery("select * from users where username='".$_SESSION{"authUser"}."'"
 		<td align="right" style="vertical-align:top;"><a href="../logout.php" target="_top" class="css_button_small" style='float:right;' id="logout_link" onclick="top.restoreSession()" >
 			<span><?php echo htmlspecialchars( xl('Logout'), ENT_QUOTES) ?></span></a></td>
 	</tr><tr>
-		<td colspan='2' valign="baseline" align='right'><B>
+		<td colspan='2' valign="baseline" align='right'>
 			<span class="text title_bar_top" title="<?php echo htmlspecialchars( xl('Authorization group') .': '.$_SESSION['authGroup'], ENT_QUOTES); ?>"><?php echo htmlspecialchars($res{"fname"}.' '.$res{"lname"},ENT_NOQUOTES); ?></span></span></td>
     	</tr></table>
 </td>

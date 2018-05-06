@@ -22,6 +22,11 @@
  * @author  Rod Roark <rod@sunsetsystems.com>
  * @author  Roberto Vasquez <robertogagliotta@gmail.com>
  * @link    http://www.open-emr.org
+ *
+ *
+ * Updated by Growlingflea Software.  now generates correct service and billing facility on statement.
+ * any questions contact Daniel Pflieger at daniel@growlingflea.com
+ *
  */
 require_once("../globals.php");
 require_once("$srcdir/patient.inc");
@@ -203,6 +208,7 @@ if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $
     // If this is a new patient then print the pending statement
     // and start a new one.  This is an associative array:
     //
+    ///  form_id = form id.  This is needed to get correct billing and service facility related to the encounter. //added by growlingflea
     //  cid     = same as pid
     //  pid     = OpenEMR patient ID
     //  patient = patient name
@@ -221,6 +227,7 @@ if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $
     //
     if ($stmt['cid'] != $row['pid']) {
       if (!empty($stmt)) ++$stmt_count;
+      $stmt['fid'] = $row['id'];
       $stmt['cid'] = $row['pid'];
       $stmt['pid'] = $row['pid'];
       $stmt['dun_count'] = $row['stmt_count'];

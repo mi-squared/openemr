@@ -55,29 +55,21 @@ function make_statement($stmt) {
  */
 function report_header_2($stmt,$direction='',$providerID='1') {
   $titleres = getPatientData($stmt['pid'], "fname,lname,DOB");
-  if ($_SESSION['pc_facility']) {
-    $sql = "select * from facility where id=?";
-    $facility = sqlQuery($sql,array($_SESSION['pc_facility']));
-  } else {
-    $sql = "SELECT * FROM facility ORDER BY billing_location DESC LIMIT 1";
-    $facility = sqlQuery($sql);
-  }
+  //Author Daniel Pflieger - daniel@growlingflea.com
+  //We get the service facility from the encounter.  In cases with multiple service facilities
+  //OpenEMR sends the correct facility
+
+  $service_query = sqlStatement("SELECT * FROM `form_encounter` fe join facility f on fe.facility_id = f.id where fe.id = {$stmt['fid']}");
+  $facility = sqlFetchArray($service_query);
+
   $DOB = oeFormatShortDate($titleres['DOB']);
   /******************************************************************/
   ob_start();
-  // Use logo if it exists as 'practice_logo.gif' in the site dir
-  // old code used the global custom dir which is no longer a valid
+
   ?>
   <table style="width:7in;">
+
     <tr>
-      <td style='width:100px;text-align:top;'>
-        <?php
-          $practice_logo = $GLOBALS['OE_SITE_DIR']."/images/practice_logo.gif";
-          if (file_exists($practice_logo)) {
-            echo "<img src='$practice_logo' align='left' style='width:125px;margin:0px;'><br />\n";
-          }
-        ?>
-      </td>
       <td style='width:40%;'>
         <em style="font-weight:bold;font-size:1.4em;"><?php echo text($facility['name']); ?></em><br />
         <?php echo text($facility['street']); ?><br />
@@ -86,6 +78,34 @@ function report_header_2($stmt,$direction='',$providerID='1') {
         <?php echo xlt('Fax').': ' .text($facility['fax']); ?><br />
         <br clear='all' />
       </td>
+      <td style='width:100px; text-align:center;'>
+      <?php
+      //Author Daniel Pflieger - daniel@growlingflea.com
+      //We only put space for a logo if it exists.
+      //if it does we put the patient name and the service facility on a separate line.
+      //Patients with long names cause formatting issues and it makes the statement look
+      //unprofessional. Additionally, the end user should be able to choose the
+      //statement logo from Administration -> statement.
+
+      $practice_logo = $GLOBALS['OE_SITE_DIR']."/images/".$GLOBALS['statement_logo'];
+      if (file_exists($practice_logo)) {
+      ?>
+
+
+        <?php
+
+        echo "<img src='$practice_logo' align='left' style='width:125px;margin:0px;'><br />\n";
+
+        ?>
+
+
+
+    <?php } ?>
+
+      </td>
+
+
+
       <td>
         <em style="font-weight:bold;font-size:1.4em;"><?php echo text($titleres['fname']) . " " . text($titleres['lname']); ?></em><br />
         <b style="font-weight:bold;"><?php echo xlt('Chart Number'); ?>:</b> <?php echo text($stmt['pid']); ?><br />
@@ -471,24 +491,21 @@ function create_statement($stmt) {
   // These are your clinics return address, contact etc.  Edit them.
   // TBD: read this from the facility table
 
-  // Facility (service location)
-  $atres = sqlStatement("select f.name,f.street,f.city,f.state,f.postal_code from facility f " .
-    " left join users u on f.id=u.facility_id " .
-    " left join  billing b on b.provider_id=u.id and b.pid = '".$stmt['pid']."' " .
-    " where  service_location=1");
-  $row = sqlFetchArray($atres);
-
-  // Facility (service location)
-
+ // Facility (service location) modified by Daniel Pflieger at Growlingflea Software
+  $service_query = sqlStatement("SELECT * FROM `form_encounter` fe join facility f on fe.facility_id = f.id where fe.id = {$stmt['fid']}");
+  $row = sqlFetchArray($service_query);
   $clinic_name = "{$row['name']}";
   $clinic_addr = "{$row['street']}";
   $clinic_csz = "{$row['city']}, {$row['state']}, {$row['postal_code']}";
 
 
-  // Billing location
-  $remit_name = $clinic_name;
-  $remit_addr = $clinic_addr;
-  $remit_csz = $clinic_csz;
+ // Billing location modified by Daniel Pflieger at Growlingflea Software
+ $service_query = sqlStatement("SELECT * FROM `form_encounter` fe join facility f on fe.billing_facility = f.id where fe.id = {$stmt['fid']}");
+ $row = sqlFetchArray($service_query);
+ $remit_name = "{$row['name']}";
+ $remit_addr = "{$row['street']}";
+ $remit_csz = "{$row['city']}, {$row['state']}, {$row['postal_code']}";
+
 
   // Contacts
   $atres = sqlStatement("select f.attn,f.phone from facility f " .
@@ -554,13 +571,19 @@ function create_statement($stmt) {
   //  %-25s = left-justified string of 25 characters padded with spaces
   // Note that "\n" is a line feed (new line) character.
   // reformatted to handle i8n by tony
-  $out = "\n\n";
-  $providerNAME = getProviderName($stmt['providerID']);
-  $out .= sprintf("%-30s %s %-s\n",$clinic_name,$stmt['patient'],$stmt['today']);
-  $out .= sprintf("%-30s %s: %-s\n",$providerNAME,$label_chartnum,$stmt['pid']);
-  $out .= sprintf("%-30s %s\n",$clinic_addr,$label_insinfo);
-  $out .= sprintf("%-30s %-s: %-s\n",$clinic_csz,$label_totaldue,$stmt['amount']);
-  $out .= "\n";
+
+  $out  = sprintf("%-30s %-23s %-s\n",$clinic_name,null,$stmt['today']);
+  $out .= sprintf("%-30s %s %-s\n",$clinic_addr,null, null);
+  $out .= sprintf("%-30s %-s\n",$clinic_csz, null);
+
+
+  $out .= "\n\n";
+  $out .= sprintf("%s %s %-s\n",$stmt['patient'], null, null);
+  $out .= sprintf("%s: %s %-s\n",$label_chartnum,$stmt['pid'], null);
+  $out .= sprintf("%s  %s\n",$label_insinfo, null);
+  $out .= sprintf("%s: %s %-s\n",$label_totaldue,$stmt['amount'], null);
+
+  $out .= "\n\n";
   $out .= sprintf("       %-30s %-s\n",$label_addressee,$label_remitto);
   $out .= sprintf("       %-30s %s\n",$stmt['to'][0],$remit_name);
   $out .= sprintf("       %-30s %s\n",$stmt['to'][1],$remit_addr);
@@ -584,7 +607,7 @@ function create_statement($stmt) {
 
   // This must be set to the number of lines generated above.
   //
-  $count = 25;
+  $count = 29;
   $num_ages = 4;
   $aging = array();
   for ($age_index = 0; $age_index < $num_ages; ++$age_index) {

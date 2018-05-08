@@ -10,7 +10,46 @@ function getFormById ($id, $cols = "*")
 	//echo $sql . "<br />";
 	return sqlQuery($sql);
 }
+// added by sherwin
+function getPriorAuthData($pid)
+{
+$sql = "SELECT a.id, a.date, a.prior_auth_number, a.units, a.comments, a.desc, 
+               a.auth_for, a.auth_from, a.auth_to,
+               a.code1, a.code2, a.code3, a.code4, a.code5, a.code6, a.code7, 
+               a.used, b.id, b.encounter 
+        FROM forms AS b LEFT JOIN form_prior_auth AS a ON a.id = b.form_id AND b.formdir LIKE 'prior_auth'  
+		WHERE a.pid = ". $pid . " GROUP BY b.form_id";
 
+        $res = sqlStatement($sql);
+
+       return $res;
+}
+
+function getPriorAuthAlert($encounter)
+{
+   $sql = "SELECT auth_to, auth_alert, units, used FROM form_prior_auth WHERE pid = $pid AND units != 'NULL'";
+    $a = sqlStatement($sql);
+
+	return $a;
+}
+
+function getSupervisor($authUser){
+    //See if supervisor is logged in
+		$sql = "SELECT info FROM users WHERE username = '".$_SESSION['authUser']."'";
+		$info = sqlStatement($sql);
+		$who = sqlFetchArray($info);
+		return $who['info'];
+}
+
+function deleteSignature($encounter){
+
+      $sql = "SELECT a.id FROM esign_signatures AS a, forms AS b WHERE b.id = a.tid AND b.encounter = $encounter ORDER BY a.id ASC LIMIT 1";
+	  $rid = sqlQuery($sql);
+	  $di = $rid['id'];
+	  $dd = "DELETE FROM `esign_signatures` WHERE `esign_signatures`.`id` = $di";
+	  sqlStatement($dd);
+
+}
 function getFormInfoById ($id, $cols = "*")
 {
 	$sql = "select $cols from forms where id='$id' order by date DESC limit 0,1";

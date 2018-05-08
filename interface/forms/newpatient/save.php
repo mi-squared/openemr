@@ -140,8 +140,16 @@ if ($mode == 'new' && $GLOBALS['default_new_encounter_form'] == 'football_injury
     }
   }
 }
+/*
 $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_categories.pc_catname FROM form_encounter AS fe ".
 	" left join openemr_postcalendar_categories on fe.pc_catid=openemr_postcalendar_categories.pc_catid  WHERE fe.pid = ? order by fe.date desc", array($pid));
+
+*/
+
+  $result4 = sqlStatement("SELECT fe.encounter, fe.date, openemr_postcalendar_categories.pc_catname, openemr_postcalendar_events.pc_startTime " .
+              "FROM form_encounter AS fe left join openemr_postcalendar_categories on fe.pc_catid=openemr_postcalendar_categories.pc_catid ".
+			  " left join openemr_postcalendar_events on fe.date=pc_eventDate WHERE fe.date=pc_eventDate AND fe.pid = ? AND pc_pid = ? ".
+			  " AND fe.pc_catid = openemr_postcalendar_events.pc_catid order by fe.encounter desc", array($pid, $pid));
 ?>
 <html>
 <body>
@@ -149,6 +157,7 @@ $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_catego
 	EncounterDateArray=new Array;
 	CalendarCategoryArray=new Array;
 	EncounterIdArray=new Array;
+	EncounterTimeArray=new Array;
 	Count=0;
 	 <?php
 			   if(sqlNumRows($result4)>0)
@@ -158,14 +167,15 @@ $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_catego
 					EncounterIdArray[Count]='<?php echo attr($rowresult4['encounter']); ?>';
 					EncounterDateArray[Count]='<?php echo attr(oeFormatShortDate(date("Y-m-d", strtotime($rowresult4['date'])))); ?>';
 					CalendarCategoryArray[Count]='<?php echo attr(xl_appt_category($rowresult4['pc_catname'])); ?>';
+					EncounterTimeArray[Count] = '<?php echo htmlspecialchars($rowresult4['pc_startTime'], ENT_QUOTES); ?>';
 					Count++;
 	 <?php
 				 }
 	 ?>
-	 top.window.parent.left_nav.setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray);
+    top.window.parent.left_nav.setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray,EncounterTimeArray);
  top.restoreSession();
 <?php if ($mode == 'new') { ?>
- parent.left_nav.setEncounter(<?php echo "'" . attr(oeFormatShortDate($date)) . "', '" . attr($encounter) . "', window.name"; ?>);
+    parent.left_nav.setEncounter(<?php echo "'" . oeFormatShortDate($date) . "', " . attr($encounter) . ", window.name"; ?>);
 <?php } // end if new encounter ?>
  parent.left_nav.loadFrame('enc2', window.name, '<?php echo $nexturl; ?>');
 </script>

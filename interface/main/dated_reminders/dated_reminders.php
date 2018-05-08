@@ -27,10 +27,11 @@
 require_once('../../globals.php');
 require_once("$srcdir/htmlspecialchars.inc.php");
 require_once("$srcdir/dated_reminder_functions.php");
+require_once("$srcdir/user.inc");
 
         $days_to_show = 5;
         $alerts_to_show = $GLOBALS['dated_reminders_max_alerts_to_show'];
-        $updateDelay = 60; // time is seconds 
+        $updateDelay = 60; // time is seconds
 
         
 // ----- get time stamp for start of today, this is used to check for due and overdue reminders
@@ -56,11 +57,24 @@ require_once("$srcdir/dated_reminder_functions.php");
         // stop any other output  
           exit;
     }
+
+//-----------------------------------------------------------------------------
+// HANDEL AJAX TO HIDE INTERN GROUP REMINDERS
+// Javascript will send a post
+// ----------------------------------------------------------------------------
+if(isset($_POST['show_intern_messages'])){
+
+    $userID = $_SESSION['authId'];
+    setUserSetting( 'show_intern_messages', $_POST['show_intern_messages'], $userID, true );
+    // stop any other output
+    exit;
+}
 //-----------------------------------------------------------------------------
 // END HANDEL AJAX TO MARK REMINDERS AS READ 
 // ----------------------------------------------------------------------------       
 
       $reminders = RemindersArray($days_to_show,$today,$alerts_to_show);
+      $show_intern_messages = checkUserSetting( 'show_intern_messages', "1", $_SESSION['authId'] );
       
       ?> 
       
@@ -88,10 +102,54 @@ require_once("$srcdir/dated_reminder_functions.php");
            cursor:pointer; 
            text-decoration: underline;
          }
+         <?php if ( $show_intern_messages == false ) { ?>
+          .intern-message {
+              display: none;
+          }
+
+          .intern-message-row {
+              display: none;
+          }
+          <?php } ?>
+
+         .message-row {
+             background: white;
+             height: 24px;
+         }
+
       </style> 
       <script type="text/javascript">
-         $(document).ready(function (){ 
-            <?php if(!$hasAlerts) echo '$(".hideDR").html("<span>'.xla('Show Reminders').'</span>"); $(".drHide").hide();'; ?> 
+         $(document).ready(function (){
+
+
+             $(".hideIntern").click(function(){
+                 if($(this).html() == "<span><?php echo xla('Hide Intern Msgs') ?></span>"){
+
+                     $(this).html("<span><?php echo xla('Show Intern Msgs') ?></span>");
+                     $(".intern-message").hide("fast");
+                     $(".intern-message-row").css("display", "none");
+
+                     $.post("<?php echo $GLOBALS['webroot']; ?>/interface/main/dated_reminders/dated_reminders.php",
+                         { show_intern_messages: 0, skip_timeout_reset: "1" },
+                         function(data) {
+
+                         });
+                 }
+                 else{
+
+                     $(this).html("<span><?php echo xla('Hide Intern Msgs') ?></span>");
+                     $(".intern-message").show("fast");
+                     $(".intern-message-row").css("display", "table-row");
+
+                     $.post("<?php echo $GLOBALS['webroot']; ?>/interface/main/dated_reminders/dated_reminders.php",
+                         { show_intern_messages: 1, skip_timeout_reset: "1" },
+                         function(data) {
+
+                         });
+                 }
+             });
+
+         <?php if(!$hasAlerts) echo '$(".hideDR").html("<span>'.xla('Show Reminders').'</span>"); $(".drHide").hide();'; ?>
             $(".hideDR").click(function(){
               if($(this).html() == "<span><?php echo xla('Hide Reminders') ?></span>"){  
                 $(this).html("<span><?php echo xla('Show Reminders') ?></span>"); 
@@ -104,7 +162,8 @@ require_once("$srcdir/dated_reminder_functions.php");
             }) 
            // run updater after 30 seconds
            var updater = setTimeout("updateme(0)", 1);
-         }) 
+
+         });
            
            function openAddScreen(id){
              if(id == 0){
@@ -161,6 +220,7 @@ require_once("$srcdir/dated_reminder_functions.php");
         <?php 
           // initialize html string        
           $pdHTML = '<div class="dr_container"><table><tr><td valign="top">                         
+                        <p><a class="hideIntern css_button_small" href="#"><span>'.xlt($show_intern_messages ? 'Hide Intern Msgs' : 'Show Intern Msgs').'</span></a><br /></p>
                         <p><a class="hideDR css_button_small" href="#"><span>'.xlt('Hide Reminders').'</span></a><br /></p>
                         <div class="drHide">'.
                         '<p><a title="'.xla('View Past and Future Reminders').'" onclick="openLogScreen()" class="css_button_small" href="#"><span>'.xlt('View Log').'</span></a><br /></p>'

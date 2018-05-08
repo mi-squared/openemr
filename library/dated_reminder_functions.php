@@ -42,7 +42,7 @@ function RemindersArray($days_to_show,$today,$alerts_to_show,$userID = false){
                             JOIN `users` u ON dr.dr_from_ID = u.id 
                             JOIN `dated_reminders_link` drl ON dr.dr_id = drl.dr_id  
                             JOIN `users` u2 ON drl.to_id = u2.id 
-                            WHERE drl.to_id = ? OR drl.to_id = ?
+                            WHERE ( drl.to_id = ? OR drl.to_id = ? )
                             AND dr.`message_processed` = 0
                             AND dr.`dr_message_due_date` < ADDDATE(NOW(), INTERVAL $days_to_show DAY) 
                             ORDER BY `dr_message_due_date` ASC , `message_priority` ASC LIMIT 0,$alerts_to_show"
@@ -167,8 +167,9 @@ function RemindersArray($days_to_show,$today,$alerts_to_show,$userID = false){
               $class='bold alert dr';
             }
             // end check if reminder is due or overdue
-            // apend to html string 
-            $pdHTML .= '<p id="p_'.attr($r['messageID']).'">
+            // apend to html string
+            $row_class = ( $r['toName'] == "Intern Group" ) ? 'intern-message' : '';
+            $pdHTML .= '<p id="p_'.attr($r['messageID']).'" class='.$row_class.'>
                           To: '.$r['toName'].' 
                           <a class="dnRemover css_button_small" onclick="updateme('."'".attr($r['messageID'])."'".')" id="'.attr($r['messageID']).'" href="#">
                             <span>'.xlt('Set As Completed').'</span>

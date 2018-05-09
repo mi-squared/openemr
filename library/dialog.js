@@ -57,11 +57,75 @@ function grabfocus(w) {
  // }
 }
 
-// Call this when a "modal" dialog is desired.
-// Note that the below function is used for the
-// frames ui, and that a separate dlgopen function
-// is used below (see if(top.tab_mode)...) for the tabs ui.
+
+// call this when a "modal" dialog is desired
  function dlgopen(url, winname, width, height) {
+
+	window.top = top;
+
+	if (top.modaldialog && ! top.modaldialog.closed) {
+		if (window.focus) top.modaldialog.focus();
+		if (top.modaldialog.confirm(top.oemr_dialog_close_msg)) {
+			top.modaldialog.close();
+			top.modaldialog = null;
+		} else {
+			return false;
+		}
+	}
+
+	// IBH_DEV
+	// Check to make sure the event doesn't have an encounter
+	if (url.substring(0,14) == "add_edit_event") {
+
+		var that = this;
+
+		var uArr = url.split("?");
+		var uArr_2 = uArr[1];
+		var hashes = uArr_2.split("&");
+		var hash = [];
+		var vars = [];
+
+		for(var i = 0; i < hashes.length; i++) {
+	        hash = hashes[i].split('=');
+	        vars.push(hash[0]);
+	        vars[hash[0]] = hash[1];
+	    }
+
+	    var eventid = vars['eid'];
+
+		if (eventid) {
+			$.ajax({
+				url:"/openemr/_ibh/ajax/get_appointment_status.php",
+				data:{pc_eid:eventid},
+				success: function(res) {
+					if (res.pc_apptstatus == "@" || res.pc_apptstatus == ">" || res.pc_apptstatus == "$") {
+						// alert("Whoah there! That appointment's got an encounter goin'. Sorry, but you can't edit it.");
+
+						cascwin(url + "&editable=false", winname, width, height,"resizable=1,scrollbars=1,location=0,toolbar=0");
+
+
+					} else {
+						cascwin(url, winname, width, height,"resizable=1,scrollbars=1,location=0,toolbar=0");
+						grabfocus(top);
+					}
+				}
+			});
+		} else {
+			// new
+			top.modaldialog = cascwin(url, winname, width, height,"resizable=1,scrollbars=1,location=0,toolbar=0");
+			grabfocus(top);
+		}
+
+	} else {
+		// some other type of window open event, not editing an appointment
+		top.modaldialog = cascwin(url, winname, width, height,"resizable=1,scrollbars=1,location=0,toolbar=0");
+		grabfocus(top);
+	}
+
+	return false;
+
+	/*
+	OLD
  if (top.modaldialog && ! top.modaldialog.closed) {
   if (window.focus) top.modaldialog.focus();
   if (top.modaldialog.confirm(top.oemr_dialog_close_msg)) {
@@ -75,6 +139,7 @@ function grabfocus(w) {
   "resizable=1,scrollbars=1,location=0,toolbar=0");
  grabfocus(top);
  return false;
+	*/
 }
 
 

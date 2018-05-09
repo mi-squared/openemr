@@ -13,6 +13,7 @@ require_once(dirname(__FILE__) . "/../library/classes/CouchDB.class.php");
 require_once(dirname(__FILE__) . "/../library/forms.inc");
 require_once(dirname(__FILE__) . "/../library/formatting.inc.php");
 require_once(dirname(__FILE__) . "/../library/classes/postmaster.php"  );
+require_once(dirname(__FILE__) . "/../library/pnotes.inc");
 
 class C_Document extends Controller {
 
@@ -254,7 +255,7 @@ class C_Document extends Controller {
 			$body_notes = attr($_POST['note']);
 			$pdetails = getPatientData($patient_id);
 			$pname = $pdetails['fname']." ".$pdetails['lname'];
-			$this->document_send($_POST['provide_email'],$body_notes,$url,$pname);
+			$this->document_send($d, $_POST['provide_email'],$_POST['asign_note_to_user'], $body_notes,$url,$pname);
                         if ($couch_docid && $couch_revid) {
                               // remove the temporary couchdb file
                               unlink($temp_couchdb_url);
@@ -372,6 +373,18 @@ class C_Document extends Controller {
 		$treeMenu_listbox  = new HTML_TreeMenu_Listbox($menu, array("promoText" => xl('Move Document to Category:')));
 		
 		$this->assign("tree_html_listbox",$treeMenu_listbox->toHTML());
+
+		$all_users_sql = "SELECT fname, lname, username FROM users WHERE active = '1' ORDER BY lname DESC";
+		$all_users = sqlStatement( $all_users_sql );
+        $all_users_array = array();
+        $user_select_options = "<option value=''> -- </option>";
+		while ( $all_user = sqlFetchArray( $all_users ) ) {
+        	$full_name = $all_user['lname'].', '.$all_user['fname'];
+			$all_users_array[$full_name] = $all_user['username'];
+            $user_select_options .= "<option value='{$all_user['username']}'>$full_name</option>";
+		}
+
+        $this->assign( 'user_select_options', $user_select_options );
 		
 		$activity = $this->fetch($GLOBALS['template_dir'] . "documents/" . $this->template_mod . "_view.html");
 		$this->assign("activity", $activity);
@@ -1140,31 +1153,43 @@ class C_Document extends Controller {
 		fclose($LOG);
 	}
 	
-	function document_send($email,$body,$attfile,$pname) {
-		if (empty($email)) {
-			$this->assign("process_result","Email could not be sent, the address supplied: '$email' was empty or invalid.");
-			return;
+	function document_send(Document $document, $email,$user_message,$body,$attfile,$pname) {
+
+		if (!empty($email)) {
+
+            $desc = "Please check the attached patient document.\n Content:" . attr( $body );
+            $mail = new MyMailer();
+            $from_name = $GLOBALS[ "practice_return_email_path" ];
+            $from = $GLOBALS[ "practice_return_email_path" ];
+            $mail->AddReplyTo( $from, $from_name );
+            $mail->SetFrom( $from, $from );
+            $to = $email;
+            $to_name = $email;
+            $mail->AddAddress( $to, $to_name );
+            $subject = "Patient documents";
+            $mail->Subject = $subject;
+            $mail->Body = $desc;
+            $mail->AddAttachment( $attfile );
+            if ( $mail->Send() ) {
+                $retstatus = "email_sent";
+            } else {
+                $email_status = $mail->ErrorInfo;
+                //echo "EMAIL ERROR: ".$email_status;
+                $retstatus = "email_fail";
+            }
+        }
+
+        if ( !empty($user_message)) {
+			global $pid;
+            $desc = "Please review linked document. \n Content:" . attr( $body );
+            $document->postPatientNote($user_message,"",$desc );
 		}
-		 
-		  $desc = "Please check the attached patient document.\n Content:".attr($body);
-		  $mail = new MyMailer();
-		  $from_name = $GLOBALS["practice_return_email_path"];
-		  $from =  $GLOBALS["practice_return_email_path"];
-		  $mail->AddReplyTo($from,$from_name);
-		  $mail->SetFrom($from,$from );
-		  $to = $email ; $to_name =$email;
-		  $mail->AddAddress($to, $to_name);
-		  $subject = "Patient documents";
-		  $mail->Subject = $subject;
-		  $mail->Body = $desc;
-		  $mail->AddAttachment($attfile);
-		  if ($mail->Send()) {
-			 $retstatus = "email_sent";
-		  } else {
-			$email_status = $mail->ErrorInfo;
-			//echo "EMAIL ERROR: ".$email_status;
-			$retstatus =  "email_fail";
-		  }
+
+        if ( empty($user_message) && empty($email)) {
+            $this->assign("process_result","Message could not be sent, the address supplied: '$email' was empty or invalid.");
+		}
+
+
 	}
 	
 //place to hold optional code

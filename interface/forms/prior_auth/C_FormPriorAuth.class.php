@@ -21,6 +21,7 @@ class C_FormPriorAuth extends Controller {
     function default_action() {
     	$prior_auth = new FormPriorAuth();
     	$this->assign("prior_auth",$prior_auth);
+		$this->assign("prior_Auth_number", "");
 		return $this->fetch($this->template_dir . $this->template_mod . "_new.html");
 	}
 	
@@ -33,6 +34,9 @@ class C_FormPriorAuth extends Controller {
     	}
     	$this->assign("VIEW",true);
     	$this->assign("prior_auth",$prior_auth);
+		$this->assign("NoAuth", $prior_auth->get_not_req());
+		$this->assign("Alert", $prior_auth->get_units());
+		$this->assign("OverRide", $prior_auth->get_override());
 		return $this->fetch($this->template_dir . $this->template_mod . "_new.html");
 
 	}

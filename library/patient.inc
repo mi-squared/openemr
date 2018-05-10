@@ -67,10 +67,17 @@ function getLanguages() {
 
 function getInsuranceProvider($ins_id) {
     
-    $sql = "select name from insurance_companies where id=?";
+    $sql = "select name from insurance_companies where id=? and inactive != 1";
     $row = sqlQuery($sql,array($ins_id));
     return $row['name'];
     
+}
+
+function getProvideUsername($providerIDres){
+
+	$sql = "select username from users where id=?";
+	$row = sqlQuery($sql,array($providerIDres));
+	return $row['username'];
 }
 
 function getInsuranceProviders() {
@@ -92,7 +99,7 @@ function getInsuranceProviders() {
         $sql = "select insurance_companies.name, insurance_companies.id, " .
           "addresses.zip, addresses.line1 " .
           "from insurance_companies, addresses " .
-          "where addresses.foreign_id = insurance_companies.id " .
+          "where addresses.foreign_id = insurance_companies.id and inactive != 1 " .
           "order by insurance_companies.name, addresses.zip";
 
         $rez = sqlStatement($sql);
@@ -162,7 +169,17 @@ function getProviders() {
     }
     return $returnval;
 }
+//-----------------------------------------------------------------------------
+// Get the calendar appointment title Sherwin
 
+function getTitle($encounter){
+
+   $query = "SELECT a.pc_catname FROM openemr_postcalendar_categories AS a, form_encounter AS b WHERE b.encounter = $encounter AND a.pc_catid = b.pc_catid ";
+      $res = sqlStatement($query);
+	  $title = sqlFetchArray($res);
+	  return $title['pc_catname'];
+
+}
 // ----------------------------------------------------------------------------
 // Get one facility row.  If the ID is not specified, then get either the
 // "main" (billing) facility, or the default facility of the currently
@@ -1014,6 +1031,35 @@ function updatePatientData($pid, $new, $create=false)
     $sql .= " WHERE id = '$db_id'";
     sqlStatement($sql);
   }
+  //added by sherwin to make the external id uniform
+  $cpub = sqlQuery("SELECT fname, lname, DOB, pubpid FROM patient_data WHERE id = '$db_id'");
+   if(empty($cpub['pubpid'])){
+      $npub = explode("-", $cpub['DOB']);
+	  $pubpid = substr($cpub['lname'], 0, 3 )
+	           .substr($cpub['fname'], 0, 3 )
+			   .substr($npub[0], -2);
+	  $pubpid = strtoupper($pubpid);
+      $sql = "UPDATE patient_data SET pubpid = '$pubpid' WHERE id = '$db_id'";
+	sqlStatement($sql);
+	}else{
+	   //check to see if the pubpid match the standard
+      $npub = explode("-", $cpub['DOB']);
+	  $pubpid = substr($cpub['lname'], 0, 3 )
+	           .substr($cpub['fname'], 0, 3 )
+			   .substr($npub[0], -2);
+	  $pubpid = strtoupper($pubpid);
+	  if ($cpub['pubpid'] != $pubpid){
+      $sql = "UPDATE patient_data SET pubpid = '$pubpid' WHERE id = '$db_id'";
+	  sqlStatement($sql);
+
+	   }
+
+	}
+
+  $rez = sqlQuery("SELECT * FROM patient_data WHERE id = '$db_id'");
+  sync_patient($db_id,$rez['fname'],$rez['lname'],$rez['street'],$rez['city'],
+    $rez['postal_code'],$rez['state'],$rez['phone_home'],$rez['phone_biz'],
+    $rez['phone_cell'],$rez['email'],$rez['pid']);
 
   return $db_id;
 }

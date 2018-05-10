@@ -27,6 +27,29 @@ function getPnoteById($id, $cols = "*")
 }
 
 /**
+ * Retrieve a note status, given its ID
+ *
+ * @param string $id the ID of the note to retrieve.
+ *
+ */
+ function getPnoteStatus($msg)
+ {
+     return sqlQuery("SELECT message_status FROM pnotes WHERE id=?", array($msg));
+
+ }
+
+/**
+ * Change message status and title from New to unsigned and New Document to Read
+ *
+ */
+
+ function updatePnoteStatus($msg, $pid)
+ {
+    sqlStatement("UPDATE pnotes SET title = 'Read', message_status = 'Unsigned' WHERE id = $msg AND pid = $pid ");
+
+ }
+
+/**
  * Get the patient notes for the given user.
  *
  * This function is used to retrieve notes assigned to the given user, or
@@ -67,7 +90,8 @@ function getPnotesByUser($activity="1",$show_all="no",$user='',$count=false,$sor
 
   // run the query 
   // 2013-02-08 EMR Direct: minor changes to query so notes with pid=0 don't disappear
-  $sql = "SELECT pnotes.id, pnotes.user, pnotes.pid, pnotes.title, pnotes.date, pnotes.message_status,
+  //sherwin to pull encounter information that is stored
+  $sql = "SELECT pnotes.id, pnotes.user, pnotes.pid, pnotes.title, pnotes.date, pnotes.message_status, pnotes.encounter,
           IF(pnotes.pid = 0 OR pnotes.user != pnotes.pid,users.fname,patient_data.fname) as users_fname,
           IF(pnotes.pid = 0 OR pnotes.user != pnotes.pid,users.lname,patient_data.lname) as users_lname,
           patient_data.fname as patient_data_fname, patient_data.lname as patient_data_lname
@@ -350,10 +374,11 @@ function getPnotesByPid ($pid, $activity = "1", $cols = "*", $limit=10, $start=0
  * @param string $background_user if set then the pnote is created by a background-service rather than a user
  * @return int the ID of the added note.
  */
-function addPnote($pid, $newtext, $authorized = '0', $activity = '1',
-  $title= 'Unassigned', $assigned_to = '', $datetime = '',
-  $message_status = 'New', $background_user="")
-{
+
+ // IBH_DEV
+ // removed encounter from insert; was not in function params
+
+function addPnote($pid, $newtext, $authorized = '0', $activity = '1', $title= 'Unassigned', $assigned_to = '', $datetime = '', $message_status = 'New', $background_user="") {
   if (empty($datetime)) $datetime = date('Y-m-d H:i:s');
 
   // make inactive if set as Done
@@ -364,8 +389,7 @@ function addPnote($pid, $newtext, $authorized = '0', $activity = '1',
   if ($assigned_to) $body .= " to $assigned_to";
   $body = $body . ') ' . $newtext;
 
-  return sqlInsert('INSERT INTO pnotes (date, body, pid, user, groupname, ' .
-    'authorized, activity, title, assigned_to, message_status) VALUES ' .
+  return sqlInsert('INSERT INTO pnotes (date, body, pid, user, groupname, authorized, activity, title, assigned_to, message_status) VALUES ' .
     '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     array($datetime, $body, $pid, $user, $_SESSION['authProvider'], $authorized, $activity, $title, $assigned_to, $message_status) );
 }

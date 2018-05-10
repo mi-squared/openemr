@@ -54,6 +54,12 @@ function get_pharmacies() {
     "ORDER BY name, area_code, prefix, number");
 }
 
+
+/* IBH_DEV
+// We've added a couple things here: copayComment()
+// and skipping certain options with "subtype" labeled in DB as "skip"
+// hence the "AND subtype != 'skip'" in the queries below
+*/
 function optionalAge($frow, $date, &$asof) {
   $asof = '';
   if (empty($date)) return '';
@@ -89,7 +95,7 @@ function generate_select_list($tag_name, $list_id, $currvalue, $title, $empty_na
             $tag_name_esc = $tag_name_esc . "[]";
         }
 
-	$s .= "<select name='$tag_name_esc'";
+	$s .= "<select name='$tag_name_esc' data-test='foo' onchange='copayComment()'";  //added by sherwin
 
 	if ($multiple) {
 		$s .= " multiple='multiple'";

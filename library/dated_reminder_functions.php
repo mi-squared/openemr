@@ -31,7 +31,7 @@ function RemindersArray($days_to_show,$today,$alerts_to_show,$userID = false){
 // ----- define a blank reminders array
         $reminders = array();
         $internUserSql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-        $internUserRow = sqlQuery( $internUserSql, [ 'intern_group' ] );
+        $internUserRow = sqlQuery( $internUserSql, [ 'apprentice_group' ] );
         
 // ----- sql statement for getting uncompleted reminders (sorts by date, then by priority)  
           $drSQL = sqlStatement(

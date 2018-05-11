@@ -82,7 +82,7 @@ function getPnotesByUser($activity="1",$show_all="no",$user='',$count=false,$sor
             " ".escape_sort_order($sortorder).
             " limit ".escape_limit($begin).", ".escape_limit($listnumber);
   }
-  $result = sqlStatement($sql, array($usrvar, 'intern_group'));
+  $result = sqlStatement($sql, array($usrvar, 'apprentice_group'));
 
   // return the results
   if ($count) {

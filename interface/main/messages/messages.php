@@ -575,7 +575,7 @@ else {
             }
             $assigned_to_name = $myrow['assigned_fname'].' '.$myrow['assigned_lname'];
             $rowClass = '';
-            if ( $myrow['assigned_to'] == 'intern_group' ) {
+            if ( $myrow['assigned_to'] == 'apprentice_group' ) {
                 $rowClass = "intern-message-row";
             }
             $count++;

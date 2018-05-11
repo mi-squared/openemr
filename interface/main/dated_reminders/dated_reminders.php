@@ -123,9 +123,9 @@ if(isset($_POST['show_intern_messages'])){
 
 
              $(".hideIntern").click(function(){
-                 if($(this).html() == "<span><?php echo xla('Hide Intern Msgs') ?></span>"){
+                 if($(this).html() == "<span><?php echo xla('Hide Apprentice Msgs') ?></span>"){
 
-                     $(this).html("<span><?php echo xla('Show Intern Msgs') ?></span>");
+                     $(this).html("<span><?php echo xla('Show Apprentice Msgs') ?></span>");
                      $(".intern-message").hide("fast");
                      $(".intern-message-row").css("display", "none");
 
@@ -137,7 +137,7 @@ if(isset($_POST['show_intern_messages'])){
                  }
                  else{
 
-                     $(this).html("<span><?php echo xla('Hide Intern Msgs') ?></span>");
+                     $(this).html("<span><?php echo xla('Hide Apprentice Msgs') ?></span>");
                      $(".intern-message").show("fast");
                      $(".intern-message-row").css("display", "table-row");
 
@@ -220,7 +220,7 @@ if(isset($_POST['show_intern_messages'])){
         <?php 
           // initialize html string        
           $pdHTML = '<div class="dr_container"><table><tr><td valign="top">                         
-                        <p><a class="hideIntern css_button_small" href="#"><span>'.xlt($show_intern_messages ? 'Hide Intern Msgs' : 'Show Intern Msgs').'</span></a><br /></p>
+                        <p><a class="hideIntern css_button_small" href="#"><span>'.xlt($show_intern_messages ? 'Hide Apprentice Msgs' : 'Show Apprentice Msgs').'</span></a><br /></p>
                         <p><a class="hideDR css_button_small" href="#"><span>'.xlt('Hide Reminders').'</span></a><br /></p>
                         <div class="drHide">'.
                         '<p><a title="'.xla('View Past and Future Reminders').'" onclick="openLogScreen()" class="css_button_small" href="#"><span>'.xlt('View Log').'</span></a><br /></p>'

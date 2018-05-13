@@ -61,11 +61,11 @@ function echoLine($iname, $date, $charges, $ptpaid, $inspaid, $duept,$encounter=
   echo "  <td class='detail'>" . text(oeFormatShortDate($date)) . "</td>\n";
   echo "  <td class='detail' id='".attr($date)."' align='center'>" . htmlspecialchars($encounter, ENT_QUOTES) . "</td>\n";
   echo "  <td class='detail' align='center' id='td_charges_$var_index' >" . htmlspecialchars(bucks($charges), ENT_QUOTES) . "</td>\n";
-  echo "  <td class='detail' align='center' id='td_inspaid_$var_index' >" . htmlspecialchars(bucks($inspaid*-1), ENT_QUOTES) . "</td>\n";
+//  echo "  <td class='detail' align='center' id='td_inspaid_$var_index' >" . htmlspecialchars(bucks($inspaid*-1), ENT_QUOTES) . "</td>\n";
   echo "  <td class='detail' align='center' id='td_ptpaid_$var_index' >" . htmlspecialchars(bucks($ptpaid*-1), ENT_QUOTES) . "</td>\n";
-  echo "  <td class='detail' align='center' id='td_patient_copay_$var_index' >" . htmlspecialchars(bucks($patcopay), ENT_QUOTES) . "</td>\n";
-  echo "  <td class='detail' align='center' id='td_copay_$var_index' >" . htmlspecialchars(bucks($copay), ENT_QUOTES) . "</td>\n";
-  echo "  <td class='detail' align='center' id='balance_$var_index'>" . htmlspecialchars(bucks($balance), ENT_QUOTES) . "</td>\n";
+//  echo "  <td class='detail' align='center' id='td_patient_copay_$var_index' >" . htmlspecialchars(bucks($patcopay), ENT_QUOTES) . "</td>\n";
+//  echo "  <td class='detail' align='center' id='td_copay_$var_index' >" . htmlspecialchars(bucks($copay), ENT_QUOTES) . "</td>\n";
+//  echo "  <td class='detail' align='center' id='balance_$var_index'>" . htmlspecialchars(bucks($balance), ENT_QUOTES) . "</td>\n";
   echo "  <td class='detail' align='center' id='duept_$var_index'>" . htmlspecialchars(bucks(round($duept,2)*1), ENT_QUOTES) . "</td>\n";
   echo "  <td class='detail' align='right'><input type='text' name='".attr($iname)."'  id='paying_".attr($var_index)."' " .
     " value='" .  '' . "' onchange='coloring();calctotal()'  autocomplete='off' " .
@@ -934,7 +934,7 @@ function make_insurance()
    <?php echo xla('Check/Ref Number'); ?>:
   </td>
   <td colspan='2' ><div id="ajax_div_patient" style="display:none;"></div>
-   <input type='text'  id="check_number" name='form_source' style="width:120px" value='<?php echo htmlspecialchars($payrow['source'], ENT_QUOTES); ?>'>
+   <input type='text' disabled id="check_number" name='form_source' style="width:120px" value='<?php echo htmlspecialchars($payrow['source'], ENT_QUOTES); ?>'>
   </td>
  </tr>
  <tr height="5"><td colspan='3'></td></tr>
@@ -943,7 +943,7 @@ function make_insurance()
   <td class='text' valign="middle" >
    <?php echo htmlspecialchars(xl('Patient Coverage'), ENT_QUOTES); ?>:
   </td>
-  <td class='text' colspan="2" ><input type="radio" name="radio_type_of_coverage" id="radio_type_of_coverage1" value="self" onClick="make_visible_radio();make_self();"/><?php echo htmlspecialchars(xl('Self'), ENT_QUOTES); ?><input type="radio" name="radio_type_of_coverage" id="radio_type_of_coverag2" value="insurance"  checked="checked" onClick="make_hide_radio();make_insurance();"/><?php echo htmlspecialchars(xl('Insurance'), ENT_QUOTES); ?>  </td>
+  <td class='text' colspan="2" ><input type="radio" name="radio_type_of_coverage" id="radio_type_of_coverage1" value="self" checked="checked"  onClick="make_visible_radio();make_self();"/><?php echo htmlspecialchars(xl('Self'), ENT_QUOTES); ?><input type="radio" name="radio_type_of_coverage" id="radio_type_of_coverag2" value="insurance"  onClick="make_hide_radio();make_insurance();"/><?php echo htmlspecialchars(xl('Insurance'), ENT_QUOTES); ?>  </td>
  </tr>
 
  <tr height="5"><td colspan='3'></td></tr>
@@ -988,20 +988,8 @@ function make_insurance()
   <td class="dehead" align="center" width="200" id="td_head_description" style='display:none'>
    <?php echo htmlspecialchars( xl('Description'), ENT_QUOTES) ?>
   </td>
-  <td class="dehead" align="center" width="80" id="td_head_insurance_payment" >
-   <?php echo htmlspecialchars( xl('Insurance Payment'), ENT_QUOTES) ?>
-  </td>
   <td class="dehead" align="center" width="80" id="td_head_patient_payment" >
    <?php echo htmlspecialchars( xl('Patient Payment'), ENT_QUOTES) ?>
-  </td>
-  <td class="dehead" align="center" width="55" id="td_head_patient_co_pay" >
-   <?php echo htmlspecialchars( xl('Co Pay Paid'), ENT_QUOTES) ?>
-  </td>
-	<td class="dehead" align="center" width="55" id="td_head_co_pay" >
-   <?php echo htmlspecialchars( xl('Required Co Pay'), ENT_QUOTES) ?>
-  </td>
-  <td class="dehead" align="center" width="80" id="td_head_insurance_balance" >
-   <?php echo htmlspecialchars( xl('Insurance Balance'), ENT_QUOTES) ?>
   </td>
   <td class="dehead" align="center" width="80" id="td_head_patient_balance" >
    <?php echo htmlspecialchars( xl('Patient Balance'), ENT_QUOTES) ?>
@@ -1166,11 +1154,11 @@ function make_insurance()
   <td class="dehead" id='td_total_1'></td>
   <td class="dehead" id='td_total_2'></td>
   <td class="dehead" id='td_total_3'></td>
-  <td class="dehead" id='td_total_4'></td>
+<!--  <td class="dehead" id='td_total_4'></td>-->
   <td class="dehead" id='td_total_5'></td>
-  <td class="dehead" id='td_total_6'></td>
-	<td class="dehead" id='td_total_7'></td>
-  <td class="dehead" id='td_total_8'></td>
+<!--  <td class="dehead" id='td_total_6'></td>-->
+<!--	<td class="dehead" id='td_total_7'></td>-->
+<!--  <td class="dehead" id='td_total_8'></td>-->
   <td class="dehead" align="right">
    <?php echo htmlspecialchars( xl('Total'), ENT_QUOTES);?>
   </td>
@@ -1191,7 +1179,12 @@ function make_insurance()
 <input type='hidden' name='mode' id='mode' value='' />
 </form>
 <script language="JavaScript">
- calctotal();
+    $(document).ready( function(){
+        calctotal();
+        $("#radio_type_of_coverage1").click();
+        $("#radio_type_of_payment_self1").click();
+    });
+
 </script>
 </center>
 </body>

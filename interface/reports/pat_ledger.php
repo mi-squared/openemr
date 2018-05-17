@@ -177,6 +177,14 @@ function PrintCreditDetail($detail, $pat, $unassigned = false)
         $print .= "<td class='detail'>&nbsp;</td>";
         $method = List_Look($pmt['payment_method'], 'payment_method');
         $desc = $pmt['description'];
+
+        $pn_statement = sqlStatement("SELECT note FROM ar_activity WHERE session_id = ?", [$pmt['session_id']]);
+        $payment_note = "";
+        while ( $pnrow = sqlFetchArray($pn_statement) ) {
+            $payment_note .= "{$pnrow['note']}\n";
+        }
+        $note = $payment_note;
+
         $ref = $pmt['reference'];
         if ($unassigned) {
               $memo = List_Look($pmt['adjustment_code'], 'payment_adjustment_code');
@@ -208,14 +216,17 @@ function PrintCreditDetail($detail, $pat, $unassigned = false)
 
             $description .= '['.$memo.']';
         }
+
+
         if ($uap_flag === true) {
             if ($description) {
                 $description .= ' ';
             }
             $description .= '{Pay History}';
         }
+
         $print .= "<td class='detail' colspan='2'>".
-                                      text($description)."&nbsp;</td>";
+                                      text($description)."<br>".text($note)."</td>";
         $payer = ($pmt['name'] == '') ? xl('Patient') : $pmt['name'];
         if ($unassigned) {
               $pmt_date = substr($pmt['post_to_date'], 0, 10);

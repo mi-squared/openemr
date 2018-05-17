@@ -23,7 +23,6 @@ require_once("$srcdir/invoice_summary.inc.php");
 require_once("../../custom/code_types.inc.php");
 require_once("$srcdir/options.inc.php");
 require_once("$srcdir/encounter_events.inc.php");
-
 use OpenEMR\Core\Header;
 use OpenEMR\Services\FacilityService;
 
@@ -62,7 +61,7 @@ $facilityService = new FacilityService();
     // Display a row of data for an encounter.
     //
     $var_index = 0;
-    function echoLine($iname, $date, $charges, $ptpaid, $inspaid, $duept, $encounter = 0, $copay = 0, $patcopay = 0)
+    function echoLine($iname, $date, $charges, $ptpaid, $inspaid, $duept, $encounter = 0, $copay = 0, $patcopay = 0, $notes = [])
     {
         global $var_index;
         $var_index++;
@@ -81,7 +80,27 @@ $facilityService = new FacilityService();
         echo "  <td class='detail' align='center' id='duept_$var_index'>" . htmlspecialchars(bucks(round($duept, 2) * 1), ENT_QUOTES) . "</td>\n";
         echo "  <td class='detail' align='right'><input type='text' name='" . attr($iname) . "'  id='paying_" . attr($var_index) . "' " .
             " value='" . '' . "' onchange='coloring();calctotal()'  autocomplete='off' " .
-            "onkeyup='calctotal()'  style='width:50px'/></td>\n";
+            "onkeyup='calctotal()'  style='width:50px'/></td>";
+
+        echo "  <td class='detail' align='right'><input type='text' name='note_" . attr( $iname ) . "'  id='note_" . attr( $var_index ) . "' " .
+            " value='' " .
+            "style='width:100px'/>";
+
+        echo "  <td class='detail' align='right'>";
+        if ( count ( $notes ) ) {
+            echo "<ul style='margin-left: 0px; padding-left: 0px;'>";
+            foreach ( $notes as $note ) {
+                echo "<li>$note</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "&nbsp;";
+        }
+        echo "</td>";
+
+
+        echo "</td>\n";
+
         echo " </tr>\n";
     }
 
@@ -180,7 +199,7 @@ $facilityService = new FacilityService();
                 array(0, $form_pid, $_SESSION['authUserID'], 0, $form_source, $_REQUEST['form_prepayment'], $NameNew, $form_method)
             );
 
-            frontPayment($form_pid, 0, $form_method, $form_source, $_REQUEST['form_prepayment'], 0, $timestamp);//insertion to 'payments' table.
+            frontPayment($form_pid, 0, $form_method, $form_source, $_REQUEST['form_prepayment'], 0, $timestamp );//insertion to 'payments' table.
         }
 
         if ($_POST['form_upay'] && $_REQUEST['radio_type_of_payment'] != 'pre_payment') {
@@ -224,11 +243,12 @@ $facilityService = new FacilityService();
                         );
 
                         sqlBeginTrans();
+                        $encounter_payment_note = $_POST['note_form_upay'][$enc];
                         $sequence_no = sqlQuery("SELECT IFNULL(MAX(sequence_no),0) + 1 AS increment FROM ar_activity WHERE pid = ? AND encounter = ?", array($form_pid, $enc));
                         $insrt_id = sqlInsert(
-                            "INSERT INTO ar_activity (pid,encounter,sequence_no,code_type,code,modifier,payer_type,post_time,post_user,session_id,pay_amount,account_code)" .
-                            " VALUES (?,?,?,?,?,?,0,now(),?,?,?,'PCP')",
-                            array($form_pid, $enc, $sequence_no['increment'], $Codetype, $Code, $Modifier, $_SESSION['authId'], $session_id, $amount)
+                            "INSERT INTO ar_activity (pid,encounter,sequence_no,code_type,code,modifier,payer_type,post_time,post_user,session_id,pay_amount,account_code,note)" .
+                            " VALUES (?,?,?,?,?,?,0,now(),?,?,?,'PCP',?)",
+                            array($form_pid, $enc, $sequence_no['increment'], $Codetype, $Code, $Modifier, $_SESSION['authId'], $session_id, $amount,$encounter_payment_note)
                         );
                         sqlCommitTrans();
 
@@ -323,6 +343,7 @@ $facilityService = new FacilityService();
 
                                 sqlBeginTrans();
                                 $sequence_no = sqlQuery("SELECT IFNULL(MAX(sequence_no),0) + 1 AS increment FROM ar_activity WHERE pid = ? AND encounter = ?", array($form_pid, $enc));
+                                $encounter_payment_note = $_POST['note_form_upay'][$enc];
                                 sqlStatement(
                                     "insert into ar_activity set " .
                                     "pid = ?" .
@@ -337,8 +358,9 @@ $facilityService = new FacilityService();
                                     ", session_id = ?" .
                                     ", pay_amount = ?" .
                                     ", adj_amount = ?" .
+                                    ", note = ?" .
                                     ", account_code = 'PP'",
-                                    array($form_pid, $enc, $sequence_no['increment'], $Codetype, $Code, $Modifier, 0, $_SESSION['authUserID'], $payment_id, $insert_value, 0)
+                                    array($form_pid, $enc, $sequence_no['increment'], $Codetype, $Code, $Modifier, 0, $_SESSION['authUserID'], $payment_id, $insert_value, 0,$encounter_payment_note )
                                 );
                                 sqlCommitTrans();
                             }//if
@@ -360,8 +382,9 @@ $facilityService = new FacilityService();
                                 ", session_id = ?" .
                                 ", pay_amount = ?" .
                                 ", adj_amount = ?" .
+                                ", note = ?" .
                                 ", account_code = 'PP'",
-                                array($form_pid, $enc, $sequence_no['increment'], $Codetype, $Code, $Modifier, 0, $_SESSION['authUserID'], $payment_id, $amount, 0)
+                                array($form_pid, $enc, $sequence_no['increment'], $Codetype, $Code, $Modifier, 0, $_SESSION['authUserID'], $payment_id, $amount, 0, $_POST['note_form_upay'][$enc])
                             );
                             sqlCommitTrans();
                         }
@@ -966,7 +989,7 @@ $facilityService = new FacilityService();
 
     <body class="body_top" onLoad="cursor_pointer();">
     <div class="container well well-sm">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <span class='text'>
                 <h4 class="text-center"><?php echo htmlspecialchars(xl('Accept Payment for'), ENT_QUOTES); ?>
                     <?php echo htmlspecialchars($patdata['fname'], ENT_QUOTES) . " " .
@@ -1131,6 +1154,12 @@ $facilityService = new FacilityService();
                             <th class="dehead" align="center">
                                 <?php echo htmlspecialchars(xl('Paying'), ENT_QUOTES) ?>
                             </th>
+                            <th class="dehead" align="center">
+                                <?php echo htmlspecialchars(xl('Note'), ENT_QUOTES) ?>
+                            </th>
+                            <th class="dehead" align="center">
+                                <?php echo htmlspecialchars(xl('Note History'), ENT_QUOTES) ?>
+                            </th>
                         </tr>
                         </thead>
                         <?php
@@ -1227,7 +1256,7 @@ $facilityService = new FacilityService();
                         // entering today's co-pay.
                         //
                         if (!$gottoday) {
-                            echoLine("form_upay[0]", date("Y-m-d"), 0, 0, 0, 0 /*$duept*/);//No encounter yet defined.
+                            echoLine("form_upay[0]", date("Y-m-d"), 0, 0, 0, 0 /*$duept*/, '');//No encounter yet defined.
                         }
 
                         $gottoday = false;
@@ -1283,6 +1312,15 @@ $facilityService = new FacilityService();
                                 $duept = $brow['amount'] + $srow['amount'] - $drow['payments'] - $drow['adjustments'];
                             }
 
+                            $pn_statement = sqlStatement("SELECT note, post_time FROM ar_activity WHERE pid = ? AND encounter = ? ORDER BY post_time DESC", [$pid, $enc]);
+                            $payment_notes = [];
+                            while ( $pnrow = sqlFetchArray($pn_statement) ) {
+                                if ( $pnrow['note'] ) {
+                                    $post_time = oeFormatShortDate( $pnrow[ 'post_time' ] );
+                                    $payment_notes [] = "{$pnrow['note']} ($post_time)\n";
+                                }
+                            }
+
                             echoLine(
                                 "form_upay[$enc]",
                                 $dispdate,
@@ -1292,7 +1330,8 @@ $facilityService = new FacilityService();
                                 $duept,
                                 $enc,
                                 $inscopay,
-                                $patcopay
+                                $patcopay,
+                                $payment_notes
                             );
                         }
 
@@ -1316,6 +1355,8 @@ $facilityService = new FacilityService();
                             <input type='text' name='form_paytotal' value=''
                                    style='color:#00aa00;width:50px' readonly/>
                         </td>
+                        <td class="dehead">&nbsp;</td>
+                        <td class="dehead">&nbsp;</td>
                     </tr>
 
                     </table>

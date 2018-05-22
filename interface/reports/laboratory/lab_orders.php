@@ -193,6 +193,12 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 	media="screen" />
 
 <style type="text/css">
+
+input[type='text'] {
+	margin: 0;
+	padding: 1px 3px;
+}
+
 /* specifically include & exclude from printing */
 @media print {
 	#report_parameters {

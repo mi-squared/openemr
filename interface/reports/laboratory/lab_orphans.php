@@ -215,6 +215,13 @@ if ($form_refresh) $res = sqlStatement($query);
 #report_results table td {
 	border-bottom: none;
 }
+
+
+input[type='text'] {
+	margin: 0;
+	padding: 1px 3px;
+}
+
 </style>
 
 <script><?php include_once("{$GLOBALS['srcdir']}/restoreSession.php"); ?></script>

@@ -401,7 +401,7 @@ input[type='text'] {
 							</tr>
 						</table>
 					</td>
-					<td style="vertical-align:middle;text-align:center;height:100%;padding-right:20px;min-width:<?php echo ($form_refresh)? '120px' : '75px' ?>">
+					<td style="vertical-align:middle;text-align:center;height:100%;padding-right:20px;min-width:<?php echo ($form_refresh)? '130px' : '75px' ?>">
 <?php if ($form_refresh ) { ?>
 							<div style='float: right'>
 							<a href='#' class='css_button' onclick='window.print()'> <span><?php xl('Print','e'); ?></span>

@@ -193,9 +193,36 @@ class Installer
         return $this->execute_sql($sql);
     }
 
+    public function check_database_user()
+    {
+        return $this->execute_sql("SELECT user FROM mysql.user WHERE user = '" . $this->escapeSql($this->login) . "' AND host = '" . $this->escapeSql($this->loginhost) . "'");
+    }
+
+    public function create_database_user()
+    {
+        $checkUser = $this->check_database_user();
+
+        if ($checkUser === false) {
+            // there was an error in the check database user query, so return false
+            return false;
+        } else if ($checkUser->num_rows > 0) {
+            // the mysql user already exists, so do not need to create the user, but need to set the password
+            // Note need to try two different methods, first is for newer mysql versions and second is for older mysql versions (if the first method fails)
+            $returnSql = $this->execute_sql("ALTER USER '" . $this->escapeSql($this->login) . "'@'" . $this->escapeSql($this->loginhost) . "' IDENTIFIED BY '" . $this->escapeSql($this->pass) . "'", false);
+            if ($returnSql === false) {
+                error_log("Using older mysql version method to set password for the mysql user");
+                $returnSql = $this->execute_sql("SET PASSWORD FOR '" . $this->escapeSql($this->login) . "'@'" . $this->escapeSql($this->loginhost) . "' = PASSWORD('" . $this->escapeSql($this->pass) . "')");
+            }
+            return $returnSql;
+        } else {
+            // the mysql user does not yet exist, so create the user
+            return $this->execute_sql("CREATE USER '" . $this->escapeSql($this->login) . "'@'" . $this->escapeSql($this->loginhost) . "' IDENTIFIED BY '" . $this->escapeSql($this->pass) . "'");
+        }
+    }
+
     public function grant_privileges()
     {
-        return $this->execute_sql("GRANT ALL PRIVILEGES ON " . $this->escapeDatabaseName($this->dbname) . ".* TO '" . $this->escapeSql($this->login) . "'@'" . $this->escapeSql($this->loginhost) . "' IDENTIFIED BY '" . $this->escapeSql($this->pass) . "'");
+        return $this->execute_sql("GRANT ALL PRIVILEGES ON " . $this->escapeDatabaseName($this->dbname) . ".* TO '" . $this->escapeSql($this->login) . "'@'" . $this->escapeSql($this->loginhost) . "'");
     }
 
     public function disconnect()
@@ -310,7 +337,7 @@ class Installer
 
     public function add_initial_user()
     {
-        if ($this->execute_sql("INSERT INTO groups (id, name, user) VALUES (1,'" . $this->escapeSql($this->igroup) . "','" . $this->escapeSql($this->iuser) . "')") == false) {
+        if ($this->execute_sql("INSERT INTO `groups` (id, name, user) VALUES (1,'" . $this->escapeSql($this->igroup) . "','" . $this->escapeSql($this->iuser) . "')") == false) {
             $this->error_message = "ERROR. Unable to add initial user group\n" .
             "<p>".mysqli_error($this->dbh)." (#".mysqli_errno($this->dbh).")\n";
             return false;
@@ -518,6 +545,11 @@ if ($it_died != 0) {
                     return false;
                 }
 
+                // Create the mysql user
+                if (! $this->create_database_user()) {
+                    return false;
+                }
+
                 // Grant user privileges to the mysql database
                 if (! $this->grant_privileges()) {
                     return false;
@@ -589,7 +621,7 @@ if ($it_died != 0) {
         return $name;
     }
 
-    private function execute_sql($sql)
+    private function execute_sql($sql, $showError = true)
     {
         $this->error_message = '';
         if (! $this->dbh) {
@@ -600,9 +632,11 @@ if ($it_died != 0) {
         if ($results) {
             return $results;
         } else {
-            $error_mes = mysqli_error($this->dbh);
-            $this->error_message = "unable to execute SQL: '$sql' due to: " . $error_mes;
-            error_log("ERROR IN OPENEMR INSTALL: Unable to execute SQL: ".$sql." due to: ".$error_mes);
+            if ($showError) {
+                $error_mes = mysqli_error($this->dbh);
+                $this->error_message = "unable to execute SQL: '$sql' due to: " . $error_mes;
+                error_log("ERROR IN OPENEMR INSTALL: Unable to execute SQL: " . $sql . " due to: " . $error_mes);
+            }
             return false;
         }
     }

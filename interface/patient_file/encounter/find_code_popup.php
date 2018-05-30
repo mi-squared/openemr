@@ -24,7 +24,7 @@ if (!empty($codetype)) {
 $form_code_type = $_POST['form_code_type'];
 
 // Determine which code type will be selected by default.
-$default = '';
+$default = 'ICD10';
 if (!empty($form_code_type)) {
   $default = $form_code_type;
 }
@@ -140,6 +140,8 @@ else {
   // No allowed types were specified, so show all.
   echo "   <select name='form_code_type'";
   echo ">\n";
+  echo " <option value='ICD10' selected>ICD10 Diagnosis</option>";
+/*
   foreach ($code_types as $key => $value) {
     echo "    <option value='" . attr($key) . "'";
     if ($default == $key) echo " selected";
@@ -148,8 +150,10 @@ else {
   echo "    <option value='PROD'";
   if ($default == 'PROD') echo " selected";
   echo ">" . xlt("Product") . "</option>\n";
+*/
   echo "   </select>&nbsp;&nbsp;\n";
 }
+
 ?>
 
  <?php echo xlt('Search for:'); ?>

@@ -1773,7 +1773,7 @@
           },
           {
             "label": "Orphan Report",
-            "url": "/interface/reports/laboratory/lab_orphans.php.php",
+            "url": "/interface/reports/laboratory/lab_orphans.php",
             "target": "rep",
             "children": [],
             "requirement": 0,

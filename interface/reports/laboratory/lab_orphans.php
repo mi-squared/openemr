@@ -215,6 +215,13 @@ if ($form_refresh) $res = sqlStatement($query);
 #report_results table td {
 	border-bottom: none;
 }
+
+
+input[type='text'] {
+	margin: 0;
+	padding: 1px 3px;
+}
+
 </style>
 
 <script><?php include_once("{$GLOBALS['srcdir']}/restoreSession.php"); ?></script>
@@ -394,7 +401,7 @@ if ($form_refresh) $res = sqlStatement($query);
 							</tr>
 						</table>
 					</td>
-					<td style="vertical-align:middle;text-align:center;height:100%;padding-right:20px;min-width:<?php echo ($form_refresh)? '120px' : '75px' ?>">
+					<td style="vertical-align:middle;text-align:center;height:100%;padding-right:20px;min-width:<?php echo ($form_refresh)? '130px' : '75px' ?>">
 <?php if ($form_refresh ) { ?>
 							<div style='float: right'>
 							<a href='#' class='css_button' onclick='window.print()'> <span><?php xl('Print','e'); ?></span>

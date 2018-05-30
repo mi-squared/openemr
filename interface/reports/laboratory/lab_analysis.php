@@ -157,6 +157,11 @@ input[type='checkbox'] {
 	margin-bottom: 6px;
 }
 
+input[type='text'] {
+	margin: 0;
+	padding: 1px 3px;
+}
+
 .result {
 	font-family: monospace;
 	text-align: center;

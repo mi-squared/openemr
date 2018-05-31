@@ -3,7 +3,7 @@
 <head>
 <script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 
-<link rel="stylesheet" href="/openemr/_ibh/css/dated_reminders.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/dated_reminders.css" type="text/css">
 <style>
 	.dr-table {
 		width:90%;

@@ -96,7 +96,7 @@
 	?><html>
 	
 <head>
-	<link rel="stylesheet" type="text/css" href="/openemr/library/dynarch_calendar.css">
+	<link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css">
 	<script type="text/javascript" src="/openemr/library/dynarch_calendar.js"></script>
 	
 	<script type="text/javascript" src="/openemr/library/dynarch_calendar_setup.js"></script>

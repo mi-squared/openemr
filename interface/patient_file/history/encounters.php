@@ -187,7 +187,7 @@ function generatePageElement($start,$pagesize,$billing,$issue,$text)
 
 <script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
 <!-- IBF_DEV add link to stylesheet -->
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 <script language="JavaScript">
 
 //function toencounter(enc, datestr) {

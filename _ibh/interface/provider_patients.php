@@ -24,7 +24,7 @@ $is_supervisor = ibh_user_is_supervisor();
 
 	<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 	
-	<link rel="stylesheet" href="/openemr/_ibh/css/tickler.css" type="text/css"/>
+	<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/tickler.css" type="text/css"/>
 	
 	</head>
 	

@@ -10,8 +10,8 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <head>
 <script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 
-<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 
 </head>
 <body class="overview-pane">

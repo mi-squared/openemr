@@ -12,10 +12,10 @@
 <title>Alerting Supervisors</title>
 <head>
 <?php // html_header_show();?>
-<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
 
 <!-- IBF_DEV add link to stylesheet -->
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 
 
 

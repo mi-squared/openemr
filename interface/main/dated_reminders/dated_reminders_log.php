@@ -318,7 +318,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
     </script> 
 
 
-    <link rel="stylesheet" type="text/css" href="/openemr/_ibh/css/messages.css">
+    <link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/messages.css">
 
 
 

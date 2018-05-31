@@ -53,7 +53,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 </style>
 
 
-<link rel="stylesheet" type="text/css" href="/openemr/library/dynarch_calendar.css">
+<link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css">
 <script type="text/javascript" src="/openemr/library/topdialog.js?t=<?=time()?>"></script>
 <script type="text/javascript" src="/openemr/library/dialog.js"></script>
 <script type="text/javascript" src="/openemr/library/textformat.js"></script>
@@ -65,7 +65,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 <script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 
 
-<link rel="stylesheet" href="/openemr/_ibh/css/tickler.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/tickler.css" type="text/css">
 
 
 </head>

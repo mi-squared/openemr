@@ -221,13 +221,13 @@ if (isset($_GET['post_payment'])) {
 <head>
 <script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 
-<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 
 <script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
 
 <script src="/openemr/_ibh/js/pikaday.js"></script>
-<link rel="stylesheet" href="/openemr/_ibh/js/pikaday.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/pikaday.css" type="text/css">
 
 <style type="text/css">
 		.odd {

@@ -148,8 +148,8 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 <script type="text/javascript" src="/openemr/library/textformat.js"></script>
 
 
-<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 
 </head>
 <body class="overview-pane">
@@ -160,7 +160,7 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 		<div class='top-message'><?=$top_mssg?></div>
 <?php	} ?>
 <ul class="ibh-top-buttons">
-	<li><a href="/openemr/_ibh/interface/prior_auths_overview.php">ALL PRIOR AUTHS</a></li>
+	<li><a href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/interface/prior_auths_overview.php">ALL PRIOR AUTHS</a></li>
 	<li><a href="display.php?pid=<?=$_pid?>">PATIENT LIST (active)</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="display.php?pid=<?=$_pid?>&show_archived=true" style='color:#777'>(include archived)</a></li>
 	<li><a href="display.php?action=new&pid=<?=$_pid?>">CREATE A NEW PA FOR <?=$patient['fname'] . " " . $patient['lname']?></a></li>
 	

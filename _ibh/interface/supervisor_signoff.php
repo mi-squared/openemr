@@ -1,12 +1,12 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
+		<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
 		
 		<script type="text/javascript" src="/openemr/library/js/jquery-1.7.2.min.js"></script>
 
 
 		<script src="/openemr/library/ESign/js/jquery.esign.js"></script>
-		<link rel="stylesheet" type="text/css" href="/openemr/library/ESign/css/esign.css" />
+		<link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/ESign/css/esign.css" />
 
 
 		
@@ -205,7 +205,7 @@ if (isset($_POST['submit_comments'])) {
 		
 		<div class="signoff-sign supervisor-signoff-section">
 			
-			<a target="RBot" href="/openemr/interface/patient_file/encounter/encounter_top.php?pid=<?=$pid?>&set_encounter=<?=$encounter?>">Sign off on this encounter...</a> (will open in bottom pane)
+			<a target="RBot" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/patient_file/encounter/encounter_top.php?pid=<?=$pid?>&set_encounter=<?=$encounter?>">Sign off on this encounter...</a> (will open in bottom pane)
 
 
 

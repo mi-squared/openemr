@@ -148,7 +148,7 @@ function get_plan_row($patient) {
 <title></title>
 <head>
 
-<link rel="stylesheet" type="text/css" href="/openemr/library/dynarch_calendar.css">
+<link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css">
 <script type="text/javascript" src="/openemr/library/topdialog.js?t=<?=time()?>"></script>
 <script type="text/javascript" src="/openemr/library/dialog.js"></script>
 <script type="text/javascript" src="/openemr/library/textformat.js"></script>
@@ -159,7 +159,7 @@ function get_plan_row($patient) {
 <script type="text/javascript" src="/openemr/_ibh/js/moment.js"></script>
 <script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
 
-<link rel="stylesheet" href="/openemr/_ibh/css/tickler.css" type="text/css">
+<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/tickler.css" type="text/css">
 
 <?php if ($is_supervisor != 1) { ?>
 <style type="text/css">

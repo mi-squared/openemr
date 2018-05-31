@@ -6,6 +6,14 @@
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
 
+
+//Changed by Sherwin the value of the external ID on save
+$end = explode("-", $_POST["form_DOB"]);
+$_POST["form_pubpid"] = substr($_POST["form_lname"], 0, 3 )
+                      . substr($_POST["form_fname"], 0, 3 )
+					  . substr($end[0], -2);
+
+
 require_once("../globals.php");
 require_once("$srcdir/sql.inc");
 

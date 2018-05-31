@@ -30,6 +30,7 @@ $sanitize_all_escapes=true;
 
 $ignoreAuth=true;
 require_once("../globals.php");
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 ?>
 <html>
 <head>
@@ -113,6 +114,11 @@ require_once("../globals.php");
 
             <img class="img-responsive center-block" src="<?php echo $GLOBALS['images_static_relative']; ?>/logo.gif" />
 
+    </div>
+    <div>
+        <?php
+        ibh_run_daily_tasks();
+        ?>
     </div>
 </header>
     <div class="container">

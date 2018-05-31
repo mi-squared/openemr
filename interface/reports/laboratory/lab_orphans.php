@@ -220,6 +220,7 @@ if ($form_refresh) $res = sqlStatement($query);
 input[type='text'] {
 	margin: 0;
 	padding: 1px 3px;
+	height: 18px;
 }
 
 </style>
@@ -401,7 +402,7 @@ input[type='text'] {
 							</tr>
 						</table>
 					</td>
-					<td style="vertical-align:middle;text-align:center;height:100%;padding-right:20px;min-width:<?php echo ($form_refresh)? '130px' : '75px' ?>">
+					<td style="vertical-align:middle;text-align:center;height:100%;padding-right:20px;min-width:<?php echo ($form_refresh)? '160px' : '75px' ?>">
 <?php if ($form_refresh ) { ?>
 							<div style='float: right'>
 							<a href='#' class='css_button' onclick='window.print()'> <span><?php xl('Print','e'); ?></span>
@@ -478,7 +479,7 @@ input[type='text'] {
 						<td><?php echo ($row['lab_name']) ? $row['lab_name'] : "[ UNAVAILABLE ]" ?>&nbsp;
 						</td>
 						<td><?php echo $status; ?>&nbsp;</td>
-						<td style="text-align: right"><input tabindex="-1" type="button"
+						<td style="text-align:right;width:180px"><input tabindex="-1" type="button"
 							class="link_submit"
 							onclick="doSearch('<?php echo $row['type'] ?>',<?php echo $row['id'] ?>)"
 							value=" link " />&nbsp; <?php if ($row['result_doc_id']) { ?> <input

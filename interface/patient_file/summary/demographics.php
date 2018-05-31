@@ -42,7 +42,7 @@ $fake_register_globals=false;
  require_once("$srcdir/options.js.php");
  ////////////
  require_once(dirname(__FILE__)."/../../../library/appointments.inc.php");
- 
+ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php"); //added by ibh
   if (isset($_GET['set_pid'])) {
   include_once("$srcdir/pid.inc");
   setpid($_GET['set_pid']);
@@ -174,6 +174,10 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
 <?php html_header_show();?>
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 <link rel="stylesheet" type="text/css" href="../../../library/js/fancybox/jquery.fancybox-1.2.6.css" media="screen" />
+
+<!-- IBF_DEV add link to stylesheet -->
+<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
@@ -316,6 +320,24 @@ $(document).ready(function(){
     });
     $("#pnotes_ps_expand").load("pnotes_fragment.php");
     $("#disclosures_ps_expand").load("disc_fragment.php");
+    $("#diagnosis_ps_expand").load("diagnosis_fragment.php");
+
+    <?php if ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) { ?>
+      top.restoreSession();
+      $("#diagnosis_ps_expand").load("diagnosis_fragment.php", { 'embeddedScreen' : true }, function() {
+          // (note need to place javascript code here also to get the dynamic link to work)
+          $(".medium_modal").fancybox( {
+                  'overlayOpacity' : 0.0,
+                  'showCloseButton' : true,
+                  'frameHeight' : 500,
+                  'frameWidth' : 800,
+                  'centerOnScroll' : false,
+                  'callbackOnClose' : function()  {
+                  refreshme();
+                  }
+          });
+      });
+    <?php } // end diagnosis added by Sherwin Gaddis ?>
 
     <?php if ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) { ?>
       top.restoreSession();
@@ -481,7 +503,7 @@ $(window).load(function() {
 
 <body class="body_top patient-demographics">
 
-<a href='../reminder/active_reminder_popup.php' id='reminder_popup_link' style='visibility: false;' class='iframe' onclick='top.restoreSession()'></a>
+<a href='../reminder/active_reminder_popup.php' id='reminder_popup_link' style='visibility: hidden;' class='iframe' onclick='top.restoreSession()'></a>
 
 <?php
 $thisauth = acl_check('patients', 'demo');
@@ -630,6 +652,10 @@ if ($GLOBALS['patient_id_category_name']) {
           |
           <a href="../../reports/external_data.php" onclick='top.restoreSession()'>
           <?php echo xlt('External Data'); ?></a>
+          |
+          <a href="../../forms/prior_auth/display.php?pid=<?=$pid?>" <?php if(getSupervisor($authUser) != "Supervisor") echo "class='iframe large_modal'";  ?> onclick='top.restoreSession()'>
+          <?php echo htmlspecialchars(xl('Prior Auth'),ENT_NOQUOTES); ?></a>
+
 
 <!-- DISPLAYING HOOKS STARTS HERE -->
 <?php
@@ -748,6 +774,7 @@ if ($GLOBALS['patient_id_category_name']) {
   echo "</table></td></tr></td></tr></table><br>";
 
 ?>
+<div>Active Prior Auths: <a href="../../forms/prior_auth/display.php?pid=<?=$pid?>" onclick="top.restoreSession()"><?php echo count(ibh_get_prior_auth_warnings($pid)); ?></a></div>
         </div> <!-- required for expand_collapse_widget -->
        </td>
       </tr>
@@ -770,11 +797,60 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
   $widgetAuth, $fixedWidth);
 ?>
          <div id="DEM" >
-          <ul class="tabNav">
+
+	           <?php
+	           if (isset($_POST['edit_pa_reqs'])) {
+
+		          $cats = ibh_get_categories_array();
+				  $checked = array();
+
+		          $pa_pid = $_POST['pa_pid'];
+
+		           foreach ($_POST as $item => $val) {
+
+			           if ($val == 1 && substr($item,0,3) == "cat") {
+
+						   $checked[] = $item;
+			           }
+		           }
+
+		           // WIPE
+		           sqlStatement("DELETE FROM ibh_patient_pa_cat_exceptions WHERE pid=?", array($pa_pid));
+		           foreach ($cats as $cat => $code) {
+			           if (!in_array($cat, $checked)) {
+				           // then it's an exception
+
+				           $cat_id = (int) explode("-", $cat)[1];
+
+						   if ($cat_id > 0) {
+							   $pa_query = "INSERT INTO ibh_patient_pa_cat_exceptions (pid, cat_id) VALUES (?,?)";
+							   sqlStatement($pa_query, array($pa_pid, $cat_id));
+						   }
+
+			           }
+		           }
+
+		           echo "<div class='notification'>Prior Auth exceptions changed.</div>";
+	           }
+
+	       ?>
+
+
+          <ul class="tabNav" data-foo="bar">
            <?php display_layout_tabs('DEM', $result, $result2); ?>
+           <li><a href="/play/javascript-tabbed-navigation/" id="header_tab_.htmlspecialchars(PAs,ENT_QUOTES).">
+                        PAs</a></li>
           </ul>
           <div class="tabContainer">
            <?php display_layout_tabs_data('DEM', $result, $result2); ?>
+
+           <div class="tab"><div class="pa-exceptions"><h3>Prior Auths Required</h3><p>FOR THIS CLIENT’S SPECIFIC INSURANCE:
+ <ul style='color:#ba0303'><li>Leave boxes checked for any codes that require a Prior Authorization.</li>
+	 <li>Leave boxes checked for any codes that have a LIMITED NUMBER of units<br>or visits available without a Prior Authorization.</li>
+	 <li>UNCHECK boxes for any codes that NEVER need a Prior Authorization.</li>
+ </ul>
+ </p><form action="" method="POST"><input type="hidden" name="edit_pa_reqs" value="1"><input type="hidden" name="pa_pid" value="<?=$pid?>"><?php echo ibh_category_checkboxes($pid); ?><br><input type="submit" class="go-button" value="Save"></form></div></div>
+
           </div>
          </div>
         </div> <!-- required for expand_collapse_widget -->
@@ -1322,6 +1398,33 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
 	  echo "   <br />&nbsp;<br />\n";
 	}
 
+ //Show diagnosis
+ if ( (acl_check('patients', 'med')) && ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) ) {
+     // diagnosis summary expand collapse widget
+     $widgetTitle = xl("Diagnosis");
+     $widgetLabel = "diagnosis";
+     $widgetButtonLabel = xl("Edit");
+     //TODO: if statement for if this
+     $enid = $GLOBALS['encounter'];
+     $fid = sqlStatement("SELECT form_id, encounter FROM forms WHERE form_name = 'Patient Diagnosis' AND pid = $pid ORDER BY encounter DESC LIMIT 1");
+     $pdi = sqlFetchArray($fid);
+     $cdi = $pdi['form_id'];
+     if($enid == 0){
+         $widgetButtonLink = $GLOBALS['webroot'] . "/interface/patient_file/encounter/load_form.php?formname=LBFdiag&id=$cdi";
+     }else{
+         $widgetButtonLink = $GLOBALS['webroot'] . "/interface/patient_file/encounter/load_form.php?formname=LBFdiag&id=$cdi";
+     }
+     $widgetButtonClass = "iframe rx_modal";
+     $linkMethod = "html";
+     $bodyClass = "summary_item small";
+     $widgetAuth = true;
+     $fixedWidth = false;
+     expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel , $widgetButtonLink, $widgetButtonClass, $linkMethod, $bodyClass, $widgetAuth, $fixedWidth);
+     echo "<br/>";
+     echo "<div style='margin-left:10px' class='text'><image src='../../pic/ajax-loader.gif'/></div><br/>";
+     echo "</div>";
+ } // end if diagnosis
+
      // Show Clinical Reminders for any user that has rules that are permitted.
      $clin_rem_check = resolve_rules_sql('','0',TRUE,'',$_SESSION['authUser']);
      if ( (!empty($clin_rem_check)) && ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) ) {
@@ -1587,7 +1690,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
             if ($row['pc_hometext'] != "") {
                 $etitle = xl('Comments').": ".($row['pc_hometext'])."\r\n".$etitle;
             }
-            echo "<a href='javascript:oldEvt(" . htmlspecialchars(preg_replace("/-/", "", $row['pc_eventDate']),ENT_QUOTES) . ', ' . htmlspecialchars($row['pc_eid'],ENT_QUOTES) . ")' title='" . htmlspecialchars($etitle,ENT_QUOTES) . "'>";
+            echo "<a href='javascript:oldEvt(" . htmlspecialchars(preg_replace("/-/", "", $row['pc_eventDate']),ENT_QUOTES) . "," . htmlspecialchars($row['pc_eid'],ENT_QUOTES) . ")' title='" . htmlspecialchars($etitle,ENT_QUOTES) . "'>";
             echo "<b>" . htmlspecialchars(xl($dayname) . ", " . $row['pc_eventDate'],ENT_NOQUOTES) . "</b>" . xlt("Status") .  "(";
             echo " " .  generate_display_field(array('data_type'=>'1','list_id'=>'apptstat'),$row['pc_apptstatus']) . ")<br>";   // can't use special char parser on this
             echo htmlspecialchars("$disphour:$dispmin ") . xl($dispampm) . " ";

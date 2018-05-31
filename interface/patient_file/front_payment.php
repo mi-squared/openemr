@@ -958,7 +958,7 @@ function make_insurance()
   <td class='text' valign="top" >
    <?php echo htmlspecialchars(xl('Payment against'), ENT_QUOTES); ?>:
   </td>
-  <td class='text' colspan="2" ><input type="radio" name="radio_type_of_payment" id="radio_type_of_payment1" value="copay" checked="checked" onClick="make_visible_row();cursor_pointer();"/><?php echo htmlspecialchars(xl('Co Pay'), ENT_QUOTES); ?><input type="radio" name="radio_type_of_payment" id="radio_type_of_payment2" value="invoice_balance"  onClick="make_visible_row();"/><?php echo htmlspecialchars(xl('Invoice Balance'), ENT_QUOTES); ?><br/><input type="radio" name="radio_type_of_payment" id="radio_type_of_payment4" value="pre_payment" onClick="make_hide_row();"/><?php echo htmlspecialchars(xl('Pre Pay'), ENT_QUOTES); ?></td>
+  <td class='text' colspan="2" ><input type="radio" name="radio_type_of_payment" id="radio_type_of_payment1" value="copay"  onClick="make_visible_row();cursor_pointer();"/><?php echo htmlspecialchars(xl('Co Pay'), ENT_QUOTES); ?><input type="radio" name="radio_type_of_payment" id="radio_type_of_payment2" value="invoice_balance" checked="checked" onClick="make_visible_row();"/><?php echo htmlspecialchars(xl('Invoice Balance'), ENT_QUOTES); ?><br/><input type="radio" name="radio_type_of_payment" id="radio_type_of_payment4" value="pre_payment" onClick="make_hide_row();"/><?php echo htmlspecialchars(xl('Pre Pay'), ENT_QUOTES); ?></td>
  </tr>
 
  <tr height="15"><td colspan='3'></td></tr>

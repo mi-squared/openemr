@@ -342,7 +342,14 @@ if(dateVal > currentDate)
  return errMsgs.length < 1;
 }
 
-
+function submitme() {
+ var f = document.forms[0];
+ if (validate(f)) {
+  somethingChanged = false; // turn off "are you sure you want to leave"
+  top.restoreSession();
+  f.submit();
+ }
+}
 
 // Onkeyup handler for policy number.  Allows only A-Z and 0-9.
 function policykeyup(e) {

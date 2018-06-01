@@ -95,7 +95,7 @@ function grabfocus(w) {
 
 		if (eventid) {
 			$.ajax({
-				url:"/openemr/_ibh/ajax/get_appointment_status.php",
+				url:"/_ibh/ajax/get_appointment_status.php",
 				data:{pc_eid:eventid},
 				success: function(res) {
 					if (res.pc_apptstatus == "@" || res.pc_apptstatus == ">" || res.pc_apptstatus == "$") {

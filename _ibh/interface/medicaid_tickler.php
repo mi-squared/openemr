@@ -135,7 +135,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 	
 	function getProviderPulldown(pro_id) {
 		$.ajax({
-					url:"/openemr/_ibh/ajax/get_provider_pulldown.php",
+					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/get_provider_pulldown.php",
 					data:{provider_id:pro_id},
 					success: function(d) {
 						console.log("pulldown:", d);
@@ -151,7 +151,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 	function setpatient(pid) {
 		
 		$.ajax({
-					url:"/openemr/_ibh/ajax/get_patient_data.php",
+					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/get_patient_data.php",
 					data:{pid:pid},
 					success: function(patient_data) {
 

@@ -502,11 +502,11 @@ function ibh_alert_prior_auth($pa_id, $type="days") {
 	
 	if ($type == "units") {
 		$subject = "Prior Auth #" . $auth['prior_auth_number'] . ": " . $auth['units_remaining'] . " units left!";
-		$body = "Prior auth warning (UNITS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['units_remaining'] . " units remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='/openemr/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
+		$body = "Prior auth warning (UNITS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['units_remaining'] . " units remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='" . $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
 		
 	} else {
 		$subject = "Prior Auth #" . $auth['prior_auth_number'] . ": " . $auth['days_remaining'] . " days left!";
-		$body = "Prior auth warning (DAYS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['days_remaining'] . " days remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='/openemr/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
+		$body = "Prior auth warning (DAYS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['days_remaining'] . " days remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='" . $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
 		
 	}
 
@@ -1550,7 +1550,7 @@ function ibh_form_link($long, $encounter=0, $pid=0) {
 	}
 	
 	if ($encounter && $pid) {
-		$link = "<a href='/openemr/interface/patient_file/encounter/forms.php?set_encounter=" . $encounter . "&pid=" . $pid . "' target='_blank' class='form-link'>open</a>";
+		$link = "<a href='" . $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/patient_file/encounter/forms.php?set_encounter=" . $encounter . "&pid=" . $pid . "' target='_blank' class='form-link'>open</a>";
 	}
 	
 	return $short . $link;

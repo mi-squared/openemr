@@ -115,8 +115,8 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <html>
   <head>                                    
     <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css"> 
-    <script type="text/javascript" src=<? $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
-    <script type="text/javascript" src=<? $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/js/jquery-calendar.js"></script>
+    <script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
+    <script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/js/jquery-calendar.js"></script>
     <!-- <script type="text/javascript" src="/openemr/library/js/jquery.grouprows.js"></script>
     <script type="text/javascript" src="/openemr/library/js/grouprows.js"></script> -->
     <script language="JavaScript">   
@@ -161,7 +161,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
         function edit_dated_reminder(obj) {
 
 	        $.ajax({
-					url:"/openemr/_ibh/ajax/edit_dated_reminder.php",
+					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/edit_dated_reminder.php",
 					data:obj,
 					success: function(data) {
 						console.log("dr response: ", data);

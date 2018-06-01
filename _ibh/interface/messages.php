@@ -160,7 +160,7 @@
 			console.log("enc", value);
 			
 			$.ajax({
-				url:"/openemr/_ibh/ajax/get_supervisor_alert.php",
+				url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/get_supervisor_alert.php",
 				data:{encounter:value},
 				success: function(json) {
 				

@@ -2,10 +2,10 @@
 	<head>
 		<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
 		
-		<script type="text/javascript" src="/openemr/library/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/js/jquery-1.7.2.min.js"></script>
 
 
-		<script src="/openemr/library/ESign/js/jquery.esign.js"></script>
+		<script src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/ESign/js/jquery.esign.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/ESign/css/esign.css" />
 
 

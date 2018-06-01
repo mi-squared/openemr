@@ -141,11 +141,11 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-<style type="text/css">@import url(/openemr/library/dynarch_calendar.css);</style>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar.js"></script>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar_en.js"></script>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar_setup.js"></script>
-<script type="text/javascript" src="/openemr/library/textformat.js"></script>
+<style type="text/css">@import url(<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css);</style>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar_en.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/textformat.js"></script>
 
 
 <link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">

@@ -48,17 +48,17 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
             <thead>
               <tr>
                 <!-- <th>'.xlt('ID').'</th> -->
-                <th>'.xlt('Sent Date').'<a class="sorter" href="#" data-sort="dr_message_sent_date"><img src="/openemr/_ibh/img/sort_asc.png"></a> <a class="sorter" href="#"  data-sort="dr_message_sent_date DESC"><img src="/openemr/_ibh/img/sort_desc.png"></a></th>
+                <th>'.xlt('Sent Date').'<a class="sorter" href="#" data-sort="dr_message_sent_date"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_asc.png"></a> <a class="sorter" href="#"  data-sort="dr_message_sent_date DESC"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_desc.png"></a></th>
                 
                 <th>'.xlt('From').'/'.xlt('To').'</th>
                 
-                <th>'.xlt('Patient').'<a class="sorter" href="#" data-sort="pid"><img src="/openemr/_ibh/img/sort_asc.png"></a> <a class="sorter" href="#" data-sort="pid DESC"><img src="/openemr/_ibh/img/sort_desc.png"></a></th>
+                <th>'.xlt('Patient').'<a class="sorter" href="#" data-sort="pid"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_asc.png"></a> <a class="sorter" href="#" data-sort="pid DESC"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_desc.png"></a></th>
                 
                 <th>'.xlt('Message').'</th>
                 
-                <th>'.xlt('Due Date').'<a class="sorter" href="#" data-sort="dr_message_due_date"><img src="/openemr/_ibh/img/sort_asc.png"></a> <a href="#" class="sorter" data-sort="dr_message_due_date DESC"><img src="/openemr/_ibh/img/sort_desc.png"></a></th>
+                <th>'.xlt('Due Date').'<a class="sorter" href="#" data-sort="dr_message_due_date"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_asc.png"></a> <a href="#" class="sorter" data-sort="dr_message_due_date DESC"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_desc.png"></a></th>
                 
-                <th>'.xlt('Processed Date').'<a class="sorter" href="#" data-sort="processed_date"><img src="/openemr/_ibh/img/sort_asc.png"></a> <a href="#" class="sorter" data-sort="processed_date DESC"><img src="/openemr/_ibh/img/sort_desc.png"></a></th>
+                <th>'.xlt('Processed Date').'<a class="sorter" href="#" data-sort="processed_date"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_asc.png"></a> <a href="#" class="sorter" data-sort="processed_date DESC"><img src="'.$_SERVER['CONTEXT_DOCUMENT_ROOT'] .'/_ibh/img/sort_desc.png"></a></th>
                 
                 <th>'.xlt('Processed By').'</th>
                 <th>edit</th>
@@ -115,8 +115,8 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <html>
   <head>                                    
     <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css"> 
-    <script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
-    <script type="text/javascript" src="/openemr/library/js/jquery-calendar.js"></script>
+    <script type="text/javascript" src=<? $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
+    <script type="text/javascript" src=<? $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/js/jquery-calendar.js"></script>
     <!-- <script type="text/javascript" src="/openemr/library/js/jquery.grouprows.js"></script>
     <script type="text/javascript" src="/openemr/library/js/grouprows.js"></script> -->
     <script language="JavaScript">   

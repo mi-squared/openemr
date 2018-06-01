@@ -181,11 +181,11 @@ function generatePageElement($start,$pagesize,$billing,$issue,$text)
 <!-- Main style sheet comes after the page-specific stylesheet to facilitate overrides. -->
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/library/css/encounters.css" type="text/css">
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
-    <script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
+    <script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery.tablesort.js"></script>
 <!-- IBF_DEV add link to stylesheet -->
 <link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 <script language="JavaScript">

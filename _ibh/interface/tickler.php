@@ -149,15 +149,15 @@ function get_plan_row($patient) {
 <head>
 
 <link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css">
-<script type="text/javascript" src="/openemr/library/topdialog.js?t=<?=time()?>"></script>
-<script type="text/javascript" src="/openemr/library/dialog.js"></script>
-<script type="text/javascript" src="/openemr/library/textformat.js"></script>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dialog.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/textformat.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar_setup.js"></script>
-<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
-<script type="text/javascript" src="/openemr/_ibh/js/moment.js"></script>
-<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/moment.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery.tablesort.js"></script>
 
 <link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/tickler.css" type="text/css">
 

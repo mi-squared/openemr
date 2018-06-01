@@ -17,12 +17,12 @@ function ibh_get_insurance_name($id) {
 ?><html>
 <title></title>
 <head>
-<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
 
 <link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
 <link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
 
-<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery.tablesort.js"></script>
 
 
 <style>

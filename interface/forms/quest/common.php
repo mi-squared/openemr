@@ -164,6 +164,13 @@ $sql .= "WHERE ie.`pid` = ? AND ie.`encounter` = ? AND ie.`resolved` = 0 AND sho
 $sql .= "ORDER BY oc.`short_desc`";
 $result = sqlStatementNoLog($sql,array($pid,$encounter));
 
+// active encounter diagnoses
+$sql = "SELECT 'Active' AS title, CONCAT('ICD10:',formatted_dx_code) AS code, short_desc, long_desc FROM `lists` ls ";
+$sql .= "LEFT JOIN `icd10_dx_order_code` oc ON oc.`formatted_dx_code` = SUBSTR(ls.`diagnosis` FROM 7) AND oc.`active` = '1' ";
+$sql .= "WHERE ls.`type` LIKE 'medical_problem' AND ls.`diagnosis` LIKE 'ICD10:%' AND ls.`pid` = ? AND ls.`activity` = 1 AND short_desc IS NOT NULL ";
+$sql .= "ORDER BY oc.`short_desc`";
+$result = sqlStatementNoLog($sql,array($pid));
+
 while ($data = sqlFetchArray($result)) {
 	// create array ('tab title','icd9 code','short title','long title')
 	$dlist[] = $data;
@@ -1523,7 +1530,9 @@ else {
 												By: </label></td>
 										<td style="white-space: nowrap"><select id='specimen_draw'
 											name='specimen_draw' class='wmtSelect'>
-													<?php ListSel($order_data->specimen_draw,'Lab_Draw') ?>
+<?php 
+if (empty($order_data->specimen_draw)) $order_data->specimen_draw = 'int';
+ListSel($order_data->specimen_draw,'Lab_Draw') ?>
 												</select></td>
 										<td style='min-width: 70px'><label class="wmtLabel">Collection:
 										</label></td>
@@ -1793,11 +1802,12 @@ else { // create empty row
 		if ($order_data->request_billing == 'T') $bill_option .= " selected";
 		$bill_option .= ">Third Party</option>\n";
 	}
-	$bill_option .= "<option value='P'";
-	if ($order_data->request_billing == 'P') $bill_option .= " selected";
-	$bill_option .= ">Patient Bill</option>\n";
+//	$bill_option .= "<option value='P'";
+//	if ($order_data->request_billing == 'P') $bill_option .= " selected";
+//	$bill_option .= ">Patient Bill</option>\n";
 	$bill_option .= "<option value='C'";
-	if ($order_data->request_billing == 'C') $bill_option .= " selected";
+	if ($order_data->request_billing == 'C'
+			|| empty($order_data->request_billing) ) $bill_option .= " selected";
 	$bill_option .= ">Client Bill</option>\n";
 	
 	echo $bill_option;	

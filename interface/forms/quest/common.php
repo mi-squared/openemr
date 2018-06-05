@@ -1523,7 +1523,9 @@ else {
 												By: </label></td>
 										<td style="white-space: nowrap"><select id='specimen_draw'
 											name='specimen_draw' class='wmtSelect'>
-													<?php ListSel($order_data->specimen_draw,'Lab_Draw') ?>
+<?php 
+if (empty($order_data->specimen_draw)) $order_data->specimen_draw = 'int';
+ListSel($order_data->specimen_draw,'Lab_Draw') ?>
 												</select></td>
 										<td style='min-width: 70px'><label class="wmtLabel">Collection:
 										</label></td>
@@ -1797,7 +1799,8 @@ else { // create empty row
 	if ($order_data->request_billing == 'P') $bill_option .= " selected";
 	$bill_option .= ">Patient Bill</option>\n";
 	$bill_option .= "<option value='C'";
-	if ($order_data->request_billing == 'C') $bill_option .= " selected";
+	if ($order_data->request_billing == 'C'
+			|| empty($order_data->request_billing) ) $bill_option .= " selected";
 	$bill_option .= ">Client Bill</option>\n";
 	
 	echo $bill_option;	

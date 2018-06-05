@@ -32,10 +32,13 @@ require_once("../globals.php");
 require_once("$srcdir/patient.inc");
 require_once("../../custom/code_types.inc.php");
 require_once("$srcdir/billing.inc");
+require_once $GLOBALS['srcdir'].'/ESign/Api.php';
 
 use OpenEMR\Core\Header;
 use OpenEMR\Services\FacilityService;
+use ESign\Api;
 
+$esignApi = new Api();
 $facilityService = new FacilityService();
 
 $errmsg  = "";
@@ -100,8 +103,13 @@ function endDoctor(&$docrow)
 }
 
 $form_facility  = isset($_POST['form_facility']) ? $_POST['form_facility'] : '';
+$form_provider  = $_POST['form_provider'];
 $form_from_date = (isset($_POST['form_from_date'])) ? DateToYYYYMMDD($_POST['form_from_date']) : date('Y-m-d');
 $form_to_date   = (isset($_POST['form_to_date'])) ? DateToYYYYMMDD($_POST['form_to_date']) : date('Y-m-d');
+$form_details = ( $_POST['form_refresh'] == true && $_POST['form_details'] == '' ) ? false : true;
+$form_skip_non_encounter = ( $_POST['form_refresh'] == true && $_POST['form_skip_non_encounter'] == '' ) ? false : true;
+$form_include_clean_encounters = ( $_POST['form_refresh'] == true && $_POST['form_include_clean_encounters'] == '' ) ? false : true;
+
 if ($_POST['form_refresh']) {
     // MySQL doesn't grok full outer joins so we do it the hard way.
     //
@@ -110,6 +118,7 @@ if ($_POST['form_refresh']) {
     "SELECT " .
     "e.pc_eventDate, e.pc_startTime, " .
     "fe.encounter, fe.date AS encdate, " .
+    "fe.provider_id, fe.supervisor_id, " .
     "f.authorized, " .
     "p.fname, p.lname, p.pid, p.pubpid, " .
     "CONCAT( u.lname, ', ', u.fname ) AS docname " .
@@ -133,12 +142,25 @@ if ($_POST['form_refresh']) {
         array_push($sqlBindArray, $form_facility);
     }
 
+    if ( $form_provider !== '' ) {
+        $query .= "AND ( fe.provider_id = ? OR fe.supervisor_id = ? ) ";
+        array_push($sqlBindArray, $form_provider);
+        array_push($sqlBindArray, $form_provider);
+    }
+
+    if ( $form_skip_non_encounter ) {
+        // Skip the row if the encounter is empty or null
+        $query .= "AND ( fe.encounter != ? AND fe.encounter IS NOT NULL ) ";
+        array_push($sqlBindArray, '');
+    }
+
     // $query .= "AND ( e.pc_catid = 5 OR e.pc_catid = 9 OR e.pc_catid = 10 ) " .
     $query .= "AND e.pc_pid != '' AND e.pc_apptstatus != ? " .
     ") UNION ( " .
     "SELECT " .
     "e.pc_eventDate, e.pc_startTime, " .
     "fe.encounter, fe.date AS encdate, " .
+    "fe.provider_id, fe.supervisor_id, " .
     "f.authorized, " .
     "p.fname, p.lname, p.pid, p.pubpid, " .
     "CONCAT( u.lname, ', ', u.fname ) AS docname " .
@@ -167,6 +189,18 @@ if ($_POST['form_refresh']) {
         array_push($sqlBindArray, $form_facility);
     }
 
+    if ( $form_provider !== '' ) {
+        $query .= "AND ( fe.provider_id = ? OR fe.supervisor_id = ? ) ";
+        array_push($sqlBindArray, $form_provider);
+        array_push($sqlBindArray, $form_provider);
+    }
+
+    if ( $form_skip_non_encounter ) {
+        // Skip the row if the encounter is empty or null
+        $query .= "AND ( fe.encounter != ? AND fe.encounter IS NOT NULL ) ";
+        array_push($sqlBindArray, '');
+    }
+
     $query .= ") ORDER BY docname, IFNULL(pc_eventDate, encdate), pc_startTime";
 
     $res = sqlStatement($query, $sqlBindArray);
@@ -179,6 +213,12 @@ if ($_POST['form_refresh']) {
     <?php Header::setupHeader(['datetime-picker', 'report-helper']); ?>
 
     <style type="text/css">
+
+        /* KCC this helps align the td data with column headers */
+        #report_results table td, table.report_results td {
+            text-align: left;
+        }
+
         /* specifically include & exclude from printing */
         @media print {
             #report_parameters {
@@ -205,6 +245,15 @@ if ($_POST['form_refresh']) {
 
     <script LANGUAGE="JavaScript">
         $(document).ready(function() {
+
+            $('.goto-encounter').click( function( e ) {
+                e.preventDefault();
+                e.stopPropagation();
+                var encounter = $(this).attr('data-encounter');
+                var data = { id : function() { return encounter } };
+                top.chooseEncounterEvent( data );
+            });
+
             oeFixedHeaderSetup(document.getElementById('mymaintable'));
             var win = top.printLogSetup ? top : opener.top;
             win.printLogSetup(document.getElementById('printbutton'));
@@ -267,6 +316,35 @@ if ($_POST['form_refresh']) {
                  echo "   </select>\n";
                 ?>
             </td>
+            <td class='control-label'><?php echo xlt('Provider'); ?>:</td>
+            <td><?php
+
+                // Build a drop-down list of providers.
+                //
+
+                $query = "SELECT id, lname, fname FROM users WHERE ".
+                    "authorized = 1 $provider_facility_filter ORDER BY lname, fname"; //(CHEMED) facility filter
+
+                $ures = sqlStatement($query);
+
+                echo "   <select name='form_provider' class='form-control'>\n";
+                echo "    <option value=''>-- " . xlt('All') . " --\n";
+
+                while ($urow = sqlFetchArray($ures)) {
+                    $provid = $urow['id'];
+                    echo "    <option value='" . attr($provid) . "'";
+                    if ($provid == $_POST['form_provider']) {
+                        echo " selected";
+                    }
+
+                    echo ">" . text($urow['lname']) . ", " . text($urow['fname']) . "\n";
+                }
+
+                echo "   </select>\n";
+                ?>
+            </td>
+        </tr>
+        <tr>
             <td class='control-label'>
                 <?php echo xlt('DOS'); ?>:
             </td>
@@ -285,8 +363,26 @@ if ($_POST['form_refresh']) {
             <td>
         <div class="checkbox">
                 <label><input type='checkbox' name='form_details'
-                  value='1'<?php echo ($_POST['form_details']) ? " checked" : ""; ?>><?php echo xlt('Details') ?></label>
+                  value='1' <?php echo ( $form_details == true ? 'checked' : '' ) ?>><?php echo xlt('Details') ?></label>
         </div>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;
+                <div class="checkbox">
+                    <label><input type='checkbox' name='form_skip_non_encounter'
+                                  value='1' <?php echo ( $form_skip_non_encounter == true ? 'checked' : '' ) ?>><?php echo xlt('Skip Appts w/o and Encounter') ?></label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;
+                <div class="checkbox">
+                    <label><input type='checkbox' name='form_include_clean_encounters'
+                                  value='1' <?php echo ( $form_include_clean_encounters == true ? 'checked' : '' ) ?>><?php echo xlt('Include Clean Encounters') ?></label>
+                </div>
             </td>
         </tr>
     </table>
@@ -335,7 +431,7 @@ if ($_POST['form_refresh']) {
 <th align='right'> <?php echo xlt('Charges'); ?>&nbsp; </th>
 <th align='right'> <?php echo xlt('Copays'); ?>&nbsp; </th>
 <th> <?php echo xlt('Billed'); ?> </th>
-<th> &nbsp;<?php echo xlt('Error'); ?> </th>
+<th> &nbsp;<?php echo xlt('Notices'); ?> </th>
 </thead>
 <tbody>
 <?php
@@ -355,6 +451,8 @@ if ($res) {
         $billed  = "Y";
         $charges = 0;
         $copays  = 0;
+        $row_charges = 0;
+        $row_copays = 0;
         $gcac_related_visit = false;
 
         // Scan the billing items for status and fee total.
@@ -365,6 +463,7 @@ if ($res) {
         $bres = sqlStatement($query, array($patient_id, $encounter));
         //
         while ($brow = sqlFetchArray($bres)) {
+
             $code_type = $brow['code_type'];
             if ($code_types[$code_type]['fee'] && !$brow['billed']) {
                 $billed = "";
@@ -381,7 +480,7 @@ if ($res) {
             }
 
             if ($code_types[$code_type]['fee']) {
-                $charges += $brow['fee'];
+                $row_charges += $brow['fee'];
                 if ($brow['fee'] == 0 && !$GLOBALS['ippf_specific']) {
                     postError(xl('Missing Fee'));
                 }
@@ -425,7 +524,7 @@ if ($res) {
             } // End IPPF stuff
         } // end while
 
-        $copays -= getPatientCopay($patient_id, $encounter);
+        $row_copays -= getPatientCopay($patient_id, $encounter);
 
        // The following is removed, perhaps temporarily, because gcac reporting
        // no longer depends on gcac issues.  -- Rod 2009-08-11
@@ -475,6 +574,55 @@ if ($res) {
             $billed = "";
         }
 
+
+        // If encounter level esigning is enabled
+        if ( $GLOBALS['esign_all'] ) {
+            $esign = $esignApi->createEncounterESign( $encounter );
+            $signatures = $esign->getSignatures();
+            if ( count( $signatures ) == 0 ) {
+                postError( xl( 'No Signature for encounter' ) );
+            }
+        }
+
+        // If individual form esigning is enabled, check every form for a signature
+        if ( $GLOBALS['esign_individual'] ) {
+            // Find all forms associated with this encounter
+            $form_sql = "SELECT * FROM forms WHERE encounter = ?";
+            $form_result = sqlStatement( $form_sql, [ $encounter ] );
+            while ( $form_row = sqlFetchArray( $form_result ) ) {
+
+                $esign = $esignApi->createFormESign( $form_row[ 'id' ], $form_row[ 'formdir' ], $form_row[ 'encounter' ] );
+                $signatures = $esign->getSignatures();
+                $formSigFound = false;
+                foreach ( $signatures as $signature ) {
+                    // Need to get the actual form from forms table
+                    $sql = "SELECT * FROM forms WHERE id = ?";
+                    $forms_table_row = sqlQuery( $sql, [ $signature->getTableId() ] );
+                    // If we allow esign on encounter, raise notice if there's no signature on encounter
+                    if ( $forms_table_row['id'] == $form_row[ 'id' ] ) {
+                        $formSigFound = true;
+                        break;
+                    }
+                }
+
+                // For each form, raise a notice if the form is not signed
+                if ( $formSigFound === false ) {
+                    postError( xl( 'No Signature for' ) . " " . $form_row[ 'form_name' ]. " (form)" );
+                }
+            }
+        }
+
+
+
+        if ( $form_include_clean_encounters === false &&
+            $errmsg == "" ) {
+            continue;
+        }
+
+        // Only total up if we get here
+        $charges = $row_charges;
+        $copays = $row_copays;
+
         $docrow['charges'] += $charges;
         $docrow['copays']  += $copays;
         if ($encounter) {
@@ -512,7 +660,7 @@ if ($res) {
             <?php echo text($row['pid']); ?>&nbsp;
          </td>
          <td align='right'>
-            <?php echo text($encounter); ?>&nbsp;
+             <a href='javascript;' data-encounter='<?php echo $encounter; ?>' class='goto-encounter'><?php echo text($encounter); ?></a>&nbsp;
          </td>
          <td align='right'>
             <?php echo text(bucks($charges)); ?>&nbsp;

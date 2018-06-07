@@ -481,7 +481,7 @@ if (!empty($_REQUEST['go'])) { ?>
 
                                 ?>
                                 <textarea name='note' id='note' class='form-control'
-                                          style='margin:6px; background-color:white; color: gray; border:1px solid #999; padding: 5px; height:100px; width: 640px;'><?php echo nl2br(text($note)); ?></textarea>
+                                          style='margin:6px; background-color:white; color: gray; border:1px solid #999; padding: 5px; height:100px; width: 640px;'><?php echo nl2br($note); ?></textarea>
                             </td>
                         </tr>
                     </table>

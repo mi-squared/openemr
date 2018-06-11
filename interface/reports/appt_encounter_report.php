@@ -246,12 +246,25 @@ if ($_POST['form_refresh']) {
     <script LANGUAGE="JavaScript">
         $(document).ready(function() {
 
+
+
             $('.goto-encounter').click( function( e ) {
                 e.preventDefault();
                 e.stopPropagation();
+
+                var pid = $(this).attr('data-pid');
                 var encounter = $(this).attr('data-encounter');
-                var data = { id : function() { return encounter } };
-                top.chooseEncounterEvent( data );
+
+                $.post('<?php echo $GLOBALS['webroot']; ?>/interface/tags_filters/index.php?action=patients!setpid', {pid: pid, encounter: encounter}, function (response) {
+                        // When call returns set the UI patient in the top navigation using code similar to line 397
+                        // of /interface/patient_file/demographics.php
+                        parent.left_nav.setPatient(response['patientname'], response['pid'], response['pubpid'], response['frname'], response['str_dob'], response['encounter']);
+                        var data = { id : function() { return encounter } };
+                        top.chooseEncounterEvent( data );
+                    },
+                    'json');
+
+
             });
 
             oeFixedHeaderSetup(document.getElementById('mymaintable'));
@@ -660,7 +673,7 @@ if ($res) {
             <?php echo text($row['pid']); ?>&nbsp;
          </td>
          <td align='right'>
-             <a href='javascript;' data-encounter='<?php echo $encounter; ?>' class='goto-encounter'><?php echo text($encounter); ?></a>&nbsp;
+             <a href='javascript;' data-pid='<?php echo text($row['pid']); ?>' data-encounter='<?php echo $encounter; ?>' class='goto-encounter'><?php echo text($encounter); ?></a>&nbsp;
          </td>
          <td align='right'>
             <?php echo text(bucks($charges)); ?>&nbsp;

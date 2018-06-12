@@ -75,6 +75,16 @@ class Signature implements SignatureIF
         return $this->id;
     }
 
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    public function getTableId()
+    {
+        return $this->tid;
+    }
+
     public function getUid()
     {
         return $this->uid;

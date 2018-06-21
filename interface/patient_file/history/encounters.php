@@ -185,7 +185,7 @@ function generatePageElement($start,$pagesize,$billing,$issue,$text)
 <script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-<script type="text/javascript" src="/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery.tablesort.js"></script>
 <!-- IBF_DEV add link to stylesheet -->
 <link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
 <script language="JavaScript">

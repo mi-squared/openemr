@@ -661,7 +661,7 @@ if ($_POST['form_action'] == "save") {
                     "pc_alldayevent = '" . add_escape_custom($_POST['form_allday']) . "', " .
                     "pc_apptstatus = '" . add_escape_custom($_POST['form_apptstatus']) . "', "  .
                     "pc_prefcatid = '" . add_escape_custom($_POST['form_prefcat']) . "' ,"  .
-                    "pc_facility = '" . add_escape_custom((int)$_POST['facility']) ."xxx' ,"  . // FF stuff
+                    "pc_facility = '" . add_escape_custom((int)$_POST['facility']) ."' ,"  . // FF stuff
                     "pc_billing_location = '" . add_escape_custom((int)$_POST['billing_facility']) ."' "  .
                     "WHERE pc_eid = '" . add_escape_custom($eid) . "'");
             }
@@ -742,10 +742,6 @@ if ($_POST['form_action'] == "save") {
             else {
                 // really delete the event from the database
                 sqlStatement("DELETE FROM openemr_postcalendar_events WHERE ".$whereClause);
-			  if($encounter){
-					 sqlStatement("DELETE FROM form_encounter WHERE pid = ? AND encounter = ?", array($eid, $encounter));
-					 sqlStatement("DELETE FROM forms WHERE pid = ? AND encounter = ?", array($eid, $encounter));
-				 }
             }
         }
 
@@ -779,10 +775,6 @@ if ($_POST['form_action'] == "save") {
             else {
                 // fully delete the event from the database
                 sqlStatement("DELETE FROM openemr_postcalendar_events WHERE pc_eid = ?", array($eid) );
-			     if($encounter){
-					 sqlStatement("DELETE FROM form_encounter WHERE pid = ? AND encounter = ?", array($eid, $encounter));
-					 sqlStatement("DELETE FROM forms WHERE pid = ? AND encounter = ?", array($eid, $encounter));
-				 }
             }
         }
  }
@@ -947,7 +939,7 @@ if ($_POST['form_action'] == "save") {
 <link rel="stylesheet" href='<?php echo $css_header ?>' type='text/css'>
 
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
-    <script type="text/javascript" src="../../../library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="../../../library/topdialog.js"></script>
 <script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
@@ -960,10 +952,6 @@ if ($_POST['form_action'] == "save") {
 
 
 <script language="JavaScript">
-
-	window.repeat_status = false;
-	window.appt_status = "";
-	window.is_new = <?php echo $is_new ? "true": "false"; ?>;
 
  var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
 
@@ -1122,7 +1110,7 @@ if ($_POST['form_action'] == "save") {
 	  	 alert("For repeating appointments, you must save once before checking in.");
 	  	 var pulldown = document.getElementById("form_apptstatus");
 	  	 pulldown.selectedIndex = 0;
-  }
+     }
 
   } else {
 	  window.repeat_status = false;
@@ -1465,8 +1453,8 @@ $classpati='';
    <b><?php echo xlt('Patient'); ?>:</b>
   </td>
   <td nowrap>
-   <input type='text' size='10' name='form_patient'  style='width:100%;cursor:pointer;cursor:hand' value='<?php echo attr($patientname); ?>' onclick='sel_patient()' title='<?php echo xla('Click to select patient'); ?>' readonly />
-   <input type='hidden' name='form_pid' id='patient_id' value='<?php echo attr($patientid) ?>' />
+   <input type='text' size='10' name='form_patient' id="form_patient" style='width:100%;cursor:pointer;cursor:hand' placeholder='<?php echo xla('Click to select');?>' value='<?php echo is_null($patientname) ? '' : attr($patientname); ?>' onclick='sel_patient()' title='<?php echo xla('Click to select patient'); ?>' readonly />
+   <input type='hidden' name='form_pid' value='<?php echo attr($patientid) ?>' />
   </td>
   <td colspan='3' nowrap style='font-size:8pt'>
    &nbsp;
@@ -1480,7 +1468,7 @@ $classpati='';
  ?>
  <tr>
   <td nowrap>
-   <b><?php echo xlt('Provider-'); ?>:</b>
+   <b><?php echo xlt('Provider'); ?>:</b>
   </td>
   <td nowrap>
 
@@ -1625,15 +1613,13 @@ if  ($GLOBALS['select_multi_providers']) {
       repeating mechanism is being used, and load settings accordingly.
       */
       ?>
-      <div style='display:none'>
    <input type='checkbox' name='form_repeat' id="form_repeat" onclick='set_repeat(this)' value='1'<?php if (isRegularRepeat($repeats)) echo " checked" ?>/>
    <input type='hidden' name='form_repeat_exdate' id='form_repeat_exdate' value='<?php echo attr($repeatexdate); ?>' /> <!-- dates excluded from the repeat -->
-   </div>
   </td>
-  <td nowrap id='tdrepeat1'> <!-- <?php echo xlt('Repeats'); ?> -->
+  <td nowrap id='tdrepeat1'><?php echo xlt('Repeats'); ?>
   </td>
   <td nowrap>
-  <div style='display:none'>
+
    <select name='form_repeat_freq' title='<?php echo xla('Every, every other, every 3rd, etc.'); ?>'>
 <?php
  foreach (array(1 => xl('every'), 2 => xl('2nd'), 3 => xl('3rd'), 4 => xl('4th'), 5 => xl('5th'), 6 => xl('6th'))
@@ -1659,7 +1645,7 @@ if  ($GLOBALS['select_multi_providers']) {
  }
 ?>
    </select>
-  </div>
+
   </td>
  </tr>
 
@@ -1712,10 +1698,9 @@ generate_form_field(array('data_type'=>1,'field_id'=>'apptstatus','list_id'=>'ap
   <td nowrap>&nbsp;
 
   </td>
-  <td nowrap id='tdrepeat2'><!-- <?php echo xlt('until'); ?> -->
+  <td nowrap id='tdrepeat2'><?php echo xlt('until'); ?>
   </td>
   <td nowrap>
-	  <div style="display:none">
    <input type='text' size='10' name='form_enddate' id='form_enddate' value='<?php echo attr($row['pc_endDate']) ?>' onkeyup='datekeyup(this,mypcc)' onblur='dateblur(this,mypcc)' title='<?php echo xla('yyyy-mm-dd last date of this event');?>' />
    <img src='../../pic/show_calendar.gif' align='absbottom' width='24' height='22'
     id='img_enddate' border='0' alt='[?]' style='cursor:pointer;cursor:hand'
@@ -1732,7 +1717,6 @@ if ($repeatexdate != "") {
     echo "<a href='#' title='" . attr($tmptitle) . "' alt='" . attr($tmptitle) . "'><img src='../../pic/warning.gif' title='" . attr($tmptitle) . "' alt='*!*' style='border:none;'/></a>";
 }
 ?>
-	  </div>
   </td>
  </tr>
  <?php
@@ -1759,6 +1743,7 @@ if ($repeatexdate != "") {
   </td>
  </tr>
 
+
 <?php
  // DOB is important for the clinic, so if it's missing give them a chance
  // to enter it right here.  We must display or hide this row dynamically
@@ -1782,9 +1767,6 @@ if ($repeatexdate != "") {
 </table></td></tr>
 <tr class='text'><td colspan='10' class="buttonbar">
 <p>
-
-
-
 <input type='button' name='form_save' id='form_save' value='<?php echo xla('Save');?>' />
 &nbsp;
 

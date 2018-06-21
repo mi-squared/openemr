@@ -176,7 +176,7 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
 <link rel="stylesheet" type="text/css" href="../../../library/js/fancybox/jquery.fancybox-1.2.6.css" media="screen" />
 
 <!-- IBF_DEV add link to stylesheet -->
-<link rel="stylesheet" href="/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $GLOBALS['webroot']?>/_ibh/css/encounter.css" type="text/css">
 
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
 <script type="text/javascript" src="../../../library/textformat.js"></script>

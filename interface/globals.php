@@ -78,8 +78,9 @@ if (preg_match("/^[^\/]/",$web_root)) {
 // The webserver_root and web_root are now automatically collected in
 //  real time per above code. If above is not working, can uncomment and
 //  set manually here:
+//  For IBH we need to uncomment the $web_root line 83
 //   $webserver_root = "/var/www/openemr";
-//   $web_root =  "/openemr";
+//   $web_root =  "/openemr-500";
 //
 
 // This is the directory that contains site-specific data.  Change this

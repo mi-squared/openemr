@@ -370,7 +370,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 		var column_id = cell_info[2];
 		
 		$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_set_complete_date.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_complete_date.php",
 					data:{form_id:form_id, tickler_id:tickler_id, target:column_id, clear:0},
 					success: function(reply) {
 					
@@ -409,7 +409,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			$bt.toggleClass("signed unsigned");
 
 			$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_set_signed.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_signed.php",
 					data:{phase:phase, tickler_id:tickler_id, signed:new_state},
 					success: function(reply) {
 					
@@ -434,7 +434,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 	function getEncounterPulldown(pid, $el) {
 		
 		$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_encounter_pulldown.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_encounter_pulldown.php",
 					data:{pid:pid},
 					success: function(json) {
 						if (!json.html) {
@@ -485,7 +485,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			var tickler_id = row_id.split("_")[2];	
 			
 			$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_set_row.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_row.php",
 					data:{action:"clear", clear_id:tickler_id, tx_form_id:tx_id, cda_form_id:cda_id},
 					success: function(json) {
 						console.log("clear??");
@@ -522,7 +522,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			// so far, it has no tickler_id; this wll be sent back in json var as json.tickler_id
 			
 			$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_set_row.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_row.php",
 					data:{action:"set", tx_form_id:tx_id, cda_form_id:cda_id, patient_id:patient_id},
 					success: function(json) {
 						
@@ -551,7 +551,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			
 			
 			$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_set_row.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_row.php",
 					data:{action:"update", tickler_id:tickler_id, tx_form_id:tx_id, cda_form_id:"", patient_id:patient_id},
 					success: function(json) {
 						
@@ -723,7 +723,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			var tickler_id = row_id.split("_")[2];
 			
 			$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/tickler_set_complete_date.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_complete_date.php",
 					data:{clear:1, tickler_id:tickler_id, target:class_info[2]},
 					success: function(reply) {
 						
@@ -756,7 +756,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 
 	function getProviderPulldown(pro_id) {
 		$.ajax({
-			url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/get_provider_pulldown.php",
+			url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/get_provider_pulldown.php",
 			data:{provider_id:pro_id},
 			success: function(d) {						
 				
@@ -797,7 +797,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 		var $patient_td = $active_td; // BOGUS!!
 		
 		$.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/get_patient_data.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/get_patient_data.php",
 					data:{pid:pid},
 					success: function(patient_data) {
 

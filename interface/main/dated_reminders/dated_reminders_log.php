@@ -161,7 +161,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
         function edit_dated_reminder(obj) {
 
 	        $.ajax({
-					url:"<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/ajax/edit_dated_reminder.php",
+					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/edit_dated_reminder.php",
 					data:obj,
 					success: function(data) {
 						console.log("dr response: ", data);

@@ -1794,20 +1794,27 @@ else { // create empty row
 									<td nowrap><select class="wmtSelect" name="request_billing"
 										id="request_billing" style="width: 105px">
 <?php 
+	$acct_type = 'Self Pay';
 	$bill_option = "";
 	if (($order_data->ins_primary && $order_data->ins_primary != 'No Insurance') || 
 			($order_data->ins_secondary && $order_data->ins_secondary != 'No Insurance') || 
 					$ins_list[0]->company_name || $ins_list[1]->company_name) { // insurance available
+		$acct_type = 'Insurance';
 		$bill_option .= "<option value='T'";
-		if ($order_data->request_billing == 'T') $bill_option .= " selected";
+		if ($order_data->request_billing == 'T' || empty($order_data->request_billing)) {
+			$order_data->request_billing = 'T';
+			$bill_option .= " selected";
+		}
 		$bill_option .= ">Third Party</option>\n";
 	}
 //	$bill_option .= "<option value='P'";
 //	if ($order_data->request_billing == 'P') $bill_option .= " selected";
 //	$bill_option .= ">Patient Bill</option>\n";
 	$bill_option .= "<option value='C'";
-	if ($order_data->request_billing == 'C'
-			|| empty($order_data->request_billing) ) $bill_option .= " selected";
+	if ($order_data->request_billing == 'C'	|| empty($order_data->request_billing) ) {
+		$order_data->request_billing = 'C';
+		$bill_option .= " selected";
+	}
 	$bill_option .= ">Client Bill</option>\n";
 	
 	echo $bill_option;	
@@ -1816,9 +1823,9 @@ else { // create empty row
 
 									<td class="wmtLabel" nowrap style="text-align: right">Account:
 									</td>
-									<td nowrap><select class="wmtInput" name="request_account"
-										style="max-width: 200px" />
+									<td nowrap>
 <?php 
+/*
 	$rlist= sqlStatement("SELECT * FROM list_options WHERE list_id = 'Quest_Accounts' ORDER BY seq");
 	while ($rrow= sqlFetchArray($rlist)) {
     	echo "<option value='" . $rrow['option_id'] . "'";
@@ -1831,8 +1838,13 @@ else { // create empty row
 		echo ">" . htmlentities($rrow['title'],ENT_QUOTES);
     	echo "</option>";
   	}
+ */
+	$acct_data = sqlQuery("SELECT * FROM `list_options` WHERE `list_id` = 'Quest_Accounts' AND `title` = ?",array($acct_type));
 ?>
-											</select></td>
+										<input type='text' class="wmtInput" readonly style="width: 150px"
+											value="<?php echo $acct_data['title']; ?>" />
+										<input type='hidden' name='request_account' value='<?php echo $acct_data['option_id']; ?>' />
+									</td>
 								</tr>
 
 								<tr>

@@ -185,15 +185,8 @@ function generatePageElement($start,$pagesize,$billing,$issue,$text)
 <script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>_ibh/js/jquery.tablesort.js"></script>
-
-
-
 <!-- IBF_DEV add link to stylesheet -->
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
-
-
-
 <script language="JavaScript">
 
 //function toencounter(enc, datestr) {
@@ -388,8 +381,7 @@ $getStringForPage="&pagesize=".attr($pagesize)."&pagestart=".attr($pagestart);
 <?php } ?>
 
  </tr>
-</thead>
-<tbody>
+
 <?php
 $drow = false;
 if (!$billing_view) {
@@ -412,35 +404,24 @@ if (!$billing_view) {
 
 $sqlBindArray = array();
 
-//Removed by IBH in rel-422 custom code
-//$from = "FROM form_encounter AS fe " .
-//  "JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND " .
-//  "f.formdir = 'newpatient' AND f.deleted = 0 ";
-//if ($issue) {
-//  $from .= "JOIN issue_encounter AS ie ON ie.pid = ? AND " .
-//    "ie.list_id = ? AND ie.encounter = fe.encounter ";
-//  array_push($sqlBindArray, $pid, $issue);
-//}
-//$from .= "LEFT JOIN users AS u ON u.id = fe.provider_id WHERE fe.pid = ? ";
-
 $sqlBindArray[] = $pid;
 
-//Removed by IBH in rel-422 custom code
-//$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname " . $from .
-//        "ORDER BY fe.date DESC, fe.id DESC";
-//
-//$countQuery = "SELECT COUNT(*) as c " . $from;
+$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus ".
+        "FROM form_encounter fe " .
+        "join forms f on f.encounter = fe.encounter " .
+        "left join openemr_postcalendar_events ev on (ev.encounter = fe.encounter) " .
+        "join users u on u.id = fe.provider_id ".
+            "WHERE f.pid = fe.pid " .
+            "AND f.formdir = 'newpatient' " .
+            "AND f.deleted = 0 " .
+            "AND fe.pid = ? " .
+            "ORDER BY fe.date DESC, fe.id DESC";
 
-// Modified query by IBH to show custom previous encounter list
-
-$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter) AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? ORDER BY fe.date DESC, fe.id DESC";
-
-//
 
 
 // IBH Customer code to provide 'Units'
 
-$countQuery = "SELECT COUNT(*) as c FROM form_encounter AS fe JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND f.formdir = 'newpatient' AND f.deleted = 0 WHERE fe.pid = ?" . $from;
+$countQuery = "SELECT COUNT(*) as c FROM form_encounter AS fe JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND f.formdir = 'newpatient' AND f.deleted = 0 WHERE fe.pid = ?" ;
 
 
 $countRes = sqlStatement($countQuery,$sqlBindArray);
@@ -507,7 +488,6 @@ while ($result4 = sqlFetchArray($res4)) {
         // this encounter's notes and this is the clinical view.
         $encarr = array();
         $encounter_rows = 1;
-
         if (!$billing_view && $auth_sensitivity &&
             ($auth_notes_a || ($auth_notes && $result4['user'] == $_SESSION['authUser'])))
         {
@@ -527,9 +507,10 @@ while ($result4 = sqlFetchArray($res4)) {
 	        $format_date = date("n/j/Y H:i a", $format_stamp);
 
 	        echo "<td class='encounter-list-time' title='" . htmlspecialchars(xl('View encounter','','',' ') .
-          "$pid.{$result4['encounter']}", ENT_QUOTES) . "'>" . $format_date . "</td>";
-	       } else {
-        echo "<td valign='top' title='" . htmlspecialchars(xl('View encounter','','',' ') .
+            "$pid.{$result4['encounter']}", ENT_QUOTES) . "'>" . $format_date . "</td>";
+	       }
+	        else {
+            echo "<td valign='top' title='" . htmlspecialchars(xl('View encounter','','',' ') .
           "$pid.{$result4['encounter']}", ENT_QUOTES) . "'>" .
           htmlspecialchars(oeFormatShortDate($raw_encounter_date), ENT_NOQUOTES) . "</td>\n";
 	       }
@@ -873,12 +854,7 @@ while ($drow /* && $count <= $N */) {
 // jQuery stuff to make the page a little easier to use
 
 $(document).ready(function(){
-
-	$('.main-table').tablesort();
-
-
-
-    $(".encrow").mouseover(function() { $(this).toggleClass("highlight"); });
+	$(".encrow").mouseover(function() { $(this).toggleClass("highlight"); });
     $(".encrow").mouseout(function() { $(this).toggleClass("highlight"); });
     $(".encrow").click(function() { toencounter(this.id); }); 
     

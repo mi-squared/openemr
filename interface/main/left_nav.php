@@ -776,28 +776,21 @@ function clearactive() {
 
   $(parent.Title.document.getElementById('clear_active')).show();//To display Clear Active Patient button on selecting a patient
  }
-
-
- function setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray,EncounterTimeArray) {
-
+ function setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray) {
  //This function lists all encounters of the patient.
  //This function writes the drop down in the top frame.
  //It is called when a new patient is create/selected from the search menu.
   var str = '<Select class="text" id="EncounterHistory" onchange="{top.restoreSession();toencounter(this.options[this.selectedIndex].value)}">';
   str+='<option value=""><?php echo htmlspecialchars( xl('Encounter History'), ENT_QUOTES) ?></option>';
-  // str+='<option value="New Encounter"><?php echo htmlspecialchars( xl('New Encounter'), ENT_QUOTES) ?></option>';
+ // str+='<option value="New Encounter"><?php echo htmlspecialchars( xl('New Encounter'), ENT_QUOTES) ?></option>';
   str+='<option value="Past Encounter List"><?php echo htmlspecialchars( xl('Past Encounter List'), ENT_QUOTES) ?></option>';
   for(CountEncounter=0;CountEncounter<EncounterDateArray.length;CountEncounter++)
    {
-    str+='<option value="'+EncounterIdArray[CountEncounter]+'~'+EncounterDateArray[CountEncounter]+'">'+EncounterDateArray[CountEncounter]+'-'+CalendarCategoryArray[CountEncounter]+' - '+EncounterTimeArray[CountEncounter]+'</option>';
+    str+='<option value="'+EncounterIdArray[CountEncounter]+'~'+EncounterDateArray[CountEncounter]+'">'+EncounterDateArray[CountEncounter]+'-'+CalendarCategoryArray[CountEncounter]+'</option>';
    }
   str+='</Select>';
   $(parent.Title.document.getElementById('past_encounter_block')).show();
-
-  setTimeout(function() {
   top.window.parent.Title.document.getElementById('past_encounter').innerHTML=str;
-  }, 300)
-
  }
 
 function loadCurrentPatientFromTitle() {
@@ -1075,7 +1068,6 @@ $(document).ready(function(){
       <li class="open"><a class="expanded_lv2"><span><?php xl('Visits','e') ?></span></a>
         <ul>
           <?php if ($GLOBALS['ippf_specific'] && !$GLOBALS['disable_calendar']) genTreeLink('RTop','cal',xl('Calendar')); ?>
-          <?php genTreeLink('RBot','nen',xl('Create Visit')); ?>
           <?php genTreeLink('RBot','enc',xl('Current')); ?>
           <?php genTreeLink('RBot','ens',xl('Visit History')); ?>
         </ul>

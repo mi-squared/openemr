@@ -43,6 +43,10 @@ $menu_json='[
     {"label":"Import","icon":"fa-caret-right","children":[
       {"label":"Upload","menu_id":"ccr0","target":"pat","url":"/interface/patient_file/ccr_import.php","children":[],"requirement":0},
       {"label":"Pending Approval","menu_id":"apr0","target":"pat","url":"/interface/patient_file/ccr_pending_approval.php","children":[],"requirement":0}],"requirement":0}],"requirement":0},
+  {"label":"Employee","menu_id":"emp1","children":[
+    {"label":"Payroll","menu_id":"emp11","target":"enc","url":"/interface/reports/appointments_report_payroll.php","children":[],"requirement":2},
+    {"label":"PTO, Milage","menu_id":"emp12","target":"pat","url":"/interface/payroll/misc_payroll_entry.php","children":[],"requirement":0,"acl_req":["acct","eob"],"global_req":"enable_edihistory_in_left_menu"}],"requirement":0,"global_req":"enable_fees_in_left_menu"},
+ 
   {"label":"Fees","menu_id":"feeimg","children":[
     {"label":"Fee Sheet","menu_id":"cod2","target":"enc","url":"/interface/patient_file/encounter/load_form.php?formname=fee_sheet","children":[],"requirement":2},
     {"label":"Charges","menu_id":"cod1","target":"enc","url":"/interface/patient_file/encounter/encounter_bottom.php","children":[],"requirement":2,"global_req":"use_charges_panel"},

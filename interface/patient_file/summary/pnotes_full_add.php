@@ -283,7 +283,7 @@ if ($noteid) {
 
     <?php if ($noteid) { ?>
     <!-- existing note -->
-    <a href="#" class="css_button" id="newnote" title="<?php echo htmlspecialchars(xl('Add as a new note'), ENT_QUOTES); ?>" ><span><?php echo htmlspecialchars(xl('Save as new note'), ENT_NOQUOTES); ?></span></a>
+<!--  KCC remove this button when there's an existing note for Casa  <a href="#" class="css_button" id="newnote" title="--><?php //echo htmlspecialchars(xl('Add as a new note'), ENT_QUOTES); ?><!--" ><span>--><?php //echo htmlspecialchars(xl('Save as new note'), ENT_NOQUOTES); ?><!--</span></a>-->
     <a href="#" class="css_button" id="appendnote" title="<?php echo htmlspecialchars(xl('Append to the existing note'), ENT_QUOTES); ?>"><span><?php echo htmlspecialchars(xl('Append this note'), ENT_NOQUOTES); ?></span></a>
     <?php } else { ?>
     <a href="#" class="css_button" id="newnote" title="<?php echo htmlspecialchars(xl('Add as a new note'), ENT_QUOTES); ?>" ><span><?php echo htmlspecialchars(xl('Save as new note'), ENT_NOQUOTES); ?></span></a>

@@ -958,7 +958,7 @@ if ($_POST['form_action'] == "save") {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="../../../_ibh/css/add_edit_event.css">
+<link rel="stylesheet" type="text/css" href="/_ibh/css/add_edit_event.css">
 
     <?php  //***IBH  added ?>
 <script language="JavaScript">

@@ -48,7 +48,7 @@ function GenerateTheQueryPart()
             elseif (strpos($criteria_value, "insurance_data.provider = '1'")!== false) {
                 $query_part .= ' AND '."insurance_data.provider > '0' and insurance_data.date <= form_encounter.date";
             } elseif (strpos($criteria_value, "insurance_data.provider = '0'")!== false) {
-                $query_part .= ' AND '."(insurance_data.provider = '0' or insurance_data.date > form_encounter.date)";
+                $query_part .= ' AND '."(insurance_data.provider = '0' or insurance_data.provider = '' or insurance_data.date > form_encounter.date)";
             } //---------------------------------------------------------
             else {
                 $query_part .= ' AND '.$criteria_value;

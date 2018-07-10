@@ -5,6 +5,9 @@
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
 
+
+
+
 // open a new cascaded window
 function cascwin(url, winname, width, height, options) {
  var mywin = window.parent ? window.parent : window;
@@ -95,7 +98,7 @@ function grabfocus(w) {
 
 		if (eventid) {
 			$.ajax({
-				url:"/_ibh/ajax/get_appointment_status.php",
+				url: baseUrl + "/_ibh/ajax/get_appointment_status.php",
 				data:{pc_eid:eventid},
 				success: function(res) {
 					if (res.pc_apptstatus == "@" || res.pc_apptstatus == ">" || res.pc_apptstatus == "$") {

@@ -80,7 +80,7 @@ class Encounter_Controller extends Abstract_Controller
         $status = self::STATUS_FAILURE;
         $password = $this->getRequest()->getParam( 'password', '' );
         $encounterId = $this->getRequest()->getParam( 'encounterId', '' );
-		$msgid = $this->getRequest()->getParam( 'msgid', '' );
+		$msgid = $this->getRequest()->getParam( 'msgid', '' ); //***IBH added
         // Lock if 'Lock e-signed encounters and their forms' option is set,
         // unless esign_lock_toggle option is enable in globals, then check the request param
         $lock = false;

@@ -23,8 +23,10 @@
 
 (function( $ ) {
 	
+	window.encounter_id = "";
+	
 	$.fn.esign = function( customSettings, customEvents ) {
-		
+				
 		// Initialize settings
 		var settings = $.extend({
 			
@@ -39,6 +41,9 @@
 		var events = $.extend({
 			
 			afterFormSuccess : function( response ) {
+				
+				console.log("response from afterFormSuccess", afterFormSuccess);
+							
 				var logId = "esign-signature-log-"+response.formDir+"-"+response.formId;
 				$.post( settings.logViewAction, response, function( html ) {
 					$("#"+logId).replaceWith( html );
@@ -89,23 +94,41 @@
 	        
 	        return false;
 	    });
+	    
+	
 	
 	    $(document).on( 'click', '#esign-sign-button-'+settings.module, function( e ) {
-	    	
+		    
+			
+			
 	        e.preventDefault();
 	        var formData = $('#esign-signature-form').serialize();
+	        
+	        // console.log("so... it was clicked...", formData);
+
+
 	        $.post( 
 	        	settings.formSubmitAction,
 	        	formData,
 	        	function( response ) {
+		        	
+		        	console.log("window name", window.name);
+		        	
 	        		if ( response.status != 'success' ) { 
+		        		
 	        			$("#esign-form-error-container").remove();
 	        			$("#esign-mask-content").find("form").append("<div id='esign-form-error-container' class='error'>"+response.message+"</div>");
-	        		} else {
-	        			// Close the form and refresh the log if it's on the screen
+	        		} else {	        			
+	        			
 	        			$(".window").hide();
 	        	        $("#esign-mask").hide();
+	        	        
 	        	        events.afterFormSuccess( response );
+	        	        
+	        	        if (window.name == "Forms") {
+		        	        parent.location.reload();
+	        	        }	        	        
+	        	        
 	        		}
 	        	},
 	        	'json'
@@ -113,6 +136,7 @@
 	    	
 	    	return false;
 	    });
+
 
 		function initElement( element ) {
 			
@@ -144,8 +168,12 @@
 				// Get a list of all the data-* attributes
 				var params = element.data(); 
 				
+				// make encounter_id available to the signature panel
+				window.encounter_id = params.encounterid;
+				
 				// Load the form
 				$.post( settings.formViewAction, params, function( response ) {
+					
 					$('#esign-mask-content').html( response );
 				});
 			

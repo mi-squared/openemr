@@ -49,7 +49,7 @@ class Form_Controller extends Abstract_Controller
         $form->encounterId = $this->getRequest()->getParam( 'encounterid', 0 );
         $form->userId = $GLOBALS['authUserID'];
         $form->action = '#';
-        $signable = new Form_Signable( $form->formId, $form->formDir, $form->encounterId, $form->msgId );
+        $signable = new Form_Signable( $form->formId, $form->formDir, $form->encounterId, $form->msgId );//***IBH changes
         $form->showLock = false;
         if ( $signable->isLocked() === false &&
             $GLOBALS['lock_esign_individual'] &&
@@ -81,18 +81,14 @@ class Form_Controller extends Abstract_Controller
     public function esign_form_submit()
     {
         $message = '';
-        // Always lock, unless esign_lock_toggle option is enable in globals
-        $lock = true;
-
         $status = self::STATUS_FAILURE;
         $password = $this->getRequest()->getParam( 'password', '' );
         $formId = $this->getRequest()->getParam( 'formId', '' );
         $formDir = $this->getRequest()->getParam( 'formDir', '' );
         $encounterId = $this->getRequest()->getParam( 'encounterId', '' );
-		$msgId = $this->getRequest()->getParam( 'msgid', '' );
-		$amendment = $this->getRequest()->getParam( 'amendment', '' );
-
-
+        // Always lock, unless esign_lock_toggle option is enable in globals
+        $lock = true;
+		$msgId = $this->getRequest()->getParam( 'msgid', '' ); //***IBH added
         if ( $GLOBALS['esign_lock_toggle'] ) {
             $lock = ( $this->getRequest()->getParam( 'lock', '' ) == 'on' ) ? true : false;
         }
@@ -111,7 +107,7 @@ class Form_Controller extends Abstract_Controller
             $message = xlt( "The password you entered is invalid" );
         }
         $response = new Response( $status, $message );
-
+        //***IBH add
         if ($status == "success") {
 	        $rider = ibh_esign_rider($_POST);
 	        $response->rider = $rider;

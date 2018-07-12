@@ -29,10 +29,16 @@ require_once $GLOBALS['srcdir'].'/ESign/Form/Configuration.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Factory.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Log.php';
 
+
+// IBH_DEV_CHG
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+
+
+
 class Form_Controller extends Abstract_Controller
 {
     /**
-     * 
+     * msgId added by sherwin 3-11-2016
      */
     public function esign_form_view()
     {
@@ -43,7 +49,7 @@ class Form_Controller extends Abstract_Controller
         $form->encounterId = $this->getRequest()->getParam( 'encounterid', 0 );
         $form->userId = $GLOBALS['authUserID'];
         $form->action = '#';
-        $signable = new Form_Signable( $form->formId, $form->formDir, $form->encounterId );
+        $signable = new Form_Signable( $form->formId, $form->formDir, $form->encounterId, $form->msgId );
         $form->showLock = false;
         if ( $signable->isLocked() === false &&
             $GLOBALS['lock_esign_individual'] &&
@@ -75,13 +81,18 @@ class Form_Controller extends Abstract_Controller
     public function esign_form_submit()
     {
         $message = '';
+        // Always lock, unless esign_lock_toggle option is enable in globals
+        $lock = true;
+
         $status = self::STATUS_FAILURE;
         $password = $this->getRequest()->getParam( 'password', '' );
         $formId = $this->getRequest()->getParam( 'formId', '' );
         $formDir = $this->getRequest()->getParam( 'formDir', '' );
         $encounterId = $this->getRequest()->getParam( 'encounterId', '' );
-        // Always lock, unless esign_lock_toggle option is enable in globals
-        $lock = true;
+		$msgId = $this->getRequest()->getParam( 'msgid', '' );
+		$amendment = $this->getRequest()->getParam( 'amendment', '' );
+
+
         if ( $GLOBALS['esign_lock_toggle'] ) {
             $lock = ( $this->getRequest()->getParam( 'lock', '' ) == 'on' ) ? true : false;
         }
@@ -100,6 +111,12 @@ class Form_Controller extends Abstract_Controller
             $message = xlt( "The password you entered is invalid" );
         }
         $response = new Response( $status, $message );
+
+        if ($status == "success") {
+	        $rider = ibh_esign_rider($_POST);
+	        $response->rider = $rider;
+        }
+
         $response->formId = $formId;
         $response->formDir = $formDir;
         $response->encounterId = $encounterId;

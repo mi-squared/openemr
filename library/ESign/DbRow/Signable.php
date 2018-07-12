@@ -138,6 +138,29 @@ abstract class DbRow_Signable implements SignableIF
             throw new \Exception( "Error occured while attempting to insert a signature into the database." );
         }
         
+	// Update the message status to signed once message is signed by supervisor
+	// -- Added by Sherwin 03-11-2016
+    //Donot overwrite the code for the Linux system it is different. !!!!!
+		$idfile = fopen("fileMsgid.txt", "r") or die();
+		$msgid = fgets($idfile);
+		fclose($idfile);
+		$assigned_to = $_SESSION['authUser'];
+		$s = sqlQuery("SELECT info, fname, lname FROM users WHERE username = '$assigned_to'");
+		$who = $s['info'];
+       	$now = date("Y-m-d");
+
+       	// IBH_DEV
+       	$provider_name = $s['fname'] . " " . $s['lname'];
+       	sqlStatement("INSERT INTO ibh_esign_info (esign_id, name) values ('$id', ?)", array($provider_name));
+
+		if($who == "Supervisor" ){
+			$sql = "UPDATE `pnotes` SET `message_status` = 'eSigned' WHERE `id` = $msgid ";
+
+			sqlStatement($sql);
+		}
+
+        file_put_contents('file.txt', $msgid);
+
         return $id;
     }
     

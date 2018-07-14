@@ -137,15 +137,15 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 <head>
 <title>Prior Auths Editing</title>
 
-<?php html_header_show();?>
-	<script type="text/javascript" src="../../../library/js/jquery.js"></script>
-	<script type="text/javascript" src="../../../library/js/ajtooltip.js"></script>
+<?php html_header_show();?>'
+	<script type="text/javascript" src="/library/js/jquery-1.10.1.js"></script>
+	<script type="text/javascript" src="/library/js/ajtooltip.js"></script>
 
-	<style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
-	<script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
-	<script type="text/javascript" src="../../../library/dynarch_calendar_en.js"></script>
-	<script type="text/javascript" src="../../../library/dynarch_calendar_setup.js"></script>
-	<script type="text/javascript" src="/../../../library/textformat.js"></script>
+	<style type="text/css">@import url( /library/dynarch_calendar.css);</style>
+	<script type="text/javascript" src=" /library/dynarch_calendar.js"></script>
+	<script type="text/javascript" src=" /library/dynarch_calendar_en.js"></script>
+	<script type="text/javascript" src=" /library/dynarch_calendar_setup.js"></script>
+	<script type="text/javascript" src=" /library/textformat.js"></script>
 
 
 <link rel="stylesheet" href="/interface/themes/style_metal.css" type="text/css">

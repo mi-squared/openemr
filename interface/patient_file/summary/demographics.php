@@ -42,8 +42,10 @@ $fake_register_globals=false;
  require_once("$srcdir/options.js.php");
  ////////////
  require_once(dirname(__FILE__)."/../../../library/appointments.inc.php");
- require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php"); //added by ibh
-  if (isset($_GET['set_pid'])) {
+
+ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php"); //*** IBH add
+
+if (isset($_GET['set_pid'])) {
   include_once("$srcdir/pid.inc");
   setpid($_GET['set_pid']);
  }
@@ -174,10 +176,7 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
 <?php html_header_show();?>
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 <link rel="stylesheet" type="text/css" href="../../../library/js/fancybox/jquery.fancybox-1.2.6.css" media="screen" />
-
-<!-- IBF_DEV add link to stylesheet -->
-<link rel="stylesheet" href="<?= $GLOBALS['webroot']?>/_ibh/css/encounter.css" type="text/css">
-
+<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css"><?php //***IBH Add 179?>
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
@@ -220,7 +219,7 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
  }
 
  function newEvt() {
-  dlgopen('../../main/calendar/add_edit_event.php?patientid=<?php echo htmlspecialchars($pid,ENT_QUOTES); ?>', '_blank', 775, 500);
+  dlgopen('../../main/calendar/add_edit_event.php?patientid=<?php echo htmlspecialchars($pid,ENT_QUOTES); ?>', '_blank', 750, 525); //*** IBH Modofy (775,375)
   return false;
  }
 
@@ -320,6 +319,7 @@ $(document).ready(function(){
     });
     $("#pnotes_ps_expand").load("pnotes_fragment.php");
     $("#disclosures_ps_expand").load("disc_fragment.php");
+    //***IBH Add322
     $("#diagnosis_ps_expand").load("diagnosis_fragment.php");
 
     <?php if ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) { ?>
@@ -457,15 +457,20 @@ function setMyPatient() {
   if(sqlNumRows($result4)>0) {
     while($rowresult4 = sqlFetchArray($result4)) {
 ?>
- EncounterIdArray[Count] = '<?php echo addslashes($rowresult4['encounter']); ?>';
- EncounterDateArray[Count] = '<?php echo addslashes(oeFormatShortDate(date("Y-m-d", strtotime($rowresult4['date'])))); ?>';
- CalendarCategoryArray[Count] = '<?php echo addslashes(xl_appt_category($rowresult4['pc_catname'])); ?>';
- Count++;
+    //***IBH Modify
+ EncounterIdArray[<?=$ct?>] = '<?php echo htmlspecialchars($rowresult4['encounter'], ENT_QUOTES); ?>';
+ EncounterDateArray[<?=$ct?>] = '<?php echo htmlspecialchars(oeFormatShortDate(date("Y-m-d", strtotime($rowresult4['date']))), ENT_QUOTES); ?>';
+ CalendarCategoryArray[<?=$ct?>] = '<?php echo htmlspecialchars(xl_appt_category($rowresult4['pc_catname']), ENT_QUOTES); ?>';
+ EncounterTimeArray[<?=$ct?>] = '<?php echo htmlspecialchars($rowresult4['pc_startTime'], ENT_QUOTES); ?>';
+
 <?php
+	$ct++;
+	 // END IBH_DEV_CHG
+
     }
   }
 ?>
- parent.left_nav.setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray);
+ parent.left_nav.setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray, EncounterTimeArray); //**IBH Modify
 <?php } // end setting new pid ?>
  parent.left_nav.syncRadios();
 <?php if ( (isset($_GET['set_pid']) ) && (isset($_GET['set_encounterid'])) && ( intval($_GET['set_encounterid']) > 0 ) ) {
@@ -652,10 +657,10 @@ if ($GLOBALS['patient_id_category_name']) {
           |
           <a href="../../reports/external_data.php" onclick='top.restoreSession()'>
           <?php echo xlt('External Data'); ?></a>
-          |
+          | <?php //***IBH Add ?>
           <a href="../../forms/prior_auth/display.php?pid=<?=$pid?>" <?php if(getSupervisor($authUser) != "Supervisor") echo "class='iframe large_modal'";  ?> onclick='top.restoreSession()'>
           <?php echo htmlspecialchars(xl('Prior Auth'),ENT_NOQUOTES); ?></a>
-
+      <?php //***IBH Add END ?>
 
 <!-- DISPLAYING HOOKS STARTS HERE -->
 <?php
@@ -774,7 +779,9 @@ if ($GLOBALS['patient_id_category_name']) {
   echo "</table></td></tr></td></tr></table><br>";
 
 ?>
+           <?php //***IBH Add ?>
 <div>Active Prior Auths: <a href="../../forms/prior_auth/display.php?pid=<?=$pid?>" onclick="top.restoreSession()"><?php echo count(ibh_get_prior_auth_warnings($pid)); ?></a></div>
+           <?php //***IBH Add END ?>
         </div> <!-- required for expand_collapse_widget -->
        </td>
       </tr>
@@ -797,7 +804,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
   $widgetAuth, $fixedWidth);
 ?>
          <div id="DEM" >
-
+             <?php //***IBH Add ?>
 	           <?php
 	           if (isset($_POST['edit_pa_reqs'])) {
 
@@ -835,22 +842,22 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
 
 	       ?>
 
-
-          <ul class="tabNav" data-foo="bar">
+             <?php //***IBH Add  END?>
+          <ul class="tabNav" data-foo="bar"> <?php //***IBH Modify data-foo="bar" ?>
            <?php display_layout_tabs('DEM', $result, $result2); ?>
-           <li><a href="/play/javascript-tabbed-navigation/" id="header_tab_.htmlspecialchars(PAs,ENT_QUOTES).">
-                        PAs</a></li>
+           <li><a href="/play/javascript-tabbed-navigation/" id="header_tab_.htmlspecialchars(PAs,ENT_QUOTES)."> <?php //***IBH Add ?>
+                        PAs</a></li> <?php //***IBH Add ?>
           </ul>
           <div class="tabContainer">
            <?php display_layout_tabs_data('DEM', $result, $result2); ?>
-
+              <?php //***IBH Add ?>
            <div class="tab"><div class="pa-exceptions"><h3>Prior Auths Required</h3><p>FOR THIS CLIENT’S SPECIFIC INSURANCE:
  <ul style='color:#ba0303'><li>Leave boxes checked for any codes that require a Prior Authorization.</li>
 	 <li>Leave boxes checked for any codes that have a LIMITED NUMBER of units<br>or visits available without a Prior Authorization.</li>
 	 <li>UNCHECK boxes for any codes that NEVER need a Prior Authorization.</li>
  </ul>
  </p><form action="" method="POST"><input type="hidden" name="edit_pa_reqs" value="1"><input type="hidden" name="pa_pid" value="<?=$pid?>"><?php echo ibh_category_checkboxes($pid); ?><br><input type="submit" class="go-button" value="Save"></form></div></div>
-
+              <?php //***IBH Add END ?>
           </div>
          </div>
         </div> <!-- required for expand_collapse_widget -->
@@ -1397,7 +1404,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
 	  }
 	  echo "   <br />&nbsp;<br />\n";
 	}
-
+ //***IBH Add
  //Show diagnosis
  if ( (acl_check('patients', 'med')) && ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) ) {
      // diagnosis summary expand collapse widget
@@ -1424,7 +1431,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
      echo "<div style='margin-left:10px' class='text'><image src='../../pic/ajax-loader.gif'/></div><br/>";
      echo "</div>";
  } // end if diagnosis
-
+        //***IBH Add End
      // Show Clinical Reminders for any user that has rules that are permitted.
      $clin_rem_check = resolve_rules_sql('','0',TRUE,'',$_SESSION['authUser']);
      if ( (!empty($clin_rem_check)) && ($GLOBALS['enable_cdr'] && $GLOBALS['enable_cdr_crw']) ) {
@@ -1690,6 +1697,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
             if ($row['pc_hometext'] != "") {
                 $etitle = xl('Comments').": ".($row['pc_hometext'])."\r\n".$etitle;
             }
+            //***IBH Modify 1701
             echo "<a href='javascript:oldEvt(" . htmlspecialchars(preg_replace("/-/", "", $row['pc_eventDate']),ENT_QUOTES) . "," . htmlspecialchars($row['pc_eid'],ENT_QUOTES) . ")' title='" . htmlspecialchars($etitle,ENT_QUOTES) . "'>";
             echo "<b>" . htmlspecialchars(xl($dayname) . ", " . $row['pc_eventDate'],ENT_NOQUOTES) . "</b>" . xlt("Status") .  "(";
             echo " " .  generate_display_field(array('data_type'=>'1','list_id'=>'apptstat'),$row['pc_apptstatus']) . ")<br>";   // can't use special char parser on this

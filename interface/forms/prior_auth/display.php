@@ -138,18 +138,18 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 <title>Prior Auths Editing</title>
 
 <?php html_header_show();?>'
-	<script type="text/javascript" src="/library/js/jquery-1.10.1.js"></script>
-	<script type="text/javascript" src="/library/js/ajtooltip.js"></script>
+	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
+	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-	<style type="text/css">@import url( /library/dynarch_calendar.css);</style>
-	<script type="text/javascript" src=" /library/dynarch_calendar.js"></script>
-	<script type="text/javascript" src=" /library/dynarch_calendar_en.js"></script>
-	<script type="text/javascript" src=" /library/dynarch_calendar_setup.js"></script>
-	<script type="text/javascript" src=" /library/textformat.js"></script>
+	<style type="text/css">@import url( <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.css);</style>
+	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
+	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_en.js"></script>
+	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
+	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/textformat.js"></script>
 
 
-<link rel="stylesheet" href="/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
 
 </head>
 <body class="overview-pane">
@@ -160,7 +160,7 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 		<div class='top-message'><?=$top_mssg?></div>
 <?php	} ?>
 <ul class="ibh-top-buttons">
-	<li><a href="../../../_ibh/interface/prior_auths_overview.php">ALL PRIOR AUTHS</a></li>
+	<li><a href="<?= $GLOBALS['webroot'] ?>/_ibh/interface/prior_auths_overview.php">ALL PRIOR AUTHS</a></li>
 	<li><a href="display.php?pid=<?=$_pid?>">PATIENT LIST (active)</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="display.php?pid=<?=$_pid?>&show_archived=true" style='color:#777'>(include archived)</a></li>
 	<li><a href="display.php?action=new&pid=<?=$_pid?>">CREATE A NEW PA FOR <?=$patient['fname'] . " " . $patient['lname']?></a></li>
 	

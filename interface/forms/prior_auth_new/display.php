@@ -26,7 +26,7 @@ $displays = getPriorAuthData($pid);
 <title></title>
 <head>
 <?php html_header_show();?>
-<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>library/js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
 <style>

@@ -11,7 +11,7 @@
 		<p><label>Names:</label><input type='text' name='names' value='' class='auto'></p>
 	</form>
 
-<script type="text/javascript" src="../../library/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../library/js/jquery-1.10.1.js"></script>
 <script type="text/javascript" src="../../library/js/jquery-ui.min.js"></script>	
 <script type="text/javascript">
 $(function() {

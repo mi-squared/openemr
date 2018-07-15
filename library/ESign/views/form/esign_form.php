@@ -32,7 +32,7 @@ if(!is_numeric($msgId)){
 ?>
 
 <!-- IBH_DEV -->
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
        
 <div id='esign-form-container'>
 	<form id='esign-signature-form' method='post' action='<?php echo attr( $this->form->action ); ?>'>

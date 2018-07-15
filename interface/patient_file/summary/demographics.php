@@ -176,7 +176,7 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
 <?php html_header_show();?>
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 <link rel="stylesheet" type="text/css" href="../../../library/js/fancybox/jquery.fancybox-1.2.6.css" media="screen" />
-<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css"><?php //***IBH Add 179?>
+<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css"><?php //***IBH Add 179?>
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
@@ -449,11 +449,16 @@ function setMyPatient() {
  var EncounterDateArray = new Array;
  var CalendarCategoryArray = new Array;
  var EncounterIdArray = new Array;
+ var EncounterTimeArray = new Array; //***IBH add
  var Count = 0;
 <?php
   //Encounter details are stored to javacript as array.
-  $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_categories.pc_catname FROM form_encounter AS fe ".
-    " left join openemr_postcalendar_categories on fe.pc_catid=openemr_postcalendar_categories.pc_catid  WHERE fe.pid = ? order by fe.date desc", array($pid));
+    //***IBH modify / add.  481-486 replaces the $result4 = sqlStatement()
+$sql_1 = "SELECT DISTINCT fe.encounter, fe.date, cats.pc_catname, evts.pc_startTime FROM form_encounter fe JOIN openemr_postcalendar_categories cats ON fe.pc_catid=cats.pc_catid JOIN openemr_postcalendar_events evts on fe.date=evts.pc_eventDate WHERE fe.pid = ? AND evts.pc_pid = ? AND fe.pc_catid = evts.pc_catid ORDER BY evts.pc_eventDate DESC";
+
+$result4 = sqlStatement($sql_1, array($pid, $pid));
+$ct = 0;
+    //IBH*** add END
   if(sqlNumRows($result4)>0) {
     while($rowresult4 = sqlFetchArray($result4)) {
 ?>

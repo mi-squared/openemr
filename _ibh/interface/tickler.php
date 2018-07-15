@@ -148,18 +148,18 @@ function get_plan_row($patient) {
 <title></title>
 <head>
 
-<link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css">
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/topdialog.js?t=<?=time()?>"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dialog.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/textformat.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar.css">
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dialog.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/textformat.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar_setup.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/moment.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/moment.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery.tablesort.js"></script>
 
-<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/tickler.css" type="text/css">
+<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/tickler.css" type="text/css">
 
 <?php if ($is_supervisor != 1) { ?>
 <style type="text/css">

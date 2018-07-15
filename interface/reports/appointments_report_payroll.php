@@ -517,7 +517,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) { ?>
 				<td class="detail billing-code"><?=$code_code?></td>
 	        	<td class="detail billing-date"><?=$formatted_date?></td>
 	        	
-	        	<td><a class="encounter-setter" data-date="<?=$date_formatted?>" data-enc="<?=$appointment['encounter']?>" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/patient_file/encounter/forms.php?&pid=<?=$appointment['pid']?>&set_encounter=<?=$appointment['encounter']?>" target="RTop"><?=$appointment['encounter']?></a></td>
+	        	<td><a class="encounter-setter" data-date="<?=$date_formatted?>" data-enc="<?=$appointment['encounter']?>" href="<?=  $GLOBALS['webroot'] ?>/interface/patient_file/encounter/forms.php?&pid=<?=$appointment['pid']?>&set_encounter=<?=$appointment['encounter']?>" target="RTop"><?=$appointment['encounter']?></a></td>
 	        	
 	        	<td class="provider"><?=$docname?></td>
 	

@@ -8,17 +8,17 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 ?><html>
 <title></title>
 <head>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
 
-<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
 
 
-<style type="text/css">@import url(<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.css);</style>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar_en.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dynarch_calendar_setup.js"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/textformat.js"></script>
+<style type="text/css">@import url(<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar.css);</style>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_en.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/textformat.js"></script>
 
 
 
@@ -148,14 +148,14 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 	<tr>
 		
 	<th>patient</th>
-	<th>auth #<a href="<?=$url_string?>&order_by=pa.prior_auth_number"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.prior_auth_number-DESC"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_desc.png"></a></th>
+	<th>auth #<a href="<?=$url_string?>&order_by=pa.prior_auth_number"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.prior_auth_number-DESC"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_desc.png"></a></th>
 		
-	<th>starts<a href="<?=$url_string?>&order_by=pa.auth_from"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.auth_from-DESC"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_desc.png"></a></th>
+	<th>starts<a href="<?=$url_string?>&order_by=pa.auth_from"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.auth_from-DESC"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_desc.png"></a></th>
 	
-	<th>ends<a href="<?=$url_string?>&order_by=pa.auth_to"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.auth_to-DESC"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_desc.png"></a></th>
+	<th>ends<a href="<?=$url_string?>&order_by=pa.auth_to"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.auth_to-DESC"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_desc.png"></a></th>
 		
-	<th>units<a href="<?=$url_string?>&order_by=pa.units"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.units-DESC"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_desc.png"></a></th>
-	<th>entered<a href="<?=$url_string?>&order_by=pa.date"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.date-DESC"><img src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/img/sort_desc.png"></a></th>
+	<th>units<a href="<?=$url_string?>&order_by=pa.units"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.units-DESC"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_desc.png"></a></th>
+	<th>entered<a href="<?=$url_string?>&order_by=pa.date"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_asc.png"></a> <a href="<?=$url_string?>&order_by=pa.date-DESC"><img src="<?= $GLOBALS['webroot'] ?>/_ibh/img/sort_desc.png"></a></th>
 	<th>codes</th></tr>
 <?php
 	

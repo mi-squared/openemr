@@ -115,8 +115,8 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <html>
   <head>                                    
     <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css"> 
-    <script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
-    <script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/js/jquery-calendar.js"></script>
+    <script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
+    <script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/jquery-calendar.js"></script>
     <!-- <script type="text/javascript" src="/openemr/library/js/jquery.grouprows.js"></script>
     <script type="text/javascript" src="/openemr/library/js/grouprows.js"></script> -->
     <script language="JavaScript">   
@@ -318,7 +318,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
     </script> 
 
 
-    <link rel="stylesheet" type="text/css" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/messages.css">
+    <link rel="stylesheet" type="text/css" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/messages.css">
 
 
 

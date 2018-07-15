@@ -18,13 +18,13 @@ $is_supervisor = ibh_user_is_supervisor();
 	</style>
 
 
-	<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/topdialog.js?t=<?=time()?>"></script>
-<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/library/dialog.js"></script>
+	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dialog.js"></script>
 
 
-	<script type="text/javascript" src="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/js/jquery_latest.min.js"></script>
+	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
 	
-	<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/tickler.css" type="text/css"/>
+	<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/tickler.css" type="text/css"/>
 	
 	</head>
 	

@@ -349,7 +349,7 @@ if(isset($_GET['mID']) and is_numeric($_GET['mID'])){
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 
 <!-- IBF_DEV add link to stylesheet -->
-<link rel="stylesheet" href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/css/messages.css" type="text/css">
+<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/messages.css" type="text/css">
 
 
 

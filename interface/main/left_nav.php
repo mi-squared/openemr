@@ -1328,7 +1328,7 @@ if (!empty($reg)) {
           <?php if ($GLOBALS['enable_amc_tracking']) genMiscLink('RTop','rep','0',xl('AMC Tracking'),'reports/amc_tracking.php'); ?>
           <?php if ($GLOBALS['enable_cdr'] && $GLOBALS['enable_alert_log'] ) genMiscLink('RTop','rep','0',xl('Alerts Log'),'reports/cdr_log.php'); ?>
 
-          <li><a href="<?= $_SERVER['CONTEXT_DOCUMENT_ROOT'] ?>/_ibh/interface/tickler.php" id="tickler" target="_blank">Ticklers</a></li>
+          <li><a href="<?=  $GLOBALS['webroot'] ?>/_ibh/interface/tickler.php" id="tickler" target="_blank">Ticklers</a></li>
 
 
         </ul>

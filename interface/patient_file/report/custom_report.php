@@ -45,7 +45,7 @@ if ($GLOBALS['gbl_portal_cms_enable']) {
 require_once("$srcdir/appointments.inc.php");
 
 // IBH_DEV
-require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+require_once($GLOBALS['webroot'] . "/_ibh/ibh_functions.php");
 // For those who care that this is the patient report.
 $GLOBALS['PATIENT_REPORT_ACTIVE'] = true;
 

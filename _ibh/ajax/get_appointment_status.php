@@ -3,7 +3,7 @@
 	
 	header('Content-Type: application/json');
     require_once( "../../interface/globals.php");
-	require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+	require_once("../../_ibh/ibh_functions.php");
 
 
 	$finder = "";

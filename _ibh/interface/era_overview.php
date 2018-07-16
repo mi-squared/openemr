@@ -6,7 +6,7 @@
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/globals.php");
 
 // IBH_DEV_CHG
-require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+require_once("../../_ibh/ibh_functions.php");
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_era.php");
 // ini_set("display_errors", 1);
 

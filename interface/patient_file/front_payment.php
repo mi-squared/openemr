@@ -88,7 +88,7 @@ $facilityService = new FacilityService();
 
         echo "  <td class='detail' align='right'>";
         if ( count ( $notes ) ) {
-            echo "<ul style='margin-left: 0px; padding-left: 0px;'>";
+            echo "<ul style='margin-left: 0px; padding-left: 0px; list-style-type: none;'>";
             foreach ( $notes as $note ) {
                 echo "<li>$note</li>";
             }
@@ -1317,7 +1317,7 @@ $facilityService = new FacilityService();
                             while ( $pnrow = sqlFetchArray($pn_statement) ) {
                                 if ( $pnrow['note'] ) {
                                     $post_time = oeFormatShortDate( $pnrow[ 'post_time' ] );
-                                    $payment_notes [] = "{$pnrow['note']} ($post_time)\n";
+                                    $payment_notes [] = "<b>($post_time)</b> {$pnrow['note']}\n";
                                 }
                             }
 

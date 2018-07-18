@@ -138,20 +138,25 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 <title>Prior Auths Editing</title>
 
 <?php html_header_show();?>'
-	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
-	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-	<style type="text/css">@import url( <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.css);</style>
-	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
-	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_en.js"></script>
-	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
-	<script type="text/javascript" src=" <?= $GLOBALS['webroot'] ?>/library/textformat.js"></script>
+		<?php html_header_show(); ?>
+		<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
+
+		<!-- pop up calendar -->
+		<style type="text/css">@import url(<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar.css);</style>
+		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
+		<?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
+		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
+		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/textformat.js"></script>
+		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
+		<link rel="stylesheet" href="<?php echo $css_header; ?>" type="text/css">
+
 
 
 <link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
 <link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
 
-</head>
+</>
 <body class="overview-pane">
 <div class="ibh-wrapper">
 		
@@ -579,6 +584,8 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 
 
 $(document).ready(function(){
+
+    console.log("AUTH FROM " + $("#auth_from").val());
 	
 	function no_dash(n) {
 		return n.replace(/-/g, "");
@@ -674,9 +681,16 @@ $(document).ready(function(){
 		 		$("#prior_auth_number_row").hide();
 	 		}
 		});
-		
-		
-		/*Calendar.setup({inputField:"dob", ifFormat:"%Y-%m-%d", button:"img_dob"});*/
+
+    if (typeof $("#auth_from").val() === 'undefined') {
+        $("#auth_from").datepicker().datepicker("setDate", new Date());
+    }
+
+    if (typeof $("#auth_to").val() === 'undefined') {
+        $("#auth_to").datepicker().datepicker("setDate", new Date());
+    }
+
+    /*Calendar.setup({inputField:"dob", ifFormat:"%Y-%m-%d", button:"img_dob"});*/
 		Calendar.setup({inputField:"auth_from", ifFormat:"%Y-%m-%d", button:"img_auth_from"});
 		Calendar.setup({inputField:"auth_to", ifFormat:"%Y-%m-%d", button:"img_auth_to"});
 

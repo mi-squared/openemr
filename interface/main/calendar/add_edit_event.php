@@ -49,6 +49,8 @@ require_once($GLOBALS['incdir']."/main/holidays/Holidays_Controller.php");
  if (!acl_check('patients','appt','',array('write','wsome') ))
    die(xl('Access not allowed'));
 
+$is_new = isset($_GET['eid']) == false;//***IBH added
+
 /* Things that might be passed by our opener. */
  $eid           = $_GET['eid'];         // only for existing events
  $date          = $_GET['date'];        // this and below only for new events
@@ -102,7 +104,7 @@ else {
 
 function InsertEventFull()
  {
-	global $new_multiple_value,$provider,$event_date,$duration,$recurrspec,$starttime,$endtime,$locationspec;
+	global $new_multiple_value,$provider,$event_date,$duration,$recurrspec,$starttime,$endtime,$locationspec,$userid;//**Added by IBH (userid)
 	// =======================================
 	// multi providers case
 	// =======================================
@@ -124,7 +126,8 @@ function InsertEventFull()
                 $args['starttime'] = $starttime;
                 $args['endtime'] = $endtime;
                 $args['locationspec'] = $locationspec;
-                InsertEvent($args);
+                $args['pc_informant'] = $userid; //***IBH added
+                $insert_eid = InsertEvent($args);//***IBH modified
             }
 
         // ====================================
@@ -140,11 +143,12 @@ function InsertEventFull()
             $args['starttime'] = $starttime;
             $args['endtime'] = $endtime;
             $args['locationspec'] = $locationspec;
-            InsertEvent($args);
+            $insert_eid = InsertEvent($args); //***IBH Modified.
         }
+        return $insert_eid; //***IBH Added this return, I'm not sure why
  }
-function DOBandEncounter()
- {
+
+function DOBandEncounter($pc_eid=0) { //***IBH modified
    global $event_date,$info_msg;
 	 // Save new DOB if it's there.
 	 $patient_dob = trim($_POST['form_dob']);
@@ -161,12 +165,16 @@ function DOBandEncounter()
     // Manage tracker status.
     // And auto-create a new encounter if appropriate.	 
     if (!empty($_POST['form_pid'])) {
-     if ($GLOBALS['auto_create_new_encounters'] && $event_date == date('Y-m-d') && (is_checkin($_POST['form_apptstatus']) == '1') && !is_tracker_encounter_exist($event_date,$appttime,$_POST['form_pid'],$_GET['eid']))
+        //***IBH modified, added arguments to if statement
+     if ($GLOBALS['auto_create_new_encounters'] && (is_checkin($_POST['form_apptstatus']) == '1') && !is_tracker_encounter_exist($event_date,$appttime,$_POST['form_pid'],$_GET['eid']) || $GLOBALS['auto_create_new_encounters'] && $_POST['form_apptstatus'] == '@')
      {
 		 $encounter = todaysEncounterCheck($_POST['form_pid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false);
 		 if($encounter){
 				 $info_msg .= xl("New encounter created with id");
-				 $info_msg .= " $encounter";
+				 $info_msg .= " $encounter" . " and pc_eid " . $pc_eid; //***IBH Modified
+				 if ($pc_eid) { //**IBH added If statement
+					sqlStatement("UPDATE openemr_postcalendar_events SET encounter=? WHERE pc_eid=?", array($encounter, $pc_eid) );
+				 }
 		 }
                  # Capture the appt status and room number for patient tracker. This will map the encounter to it also.
                  if ( isset($GLOBALS['temporary-eid-for-manage-tracker']) || !empty($_GET['eid']) ) {
@@ -368,9 +376,28 @@ if ($_POST['form_action'] == "duplicate") {
 // If we are saving, then save and close the window.
 //
 if ($_POST['form_action'] == "save") {
+	$insert_id = "0"; //***IBH added
     /* =======================================================
      *                    UPDATE EVENTS
      * =====================================================*/
+
+		$tname = $_POST['answer1'] . " " . $_POST['amount1'] . " " . $_POST['why'];//***IBH added
+		file_put_contents('copay.txt', $tname);
+	if(!empty($_POST['amount1']))
+	{
+		sqlStatement("INSERT INTO i_copay SET ".
+		             "copay_id = '', ".
+					 "copay_date = '$date', ".
+					 "userid = '".$_SESSION['authUserID']."', " .
+					 "pid = '".$_POST['form_pid']."', " .
+					 "enc = '".$_POST['form_encounter']."', ".
+					 "copay_amount = '".$_POST['amount1']."', ".
+					 "balance_payment = '".$_POST['amount2']."'"
+					 );
+
+	} //***IBH added 329-349
+
+
     if ($eid) {
 
         // what is multiple key around this $eid?
@@ -635,20 +662,20 @@ if ($_POST['form_action'] == "save") {
 
         // EVENTS TO FACILITIES
         $e2f = (int)$eid;
-
+		$insert_id = $e2f; //***IBH added
 
     } else {
         /* =======================================================
          *                    INSERT NEW EVENT(S)
          * ======================================================*/
 
-		InsertEventFull();
+		$insert_id = InsertEventFull(); //***IBH modified
 
     }
 
     // done with EVENT insert/update statements
 
-		DOBandEncounter();
+		DOBandEncounter($insert_id); //***IBH modified
 
  }
 
@@ -861,8 +888,10 @@ if ($_POST['form_action'] == "save") {
             ", array($userid) ));
         }
         /************************************************************/
-        $e2f = $pref_facility['facility_id'];
-        $e2f_name = $pref_facility['facility'];
+
+        $e2f = 0;//***IBH Modified
+        $e2f_name = ""; //***IBH Modified
+
     }
     //END of CHEMED -----------------------
  }
@@ -903,15 +932,23 @@ td { font-size:0.8em; }
 </style>
 
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
-<script type="text/javascript" src="../../../library/topdialog.js"></script>
-<script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
-<script type="text/javascript" src="../../../library/textformat.js"></script>
+    <script type="text/javascript" src="../../../library/topdialog.js?t=<?=time()?>"></script><?php //***IBH Modified?><script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
+    <script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
+
+    <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
 <script type="text/javascript" src="../../../library/dynarch_calendar_setup.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script><?php //***IBH added  ?>
+<link rel="stylesheet" type="text/css" href="../../../_ibh/css/add_edit_event.css"><?php //***IBH added  ?>
+
 
 <script language="JavaScript">
-
+//***IBH Added
+	window.repeat_status = false;
+	window.appt_status = "";
+	window.is_new = <?php echo $is_new ? "true": "false"; ?>;
+//***IBH Added <end>
  var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
 
  var durations = new Array();
@@ -971,6 +1008,10 @@ td { font-size:0.8em; }
   f.form_pid.value = pid;
   dobstyle = (dob == '' || dob.substr(5, 10) == '00-00') ? '' : 'none';
   document.getElementById('dob_row').style.display = dobstyle;
+
+  //***IBH Added function defined in /_ibh/interface/add_edit_event.php
+  window.patient_selected();
+
  }
 
  // This invokes the find-patient popup.
@@ -1057,7 +1098,21 @@ td { font-size:0.8em; }
       isdisabled = false;
       mycolor = '#000000';
       myvisibility = 'visible';
+
+   //***IBH Added 1047-53
+   // Check to see whether checked-in status is there
+  	 window.repeat_status = true;
+  	 if (window.appt_status == "@" && window.is_new) {
+	  	 alert("For repeating appointments, you must save once before checking in.");
+	  	 var pulldown = document.getElementById("form_apptstatus");
+	  	 pulldown.selectedIndex = 0;
   }
+
+  } else {
+	  window.repeat_status = false;
+  }
+
+
   f.form_repeat_type.disabled = isdisabled;
   f.form_repeat_freq.disabled = isdisabled;
   f.form_enddate.disabled = isdisabled;
@@ -1190,9 +1245,9 @@ td { font-size:0.8em; }
 
 </head>
 
-<body class="body_top main-calendar-add_edit_event" onunload='imclosing()'>
-
-<form method='post' name='theform' id='theform' action='add_edit_event.php?eid=<?php echo attr($eid) ?>' />
+<body class="body_top" onunload='imclosing()' >
+<?php  //***IBH modified ?>
+<form method='post' name='theform' id='theform' action='add_edit_event.php?eid=<?php echo attr($eid) ?>' onsubmit="return copayValidate()"/><?php //***IBH Modified ?>
 <!-- ViSolve : Requirement - Redirect to Create New Patient Page -->
 <input type='hidden' size='2' name='resname' value='empty' />
 <?php
@@ -1204,7 +1259,7 @@ echo '
 			top.restoreSession();
 			opener.document.location="../../new/new.php";
 			// Close the window
-			window.close();
+			// window.close();  //***IBH modified
 </script>';
 }
 $classprov='current';
@@ -1253,7 +1308,8 @@ $classpati='';
 		</ul>
 </th></tr>
 <tr><td colspan='10'>
-<table border='0' width='100%' bgcolor='#DDDDDD'>
+<table border='0' width='100%' bgcolor='#DDDDDD' class="aee-table"><?php //***IBH Modified ?>
+
     <tr>
         <td width='1%' nowrap>
             <b><?php echo xlt('Category'); ?>:</b>
@@ -1312,7 +1368,7 @@ $classpati='';
   <td nowrap>
    <input type='text' size='10' name='form_title' value='<?php echo attr($row['pc_title']); ?>'
     style='width:100%'
-    title='<?php echo xla('Event title'); ?>' />
+    title='<?php echo xla('Event title'); ?>' readonly/> <?php //***IBH Modified 1269, 1277 added 1279-88, added 1296 ?>
   </td>
   <td nowrap>&nbsp;
 
@@ -1322,6 +1378,18 @@ $classpati='';
   <td nowrap id='tdallday5'>
    <input type='text' size='4' name='form_duration' value='<?php echo attr($thisduration) ?>' title='<?php echo xla('Event duration in minutes'); ?>' />
     <?php echo xlt('minutes'); ?>
+      <?php //***IBH Added?>
+      <a href="#" title="
+  Units:
+  15 mins - 1 Unit
+  30 mins = 2 Units
+  45 mins = 3 Units
+  60 mins = 4 Units
+  75 mins =  5 Units
+  90 mins =  6 Units
+  105 mins =  7 Units
+  120 mins =  8 Units">/Units</a>
+      <?php //***IBH Added End ?>
   </td>
  </tr>
 
@@ -1329,6 +1397,7 @@ $classpati='';
       <td nowrap><b><?php echo xlt('Facility'); ?>:</b></td>
       <td>
       <select name="facility" id="facility" >
+	      <option value=''>Choose...</option> <?php //***IBH Added?>
       <?php
 
       // ===========================
@@ -1383,7 +1452,7 @@ $classpati='';
   </td>
   <td nowrap>
    <input type='text' size='10' name='form_patient' id="form_patient" style='width:100%;cursor:pointer;cursor:hand' placeholder='<?php echo xla('Click to select');?>' value='<?php echo is_null($patientname) ? '' : attr($patientname); ?>' onclick='sel_patient()' title='<?php echo xla('Click to select patient'); ?>' readonly />
-   <input type='hidden' name='form_pid' value='<?php echo attr($patientid) ?>' />
+      <input type='hidden' name='form_pid' id='patient_id' value='<?php echo attr($patientid) ?>' /> <?php  //***IBH added id  ?>
   </td>
   <td colspan='3' nowrap style='font-size:8pt'>
    &nbsp;
@@ -1611,6 +1680,7 @@ if  ($GLOBALS['select_multi_providers']) {
    <span id='title_prefcat' style='display:none'><b><?php echo xlt('Pref Cat'); ?>:</b></span>
   </td>
   <td nowrap>
+<div id='appt_warning_container'></div><?php //***IBH added  ... this probably populates stuff we haven't seen   ?>
 
 <?php
 generate_form_field(array('data_type'=>1,'field_id'=>'apptstatus','list_id'=>'apptstat','empty_title'=>'SKIP'), $row['pc_apptstatus']);
@@ -1667,7 +1737,8 @@ if ($repeatexdate != "") {
    <b><?php echo xlt('Comments'); ?>:</b>
   </td>
   <td colspan='4' nowrap>
-   <input type='text' size='40' name='form_comments' style='width:100%' value='<?php echo attr($hometext); ?>' title='<?php echo xla('Optional information about this event');?>' />
+  <!-- prior auth added by Sherwin 4/28/16 -->
+   <input type='text' size='40' name='form_comments' style='width:100%' value='<?php echo attr($hometext); ?>' title='<?php echo xla('Additional Information for calendar and show patient copay & balance');?>' />
   </td>
  </tr>
 
@@ -1694,6 +1765,21 @@ if ($repeatexdate != "") {
 
 </table></td></tr>
 <tr class='text'><td colspan='10' class="buttonbar">
+        <?php //***IBH added 1612-1626, 1628-36 ?>
+<div class="icopay">
+<?php
+
+	$sql = (!empty($patientid))? "SELECT copay FROM `insurance_data` WHERE pid =" . $patientid : false ;
+	$res = (!empty($patientid)) ?  sqlQuery($sql) : false ;
+
+    print (!empty($res['copay'])) ? "<p>Collect Copay: ".$res['copay']."</p>" : "<p>No copay required</p>";
+
+    print  "<p>Patient Balance ". get_patient_balance($pid, $with_insurance=false)."</p>";
+?>
+	<div class='prior-auth-reqs'></div>
+	<div class='prior-auths'></div>
+	<div class="pa-warning">Prior Auth for that billing code that is out of units.</div>
+</div>
 <p>
 <input type='button' name='form_save' id='form_save' value='<?php echo xla('Save');?>' />
 &nbsp;
@@ -1714,6 +1800,7 @@ if ($repeatexdate != "") {
 </center>
 </form>
 
+<div id="checkins"></div> <?php //***IBH added ?>
 <div id="recurr_popup" style="visibility: hidden; position: absolute; top: 50px; left: 50px; width: 400px; border: 3px outset yellow; background-color: yellow; padding: 5px;">
 <?php echo xlt('Apply the changes to the Current event only, to this and all Future occurrences, or to All occurrences?') ?>
 <br>
@@ -1725,7 +1812,7 @@ if ($repeatexdate != "") {
 <input type="button" name="recurr_cancel" id="recurr_cancel" value="<?php echo xla('Cancel'); ?>">
 </div>
 
-</body>
+<?php //***IBH modified, body ending comes at end of file ?>
 
 <script language='JavaScript'>
 <?php if ($eid) { ?>
@@ -1872,8 +1959,33 @@ function deleteEvent() {
     }
     return false;
 }
-
+//***IBH modified submit form, added facility and form_appstatus
 function SubmitForm() {
+
+
+	if ($("#facility").val() == "") {
+		alert("Please choose a facility.");
+		return false;
+	}
+
+	if ($("#form_apptstatus").val() == "@") {
+		var patient = $("input[name=form_patient]").val();
+		var date = $("#form_date").val();
+		var hr = $("input[name=form_hour]").val();
+		var mi = $("input[name=form_minute]").val();
+		var ap = $("select[name=form_ampm] option:selected").val();
+		var min = $("input[name=form_duration]").val();
+		ap = ap == 1 ? "am": "pm";
+		var dstr = date + " at " + hr + ":" + mi + " " + ap + " (" + min + " min.)";
+
+		var appt_title = $("input[name=form_title]").val();
+		var conf = confirm("You are about to check in: \n\n" + patient + "\nfor: " + appt_title + "\ndate: " + dstr + "\n\nAre you sure you want to do this? It will not be editable after this.");
+
+		if (!conf) return false;
+
+	}
+
+
  var f = document.forms[0];
  <?php if (!($GLOBALS['select_multi_providers'])) { // multi providers appt is not supported by check slot avail window, so skip ?>
   if (f.form_action.value != 'delete') {
@@ -1893,7 +2005,47 @@ function SubmitForm() {
 
   return true;
 }
+<?php //***IBH added  1814 - 1845?>
+// Commercial Northwest Property Management
+
+/**********Trying to involk the prior auth alert.*********/
+
+  function showcopay()
+  {
+	var apa = document.getElementById("patient_id").value;
+
+	 $("#copay").load('show_copay.php?pid='+apa);
+	// alert("Clicked " + apa);
+
+  }
+
+ function statusChange() {
+
+	var pulldown = document.getElementById("form_apptstatus");
+    var x = pulldown.value;
+    window.appt_status = x;
+
+    if (x == "@") {
+
+	    if (window.repeat_status == true && window.is_new) {
+		    alert("For repeating appointments, you must save once before checking in.");
+		    pulldown.selectedIndex = 0;
+	    }
+    }
+
+}
+
+ /***************************************************/
+
 
 </script>
 
+<?php
+	// adds functionality to check if there's an existing prior auth  //***IBH added
+
+
+	include($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/interface/add_edit_event.php");
+?>
+
+</body>
 </html>

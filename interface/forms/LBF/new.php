@@ -762,6 +762,10 @@ if (!empty($_POST['bn_save']) || !empty($_POST['bn_save_print']) || !empty($_POS
                     );
                     $form_issue_id = empty($firow['issue_id']) ? 0 : intval($firow['issue_id']);
                     $form_provider_id = empty($firow['provider_id']) ? 0 : intval($firow['provider_id']);
+                    if ( $form_provider_id == 0 ) {
+                        // Use the current logged in user as default
+                        $form_provider_id = $_SESSION['authUserID'];
+                    }
 
                     // Provider selector.
                     echo "&nbsp;&nbsp;";

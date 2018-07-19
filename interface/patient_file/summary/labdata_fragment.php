@@ -62,7 +62,7 @@ if ( !$result ) //If there are no lab data recorded
   <?php 
   	echo xlt('Procedure') . ": " . text($result['theprocedure']) . " (" . text($result['thedate']) . ")<br>";
   	echo xlt('Encounter') . ": "; ?>
-  	<a href="#" onclick="parent.left_nav.loadFrame2('ens1', 'RBot', 'patient_file/encounter/encounter_top.php?set_encounter=<?php echo attr($result['theencounter']) ?>')">
+  	<a href="#" onclick="parent.left_nav.loadFrame('ens1', 'RBot', 'patient_file/encounter/encounter_top.php?set_encounter=<?php echo attr($result['theencounter']) ?>')">
 	<?php echo  text($result['theencounter']) . "</a>"; ?>
   <br />
   </span><span class='text'>

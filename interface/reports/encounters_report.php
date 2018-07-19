@@ -171,6 +171,26 @@ $res = sqlStatement($query, $sqlBindArray);
 
     <script LANGUAGE="JavaScript">
         $(document).ready(function() {
+
+            $('.goto-encounter').click( function( e ) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var pid = $(this).attr('data-pid');
+                var encounter = $(this).attr('data-encounter');
+
+                $.post('<?php echo $GLOBALS['webroot']; ?>/interface/tags_filters/index.php?action=patients!setpid', {pid: pid, encounter: encounter}, function (response) {
+                        // When call returns set the UI patient in the top navigation using code similar to line 397
+                        // of /interface/patient_file/demographics.php
+                        parent.left_nav.setPatient(response['patientname'], response['pid'], response['pubpid'], response['frname'], response['str_dob'], response['encounter']);
+                        var data = { id : function() { return encounter } };
+                        top.chooseEncounterEvent( data );
+                    },
+                    'json');
+
+
+            });
+
             oeFixedHeaderSetup(document.getElementById('mymaintable'));
             var win = top.printLogSetup ? top : opener.top;
             win.printLogSetup(document.getElementById('printbutton'));
@@ -475,8 +495,9 @@ if ($res) {
         <?php echo text($row['reason']); ?>&nbsp;
   </td>
    <td>
-        <?php echo text($row['encounter']); ?>&nbsp;
-  </td>
+       <a href='javascript;' data-pid='<?php echo text($row['pid']); ?>' data-encounter='<?php echo $row['encounter']; ?>' class='goto-encounter'><?php echo text($row['encounter']); ?></a>&nbsp;
+
+   </td>
   <td>
         <?php echo $encnames; //since this variable contains html, have already html escaped it above ?>&nbsp;
   </td>

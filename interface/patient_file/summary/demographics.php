@@ -34,6 +34,11 @@ if (isset($_GET['set_pid'])) {
     setpid($_GET['set_pid']);
 }
 
+$set_encounter = false;
+if ( isset($_GET['set_encounter']) ) {
+    $set_encounter = true;
+}
+
   $active_reminders = false;
   $all_allergy_alerts = false;
 if ($GLOBALS['enable_cdr']) {
@@ -169,6 +174,17 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
 
 <script type="text/javascript" language="JavaScript">
 
+<?php if ( $set_encounter === true ) { ?>
+
+    $.post('<?php echo $GLOBALS['webroot']; ?>/interface/tags_filters/index.php?action=patients!setpid', {pid: <?php echo $pid; ?>, encounter: <?php echo $encounter; ?>}, function (response) {
+        // When call returns set the UI patient in the top navigation using code similar to line 397
+        // of /interface/patient_file/demographics.php
+        var data = { id : function() { return <?php echo $encounter; ?> } };
+        top.chooseEncounterEvent( data );
+    },
+    'json');
+
+<?php } ?>
  var mypcc = '<?php echo htmlspecialchars($GLOBALS['phone_country_code'], ENT_QUOTES); ?>';
  //////////
  function oldEvt(apptdate, eventid) {

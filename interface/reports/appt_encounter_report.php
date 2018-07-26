@@ -255,15 +255,8 @@ if ($_POST['form_refresh']) {
                 var pid = $(this).attr('data-pid');
                 var encounter = $(this).attr('data-encounter');
 
-                $.post('<?php echo $GLOBALS['webroot']; ?>/interface/tags_filters/index.php?action=patients!setpid', {pid: pid, encounter: encounter}, function (response) {
-                        // When call returns set the UI patient in the top navigation using code similar to line 397
-                        // of /interface/patient_file/demographics.php
-                        parent.left_nav.setPatient(response['patientname'], response['pid'], response['pubpid'], response['frname'], response['str_dob'], response['encounter']);
-                        var data = { id : function() { return encounter } };
-                        top.chooseEncounterEvent( data );
-                    },
-                    'json');
-
+                top.restoreSession();
+                top.RTop.location = "../patient_file/summary/demographics.php?set_pid=" + pid + "&set_encounter=" + encounter;
 
             });
 

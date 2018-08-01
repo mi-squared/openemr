@@ -256,7 +256,7 @@ if ($_POST['form_refresh']) {
                 var encounter = $(this).attr('data-encounter');
 
                 top.restoreSession();
-                top.RTop.location = "../patient_file/summary/demographics.php?set_pid=" + pid + "&set_encounter=" + encounter;
+                top.RTop.location = "<?php echo $GLOBALS['webroot']; ?>/interface/patient_file/summary/demographics.php?set_pid=" + pid + "&set_encounter=" + encounter;
 
             });
 

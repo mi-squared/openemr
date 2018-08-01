@@ -37,6 +37,7 @@ if (isset($_GET['set_pid'])) {
 $set_encounter = false;
 if ( isset($_GET['set_encounter']) ) {
     $set_encounter = true;
+    $encounter = $_GET['set_encounter'];
 }
 
   $active_reminders = false;

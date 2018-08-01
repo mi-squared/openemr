@@ -467,9 +467,12 @@ if ($res) {
         "FROM billing WHERE " .
         "pid = ? AND encounter = ? AND activity = 1";
         $bres = sqlStatement($query, array($patient_id, $encounter));
+
         //
+        $fee_sheet = false;
         while ($brow = sqlFetchArray($bres)) {
 
+            $fee_sheet = true;
             $code_type = $brow['code_type'];
             if ($code_types[$code_type]['fee'] && !$brow['billed']) {
                 $billed = "";
@@ -529,6 +532,10 @@ if ($res) {
                 }
             } // End IPPF stuff
         } // end while
+
+        if ( $fee_sheet == false ) {
+            postError(xl('No Fee Sheet Created'));
+        }
 
         $row_copays -= getPatientCopay($patient_id, $encounter);
 

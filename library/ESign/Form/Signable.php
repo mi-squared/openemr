@@ -136,6 +136,18 @@ class Form_Signable extends DbRow_Signable implements SignableIF
         $rs = sqlStatement($sql, array( $this->_formId ));
         if (sqlNumRows($rs) == 1) { // maintain legacy hash
             $frs = sqlFetchArray($rs);
+
+            if ( $tbl == 'form_encounter' ) {
+
+                // Exclude billing stuff that could be updated after lock
+                if ( $frs['last_level_billed'] ) {
+                    $frs[ 'last_level_billed' ] = 0;
+                }
+
+                if ( $frs['last_level_closed'] ) {
+                    $frs[ 'last_level_closed' ] = 0;
+                }
+            }
         } else {
             $frs = array();
             while ($fr = sqlFetchArray($rs)) {

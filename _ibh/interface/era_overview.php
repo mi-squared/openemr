@@ -6,7 +6,7 @@
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/globals.php");
 
 // IBH_DEV_CHG
-require_once("../../_ibh/ibh_functions.php");
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_era.php");
 // ini_set("display_errors", 1);
 
@@ -219,15 +219,15 @@ if (isset($_GET['post_payment'])) {
 ?><html>
 <title></title>
 <head>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 
-<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
 
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
 
-<script src="<?= $GLOBALS['webroot'] ?>/_ibh/js/pikaday.js"></script>
-<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/js/pikaday.css" type="text/css">
+<script src="/openemr/_ibh/js/pikaday.js"></script>
+<link rel="stylesheet" href="/openemr/_ibh/js/pikaday.css" type="text/css">
 
 <style type="text/css">
 		.odd {

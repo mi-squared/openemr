@@ -96,11 +96,11 @@
 	?><html>
 	
 <head>
-	<link rel="stylesheet" type="text/css" href="<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar.css">
-	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
+	<link rel="stylesheet" type="text/css" href="/openemr/library/dynarch_calendar.css">
+	<script type="text/javascript" src="/openemr/library/dynarch_calendar.js"></script>
 	
-	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
-<script src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
+	<script type="text/javascript" src="/openemr/library/dynarch_calendar_setup.js"></script>
+<script src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
 
 <style type="text/css">

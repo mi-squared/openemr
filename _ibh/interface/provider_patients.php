@@ -18,13 +18,13 @@ $is_supervisor = ibh_user_is_supervisor();
 	</style>
 
 
-	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/topdialog.js?t=<?=time()?>"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dialog.js"></script>
+	<script type="text/javascript" src="/openemr/library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="/openemr/library/dialog.js"></script>
 
 
-	<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
+	<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 	
-	<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/tickler.css" type="text/css"/>
+	<link rel="stylesheet" href="/openemr/_ibh/css/tickler.css" type="text/css"/>
 	
 	</head>
 	
@@ -76,7 +76,7 @@ $is_supervisor = ibh_user_is_supervisor();
 			provider_id = prov_id;
 			
 			$.ajax({
-				url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/get_provider_patients.php",
+				url:"/openemr/_ibh/ajax/get_provider_patients.php",
 				data:{provider_id:prov_id},
 				success: function(json) {
 					
@@ -119,7 +119,7 @@ $is_supervisor = ibh_user_is_supervisor();
 			// alert("provider" + provider_id + " patient:" + pid);
 			
 			$.ajax({
-				url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/edit_provider_patients.php",
+				url:"/openemr/_ibh/ajax/edit_provider_patients.php",
 				data:{action:"remove", provider_id:provider_id, patient_id:pid},
 				success: function(json) {
 				
@@ -146,7 +146,7 @@ $is_supervisor = ibh_user_is_supervisor();
 		window.setpatient = function(pid) {
 			
 			$.ajax({
-						url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/get_patient_data.php",
+						url:"/openemr/_ibh/ajax/get_patient_data.php",
 						data:{pid:pid},
 						success: function(patient_data) {
 	
@@ -154,7 +154,7 @@ $is_supervisor = ibh_user_is_supervisor();
 							$(".new_patient_row").text(patient_data.patient.fname + " " + patient_data.patient.lname + " added.");
 							
 							$.ajax({
-								url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/edit_provider_patients.php",
+								url:"/openemr/_ibh/ajax/edit_provider_patients.php",
 								data:{action:"add", provider_id:provider_id, patient_id:pid},
 								success: function(json) {
 								

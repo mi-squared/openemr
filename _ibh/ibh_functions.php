@@ -34,7 +34,8 @@ function ibh_getEncounterCodeInfo($code) {
 			"CBRS Skill Training"=>array("mod"=> 0.25),
 			"T1017 - T1017 - Case Management"=>array("mod"=> 0.25),
 			"Case Management"=>array("mod"=> 0.25),
-			"Telephonic Case Management"=>array("mod"=>0.25)
+			"Telephonic Case Management"=>array("mod"=>0.25),
+            "Assessment – Behavioral Health" =>array("mod"=>0.25)
 		);
 		
 		if (!$code) return $codes;
@@ -243,7 +244,7 @@ function ibh_get_user_names_by_ids($users_string) {
 	$ret = array();
 	
 	foreach ($users as $u) {
-		$sql = "SELECT fname, lname FROM users WHERE id='$u'";
+		$sql = "SELECT fname, lname FROM users WHERE id='$u' and active = 1"; //The active = 1 might have to be removed
 		$res = sqlStatement($sql);
 		$arr = sqlFetchArray($res);
 		$ret[] = $arr['fname'] . " " . $arr['lname'];
@@ -502,11 +503,11 @@ function ibh_alert_prior_auth($pa_id, $type="days") {
 	
 	if ($type == "units") {
 		$subject = "Prior Auth #" . $auth['prior_auth_number'] . ": " . $auth['units_remaining'] . " units left!";
-		$body = "Prior auth warning (UNITS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['units_remaining'] . " units remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='" . $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
+		$body = "Prior auth warning (UNITS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['units_remaining'] . " units remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='/openemr/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
 		
 	} else {
 		$subject = "Prior Auth #" . $auth['prior_auth_number'] . ": " . $auth['days_remaining'] . " days left!";
-		$body = "Prior auth warning (DAYS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['days_remaining'] . " days remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='" . $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
+		$body = "Prior auth warning (DAYS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['days_remaining'] . " days remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='/openemr/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
 		
 	}
 
@@ -720,7 +721,7 @@ function ibh_get_era_warning_code($c) {
 
 function ibh_get_user_by_id($id) {
 		
-	$stmt = sqlStatement("SELECT * FROM users WHERE id=?", array($id));
+	$stmt = sqlStatement("SELECT * FROM users WHERE id=? and active = 1", array($id));
 	$arr = sqlFetchArray($stmt);
 	return $arr;
 	
@@ -851,7 +852,7 @@ function ibh_get_encounter_info($encounter_id) {
 	
 	$arr2 = array();
 	
-	$sql = "SELECT * FROM form_encounter fe, users u WHERE fe.encounter=? AND fe.provider_id=u.id LIMIT 1";
+	$sql = "SELECT * FROM form_encounter fe, users u WHERE fe.encounter=? AND fe.provider_id=u.id  LIMIT 1";
 
 	$data = array($encounter_id);
 	
@@ -899,7 +900,7 @@ function ibh_get_encounter_times($encounter) {
 function ibh_user_is_supervisor() {
 	$username = $_SESSION['authUser'];
 	
-	$stmt = sqlStatement("SELECT info FROM users WHERE username='$username'");
+	$stmt = sqlStatement("SELECT info FROM users WHERE username='$username' and active = 1");
 	$arr = sqlFetchArray($stmt);
 	if ( $arr['info'] == "Supervisor" || $arr['info'] == "Supervisor:") return true;
 	
@@ -1352,7 +1353,15 @@ function esign_interactive_complexity($encounter, $pid){
 
     function ibh_esign_checkout($pid, $modifier, $encounter){
 			  	// $mssg .= "(" . $pid . "," . $modifier . ", " . $encounter . ")";
-			  			  
+        if(is_array($modifier)){
+
+            $modifier = implode(':', $modifier);
+
+        }
+
+        if($modifier == '1'){
+            $modifier = "";
+        }
 				function getPrice($c){
 				  
 					$sql = "SELECT a.id, b.pr_id, b.pr_price FROM codes AS a, prices AS b WHERE a.code LIKE '$c' AND b.pr_id = a.id";
@@ -1550,7 +1559,7 @@ function ibh_form_link($long, $encounter=0, $pid=0) {
 	}
 	
 	if ($encounter && $pid) {
-		$link = "<a href='" . $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/patient_file/encounter/forms.php?set_encounter=" . $encounter . "&pid=" . $pid . "' target='_blank' class='form-link'>open</a>";
+		$link = "<a href='/openemr/interface/patient_file/encounter/forms.php?set_encounter=" . $encounter . "&pid=" . $pid . "' target='_blank' class='form-link'>open</a>";
 	}
 	
 	return $short . $link;

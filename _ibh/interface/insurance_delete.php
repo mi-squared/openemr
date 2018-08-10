@@ -4,10 +4,10 @@
 	
 	$authUsers = array("mckenzieb", "admin", "tami", "TamiJ");
 	
-require_once($GLOBALS['webroot'] . "/interface/globals.php");
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/globals.php");
 
 // IBH_DEV_CHG
-require_once($GLOBALS['webroot'] . "/_ibh/ibh_functions.php");
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 
 function ibh_get_insurance_name($id) {
 	$cres = sqlStatement("SELECT name FROM insurance_companies WHERE id='$id'");
@@ -17,12 +17,12 @@ function ibh_get_insurance_name($id) {
 ?><html>
 <title></title>
 <head>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
 
-<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
+<link rel="stylesheet" href="/openemr/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="/openemr/_ibh/css/encounter.css" type="text/css">
 
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
 
 
 <style>

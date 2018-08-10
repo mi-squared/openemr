@@ -148,18 +148,18 @@ function get_plan_row($patient) {
 <title></title>
 <head>
 
-<link rel="stylesheet" type="text/css" href="<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar.css">
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/topdialog.js?t=<?=time()?>"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dialog.js"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/textformat.js"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
+<link rel="stylesheet" type="text/css" href="/openemr/library/dynarch_calendar.css">
+<script type="text/javascript" src="/openemr/library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="/openemr/library/dialog.js"></script>
+<script type="text/javascript" src="/openemr/library/textformat.js"></script>
+<script type="text/javascript" src="/openemr/library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/moment.js"></script>
-<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery.tablesort.js"></script>
+<script type="text/javascript" src="/openemr/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/moment.js"></script>
+<script type="text/javascript" src="/openemr/_ibh/js/jquery.tablesort.js"></script>
 
-<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/tickler.css" type="text/css">
+<link rel="stylesheet" href="/openemr/_ibh/css/tickler.css" type="text/css">
 
 <?php if ($is_supervisor != 1) { ?>
 <style type="text/css">
@@ -370,7 +370,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 		var column_id = cell_info[2];
 		
 		$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_complete_date.php",
+					url:"/openemr/_ibh/ajax/tickler_set_complete_date.php",
 					data:{form_id:form_id, tickler_id:tickler_id, target:column_id, clear:0},
 					success: function(reply) {
 					
@@ -409,7 +409,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			$bt.toggleClass("signed unsigned");
 
 			$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_signed.php",
+					url:"/openemr/_ibh/ajax/tickler_set_signed.php",
 					data:{phase:phase, tickler_id:tickler_id, signed:new_state},
 					success: function(reply) {
 					
@@ -434,7 +434,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 	function getEncounterPulldown(pid, $el) {
 		
 		$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_encounter_pulldown.php",
+					url:"/openemr/_ibh/ajax/tickler_encounter_pulldown.php",
 					data:{pid:pid},
 					success: function(json) {
 						if (!json.html) {
@@ -485,7 +485,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			var tickler_id = row_id.split("_")[2];	
 			
 			$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_row.php",
+					url:"/openemr/_ibh/ajax/tickler_set_row.php",
 					data:{action:"clear", clear_id:tickler_id, tx_form_id:tx_id, cda_form_id:cda_id},
 					success: function(json) {
 						console.log("clear??");
@@ -522,7 +522,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			// so far, it has no tickler_id; this wll be sent back in json var as json.tickler_id
 			
 			$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_row.php",
+					url:"/openemr/_ibh/ajax/tickler_set_row.php",
 					data:{action:"set", tx_form_id:tx_id, cda_form_id:cda_id, patient_id:patient_id},
 					success: function(json) {
 						
@@ -551,7 +551,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			
 			
 			$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_row.php",
+					url:"/openemr/_ibh/ajax/tickler_set_row.php",
 					data:{action:"update", tickler_id:tickler_id, tx_form_id:tx_id, cda_form_id:"", patient_id:patient_id},
 					success: function(json) {
 						
@@ -723,7 +723,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 			var tickler_id = row_id.split("_")[2];
 			
 			$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/tickler_set_complete_date.php",
+					url:"/openemr/_ibh/ajax/tickler_set_complete_date.php",
 					data:{clear:1, tickler_id:tickler_id, target:class_info[2]},
 					success: function(reply) {
 						
@@ -756,7 +756,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 
 	function getProviderPulldown(pro_id) {
 		$.ajax({
-			url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/get_provider_pulldown.php",
+			url:"/openemr/_ibh/ajax/get_provider_pulldown.php",
 			data:{provider_id:pro_id},
 			success: function(d) {						
 				
@@ -797,7 +797,7 @@ Create a new row with patient: <?php echo provider_patient_pulldown($access_prov
 		var $patient_td = $active_td; // BOGUS!!
 		
 		$.ajax({
-					url:"<?= $GLOBALS['webroot']?>/_ibh/ajax/get_patient_data.php",
+					url:"/openemr/_ibh/ajax/get_patient_data.php",
 					data:{pid:pid},
 					success: function(patient_data) {
 

@@ -4,9 +4,9 @@
 	
 	
 	header('Content-Type: application/json');
-    require_once("../../interface/globals.php");
-	require_once("../../_ibh/ibh_functions.php");
-
+	
+	require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+	require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/interface/globals.php");
 
 
 	$encounter_id = $_GET['encounter'];
@@ -40,7 +40,7 @@
 	
 						$date_formatted = date("m/d/y", strtotime($lbf['date']));
 	
-						$lbf_links .= '<li><a class="encounter-setter" data-date="' . $date_formatted . '" data-enc="' . $encounter_id . '" href="../../interface/patient_file/encounter/forms.php?supervisor_review=1&pid=' . $pid . '&set_encounter=' . $encounter_id . '" target="RTop">' . $lbf['name'] . '</a></li>';
+						$lbf_links .= '<li><a class="encounter-setter" data-date="' . $date_formatted . '" data-enc="' . $encounter_id . '" href="/openemr/interface/patient_file/encounter/forms.php?supervisor_review=1&pid=' . $pid . '&set_encounter=' . $encounter_id . '" target="RTop">' . $lbf['name'] . '</a></li>';
 						
 					}
 				}

@@ -188,7 +188,7 @@ a:hover {
 .textcolor11 { background-color: #222; }    /* $GLOBALS['style']['TEXTCOLOR11'] */
 .highlightcolor { background-color: #ddd; } /* $GLOBALS['style']['HIGHLIGHTCOLOR'] */
 .bottom_line { background: url('../pic/aquabg.gif') repeat; }    /* $GLOBALS['style']['BOTTOM_BG_LINE'] */
-.logobar { background-color: #99bcf4; height: 110px; }                 /* $GLOBALS['logoBarHeight'] */
+.logobar { background-color: #24262c; height: 110px; }                 /* $GLOBALS['logoBarHeight'] */
 .navbar { height: 22px; }                   /* $GLOBALS['navBarHeight'] */
 .titlebar { height: 20px; }                 /* $GLOBALS['titleBarHeight'] */
 
@@ -617,14 +617,12 @@ font-weight: bold;
  * CSS BUTTONS
 */
 .css_button_small {
-    background: transparent url( '../../images/bg_button_a_small.gif' ) no-repeat scroll top right;
-    color: #444;
-    display: block;
-    float: left;
-    font: bold 9px arial, sans-serif;
-    height: 19px;
+    background: #063f80;
+    color: #ffffff !important;
+    display: inline-block;
+    font-weight: 300;
     margin-right: 3px;
-    padding-right: 10px; /* sliding doors padding */
+    /* sliding doors padding */
     text-decoration: none;
     padding: 2px 7px 2px;
     border: none;
@@ -634,29 +632,32 @@ font-weight: bold;
 }
 
 .css_button_small span {
-    background: transparent url( '../../images/bg_button_span_small.gif' ) no-repeat;
-    display: block;
-    line-height: 20px;
-    padding: 0px 0px 0px 10px;
+    display: inline-block;
 }
 
-.css_button {
-    background: transparent url( '../../images/bg_button_a.gif' ) no-repeat scroll top right;
-    color: #444;
-    display: block;
-    float: left;
-    font: bold 10px arial, sans-serif;
-    height: 24px;
-    margin-right: 3px;
-    padding-right: 10px; /* sliding doors padding */
+.css_button_small:hover {
+    background: #1050b6;
+    box-shadow: 0px 1px 3px #DDD;
+}
+
+.css_button, input[type="button"], input[type="submit"], button{
+    background: #063f80;
+    color: #ffffff !important;
+    display: inline-block;
+    font-weight: 300;
+    margin: 4px;
+    vertical-align: middle;
+    /* sliding doors padding */
     text-decoration: none;
+    padding: 4px 6px 4px;
+    border: none;
+    border-radius: 5px;
+    font-size:0.8em;
+    box-shadow: 2px 1px 4px #88888B;
 }
 
-.css_button span {
-    background: transparent url( '../../images/bg_button_span.gif' ) no-repeat;
-    display: block;
-    line-height: 14px;
-    padding: 5px 0 5px 10px;
+.css_button span, input[type="button"] span, input[type="submit"] span, button span {
+    display: inline-block;
 }
 
 .css_button[href*="deleter"], input[type="button"][href*="deleter"], button[href*="deleter"] {
@@ -943,13 +944,6 @@ font-size:9pt;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dae9ef', endColorstr='#6aa4bf'); /* for IE */
     background: -webkit-gradient(linear, left top, left bottom, from(#dae9ef), to(#6aa4bf)); /* for webkit browsers */
     background: -moz-linear-gradient(top,  #dae9ef,  #6aa4bf); /* for firefox 3.6+ */
-}
-
-#sddm {
-	margin: 0;
-	padding: 0;
-	z-index: 30;
-
 }
 
 #sddm li

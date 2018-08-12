@@ -53,19 +53,19 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 </style>
 
 
-<link rel="stylesheet" type="text/css" href="/openemr/library/dynarch_calendar.css">
-<script type="text/javascript" src="/openemr/library/topdialog.js?t=<?=time()?>"></script>
-<script type="text/javascript" src="/openemr/library/dialog.js"></script>
-<script type="text/javascript" src="/openemr/library/textformat.js"></script>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar.css">
+<script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/topdialog.js?t=<?=time()?>"></script>
+<script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/dialog.js"></script>
+<script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/textformat.js"></script>
+<script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
-<script type="text/javascript" src="/openemr/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
 
 
-<script type="text/javascript" src="/openemr/_ibh/js/jquery_latest.min.js"></script>
+<script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
 
 
-<link rel="stylesheet" href="/openemr/_ibh/css/tickler.css" type="text/css">
+<link rel="stylesheet" href="<?=  $GLOBALS['webroot'] ?>/_ibh/css/tickler.css" type="text/css">
 
 
 </head>

@@ -40,7 +40,7 @@
 	
 						$date_formatted = date("m/d/y", strtotime($lbf['date']));
 	
-						$lbf_links .= '<li><a class="encounter-setter" data-date="' . $date_formatted . '" data-enc="' . $encounter_id . '" href="/openemr/interface/patient_file/encounter/forms.php?supervisor_review=1&pid=' . $pid . '&set_encounter=' . $encounter_id . '" target="RTop">' . $lbf['name'] . '</a></li>';
+						$lbf_links .= '<li><a class="encounter-setter" data-date="' . $date_formatted . '" data-enc="' . $encounter_id . '" href=" '.$GLOBALS['webroot'] .'/interface/patient_file/encounter/forms.php?supervisor_review=1&pid=' . $pid . '&set_encounter=' . $encounter_id . '" target="RTop">' . $lbf['name'] . '</a></li>';
 						
 					}
 				}

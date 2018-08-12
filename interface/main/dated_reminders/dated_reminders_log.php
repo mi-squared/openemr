@@ -117,8 +117,8 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
     <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css"> 
     <script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script>
     <script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/jquery-calendar.js"></script>
-    <!-- <script type="text/javascript" src="/openemr/library/js/jquery.grouprows.js"></script>
-    <script type="text/javascript" src="/openemr/library/js/grouprows.js"></script> -->
+    <!-- <script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/js/jquery.grouprows.js"></script>
+    <script type="text/javascript" src="<?=  $GLOBALS['webroot'] ?>/library/js/grouprows.js"></script> -->
     <script language="JavaScript">   
       $(document).ready(function (){  
 

@@ -135,7 +135,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 	
 	function getProviderPulldown(pro_id) {
 		$.ajax({
-					url:"/openemr/_ibh/ajax/get_provider_pulldown.php",
+					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_provider_pulldown.php",
 					data:{provider_id:pro_id},
 					success: function(d) {
 						console.log("pulldown:", d);
@@ -151,7 +151,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 	function setpatient(pid) {
 		
 		$.ajax({
-					url:"/openemr/_ibh/ajax/get_patient_data.php",
+					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_patient_data.php",
 					data:{pid:pid},
 					success: function(patient_data) {
 
@@ -170,7 +170,7 @@ require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 	
 	function sel_patient() {
 		
-		 window.open("/openemr/interface/main/calendar/find_patient_popup.php", "patient-chooser", "resizable=1,scrollbars=1,location=0,toolbar=0" + 
+		 window.open("/<?= $GLOBALS['webroot'] ?>/interface/main/calendar/find_patient_popup.php", "patient-chooser", "resizable=1,scrollbars=1,location=0,toolbar=0" +
 	",width=450,height=450,left=150,top=150");
 	
  	}

@@ -66,7 +66,7 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			if (pid) {
 				
 				$.ajax({
-					url:"/openemr/_ibh/ajax/get_patient_checkins.php",
+					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_patient_checkins.php",
 					data:{pid:pid},
 					success: function(data) {
 						
@@ -122,7 +122,7 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			var cat_code = "";
 				
 			$.ajax({
-					url:"/openemr/_ibh/ajax/get_patient_pa_exceptions.php",
+					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_patient_pa_exceptions.php",
 					data:{pid:pid},
 					success: function(data) {
 
@@ -169,7 +169,7 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			if (pid) {
 				
 				$.ajax({
-					url:"/openemr/_ibh/ajax/get_patient_prior_auths.php",
+					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_patient_prior_auths.php",
 					data:{cat:cat, pid:pid},
 					success: function(data) {
 						// console.log("prior auths", data);

@@ -148,10 +148,10 @@
 		
 		
 		<br>
-		<input type='text' size='10' name='start_date' id='start_date' value='<?=substr($start_date,0,10)?>'/> <img src='/openemr/interface/pic/show_calendar.gif' width='24' height='22' id='img_start_date'>
+		<input type='text' size='10' name='start_date' id='start_date' value='<?=substr($start_date,0,10)?>'/> <img src='<?= $GLOBALS['webroot'] ?>/interface/pic/show_calendar.gif' width='24' height='22' id='img_start_date'>
 		<br>
 		
-		<input type='text' size='10' name='end_date' id='end_date' value='<?=substr($end_date,0,10)?>'/> <img src='/openemr/interface/pic/show_calendar.gif' width='24' height='22' id='img_end_date'>
+		<input type='text' size='10' name='end_date' id='end_date' value='<?=substr($end_date,0,10)?>'/> <img src='<?= $GLOBALS['webroot'] ?>/interface/pic/show_calendar.gif' width='24' height='22' id='img_end_date'>
 		
 		
 		

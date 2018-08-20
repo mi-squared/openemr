@@ -96,7 +96,7 @@ if (isset($_POST['supervisor-comments'])) {
 
     $slash_date = $einfo['slash_date'];
 
-    $encounter_link = "<a class='encounter-setter' data-date='" . $slash_date . "' data-enc='" . $encounter . "' href='/openemr/interface/patient_file/encounter/forms.php?pid=" . $einfo['pid'] . "&set_encounter=" . $encounter . "' target='RTop'>Click here to edit the LBF for this encounter.</a>";
+    $encounter_link = "<a class='encounter-setter' data-date='" . $slash_date . "' data-enc='" . $encounter . "' href='".$GLOBALS['webroot']."/interface/patient_file/encounter/forms.php?pid=" . $einfo['pid'] . "&set_encounter=" . $encounter . "' target='RTop'>Click here to edit the LBF for this encounter.</a>";
 
     $encounter_message = $date . " (" . $supervisor . " to " . $uname . ")<br>Encounter: " . $encounter . "<br>Comments: " . $comments . "<br>";
 

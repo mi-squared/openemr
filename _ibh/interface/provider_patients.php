@@ -76,7 +76,7 @@ $is_supervisor = ibh_user_is_supervisor();
 			provider_id = prov_id;
 			
 			$.ajax({
-				url:"/openemr/_ibh/ajax/get_provider_patients.php",
+				url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_provider_patients.php",
 				data:{provider_id:prov_id},
 				success: function(json) {
 					
@@ -119,7 +119,7 @@ $is_supervisor = ibh_user_is_supervisor();
 			// alert("provider" + provider_id + " patient:" + pid);
 			
 			$.ajax({
-				url:"/openemr/_ibh/ajax/edit_provider_patients.php",
+				url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/edit_provider_patients.php",
 				data:{action:"remove", provider_id:provider_id, patient_id:pid},
 				success: function(json) {
 				
@@ -146,7 +146,7 @@ $is_supervisor = ibh_user_is_supervisor();
 		window.setpatient = function(pid) {
 			
 			$.ajax({
-						url:"/openemr/_ibh/ajax/get_patient_data.php",
+						url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_patient_data.php",
 						data:{pid:pid},
 						success: function(patient_data) {
 	
@@ -154,7 +154,7 @@ $is_supervisor = ibh_user_is_supervisor();
 							$(".new_patient_row").text(patient_data.patient.fname + " " + patient_data.patient.lname + " added.");
 							
 							$.ajax({
-								url:"/openemr/_ibh/ajax/edit_provider_patients.php",
+								url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/edit_provider_patients.php",
 								data:{action:"add", provider_id:provider_id, patient_id:pid},
 								success: function(json) {
 								
@@ -176,7 +176,7 @@ $is_supervisor = ibh_user_is_supervisor();
 			
 		function sel_patient() {
 			
-			 window.open("/openemr/interface/main/calendar/find_patient_popup.php", "patient-chooser", "resizable=1,scrollbars=1,location=0,toolbar=0" + 
+			 window.open("/<?= $GLOBALS['webroot'] ?>/interface/main/calendar/find_patient_popup.php", "patient-chooser", "resizable=1,scrollbars=1,location=0,toolbar=0" +
 		",width=450,height=450,left=150,top=150");
 		
 	 	}

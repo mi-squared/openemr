@@ -41,13 +41,7 @@ function pass_note($supervisor, $uname, $pid, $date, $encounter){
 	// get encounter info
 	$einfo = ibh_get_encounter_info($encounter);
 	$slash_date = $einfo['slash_date'];
-	
-	// $body = "$nice_date  ($uname to $supervisor) $unam has assigned you as the supervisor of an encounter. Patient notes need to be signed/reviewed. Encounter ID: $encounter<br><a class='encounter-setter' data-date='" . $slash_date . "' data-enc='" . $encounter . "' href='/openemr/interface/patient_file/encounter/forms.php?pid=" . $einfo['pid'] . "&set_encounter=" . $encounter . "' target='RTop'>Click here to view this encounter.</a>";
-	
-    //$sql = "INSERT INTO `pnotes` (`id`, `date`, `body`, `pid`, `user`, `groupname`, `activity`, `authorized`, `title`, `assigned_to`, `deleted`, `message_status`, `encounter`) VALUES ('NULL', '$date', ?, '$pid', '$uname', 'IBH', '1', '1', 'Supervisor Alert', '$supervisor', '0', 'New', $encounter)";
 
-    // sqlStatement($sql, array($body));
-    
     // get supervisor user id
     $sup = sqlStatement("SELECT id FROM users WHERE username='$supervisor'");
     $sup_arr = sqlFetchArray($sup);

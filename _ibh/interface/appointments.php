@@ -218,7 +218,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 							$("#update-status").html("Aye, Captain! Appointment No. " + id + " deleted from the core database!");
 							
 							$.ajax({
-								url:"/openemr/_ibh/ajax/edit_appointment_status.php",
+								url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/edit_appointment_status.php",
 								data:{pc_eid:id, delete:"true"},
 								success: function(data) {
 									console.log("delete data: " , data);
@@ -254,7 +254,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 				$status.text("Updating...");
 			
 				$.ajax({
-					url:"/openemr/_ibh/ajax/edit_appointment_status.php",
+					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/edit_appointment_status.php",
 					data:{pc_eid:id, pc_apptstatus:val},
 					success: function(data) {
 						console.log("response: ", data);

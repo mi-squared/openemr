@@ -186,7 +186,7 @@ if(!is_numeric($msgId)){
 	});
 	
 	$.ajax({
-		url:"/openemr/_ibh/ajax/get_appointment_status.php",
+		url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_appointment_status.php",
 		data:{encounter:encounter_id},
 		success: function(res) {
 			console.log("encounter id in  ajax:", encounter_id, res)
@@ -200,7 +200,7 @@ if(!is_numeric($msgId)){
 	
 	
 	$.ajax({
-		url:"/openemr/_ibh/ajax/get_encounter_billing.php",
+		url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_encounter_billing.php",
 		data:{encounter:encounter_id},
 		success: function(res) {
 			console.log("billing stuff" , res);

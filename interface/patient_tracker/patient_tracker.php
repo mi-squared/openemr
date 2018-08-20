@@ -682,8 +682,15 @@ if (!$_REQUEST['flb_table']) {
                         if (strlen($docname) <= 3) {
                             continue;
                         }
-                        $ptname = $appointment['lname'] . ', ' . $appointment['fname'] . ' ' . $appointment['mname'];
-                        $ptname_short = $appointment['fname'][0] . " " . $appointment['lname'][0];
+
+                        if (strlen(trim($appointment['PrefName'][0])) === 0) {
+                            $ptname_short = $appointment['fname'][0] . " " . $appointment['lname'][0];
+                            $ptname = $appointment['lname'] . ', ' . $appointment['fname'] . ' ' . $appointment['mname'];
+                        } else {
+                            $ptname_short = $appointment['PrefName'][0] . " " . $appointment['lname'][0];
+                            $ptname = $appointment['lname'] . ', ' . $appointment['PrefName'] . ' ' . $appointment['mname'];
+                        }
+
                         $appt_enc = $appointment['encounter'];
                         $appt_eid = (!empty($appointment['eid'])) ? $appointment['eid'] : $appointment['pc_eid'];
                         $appt_pid = (!empty($appointment['pid'])) ? $appointment['pid'] : $appointment['pc_pid'];

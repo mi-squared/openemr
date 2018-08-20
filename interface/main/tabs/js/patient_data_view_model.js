@@ -26,10 +26,11 @@ function encounter_data(id,date,category)
     return this;
 }
 
-function patient_data_view_model(pname,pid,pubpid,str_dob)
+function patient_data_view_model(pname,prefname,pid,pubpid,str_dob)
 {
     var self=this;
     self.pname=ko.observable(pname);
+    self.prefname=ko.observable(prefname);
     self.pid=ko.observable(pid);
     self.pubpid=ko.observable(pubpid);
     self.str_dob=ko.observable(str_dob);

@@ -1095,6 +1095,7 @@ function &postcalendar_userapi_pcQueryEvents($args)
     "concat(u.fname,' ',u.lname) as provider_name, " .
     "concat(pd.lname,', ',pd.fname) as patient_name, " .
     "concat(u2.fname, ' ', u2.lname) as owner_name, " .
+    "pd.PrefName as PrefName, " . //added for Casa
     "DOB as patient_dob, a.pc_facility, pd.pubpid, a.pc_gid, " .
     "tg.group_name, tg.group_type, tg.group_status " .
     "FROM  ( $table AS a ) " .
@@ -1229,7 +1230,7 @@ function &postcalendar_userapi_pcQueryEvents($args)
          $tmp['sharing'],      $tmp['prefcatid'],   $tmp['catcolor'],
          $tmp['catname'],      $tmp['catdesc'],     $tmp['pid'],
          $tmp['apptstatus'],   $tmp['aid'],         $tmp['provider_name'],
-         $tmp['patient_name'], $tmp['owner_name'],  $tmp['patient_dob'],
+         $tmp['patient_name'], $tmp['owner_name'],  $tmp['PrefName'],      $tmp['patient_dob'],
          $tmp['facility'],     $tmp['pubpid'],      $tmp['gid'],
          $tmp['group_name'],   $tmp['group_type'],  $tmp['group_status']) = $result->fields;
 
@@ -1285,6 +1286,7 @@ function &postcalendar_userapi_pcQueryEvents($args)
         $events[$i]['patient_name']= $tmp['patient_name'];
         $events[$i]['provider_name'] = $tmp['provider_name'];
         $events[$i]['owner_name']  = $tmp['owner_name'];
+        $events[$i]['PrefName']    = $tmp['PrefName'];
         $events[$i]['patient_dob'] = $tmp['patient_dob'];
         $events[$i]['patient_age'] = getPatientAge($tmp['patient_dob']);
         $events[$i]['facility']    = getFacility($tmp['facility']);

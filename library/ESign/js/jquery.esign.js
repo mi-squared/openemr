@@ -23,7 +23,7 @@
 
 (function( $ ) {
 	
-	window.encounter_id = "";
+	window.encounter_id = "";//***IBH Added
 	
 	$.fn.esign = function( customSettings, customEvents ) {
 				
@@ -103,10 +103,6 @@
 			
 	        e.preventDefault();
 	        var formData = $('#esign-signature-form').serialize();
-	        
-	        // console.log("so... it was clicked...", formData);
-
-
 	        $.post( 
 	        	settings.formSubmitAction,
 	        	formData,
@@ -124,7 +120,7 @@
 	        	        $("#esign-mask").hide();
 	        	        
 	        	        events.afterFormSuccess( response );
-	        	        
+	        	        //***IBH Added
 	        	        if (window.name == "Forms") {
 		        	        parent.location.reload();
 	        	        }	        	        
@@ -168,6 +164,7 @@
 				// Get a list of all the data-* attributes
 				var params = element.data(); 
 				
+				//***IBH Added
 				// make encounter_id available to the signature panel
 				window.encounter_id = params.encounterid;
 				

@@ -28,17 +28,12 @@ require_once $GLOBALS['srcdir'].'/ESign/Abstract/Controller.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Configuration.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Factory.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Log.php';
-
-
-// IBH_DEV_CHG
-require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
-
-
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");//**IBH added
 
 class Form_Controller extends Abstract_Controller
 {
     /**
-     * msgId added by sherwin 3-11-2016
+     *
      */
     public function esign_form_view()
     {

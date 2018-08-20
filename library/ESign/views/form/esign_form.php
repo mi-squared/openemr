@@ -20,7 +20,7 @@
  * @author  Medical Information Integration, LLC
  * @link    http://www.open-emr.org
  **/
-
+//***IBH add 001 start
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
  
 $string = $_SERVER['HTTP_REFERER'];
@@ -29,11 +29,12 @@ $msgId = substr(strrchr($string, "="), 1);
 if(!is_numeric($msgId)){
 	$msgId = 0;
 }
+//***IBH Add 001 end
 ?>
 
-<!-- IBH_DEV -->
+<?php //***IBH add 002 start ?>
 <link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
-       
+<?php //***IBH add 002 end ?>
 <div id='esign-form-container'>
 	<form id='esign-signature-form' method='post' action='<?php echo attr( $this->form->action ); ?>'>
 		<div class="esign-signature-form-element">
@@ -43,13 +44,15 @@ if(!is_numeric($msgId)){
 			  	<label>Checkout patient</label>
 			  	<div class="esign-options" id="checkout_options">
 				  	<label>Modifiers:</label>
-					 <select name="mod" id="checkout_modifiers">
+					 <select name="mod[]" id="checkout_modifiers" multiple style="width:150px;">
 			         <option value="1"> None Needed </option>
 					 <option value="76"> 76 </option>
 					 <option value="25"> 25 </option>
 					 <option value="59"> 59 </option>
 					 <option value="GT"> GT </option>
 					 <option value="U1"> U1 </option>
+					 <option value="HO"> HO </option>
+					 <option value="HN"> HN </option>
 					 </select>
 			  	</div>
 			  </div>

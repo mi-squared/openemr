@@ -260,9 +260,10 @@ div.section {
 
 <script language="JavaScript">
 
-// Support for beforeunload handler.
-var somethingChanged = false;
-
+<?php //***IBH Added ?>
+window.onbeforeunload = function() { return; };
+window.somethingChanged = false;
+<?php //***IBH Added end ?>
 $(document).ready(function() {
 
   // fancy box
@@ -286,20 +287,21 @@ $(document).ready(function() {
     // add drag and drop functionality to fancybox
     $("#fancy_outer").easydrag();
   });
-
+  <?php //***IBH Added ?>
   // Support for beforeunload handler.
   $('.lbfdata input, .lbfdata select, .lbfdata textarea').change(function() {
-    somethingChanged = true;
+    window.somethingChanged = true;
   });
   window.addEventListener("beforeunload", function (e) {
-    if (somethingChanged && !top.timed_out) {
-      var msg = "<?php echo xls('You have unsaved changes.'); ?>";
+    if (window.somethingChanged && !top.timed_out) {
+      var msg = "<?php echo xls('Click Leave to confirm you are saving the document.'); ?>";
       e.returnValue = msg;     // Gecko, Trident, Chrome 34+
       return msg;              // Gecko, WebKit, Chrome <34
     }
   });
 
 });
+<?php //***IBH Added end ?>
 
 var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
 
@@ -355,7 +357,7 @@ function sel_related(elem, codetype) {
  if (codetype) url += '?codetype=' + codetype;
  dlgopen(url, '_blank', 500, 400);
 }
-
+<?php //***IBH Added ?>
 // Compute the length of a string without leading and trailing spaces.
 function trimlen(s) {
  var i = 0;
@@ -365,11 +367,11 @@ function trimlen(s) {
  if (i > j) return 0;
  return j + 1 - i;
 }
-
+<?php //***IBH Added end ?>
 // Validation logic for form submission.
 function validate(f) {
 <?php generate_layout_validation($formname); ?>
- somethingChanged = false; // turn off "are you sure you want to leave"
+ window.somethingChanged = false; //***IBH Added turn off "are you sure you want to leave"
  top.restoreSession();
  return true;
 }
@@ -526,7 +528,7 @@ function validate(f) {
         echo "<div id='div_" . attr($group_seq) . "' class='section' style='display:" . attr($display_style) . ";'>\n";
       }
       // echo " <table border='0' cellpadding='0' width='100%'>\n";
-      echo " <table border='0' cellspacing='0' cellpadding='0' width='100%' class='lbfdata'>\n";
+      echo " <table border='0' cellspacing='0' cellpadding='0' width='100%' class='lbfdata'>\n"; //***IBH Edited
       $display_style = 'none';
 
       // Initialize historical data array and write date headers.
@@ -665,9 +667,10 @@ if (function_exists($formname . '_additional_buttons')) {
 
 <!-- include support for the list-add selectbox feature -->
 <?php include $GLOBALS['fileroot'] . "/library/options_listadd.inc"; ?>
-
-<script language="JavaScript">
-
+<?php //***IBH Added ?>
+<script language='javascript'>
+window.onbeforeunload = function() { return; };
+<?php //***IBH Added End ?>
 // Array of skip conditions for the checkSkipConditions() function.
 var skipArray = [
 <?php echo $condition_str; ?>

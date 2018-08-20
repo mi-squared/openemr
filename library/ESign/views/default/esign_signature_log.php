@@ -21,8 +21,9 @@
  * @link    http://www.open-emr.org
  **/
 ?>
+<?php //***IBH Added style ?>
 <style type="text/css">
-	/* IBH_DEV keeping css local for now, no dependencies... */
+
 		.esign-name, .esign-date {
 			width:40%;
 			font-size:14px;
@@ -52,16 +53,17 @@
             <div class="esign-log-row">
                 <span class="esign-amendment"><?php echo text( $signature->getAmendment() ); ?></span>
             </div>
-            <?php } 
+            <?php } //***IBH Modified  added $dated_signature 56-60
 	            
 	            $dated_signature = ibh_get_esign_signature($signature->getID());
 	            
             ?>
-            <div class="esign-log-row">
+            <div class="esign-log-row"><?php //***IBH Modified 001 start ?>
 	            <div class="esign-log-element span4 esign-name"><?= $dated_signature ?></div> 
                <!-- <div class="esign-log-element span4"><span><?php echo text( $signature->getFirstName() ); ?></span></div> 
                 <div class="esign-log-element span4"><span><?php echo text( $signature->getLastName() ); ?></span></div> -->
                 <div class="esign-log-element span4 esign-date"><?php echo text( $signature->getDatetime() ); ?></div>
+                <?php //***IBH Modified 001 end ?>
             </div>
 
         </div>

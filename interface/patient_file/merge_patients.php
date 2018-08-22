@@ -34,7 +34,7 @@ use OpenEMR\Core\Header;
 // Set this to true for production use. If false you will get a "dry run" with no updates.
 $PRODUCTION = true;
 
-if (!acl_check('admin', 'super')) {
+if (!acl_check('patients', 'demo')) {   // MODS FOR CASA DE SALUD
     die(xlt('Not authorized'));
 }
 ?>

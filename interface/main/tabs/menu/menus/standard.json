@@ -1972,6 +1972,18 @@
     "requirement": 0
   },
   {
+    "label": "Address Book",
+    "menu_id": "adb0",
+    "target": "msc",
+    "url": "/interface/usergroup/addrbook_list.php",
+    "children": [],
+    "requirement": 0,
+    "acl_req": [
+      "patients",
+      "demo"
+    ]
+  },
+  {
     "label": "Miscellaneous",
     "menu_id": "misimg",
     "children": [
@@ -2067,8 +2079,8 @@
         "children": [],
         "requirement": 0,
         "acl_req": [
-          "admin",
-          "practice"
+          "patients",
+          "demo"
         ]
       },
       {
@@ -2175,6 +2187,18 @@
         "acl_req": [
           "admin",
           "practice"
+        ]
+      },
+      {
+        "label": "Merge Patients",
+        "menu_id": "adm0",
+        "target": "adm",
+        "url": "/interface/patient_file/merge_patients.php",
+        "children": [],
+        "requirement": 0,
+        "acl_req": [
+          "patients",
+          "demo"
         ]
       }
     ],

@@ -15,10 +15,10 @@ class ColumnObjectEntity extends ActiveStatic
         $name = $this->name;
         $value = "";
         if ( $data['object_type'] == 'patient' ) {
-            $row = sqlQuery( "SELECT fname, lname FROM patient_data WHERE pid = ?", $data['object_entity'] );
+            $row = sqlQuery( "SELECT fname, lname FROM patient_data WHERE pid = ?", [$data['object_entity']] );
             $value = $row['fname']." ".$row['lname'];
         } else if ( $data['object_type'] == 'tag' ) {
-            $row = sqlQuery( "SELECT tag_name FROM tf_tags WHERE id = ?", $data['object_entity'] );
+            $row = sqlQuery( "SELECT tag_name FROM tf_tags WHERE id = ?", [$data['object_entity']] );
             $value = $row['tag_name'];
         }
 

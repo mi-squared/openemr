@@ -381,8 +381,9 @@ echo "   <tr><td><div class='view1' style=background-color:".$f['color'].";font-
 [-pc_sort_events var="S_EVENTS" sort="time" order="asc" value=$A_EVENTS-]
 </div> <!-- end bottomLeft -->
 <div id="bigCal">
+
+<!-- used in debugging
 [-php-]
-/* used in debugging
     foreach ($A_EVENTS as $date => $events) {
         echo $date." = ";
         foreach ($events as $oneE) {
@@ -391,9 +392,10 @@ echo "   <tr><td><div class='view1' style=background-color:".$f['color'].";font-
         }
         echo "<hr width=100%>";
     }
-*/
-
-echo "<table border='0' cellpadding='1' cellspacing='0' width='100%'>\n";
+[-/php-]
+-->
+[-php-]
+    echo "<table border='0' cellpadding='1' cellspacing='0' width='100%'>\n";
 
 // output the TD with the times DIV
 echo "<tr>";
@@ -664,6 +666,7 @@ foreach ($providers as $provider) {
             if($eventtype['pc_cattype']==1)
             $pccattype = 'true';
             $patientid = $event['pid'];
+            $prefname = '(' . $event['PrefName'] . ')'; //ADDED FOR CASA DE SALUD
             $commapos = strpos($event['patient_name'], ",");
             $lname = substr($event['patient_name'], 0, $commapos);
 	        $fname = substr($event['patient_name'], $commapos + 2);
@@ -725,7 +728,8 @@ foreach ($providers as $provider) {
                 // $content .= htmlspecialchars($event['apptstatus']);
                 $content .= '&nbsp;'.htmlspecialchars($event['apptstatus']);
                 if ($patientid) {
-                    $link_title = htmlspecialchars($fname,ENT_QUOTES)." ".htmlspecialchars($lname,ENT_QUOTES). " \n";
+                    // Include prefname and patient name (CASA DE SALUD)
+                    $link_title = htmlspecialchars($prefname,ENT_QUOTES) . htmlspecialchars($fname,ENT_QUOTES)." ".htmlspecialchars($lname,ENT_QUOTES). " \n";
                     $link_title .= xl('Age') . ": ".$patient_age."\n" . xl('DOB') . ": ".$patient_dob.htmlspecialchars($comment, ENT_QUOTES)."\n";
                     $link_title .= "(" . xl('Click to view') . ")";
                     $content .= "<a href='javascript:goPid($patientid)' title='$link_title'>";
@@ -768,7 +772,7 @@ foreach ($providers as $provider) {
                     $evtClass .= ' groups ';
                 }
                 else {
-                      //Category Clinic closaed or holiday take the event title
+                      //Category Clinic closed or holiday take the event title
                     if ( $catid ==6  || $catid == 7){
                          $content = xlt($event['title']);
                     }else{

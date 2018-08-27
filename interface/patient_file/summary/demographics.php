@@ -559,9 +559,10 @@ function setMyPatient() {
   return;
  }
 <?php if (isset($_GET['set_pid'])) { ?>
- parent.left_nav.setPatient(<?php echo "'" . addslashes($result['fname']) . " " . addslashes($result['lname']) .
-    "'," . addslashes($pid) . ",'" . addslashes($result['pubpid']) .
-    "','', ' " . xls('DOB') . ": " . addslashes(oeFormatShortDate($result['DOB_YMD'])) . " " . xls('Age') . ": " . addslashes(getPatientAgeDisplay($result['DOB_YMD'])) . "'"; ?>);
+ parent.left_nav.setPatient(<?php echo "'" . addslashes($result['fname']) . " " . addslashes($result['lname']) . "'," .
+    "'" . addslashes($result['PrefName']) . "'," .
+    addslashes($pid) . ",'" . addslashes($result['pubpid']) . "',''," .
+    "' " . xls('DOB') . ": " . addslashes(oeFormatShortDate($result['DOB_YMD'])) . " " . xls('Age') . ": " . addslashes(getPatientAgeDisplay($result['DOB_YMD'])) . "'"; ?>);
  var EncounterDateArray = new Array;
  var CalendarCategoryArray = new Array;
  var EncounterIdArray = new Array;

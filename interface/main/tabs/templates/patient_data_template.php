@@ -47,6 +47,11 @@
             </div>
             <div class="patientInfo">
             <!-- ko if: patient -->
+                <span data-bind="text:patient().prefname"></span>
+            <!-- /ko -->
+            </div>
+            <div class="patientInfo">
+            <!-- ko if: patient -->
                 <span data-bind="text:patient().str_dob()"></span>
             <!-- /ko -->
             </div>

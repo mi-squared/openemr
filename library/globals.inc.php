@@ -263,6 +263,13 @@ $GLOBALS_METADATA = array(
       xl('Omit method of payment from the co-pay panel')
     ),
 
+    'large_prior_auth_screen' => array(
+      xl('Full Screen for Prior Auth Widget'),
+      'bool',                           // data type
+      '0',                              // default = false
+      xl('Uses full window for Prior Auth Widget')
+      ),
+
     'use_charges_panel' => array(
       xl('Use Charges Panel'),
       'bool',                           // data type

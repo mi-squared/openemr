@@ -10,7 +10,7 @@ function getFormById ($id, $cols = "*")
 	//echo $sql . "<br />";
 	return sqlQuery($sql);
 }
-// added by sherwin
+//***IBH Added
 function getPriorAuthData($pid)
 {
 $sql = "SELECT a.id, a.date, a.prior_auth_number, a.units, a.comments, a.desc, 
@@ -25,14 +25,16 @@ $sql = "SELECT a.id, a.date, a.prior_auth_number, a.units, a.comments, a.desc,
        return $res;
 }
 
-function getPriorAuthAlert($encounter)
+//***IBH Added
+//Note this is never used.
+function getPriorAuthAlert($encounter, $pid)
 {
    $sql = "SELECT auth_to, auth_alert, units, used FROM form_prior_auth WHERE pid = $pid AND units != 'NULL'";
     $a = sqlStatement($sql);
 
 	return $a;
 }
-
+//***IBH Added
 function getSupervisor($authUser){
     //See if supervisor is logged in
 		$sql = "SELECT info FROM users WHERE username = '".$_SESSION['authUser']."'";
@@ -40,7 +42,7 @@ function getSupervisor($authUser){
 		$who = sqlFetchArray($info);
 		return $who['info'];
 }
-
+//***IBH Added
 function deleteSignature($encounter){
 
       $sql = "SELECT a.id FROM esign_signatures AS a, forms AS b WHERE b.id = a.tid AND b.encounter = $encounter ORDER BY a.id ASC LIMIT 1";

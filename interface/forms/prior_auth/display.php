@@ -585,8 +585,6 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 
 $(document).ready(function(){
 
-    console.log("AUTH FROM " + $("#auth_from").val());
-	
 	function no_dash(n) {
 		return n.replace(/-/g, "");
 	}

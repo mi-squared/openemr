@@ -28,7 +28,7 @@ function tf_filter_patient_select_pnuserapi( $username )
     $patientsToHide = $repo->fetchPatientsToHideForUser( $username );
     if ( count( $patientsToHide ) ) {
         $pidString = implode(",", $patientsToHide);
-        $where = " pd.pid NOT IN ( $pidString ) ";
+        $where = " ( pd.pid IS NULL OR pd.pid NOT IN ( $pidString ) ) ";
     }
 
     return $where;

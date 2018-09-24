@@ -219,15 +219,11 @@ if ($process) { // doing the work
 		
 		<script>
 		function doClose() {
-			if((top.window.parent) && (parent.window)){
-		        var wname = top.window.parent;
-		        if (wname) wname.refreshResults();
-	        }
-	        top.window.close();
+	        window.close();
 		}
 
 		function doCancel() {
-			top.window.close();
+			window.close();
 		}
 
 		function doSubmit() {

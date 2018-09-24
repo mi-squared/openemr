@@ -90,7 +90,7 @@ if (strtotime($order_data->result_datetime) !== false) { // returns false if not
 	if ($order_data->notified_id) $order_data->status = 'n'; // notified
 	$order_data->portal_flag = $_POST['portal_flag'];
 	
-	$review_date = $_POST['reviewed_date'];
+	$reviewed_date = $_POST['reviewed_date'];
 	if (strtotime($reviewed_date))
 		$order_data->reviewed_datetime = date('Y-m-d H:i',strtotime($reviewed_date));
 

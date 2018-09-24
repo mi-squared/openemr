@@ -2422,8 +2422,6 @@ else { // create empty row
 					<td class="wmtLabel"><a class="css_button" tabindex="-1"
 					href="<?php echo $document_url . $order_data->result_doc_id ?>"><span>Result
 							Document</span></a></td>
-				<td class="wmtLabel"><a class="css_button" tabindex="-1"
-					href="javascript:messageClicked()"><span>Send Message</span></a></td>
 <?php } ?>
 					<td class="wmtLabel" style="vertical-align: top; float: right">
 <?php if (!$locked) { ?>

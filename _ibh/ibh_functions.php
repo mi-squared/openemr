@@ -157,7 +157,7 @@ function ibh_esign_rider($post, $esign_id = 0) {
 	$modifier = ($post['mod'] && $post['mod'] != 1) ? $post['mod']: "";
 	
 	if ($post["transportation"] == '1') {
-		esign_transportation($pid, $encounter);
+		esign_transportation($pid, $encounter, $modifier);
 	}
 	
 	if ($post["checkout"] == '1') {
@@ -166,12 +166,12 @@ function ibh_esign_rider($post, $esign_id = 0) {
 	}
 	
 	if ($post["interpreter_used"] == '1') {
-		esign_interpreter($pid, $encounter, $post['interpreter_minutes'], $post['interpreter_name']);
+		esign_interpreter($pid, $encounter, $post['interpreter_minutes'], $post['interpreter_name'], $modifier);
 	}
 	
 	
 	if ($post["interactive_complexity"] == '1') {
-		esign_interactive_complexity($encounter, $pid);
+		esign_interactive_complexity($encounter, $pid, $modifier);
 	}
 	
 	return $mssg;
@@ -503,11 +503,11 @@ function ibh_alert_prior_auth($pa_id, $type="days") {
 	
 	if ($type == "units") {
 		$subject = "Prior Auth #" . $auth['prior_auth_number'] . ": " . $auth['units_remaining'] . " units left!";
-		$body = "Prior auth warning (UNITS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['units_remaining'] . " units remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='".$GLOBALS['webroot']."/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
+		$body = "Prior auth warning (UNITS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['units_remaining'] . " units remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='/openemr/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
 		
 	} else {
 		$subject = "Prior Auth #" . $auth['prior_auth_number'] . ": " . $auth['days_remaining'] . " days left!";
-		$body = "Prior auth warning (DAYS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['days_remaining'] . " days remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='".$GLOBALS['webroot']."/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
+		$body = "Prior auth warning (DAYS): Patient " . $patient['fname'] . " " . $patient['lname'] . " has " . $auth['days_remaining'] . " days remaining on Prior Auth #" . $auth['prior_auth_number'] . ". <a target='RTop' href='/openemr/interface/forms/prior_auth/display.php?prior_auth_number=" . $auth['prior_auth_number'] . "&pid=" . $pid . "'>Click here to view Prior Auth</a>.";
 		
 	}
 
@@ -1215,7 +1215,7 @@ function ibh_get_patient_diagnosis($pid) {
 
 
 
-function esign_interpreter($pid, $encounter, $minutes, $name){
+function esign_interpreter($pid, $encounter, $minutes, $name, $modifier = ''){
    	
 	$enc = ibh_get_encounter_info($encounter);
 	
@@ -1228,13 +1228,23 @@ function esign_interpreter($pid, $encounter, $minutes, $name){
 	
 	$total = $fee * $minutes;
 	$en = date("Y-m-d H:i:s");
-	
+    if(is_array($modifier)){
+
+        $modifier = implode(':', $modifier);
+
+    }
+
+    if($modifier == '1'){
+        $modifier = "";
+    }
+
     sqlStatement("INSERT INTO billing SET " .
                 "date = '$en' , " .
                 "code_type = 'CPT4', " .
                 "code = 'T1013', " .
                 "pid = '$pid', " .
                 "provider_id = '$prov', " .
+                "modifier = '". $modifier ."', ".
                 "user = '" . $_SESSION['authUserID'] . "', " .
                 "groupname = 'default', " .
                 "authorized = '1', " .
@@ -1250,7 +1260,7 @@ function esign_interpreter($pid, $encounter, $minutes, $name){
 
 
 // AKA psychotherapy home visit or transportation reimbursement per diem
-function esign_transportation($pid, $encounter) {
+function esign_transportation($pid, $encounter, $modifier) {
 	
 	$enc = ibh_get_encounter_info($encounter);
 	
@@ -1262,13 +1272,24 @@ function esign_transportation($pid, $encounter) {
 	$fee = IBH_TRANSPORTATION_FEE;
 	
 	$d = date("Y-m-d H:i:s");
-	
+    if(is_array($modifier)){
+
+        $modifier = implode(':', $modifier);
+
+    }
+
+    if($modifier == '1'){
+        $modifier = "";
+    }
+
+
     sqlStatement("INSERT INTO billing SET " .
                 "date = '$d' , " .
                 "code_type = 'CPT4', " .
                 "code = 'T2002', " .
                 "pid = '$pid', " .
                 "provider_id = '$prov', " .
+                "modifier = '". $modifier ."', ".
                 "user = '" . $_SESSION['authUserID'] . "', " .
                 "groupname = 'default', " .
                 "authorized = '1', " .
@@ -1309,7 +1330,7 @@ function ibh_get_location($claim, $claim_location = 11) {
 // LEGACY FUNCTIONS FROM ENCOUNTER/FORM ESIGN
 // FORMERLY update_fs.php
 
-function esign_interactive_complexity($encounter, $pid){
+function esign_interactive_complexity($encounter, $pid, $modifier = ''){
 	
     //Get date of the encounter.
     //so that the correct billing entry can be recorded
@@ -1327,10 +1348,22 @@ function esign_interactive_complexity($encounter, $pid){
 	$justify = ibh_get_patient_diagnosis($pid);
 	$just = explode(":", $justify);
    
+    if(is_array($modifier)){
+
+        $modifier = implode(':', $modifier);
+
+    }
+
+    if($modifier == '1'){
+        $modifier = "";
+    }
+
+
     sqlStatement("INSERT INTO billing SET " .
                 "date = '$en' , " .
                 "code_type = 'CPT4', " .
                 "code = '90785', " .
+                "modifier = '". $modifier ."', ".
                 "pid = '$pid', " .
                 "provider_id = '$prov', " .
                 "user = '" . $_SESSION['authUserID'] . "', " .
@@ -1559,7 +1592,7 @@ function ibh_form_link($long, $encounter=0, $pid=0) {
 	}
 	
 	if ($encounter && $pid) {
-		$link = "<a href='".$GLOBALS['webroot']."/interface/patient_file/encounter/forms.php?set_encounter=" . $encounter . "&pid=" . $pid . "' target='_blank' class='form-link'>open</a>";
+		$link = "<a href='/openemr/interface/patient_file/encounter/forms.php?set_encounter=" . $encounter . "&pid=" . $pid . "' target='_blank' class='form-link'>open</a>";
 	}
 	
 	return $short . $link;

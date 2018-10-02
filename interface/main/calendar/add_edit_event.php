@@ -939,7 +939,7 @@ td { font-size:0.8em; }
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
 <script type="text/javascript" src="../../../library/dynarch_calendar_setup.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script><?php //***IBH added  ?>
+    <script type="text/JavaScript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-2-2-0/index.js"></script><?php // modified from old IBH code that used googleapi.comZ  ?>
 <link rel="stylesheet" type="text/css" href="../../../_ibh/css/add_edit_event.css"><?php //***IBH added  ?>
 
 

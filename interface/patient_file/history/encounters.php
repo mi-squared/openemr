@@ -45,13 +45,8 @@ require_once("$srcdir/formdata.inc.php");
 // case we only display encounters that are linked to the specified issue.
 $issue = empty($_GET['issue']) ? 0 : 0 + $_GET['issue'];
 
-
-
 // IBH_DEV_CHG
-require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
-
-
-
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");//***IBH Added
 
  //maximum number of encounter entries to display on this page:
  // $N = 12;
@@ -182,11 +177,14 @@ function generatePageElement($start,$pagesize,$billing,$issue,$text)
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/library/css/encounters.css" type="text/css">
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 
-<script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/_ibh/js/jquery_latest.min.js"></script><?php //***IBH Modified ?>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-<!-- IBF_DEV add link to stylesheet -->
-<link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/_ibh/js/jquery.tablesort.js"></script><?php //***IBH Added ?>
+<link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css"><?php //***IBH Added?>
+
+
+
 <script language="JavaScript">
 
 //function toencounter(enc, datestr) {
@@ -337,14 +335,15 @@ $getStringForPage="&pagesize=".attr($pagesize)."&pagestart=".attr($pagestart);
 
 <br>
 
-<table class="main-table">
-<thead>
+<table class="main-table"><?php //***IBH Modified ?>
+<thead><?php //***IBH added thead ?>
  <tr class='text'>
   <th><?php echo htmlspecialchars( xl('Date'), ENT_NOQUOTES); ?></th>
 
 <?php if ($billing_view) { ?>
   <th class='billing_note'><?php echo htmlspecialchars( xl('Billing Note'), ENT_NOQUOTES); ?></th>
 <?php } else { ?>
+    <?php //***IBH modified?>
 <?php if (!$issue) {
 	// IBH_DEV commenting this out, as issue query below slows things down
   // <th><?php echo htmlspecialchars( xl('Issue'), ENT_NOQUOTES); </th>
@@ -356,22 +355,21 @@ $getStringForPage="&pagesize=".attr($pagesize)."&pagestart=".attr($pagestart);
   <th style="width:300px"><?php echo htmlspecialchars( xl('Reason/Form'), ENT_NOQUOTES); ?></th>
   <th><?php echo htmlspecialchars( xl('Enc'), ENT_NOQUOTES); ?></th>
   <!-- <th>Units</th> -->
-  <th><?php echo htmlspecialchars( xl('Billing Code'), ENT_NOQUOTES); ?></th>
+  <th><?php echo htmlspecialchars( xl('Billing Code'), ENT_NOQUOTES); ?></th><?php //***IBH Modified End ?>
   <th><?php echo htmlspecialchars( xl('Provider'), ENT_NOQUOTES);    ?></th>
 <?php } ?>
 
 
-  <th>Billing <div class="enc-units" style='width:auto'>Units</div></th>
+  <th>Billing <div class="enc-units" style='width:auto'>Units</div></th><?php //***IBH Added ?>
 <?php if ($billing_view) { ?>
-  <!-- <th><?php echo xl('Code','e'); ?></th> -->
+  <!-- <th><?php echo xl('Code','e'); ?></th> --><?php //***IBH Modified, commented out: Forces "billing" title to show in table header ?>
 
   <th class='right'><?php echo htmlspecialchars( xl('Chg'), ENT_NOQUOTES); ?></th>
   <th class='right'><?php echo htmlspecialchars( xl('Paid'), ENT_NOQUOTES); ?></th>
   <th class='right'><?php echo htmlspecialchars( xl('Adj'), ENT_NOQUOTES); ?></th>
   <th class='right'><?php echo htmlspecialchars( xl('Bal'), ENT_NOQUOTES); ?></th>
-
 <?php } else { ?>
-
+      <?php //***IBH removed ?>
 
 
 <?php } ?>
@@ -381,7 +379,8 @@ $getStringForPage="&pagesize=".attr($pagesize)."&pagestart=".attr($pagestart);
 <?php } ?>
 
  </tr>
-
+</thead><?php //***IBH Added ?>
+<tbody><?php //***IBH Added  ?>
 <?php
 $drow = false;
 if (!$billing_view) {
@@ -402,26 +401,13 @@ if (!$billing_view) {
 
 // $count = 0;
 
-$sqlBindArray = array();
+$sqlBindArray = array($pid);//***IBH Modified, added $pid as argument
 
-$sqlBindArray[] = $pid;
+//***IBH Modified Changed query
+$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter) AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? ORDER BY fe.date DESC, fe.id DESC";
 
-$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus ".
-        "FROM form_encounter fe " .
-        "join forms f on f.encounter = fe.encounter " .
-        "left join openemr_postcalendar_events ev on (ev.encounter = fe.encounter) " .
-        "join users u on u.id = fe.provider_id ".
-            "WHERE f.pid = fe.pid " .
-            "AND f.formdir = 'newpatient' " .
-            "AND f.deleted = 0 " .
-            "AND fe.pid = ? " .
-            "ORDER BY fe.date DESC, fe.id DESC";
-
-
-
-// IBH Customer code to provide 'Units'
-
-$countQuery = "SELECT COUNT(*) as c FROM form_encounter AS fe JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND f.formdir = 'newpatient' AND f.deleted = 0 WHERE fe.pid = ?" ;
+//***IBH Modified Changed count query
+$countQuery = "SELECT COUNT(*) as c FROM form_encounter AS fe JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND f.formdir = 'newpatient' AND f.deleted = 0 WHERE fe.pid = ?" . $from;
 
 
 $countRes = sqlStatement($countQuery,$sqlBindArray);
@@ -429,19 +415,19 @@ $count = sqlFetchArray($countRes);
 $numRes = $count['c'];
 
 
-//IBH custom code in 422 removed this function
+//***IBH Modified : commented out query within brackets!!
 if($pagesize>0) {
    //  $query .= " LIMIT " . escape_limit($pagestart) . "," . escape_limit($pagesize);
 }
-
 $upper  = $pagestart+$pagesize;
-
-if(($upper>$numRes) || ($pagesize==0)) {
+if(($upper>$numRes) || ($pagesize==0))
+{
     $upper=$numRes;
 }
 
 
-if(($pagesize > 0) && ($pagestart>0)) {
+if(($pagesize > 0) && ($pagestart>0))
+{
     generatePageElement($pagestart-$pagesize,$pagesize,$billing_view,$issue,"&lArr;" . htmlspecialchars( xl("Prev"), ENT_NOQUOTES) . " ");
 }
 echo ($pagestart + 1)."-".$upper." " . htmlspecialchars( xl('of'), ENT_NOQUOTES) . " " .$numRes;
@@ -454,8 +440,10 @@ if(($pagesize>0) && ($pagestart+$pagesize <= $numRes))
 
 $res4 = sqlStatement($query, $sqlBindArray);
 
+
 while ($result4 = sqlFetchArray($res4)) {
 
+        // $href = "javascript:window.toencounter(" . $result4['encounter'] . ")";
         $reason_string = "";
         $auth_sensitivity = true;
 
@@ -464,10 +452,10 @@ while ($result4 = sqlFetchArray($res4)) {
         $raw_encounter_date = date("Y-m-d", strtotime($result4{"date"}));
         $encounter_date = date("D F jS", strtotime($result4{"date"}));
 
-        $encounter_id = $result4['encounter'];
+        $encounter_id = $result4['encounter']; //***IBH Added
 
         // if ($auth_notes_a || ($auth_notes && $result4['user'] == $_SESSION['authUser']))
-        $reason_string .= htmlspecialchars( $result4{"reason"}, ENT_NOQUOTES);
+        $reason_string .= htmlspecialchars( $result4{"reason"}, ENT_NOQUOTES);//***IBH modified: formatting
         // else
         //   $reason_string = "(No access)";
 
@@ -500,20 +488,18 @@ while ($result4 = sqlFetchArray($res4)) {
           "'>\n";
 
         // show encounter date
-        // ACTUAL DATE
-
+        //***IBH Added
         if ($result4['pc_eventDate']) {
 	        $format_stamp = strtotime($result4['pc_eventDate'] . " " . $result4['pc_startTime']);
 	        $format_date = date("n/j/Y H:i a", $format_stamp);
 
 	        echo "<td class='encounter-list-time' title='" . htmlspecialchars(xl('View encounter','','',' ') .
-            "$pid.{$result4['encounter']}", ENT_QUOTES) . "'>" . $format_date . "</td>";
-	       }
-	        else {
-            echo "<td valign='top' title='" . htmlspecialchars(xl('View encounter','','',' ') .
+          "$pid.{$result4['encounter']}", ENT_QUOTES) . "'>" . $format_date . "</td>";
+	       } else {//***IBH Added END
+        echo "<td valign='top' title='" . htmlspecialchars(xl('View encounter','','',' ') .
           "$pid.{$result4['encounter']}", ENT_QUOTES) . "'>" .
           htmlspecialchars(oeFormatShortDate($raw_encounter_date), ENT_NOQUOTES) . "</td>\n";
-	       }
+	       }//***IBH Added END
 
 
 
@@ -535,11 +521,11 @@ while ($result4 = sqlFetchArray($res4)) {
         }
         else {
 
-          if (!$issue) { // only if listing for multiple issues
+          if (!$issue) { //***IBH Modified:  if(!$issue){} all commented out within brackets.
+	        // only if listing for multiple issues
             // show issues for this encounter
             /*
             echo "<td>";
-
             if ($auth_med && $auth_sensitivity) {
                 $ires = sqlStatement("SELECT lists.type, lists.title, lists.begdate " .
                                     "FROM issue_encounter, lists WHERE " .
@@ -553,42 +539,42 @@ while ($result4 = sqlFetchArray($res4)) {
                     if ($ISSUE_TYPES[$tcode]) $tcode = $ISSUE_TYPES[$tcode][2];
                         echo htmlspecialchars( "$tcode: " . $irow['title'], ENT_NOQUOTES);
                 }
-            } else {
+            }
+            else {
                 echo "(" . htmlspecialchars( xl('No access'), ENT_NOQUOTES) . ")";
             }
             echo "</td>\n";
             */
 
-          } // end if (!$issue)
+          } // end of (!$issue)
 
-		  	// STATUS
+		  	//*** IBH Added
 		  	if ($result4['pc_apptstatus']) {
 	            echo "<td class='encounter-list-status'>" . $result4['pc_apptstatus'] . "</td>";
             } else {
 	            echo "<td>&nbsp;</td>";
             }
 
-            $pc_title = "";
+            $pc_title = "";//*** IBH Added
 
             // show encounter reason/title
-            if ($result4['pc_title']) {
+            if ($result4['pc_title']) {//*** IBH Added / modified
 	            $pc_title = $result4['pc_title'];
 	            echo "<td style='width:300px'><strong>" . $result4['pc_title'] . "</strong>";
             } else {
 	            echo "<td style='width:300px'><strong>" . $reason_string . "</strong>";
             }
-
-
 			
 			//Display the documents tagged to this encounter
-			// IBH_DEV removing this to speed up list
-			//getDocListByEncID($result4['encounter'],$raw_encounter_date,$pid);
+			getDocListByEncID($result4['encounter'],$raw_encounter_date,$pid);
 			
-            echo "<div class='encounter-forms'>";
+
+
+            echo "<div class='encounter-forms'>";//*** IBH modify
 
             // Now show a line for each encounter form, if the user is authorized to
             // see this encounter's notes.
-			$lbf_ct = 0;
+			$lbf_ct = 0; //*** IBH added
             foreach ($encarr as $enc) {
                 if ($enc['formdir'] == 'newpatient') continue;
             
@@ -625,8 +611,8 @@ while ($result4 = sqlFetchArray($res4)) {
                   echo "</div>";
                 }
                 else {
-	                $lbf_ct++;
-                  echo "<div class='encounter-list-forms' " .
+	                $lbf_ct++;//*** IBH add
+                  echo "<div class='encounter-list-forms' " . //*** IBH modify
                     "onmouseover='efmouseover(this,$pid," . $result4['encounter'] .
                     ",\"$formdir\"," . $enc['form_id'] . ")' " .
                     "onmouseout='ttMouseOut()'>";
@@ -636,12 +622,12 @@ while ($result4 = sqlFetchArray($res4)) {
 
             } // end encounter Forms loop
 
-            if (!$lbf_ct) echo "NO LBF YET";
+            if (!$lbf_ct) echo "NO LBF YET"; //*** IBH add
 
             echo "</div>";
             echo "</td>\n";
 
-
+            //*** IBH add
             // CODE COL
              echo "<td>" . $encounter_id . "</td>";
 
@@ -654,7 +640,7 @@ while ($result4 = sqlFetchArray($res4)) {
 	            $code_str = "";
             }
              echo "<td>" . $code_str . "</td>";
-
+            //*** IBH add end
 
             // show user (Provider) for the encounter
             $provname = '&nbsp;';
@@ -677,7 +663,7 @@ while ($result4 = sqlFetchArray($res4)) {
         $arid = 0;
         if ($thisauth && $auth_sensitivity) {
             $binfo = array('', '', '', '', '');
-            if ($subresult2 = getBillingByEncounter($pid, $result4['encounter'], "units, code_type, code, modifier, code_text, fee"))
+            if ($subresult2 = getBillingByEncounter($pid, $result4['encounter'], "units, code_type, code, modifier, code_text, fee"))//*** IBH modify
             {
                 // Get A/R info, if available, for this encounter.
                 $arinvoice = array();
@@ -717,12 +703,11 @@ while ($result4 = sqlFetchArray($res4)) {
                     //   !$code_types[$iter2['code_type']]['fee']) continue;
                     $title = htmlspecialchars(($iter2['code_text']), ENT_QUOTES);
                     $codekey = $iter2['code'];
-                    $units = $iter2['units'];
+                    $units = $iter2['units'];//*** IBH add
 
-                    $units_str = "";
-                    if ($iter2['code'] != "90785" && $iter2['code_type'] != "ICD10") {
-	                    $units_str = "<div class='enc-units'>" . $units . "</div>";
-                    }
+                    $units_str = "";//*** IBH add
+                    if ($iter2['code'] != "90785" && $iter2['code_type'] != "ICD10") {//*** IBH add
+	                    $units_str = "<div class='enc-units'>" . $units . "</div>";                    }
                     $codekeydisp = $iter2['code_type']." - ".$iter2['code'];
                     if ($iter2['code_type'] == 'COPAY') {
                       $codekey = 'CO-PAY';
@@ -730,14 +715,14 @@ while ($result4 = sqlFetchArray($res4)) {
                     }
                     $codekeydisp = htmlspecialchars($codekeydisp, ENT_NOQUOTES);
                     if ($iter2['modifier']) $codekey .= ':' . $iter2['modifier'];
-                    // if ($binfo[0]) $binfo[0] .= '<br>';
+                    // if ($binfo[0]) $binfo[0] .= '<br>';//*** IBH modify
                     if ($issue && !$billing_view) {
                       // Single issue clinical view: show code description after the code.
                       $binfo[0] .= "$arlinkbeg$codekeydisp $title$arlinkend";
                     }
                     else {
                       // Otherwise offer the description as a tooltip.
-                      $binfo[0] .= "<div class='enc-billing-item group' title='$title'>$arlinkbeg $codekeydisp $arlinkend $units_str</div>";
+                      $binfo[0] .= "<div class='enc-billing-item group' title='$title'>$arlinkbeg $codekeydisp $arlinkend $units_str</div>";//*** IBH modify
 
 
                     }
@@ -781,7 +766,7 @@ while ($result4 = sqlFetchArray($res4)) {
             } // end if there is billing
 
             echo "<td class='text'>".$binfo[0]."</td>\n";
-            for ($i = 1; $i <= 4; ++$i) {
+            for ($i = 1; $i <= 4; ++$i) { //*** IBH modify
                 echo "<td class='text right'>". $binfo[$i]."</td>\n";
             }
         } // end if authorized
@@ -839,7 +824,7 @@ while ($drow /* && $count <= $N */) {
     $drow = sqlFetchArray($dres);
 }
 ?>
-</tbody>
+</tbody><?php //*** IBH add ?>
 </table>
 
 </div> <!-- end 'encounters' large outer DIV -->
@@ -854,7 +839,12 @@ while ($drow /* && $count <= $N */) {
 // jQuery stuff to make the page a little easier to use
 
 $(document).ready(function(){
-	$(".encrow").mouseover(function() { $(this).toggleClass("highlight"); });
+
+	$('.main-table').tablesort(); <?php //*** IBH add ?>
+
+
+
+    $(".encrow").mouseover(function() { $(this).toggleClass("highlight"); });
     $(".encrow").mouseout(function() { $(this).toggleClass("highlight"); });
     $(".encrow").click(function() { toencounter(this.id); }); 
     

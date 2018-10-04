@@ -67,13 +67,13 @@ function getLanguages() {
 
 function getInsuranceProvider($ins_id) {
     
-    $sql = "select name from insurance_companies where id=? and inactive != 1";
+    $sql = "select name from insurance_companies where id=? and inactive != 1";//***IBH Modified
     $row = sqlQuery($sql,array($ins_id));
     return $row['name'];
     
 }
 
-function getProvideUsername($providerIDres){
+function getProvideUsername($providerIDres){//***IBH Added
 
 	$sql = "select username from users where id=?";
 	$row = sqlQuery($sql,array($providerIDres));
@@ -84,7 +84,7 @@ function getInsuranceProviders() {
     $returnval = array();
 
     if (true) {
-        $sql = "select name, id from insurance_companies where inactive != 1 order by name, id";
+        $sql = "select name, id from insurance_companies where inactive != 1 order by name, id";//***IBH Modified
         $rez = sqlStatement($sql);
         for($iter=0; $row=sqlFetchArray($rez); $iter++) {
             $returnval[$row['id']] = $row['name'];
@@ -99,7 +99,7 @@ function getInsuranceProviders() {
         $sql = "select insurance_companies.name, insurance_companies.id, " .
           "addresses.zip, addresses.line1 " .
           "from insurance_companies, addresses " .
-          "where addresses.foreign_id = insurance_companies.id and inactive != 1 " .
+          "where addresses.foreign_id = insurance_companies.id and inactive != 1 " .//***IBH Modified
           "order by insurance_companies.name, addresses.zip";
 
         $rez = sqlStatement($sql);
@@ -169,9 +169,8 @@ function getProviders() {
     }
     return $returnval;
 }
-//-----------------------------------------------------------------------------
-// Get the calendar appointment title Sherwin
 
+//***IBH Added
 function getTitle($encounter){
 
    $query = "SELECT a.pc_catname FROM openemr_postcalendar_categories AS a, form_encounter AS b WHERE b.encounter = $encounter AND a.pc_catid = b.pc_catid ";
@@ -1031,7 +1030,7 @@ function updatePatientData($pid, $new, $create=false)
     $sql .= " WHERE id = '$db_id'";
     sqlStatement($sql);
   }
-  //added by sherwin to make the external id uniform
+  //***IBH Added
   $cpub = sqlQuery("SELECT fname, lname, DOB, pubpid FROM patient_data WHERE id = '$db_id'");
    if(empty($cpub['pubpid'])){
       $npub = explode("-", $cpub['DOB']);
@@ -1092,7 +1091,7 @@ function updateEmployerData($pid, $new, $create=false)
   $colnames = array('name','street','city','state','postal_code','country');
 
   if ($create) {
-    $set .= "pid = '$pid', date = NOW()";
+    $set = "pid = '$pid', date = NOW()";
     foreach ($colnames as $key) {
       $value = isset($new[$key]) ? $new[$key] : '';
       $set .= ", `$key` = '$value'";

@@ -404,10 +404,17 @@ if (!$billing_view) {
 $sqlBindArray = array($pid);//***IBH Modified, added $pid as argument
 
 //***IBH Modified Changed query
-$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter) AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? ORDER BY fe.date DESC, fe.id DESC";
+$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, " .
+        " ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus " .
+        " FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u " .
+        " WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter) " .
+        " AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? " .
+        " ORDER BY fe.date DESC, fe.id DESC";
 
 //***IBH Modified Changed count query
-$countQuery = "SELECT COUNT(*) as c FROM form_encounter AS fe JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND f.formdir = 'newpatient' AND f.deleted = 0 WHERE fe.pid = ?" . $from;
+$countQuery = "SELECT COUNT(*) as c FROM form_encounter AS fe " .
+                " JOIN forms AS f ON f.pid = fe.pid AND f.encounter = fe.encounter AND f.formdir = 'newpatient' AND f.deleted = 0 " .
+                " WHERE fe.pid = ?" . $from;
 
 
 $countRes = sqlStatement($countQuery,$sqlBindArray);

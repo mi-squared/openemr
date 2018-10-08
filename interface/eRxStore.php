@@ -66,7 +66,7 @@ class eRxStore
     public function getUserById($id)
     {
         return sqlQuery(
-            'SELECT id, username, lname, fname, mname, title, federaldrugid, upin, state_license_number, npi, newcrop_user_role
+            'SELECT id, username, lname, fname, mname, title, federaldrugid, upin, state_license_number, npi, newcrop_user_role, xdea
 			FROM users
 			WHERE id = ?;',
             array($id)

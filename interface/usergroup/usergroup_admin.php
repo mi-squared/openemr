@@ -206,6 +206,11 @@ if (isset($_POST["privatemode"]) && $_POST["privatemode"] =="user_admin") {
             sqlStatement("update users set weno_prov_id = '$erxprid' where id = ? ", array($_POST["id"]));
         }
 
+        if ($_POST["xdea"]) {
+            $erxprid = formData('xdea', 'P');
+            sqlStatement("update users set xdea = '$erxprid' where id = ? ", array($_POST["id"]));
+        }
+
         // Set the access control group of user
         $user_data = sqlFetchArray(sqlStatement("select username from users where id= ?", array($_POST["id"])));
         set_user_aro(
@@ -260,6 +265,7 @@ if (isset($_POST["mode"])) {
             "', main_menu_role = '"  . trim(formData('main_menu_role')) .
             "', patient_menu_role = '"  . trim(formData('patient_menu_role')) .
             "', weno_prov_id = '"  . trim(formData('erxprid')) .
+            "', xdea = '"  . trim(formData('xdea')) .
             "', authorized = '"    . trim(formData('authorized')) .
             "', info = '"          . trim(formData('info')) .
             "', federaldrugid = '" . trim(formData('federaldrugid')) .

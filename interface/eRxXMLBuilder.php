@@ -455,6 +455,23 @@ class eRxXMLBuilder
         return $element;
     }
 
+    public function formatLicense( $userDetails )
+    {
+        $fullLicense = "";
+        if ( $userDetails['state_license_number'] ) {
+            $fullLicense = $userDetails[ 'state_license_number' ];
+            if ( $userDetails[ 'xdea' ] ) {
+                $fullLicense .= ", XDEA#: " . $userDetails[ 'xdea' ];
+            }
+        } else {
+            if ( $userDetails[ 'xdea' ] ) {
+                $fullLicense = "XDEA#: " . $userDetails[ 'xdea' ];
+            }
+        }
+
+        return $fullLicense;
+    }
+
     public function getLicensedPrescriber($authUserId)
     {
         $userDetails = $this->getStore()
@@ -468,10 +485,7 @@ class eRxXMLBuilder
             $element->appendChild($this->createElementText('upin', $userDetails['upin']));
         }
 
-        $fullLicense = $userDetails['state_license_number'];
-        if ( $userDetails['xdea'] ) {
-            $fullLicense .= ", XDEA#: ".$userDetails['xdea'];
-        }
+        $fullLicense = $this->formatLicense( $userDetails );
         $element->appendChild($this->createElementText('licenseNumber', $fullLicense));
         $element->appendChild($this->createElementTextFieldEmpty('npi', $userDetails['npi'], xl('Licensed Prescriber NPI')));
 
@@ -496,11 +510,7 @@ class eRxXMLBuilder
         $element = $this->getDocument()->createElement('Staff');
         $element->setAttribute('ID', $userDetails['username']);
         $element->appendChild($this->getStaffName($userDetails));
-        $fullLicense = $userDetails['state_license_number'];
-        if ( $userDetails['xdea'] ) {
-            $fullLicense .= ", XDEA#: ".$userDetails['xdea'];
-        }
-        $element->appendChild($this->createElementText('license', $fullLicense));
+        $element->appendChild($this->createElementText('license', $userDetails['state_license_number']));
 
         return $element;
     }
@@ -531,10 +541,7 @@ class eRxXMLBuilder
             $element->appendChild($this->createElementText('upin', $userDetails['upin']));
         }
 
-        $fullLicense = $userDetails['state_license_number'];
-        if ( $userDetails['xdea'] ) {
-            $fullLicense .= ", XDEA#: ".$userDetails['xdea'];
-        }
+        $fullLicense = $this->formatLicense( $userDetails );
         $element->appendChild($this->createElementText('licenseNumber', $fullLicense));
         $element->appendChild($this->createElementTextFieldEmpty('npi', $userDetails['npi'], xl('Supervising Doctor NPI')));
 
@@ -554,10 +561,7 @@ class eRxXMLBuilder
             $element->appendChild($this->createElementText('upin', $userDetails['upin']));
         }
 
-        $fullLicense = $userDetails['state_license_number'];
-        if ( $userDetails['xdea'] ) {
-            $fullLicense .= ", XDEA#: ".$userDetails['xdea'];
-        }
+        $fullLicense = $this->formatLicense( $userDetails );
         $element->appendChild($this->createElementText('licenseNumber', $fullLicense));
 
         return $element;

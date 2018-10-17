@@ -197,7 +197,7 @@ form {
    //'&date=' + eventdate + '&userid=' + providerid +
    '&date=' + eventdate +
    '&patientid=' + patientid,
-   '_blank', 775, 500);
+   '_blank', 850, 650);
  }
 
 </script>

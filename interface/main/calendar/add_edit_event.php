@@ -39,6 +39,7 @@ require_once('../../globals.php');
 require_once($GLOBALS['srcdir'].'/patient.inc');
 require_once($GLOBALS['srcdir'].'/forms.inc');
 require_once($GLOBALS['srcdir'].'/calendar.inc');
+require_once($GLOBALS['srcdir'].'/formdata.inc.php'); //***IBH added
 require_once($GLOBALS['srcdir'].'/options.inc.php');
 require_once($GLOBALS['srcdir'].'/encounter_events.inc.php');
 require_once($GLOBALS['srcdir'].'/acl.inc');
@@ -932,14 +933,14 @@ td { font-size:0.8em; }
 </style>
 
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
-    <script type="text/javascript" src="../../../library/topdialog.js?t=<?=time()?>"></script><?php //***IBH Modified?><script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
+<script type="text/javascript" src="../../../library/topdialog.js"></script>
     <script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
 
     <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
 <script type="text/javascript" src="../../../library/dynarch_calendar_setup.js"></script>
-    <script type="text/JavaScript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-2-2-0/index.js"></script><?php // modified from old IBH code that used googleapi.comZ  ?>
+<script src="../../../public/assets/jquery-min-2-2-0/index.js"></script><?php //***IBH500 modify: removed googleapi and upgraded jquery to 2-2-0  ?>
 <link rel="stylesheet" type="text/css" href="../../../_ibh/css/add_edit_event.css"><?php //***IBH added  ?>
 
 
@@ -1245,7 +1246,8 @@ td { font-size:0.8em; }
 
 </head>
 
-<body class="body_top" onunload='imclosing()' >
+<body class="body_top main-calendar-add_edit_event" onunload='imclosing()'>
+
 <?php  //***IBH modified ?>
 <form method='post' name='theform' id='theform' action='add_edit_event.php?eid=<?php echo attr($eid) ?>' onsubmit="return copayValidate()"/><?php //***IBH Modified ?>
 <!-- ViSolve : Requirement - Redirect to Create New Patient Page -->
@@ -1415,14 +1417,15 @@ $classpati='';
         $selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
         echo "<option value={$facrow['id']} $selected>{$facrow['name']}</option>";
         *************************************************************/
-        if ($_SESSION['authorizedUser'] || in_array($facrow, $facils)) {
+        //***IBH modified.  1316,17 stay but everthing else in while loop commented out
+        //if ($_SESSION['authorizedUser'] || in_array($facrow, $facils)) {
           $selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
           echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
-        }
-        else{
-		$selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
-         echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
-        }
+
+        //} else{
+		 //$selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
+          //echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
+        //}
         /************************************************************/
       }
       // EOS E2F
@@ -1781,6 +1784,15 @@ if ($repeatexdate != "") {
 	<div class="pa-warning">Prior Auth for that billing code that is out of units.</div>
 </div>
 <p>
+<?php
+
+	if (isset($_GET['editable']) && $_GET['editable'] == "false") { ?>
+
+		<h4 class='add-edit-warning'>This appointment isn't editable, because it has an encounter associated with it.</h4>
+
+	<?php } else { ?>
+
+
 <input type='button' name='form_save' id='form_save' value='<?php echo xla('Save');?>' />
 &nbsp;
 
@@ -1794,7 +1806,9 @@ if ($repeatexdate != "") {
 <input type='button' id='cancel' value='<?php echo xla('Cancel');?>' />
 &nbsp;
 <input type='button' name='form_duplicate' id='form_duplicate' value='<?php echo xla('Create Duplicate');?>' />
-</p></td></tr></table>
+<?php }  //***IBH modified ?>
+</p>
+</td></tr></table><?php //***IBH modified END?>
 <?php if ($informant) echo "<p class='text'>" . xlt('Last update by') . " " .
   text($informant) . " " . xlt('on') . " " . text($row['pc_time']) . "</p>\n"; ?>
 </center>

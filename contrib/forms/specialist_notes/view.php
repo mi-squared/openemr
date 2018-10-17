@@ -99,7 +99,7 @@ if ($formid) {
 <script language='JavaScript'>
  function newEvt() {
   dlgopen('../../main/calendar/add_edit_event.php?patientid=<?php echo $pid ?>',
-   '_blank', 775, 500);
+   '_blank', 850, 650);
   return false;
  }
 </script>

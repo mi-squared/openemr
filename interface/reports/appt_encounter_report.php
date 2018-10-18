@@ -434,6 +434,7 @@ if ($_POST['form_refresh']) {
 <th> &nbsp;<?php echo xlt('ID'); ?> </th>
 <th align='right'> <?php echo xlt('Chart'); ?>&nbsp; </th>
 <th align='right'> <?php echo xlt('Encounter'); ?>&nbsp; </th>
+<th align='right'> <?php echo xlt('Enc Date'); ?>&nbsp; </th>
 <th align='right'> <?php echo xlt('Charges'); ?>&nbsp; </th>
 <th align='right'> <?php echo xlt('Copays'); ?>&nbsp; </th>
 <th> <?php echo xlt('Billed'); ?> </th>
@@ -657,7 +658,8 @@ if ($res) {
      }
      *****************************************************************/
         if (empty($row['pc_eventDate'])) {
-            echo text(oeFormatShortDate(substr($row['encdate'], 0, 10)));
+#            echo text(oeFormatShortDate(substr($row['encdate'], 0, 10)));
+            echo "No Appt";
         } else {
             echo text(oeFormatShortDate($row['pc_eventDate'])) . ' ' . text(substr($row['pc_startTime'], 0, 5));
         }
@@ -673,7 +675,12 @@ if ($res) {
             <?php echo text($row['pid']); ?>&nbsp;
          </td>
          <td align='right'>
+
              <a href='javascript;' data-pid='<?php echo text($row['pid']); ?>' data-encounter='<?php echo $encounter; ?>' class='goto-encounter'><?php echo text($encounter); ?></a>&nbsp;
+
+         </td>
+         <td align='right'>
+             <?php echo text(oeFormatShortDate(substr($row['encdate'], 0, 10))); ?>&nbsp;
          </td>
          <td align='right'>
             <?php echo text(bucks($charges)); ?>&nbsp;
@@ -697,7 +704,7 @@ if ($res) {
     endDoctor($docrow);
 
     echo " <tr class='report_totals'>\n";
-    echo "  <td colspan='5'>\n";
+    echo "  <td colspan='6'>\n";
     echo "   &nbsp;" . xlt('Grand Totals') . "\n";
     echo "  </td>\n";
     echo "  <td align='right'>\n";

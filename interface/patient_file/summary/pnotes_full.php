@@ -262,6 +262,13 @@ function refreshme() {
     document.location.reload();
 }
 </script>
+    <style>
+        a.non-hyper {
+            color: inherit; /* blue colors for links too */
+            text-decoration: inherit; /* no underline */
+        }
+    </style>
+
 </head>
 <body class="body_top">
 
@@ -495,10 +502,11 @@ if ($result != "") {
         echo generate_display_field(array('data_type'=>'1','list_id'=>'note_type'), $iter['title']);
         echo "  </a></td>\n";
 
-        echo "  <td class='notecell' id='".htmlspecialchars($row_note_id, ENT_QUOTES)."'>\n";
-        echo "   $body";
+        echo "  <td id='".htmlspecialchars($row_note_id, ENT_QUOTES)."'>\n";
+        echo "   <a class='note_modal non-hyper' href='pnotes_full_add.php?$urlparms&trigger=edit&noteid=".htmlspecialchars($row_note_id, ENT_QUOTES).
+            "'>$body</a>";
         echo "  </td>\n";
-        echo "  <td class='notecell' id='".htmlspecialchars($row_note_id, ENT_QUOTES)."'>\n";
+        echo "  <td id='".htmlspecialchars($row_note_id, ENT_QUOTES)."'>\n";
         echo getListItemTitle("message_status", $iter['message_status']);
         echo "  </td>\n";
         echo " </tr>\n";

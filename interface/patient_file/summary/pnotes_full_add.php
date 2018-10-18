@@ -354,7 +354,9 @@ if ($_GET['set_pid']) {
 //
 if ($noteid /* && $title == 'New Document' */) {
     $prow = getPnoteById($noteid, 'body');
-    if (preg_match('/New scanned document (\d+): [^\n]+\/([^\n]+)/', $prow['body'], $matches)) {
+    $matches = [];
+    $ret = preg_match('/^.* New scanned document (\d+): (.+)\n/', $prow['body'], $matches );
+    if ($ret) {
         $docid = $matches[1];
         $docname = $matches[2];
     ?>

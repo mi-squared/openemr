@@ -15,7 +15,7 @@ require_once("$srcdir/classes/Pharmacy.class.php");
 
  function newEvt() {
   dlgopen('../../main/calendar/add_edit_event.php?patientid=<?php echo $pid ?>',
-   '_blank', 850, 650);
+   '_blank', 950, 650);
   return false;
  }
 

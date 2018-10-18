@@ -118,6 +118,7 @@ $menu_json='[
       {"label":"Report Results","menu_id":"rep0","target":"rep","url":"/interface/reports/report_results.php","children":[],"requirement":0,"global_req":["enable_cdr","enable_cqm","enable_amc"]},
       {"label":"Standard Measures","menu_id":"rep0","target":"rep","url":"/interface/reports/cqm.php?type=standard","children":[],"requirement":0,"global_req":"enable_cdr"},
       {"label":"Quality Measures (CQM)","menu_id":"rep0","target":"rep","url":"/interface/reports/cqm.php?type=cqm","children":[],"requirement":0,"global_req":"enable_cqm"},
+      {"label":"Ticklers","menu_id":"rep0","target":"rep","url":"/_ibh/interface/tickler.php","children":[],"requirement":0,"global_req":"enable_cqm"},
       {"label":"Automated Measures (AMC)","menu_id":"rep0","target":"rep","url":"/interface/reports/cqm.php?type=amc","children":[],"requirement":0,"global_req":"enable_amc"},
       {"label":"AMC Tracking","menu_id":"rep0","target":"rep","url":"/interface/reports/amc_tracking.php","children":[],"requirement":0,"global_req":"enable_amc_tracking"},
       {"label":"Alerts Log","menu_id":"rep0","target":"rep","url":"/interface/reports/cdr_log.php","children":[],"requirement":0}],"requirement":0,"global_req_strict":["enable_cdr","enable_alert_log"]},

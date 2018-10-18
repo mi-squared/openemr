@@ -603,10 +603,7 @@ function clearactive() {
 	  }
 	});
     
-	// $(parent.Title.document.getElementById('clear_active')).hide();
-
-	$(parent.Title.document.getElementById('current_patient')).html("");
-
+		$(parent.Title.document.getElementById('current_patient')).html("");//***IBH Modified
 
 }
  // Reference to the search.php window.
@@ -776,21 +773,26 @@ function clearactive() {
 
   $(parent.Title.document.getElementById('clear_active')).show();//To display Clear Active Patient button on selecting a patient
  }
- function setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray) {
+  function setPatientEncounter(EncounterIdArray,EncounterDateArray,CalendarCategoryArray,EncounterTimeArray) {<?php //***IBH Modified ?>
  //This function lists all encounters of the patient.
  //This function writes the drop down in the top frame.
  //It is called when a new patient is create/selected from the search menu.
   var str = '<Select class="text" id="EncounterHistory" onchange="{top.restoreSession();toencounter(this.options[this.selectedIndex].value)}">';
   str+='<option value=""><?php echo htmlspecialchars( xl('Encounter History'), ENT_QUOTES) ?></option>';
- // str+='<option value="New Encounter"><?php echo htmlspecialchars( xl('New Encounter'), ENT_QUOTES) ?></option>';
+  // str+='<option value="New Encounter"><?php echo htmlspecialchars( xl('New Encounter'), ENT_QUOTES) ?></option>'; //***IBH removed: Appointements can only be created from an existing appointment when they are checked in
   str+='<option value="Past Encounter List"><?php echo htmlspecialchars( xl('Past Encounter List'), ENT_QUOTES) ?></option>';
   for(CountEncounter=0;CountEncounter<EncounterDateArray.length;CountEncounter++)
    {
-    str+='<option value="'+EncounterIdArray[CountEncounter]+'~'+EncounterDateArray[CountEncounter]+'">'+EncounterDateArray[CountEncounter]+'-'+CalendarCategoryArray[CountEncounter]+'</option>';
+       //***IBH Modified:
+    str+='<option value="'+EncounterIdArray[CountEncounter]+'~'+EncounterDateArray[CountEncounter]+'">'+EncounterDateArray[CountEncounter]+'-'+CalendarCategoryArray[CountEncounter]+' - '+EncounterTimeArray[CountEncounter]+'</option>';
    }
   str+='</Select>';
   $(parent.Title.document.getElementById('past_encounter_block')).show();
+      //***IBH Modified: set timeout function added by IBH
+  setTimeout(function() {
   top.window.parent.Title.document.getElementById('past_encounter').innerHTML=str;
+  }, 300)
+
  }
 
 function loadCurrentPatientFromTitle() {
@@ -1023,7 +1025,7 @@ $(document).ready(function(){
  action='<?php echo $rootdir ?>/main/finder/patient_select.php'>
 
 <center>
-<select name='sel_frame' style='background-color:transparent;font-size:9pt;width:100;'>
+<select name='sel_frame' style='background-color:transparent;font-size:9pt;width:100;'><?php //fix this ?>
  <option value='0'><?php xl('Default','e'); ?></option>
  <option value='1'><?php xl('Top','e'); ?></option>
  <option value='2'><?php xl('Bottom','e'); ?></option>
@@ -1068,6 +1070,7 @@ $(document).ready(function(){
       <li class="open"><a class="expanded_lv2"><span><?php xl('Visits','e') ?></span></a>
         <ul>
           <?php if ($GLOBALS['ippf_specific'] && !$GLOBALS['disable_calendar']) genTreeLink('RTop','cal',xl('Calendar')); ?>
+          <?php //***IBH Removed: removed Create Visit to keep workflow.  Encounters should only be created when patient has an appointment and is checked in ?>
           <?php genTreeLink('RBot','enc',xl('Current')); ?>
           <?php genTreeLink('RBot','ens',xl('Visit History')); ?>
         </ul>
@@ -1123,6 +1126,7 @@ if (!empty($reg)) {
 
     </ul>
   </li>
+      <?php //***IBH added: Employee payroll and PTO mileage tab ?>
    <li><a class="collapsed" id="feeimg" ><span><?php xl('Employee','e') ?></span></a>
        <ul>
        <?php  if (acl_check('admin', 'super'    )) genMiscLink('RBot', 'adm', '0', xl('Payroll'), 'reports/appointments_report_payroll.php' ); ?>
@@ -1260,7 +1264,7 @@ if (!empty($reg)) {
 
           <?php
 
-	          // IBH_DEV
+	          //***IBH Added: Custom 'PriorAuths' Option
 	          if (acl_check('admin', 'super')) genMiscLink('RTop','adm','0',xl('Prior Auths'),'../_ibh/interface/prior_auths_overview.php');
 	      ?>
 
@@ -1327,8 +1331,8 @@ if (!empty($reg)) {
           <?php if ($GLOBALS['enable_amc']) genMiscLink('RTop','rep','0',xl('Automated Measures (AMC)'),'reports/cqm.php?type=amc'); ?>
           <?php if ($GLOBALS['enable_amc_tracking']) genMiscLink('RTop','rep','0',xl('AMC Tracking'),'reports/amc_tracking.php'); ?>
           <?php if ($GLOBALS['enable_cdr'] && $GLOBALS['enable_alert_log'] ) genMiscLink('RTop','rep','0',xl('Alerts Log'),'reports/cdr_log.php'); ?>
-
-          <li><a href="<?=  $GLOBALS['webroot'] ?>/_ibh/interface/tickler.php" id="tickler" target="_blank">Ticklers</a></li>
+            <?php //***IBH Added ?>
+          <li><a href="../../_ibh/interface/tickler.php" id="tickler" target="_blank">Ticklers</a></li>
 
 
         </ul>

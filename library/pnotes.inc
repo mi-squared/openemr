@@ -471,7 +471,9 @@ function updatePnote($id, $newtext, $title, $assigned_to, $message_status = "")
         $activity = 0;
     }
 
-    $body = $row['body'] . "\n" . date('Y-m-d H:i') .
+    $datetime = date('Y-m-d H:i');
+
+    $body = $row['body'] . "\n" . $datetime .
     ' (' . $_SESSION['authUser'];
     if ($assigned_to) {
         $body .= " to $assigned_to";
@@ -482,16 +484,18 @@ function updatePnote($id, $newtext, $title, $assigned_to, $message_status = "")
     if ($message_status) {
         sqlStatement(
             "UPDATE pnotes SET " .
+            "date = ?," .
             "body = ?, activity = ?, title= ?, " .
             "assigned_to = ?, message_status = ? WHERE id = ?",
-            array($body, $activity, $title, $assigned_to, $message_status, $id)
+            array($datetime, $body, $activity, $title, $assigned_to, $message_status, $id)
         );
     } else {
         sqlStatement(
             "UPDATE pnotes SET " .
+            "date = ?," .
             "body = ?, activity = ?, title= ?, " .
             "assigned_to = ? WHERE id = ?",
-            array($body, $activity, $title, $assigned_to, $id)
+            array($datetime, $body, $activity, $title, $assigned_to, $id)
         );
     }
 }

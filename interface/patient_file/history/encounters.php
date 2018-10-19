@@ -45,7 +45,6 @@ require_once("$srcdir/formdata.inc.php");
 // case we only display encounters that are linked to the specified issue.
 $issue = empty($_GET['issue']) ? 0 : 0 + $_GET['issue'];
 
-// IBH_DEV_CHG
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");//***IBH Added
 
  //maximum number of encounter entries to display on this page:
@@ -403,8 +402,16 @@ if (!$billing_view) {
 
 $sqlBindArray = array($pid);//***IBH Modified, added $pid as argument
 
-//***IBH Modified Changed query
-$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter) AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? ORDER BY fe.date DESC, fe.id DESC";
+//***IBH Modified Changed
+//Note:  The 'correct' way to create an encounter is by checking a patient in from the appointment 'add-edit' screen.
+//this query shows the encounters only if they have been created correctly.  It also shows encounters from categories
+//that were deleted.
+$query = "SELECT fe.*, f.user, u.fname, u.mname, u.lname, " .
+        " ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus " .
+        " FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u " .
+        " WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter) " .
+        " AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? " .
+        " ORDER BY fe.date DESC, fe.id DESC";
 
 //***IBH Modified Changed count query
 $countQuery = " SELECT count(*) as c FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u " .
@@ -708,7 +715,7 @@ while ($result4 = sqlFetchArray($res4)) {
                     $units = $iter2['units'];//*** IBH add
 
                     $units_str = "";//*** IBH add
-                    if ($iter2['code'] != "90785" && $iter2['code_type'] != "ICD10") {//*** IBH add
+                    if ( $iter2['code_type'] != "ICD10") {//*** IBH add:
 	                    $units_str = "<div class='enc-units'>" . $units . "</div>";                    }
                     $codekeydisp = $iter2['code_type']." - ".$iter2['code'];
                     if ($iter2['code_type'] == 'COPAY') {

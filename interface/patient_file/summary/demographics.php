@@ -454,20 +454,29 @@ function setMyPatient() {
 <?php
   //Encounter details are stored to javacript as array.
     //***IBH modify / add.  481-486 replaces the $result4 = sqlStatement()
-$sql_1 = "SELECT DISTINCT fe.encounter, fe.date, cats.pc_catname, evts.pc_startTime FROM form_encounter fe JOIN openemr_postcalendar_categories cats ON fe.pc_catid=cats.pc_catid JOIN openemr_postcalendar_events evts on fe.date=evts.pc_eventDate WHERE fe.pid = ? AND evts.pc_pid = ? AND fe.pc_catid = evts.pc_catid ORDER BY evts.pc_eventDate DESC";
+    //The original modification would exclude appointment types if they were
+    //deleted.  This sql function has been replaced with a query
+    //that more accurately reflects the true past appointments
+$sql_1 = "  SELECT fe.*, f.user, u.fname, u.mname, u.lname,  " .
+         " ev.pc_title, ev.pc_startTime, ev.pc_eventDate, ev.pc_apptstatus  " .
+         " FROM form_encounter fe, forms f, openemr_postcalendar_events ev, users u  " .
+         " WHERE f.pid = fe.pid AND f.encounter = fe.encounter AND (ev.encounter = fe.encounter)  " .
+         " AND f.formdir = 'newpatient' AND f.deleted = 0 AND u.id = fe.provider_id AND fe.pid = ? " .
+         " ORDER BY fe.date DESC, fe.id DESC " ;
 
-$result4 = sqlStatement($sql_1, array($pid, $pid));
-$ct = 0;
+
+$result4 = sqlStatement($sql_1, array($pid));
+
     //IBH*** add END
   if(sqlNumRows($result4)>0) {
     while($rowresult4 = sqlFetchArray($result4)) {
 ?>
-    //***IBH Modify
- EncounterIdArray[<?=$ct?>] = '<?php echo htmlspecialchars($rowresult4['encounter'], ENT_QUOTES); ?>';
- EncounterDateArray[<?=$ct?>] = '<?php echo htmlspecialchars(oeFormatShortDate(date("Y-m-d", strtotime($rowresult4['date']))), ENT_QUOTES); ?>';
- CalendarCategoryArray[<?=$ct?>] = '<?php echo htmlspecialchars(xl_appt_category($rowresult4['pc_catname']), ENT_QUOTES); ?>';
- EncounterTimeArray[<?=$ct?>] = '<?php echo htmlspecialchars($rowresult4['pc_startTime'], ENT_QUOTES); ?>';
-
+    //***IBH Modify:
+ EncounterIdArray[Count] = '<?php echo htmlspecialchars($rowresult4['encounter'], ENT_QUOTES); ?>';
+ EncounterDateArray[Count] = '<?php echo htmlspecialchars(oeFormatShortDate(date("Y-m-d", strtotime($rowresult4['date']))), ENT_QUOTES); ?>';
+ CalendarCategoryArray[Count] = '<?php echo htmlspecialchars(xl_appt_category($rowresult4['pc_title']), ENT_QUOTES); ?>';
+ EncounterTimeArray[Count] = '<?php echo htmlspecialchars($rowresult4['pc_startTime'], ENT_QUOTES); ?>';
+ Count++;
 <?php
 	$ct++;
 	 // END IBH_DEV_CHG

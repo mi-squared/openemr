@@ -55,9 +55,10 @@
         <span class="patientDataColumn">
         <!-- ko if: patient -->
         <!-- ko with: patient -->
-            <a class="css_button_small" data-bind="click: clickNewEncounter" href="#" title="<?php echo xlt("New Encounter");?>">
-                <i style="font-size:150%;" class="fa fa-plus"></i>
-            </a>
+            <?php //*** IBH Modified Removed ability to create an encounter to comply with IBH workflow ?>
+<!--            <a class="css_button_small" data-bind="click: clickNewEncounter" href="#" title="--><?php //echo xlt("New Encounter");?><!--">-->
+<!--                <i style="font-size:150%;" class="fa fa-plus"></i>-->
+<!--            </a>-->
             <div class="patientCurrentEncounter">
                 <span><?php echo xlt("Open Encounter"); ?>:</span>
                 <!-- ko if:selectedEncounter() -->

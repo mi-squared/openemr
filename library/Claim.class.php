@@ -10,6 +10,10 @@ require_once(dirname(__FILE__) . "/classes/Address.class.php");
 require_once(dirname(__FILE__) . "/classes/InsuranceCompany.class.php");
 require_once(dirname(__FILE__) . "/invoice_summary.inc.php");
 
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+
+
+
 // This enforces the X12 Basic Character Set. Page A2.
 //
 function x12clean($str) {
@@ -197,6 +201,27 @@ class Claim {
     $provider_id = $this->procs[0]['provider_id'];
     *****************************************************************/
     $provider_id = $this->encounter['provider_id'];
+
+				  // check to see if the user is LCPC, LPC, LCSW, SNTC, PSYD, DNP, FNPC for billing purpose
+				  // added by sherwin 08-19-2016
+				  // only want to do this if the insurance is Medicaid
+            $sql = "SELECT provider FROM insurance_data WHERE pid = '$pid'";
+			 $i_row = sqlQuery($sql);
+
+			if($i_row['provider'] == 55){
+				  $sql = "SELECT info FROM users WHERE id = '".$provider_id."'";
+				  $checkProv = sqlQuery($sql);
+				  $provInfo = $checkProv['info'];
+
+				    if($provInfo == "" || $provInfo == "Supervisor:"){
+						   $provider_id = 15;
+						   $this->provider_id = $provider_id;
+					   }
+
+			    }
+
+				/********************** Switch rendering provider in flight **********************/
+
     $sql = "SELECT * FROM users WHERE id = '$provider_id'";
     $this->provider = sqlQuery($sql);
     // Selecting the billing facility assigned  to the encounter.  If none,
@@ -1009,6 +1034,89 @@ class Claim {
   function serviceDate() {
     return str_replace('-', '', substr($this->encounter['date'], 0, 10));
   }
+
+
+
+ //Added by sherwin 3/20/2016 insert data from the prior auth form not the misc billing options
+
+  function priorAuthz() {
+	  $billing_code = $this->procs[0]['code']; // just the billing code, like 98404
+	  $pid = $this->pid;
+
+	  $prior_auth_number = ibh_get_prior_auth_num($pid, $billing_code);
+
+	  /*
+	  //Loop to find the auth code match to the CPT
+	  $i = 1;
+	  do {
+		  $col = 'code'.$i;
+		  // code1, code2...
+		  // if the billing code finds a match in the form_prior_auth record...
+		  $key = array_search($cpt, array_column($this->prior_auth, $col));
+		  if (!empty($key)){ break;} // ... we have a match, so do it
+
+		  // otherwise, cycle through other prior_auth billing possibilities
+		  $i++;
+	  } while ($i <= 7);
+
+	  //file_put_contents('fileCPT.txt', $this->prior_auth[$key]['prior_auth_number']);
+	  //update table
+	  // $pan = $this->prior_auth[$key]['prior_auth_number'];
+	  // $used = $this->prior_auth[$key]['used'];
+      // if(empty($used)){ $used = 1; } else { $used++; };
+	  // $sql = "UPDATE `form_prior_auth` SET `used` = '$used'  WHERE `prior_auth_number` = '$pan'";
+	  // sqlStatement($sql);
+
+	  */
+	  // return x12clean(trim($this->prior_auth[$key]['prior_auth_number']));
+
+	  return x12clean(trim($prior_auth_number));
+  }
+
+
+  /*
+  function auth_from() {
+	return x12clean(trim($this->prior_auth['auth_from']));
+  }
+  function auth_to() {
+	return x12clean(trim($this->prior_auth['auth_to']));
+  }
+  function not_req() {
+	return x12clean(trim($this->prior_auth['not_req']));
+  }
+  function units() {
+	return x12clean(trim($this->prior_auth['units']));
+  }
+  function override() {
+	return x12clean(trim($this->prior_auth['override']));
+  }
+  function code1() {
+	return x12clean(trim($this->prior_auth['code1']));
+  }
+  function code2() {
+	return x12clean(trim($this->prior_auth['code2']));
+  }
+  function code3() {
+	return x12clean(trim($this->prior_auth['code3']));
+  }
+  function code4() {
+	return x12clean(trim($this->prior_auth['code4']));
+  }
+  function code5() {
+	return x12clean(trim($this->prior_auth['code5']));
+  }
+  function code6() {
+	return x12clean(trim($this->prior_auth['code6']));
+  }
+  function code7() {
+	return x12clean(trim($this->prior_auth['code7']));
+  }
+  */
+
+  /***********End of Sherwin Add****************/
+
+
+
 
   function priorAuth() {
     return x12clean(trim($this->billing_options['prior_auth_number']));

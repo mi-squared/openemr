@@ -1055,10 +1055,7 @@ function updatePatientData($pid, $new, $create=false)
 
 	}
 
-  $rez = sqlQuery("SELECT * FROM patient_data WHERE id = '$db_id'");
-  sync_patient($db_id,$rez['fname'],$rez['lname'],$rez['street'],$rez['city'],
-    $rez['postal_code'],$rez['state'],$rez['phone_home'],$rez['phone_biz'],
-    $rez['phone_cell'],$rez['email'],$rez['pid']);
+
 
   return $db_id;
 }
@@ -1091,7 +1088,7 @@ function updateEmployerData($pid, $new, $create=false)
   $colnames = array('name','street','city','state','postal_code','country');
 
   if ($create) {
-    $set = "pid = '$pid', date = NOW()";
+    $set .= "pid = '$pid', date = NOW()";  //***IBH found error
     foreach ($colnames as $key) {
       $value = isset($new[$key]) ? $new[$key] : '';
       $set .= ", `$key` = '$value'";

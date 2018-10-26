@@ -188,14 +188,7 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
 
   $HLBillingPayToProvider = $HLcount++;
 
-  // Situational PRV segment for provider taxonomy code for Medicaid.
-    if ($claim->claimType() == 'MC') {
-        ++$edicount;
-        $out .= "PRV*BI*ZZ" .
-        "*" . $claim->providerTaxonomy() .
-        "~\n";
-    }
-
+  // Situational PRV segment (for provider taxonomy code) omitted here.
   // Situational CUR segment (foreign currency information) omitted here.
 
   ++$edicount;
@@ -690,16 +683,7 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
   // Segment CRC (Ambulance Certification) omitted.
   // Segment CRC (Patient Condition Information: Vision) omitted.
   // Segment CRC (Homebound Indicator) omitted.
-
-  // Segment CRC (EPSDT Referral).
-   if($claim->epsdtFlag()) {
-      ++$edicount;
-    $out .= "CRC" .
-      "*ZZ" .
-      "*Y" .
-      "*" . $claim->medicaidReferralCode() .
-      "~\n";
-  }
+  // Segment CRC (EPSDT Referral) omitted.
 
   // Diagnoses, up to $max_per_seg per HI segment.
   $max_per_seg = $CMS_5010 ? 12 : 8;
@@ -802,8 +786,8 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
     if ($claim->providerTaxonomy()) {
         ++$edicount;
         $out .= "PRV" .
-        "*PE" . // Performing provider
-        "*" .($claim->claimType() != 'MC' ? "PXC" : "ZZ") .
+        "*PE" . // PErforming provider
+        "*" . ($CMS_5010 ? "PXC" : "ZZ") .
         "*" . $claim->providerTaxonomy() .
         "~\n";
     }
@@ -843,10 +827,8 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
   }
 
   // Loop 2310D is omitted in the case of home visits (POS=12).
-  if ($claim->facilityPOS() != 12 && (!$CMS_5010 || 
-      ($claim->facilityNPI() != $claim->billingFacilityNPI() || 
-      ($claim->facilityNPI() == $claim->billingFacilityNPI() &&
-       $claim->facilityStreet() != $claim->billingFacilityStreet()))))
+  if ($claim->facilityPOS() != 12 &&
+      (!$CMS_5010 || $claim->facilityNPI() != $claim->billingFacilityNPI()))
     {
     ++$edicount;
     $out .= "NM1" .       // Loop 2310D Service Location
@@ -1134,18 +1116,7 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
       $out .= $dindex;
       if (++$i >= 4) break;
     }
-    # needed for epstd
-  if($claim->epsdtFlag()) {
-    $out .= "*" .
-    "*" .
-    "*" .
-    "*Y" .
-    "~\n";
-  }
-  else
-  {
     $out .= "~\n";
-  }
 
     if (!$claim->cptCharges($prockey)) {
       $log .= "*** Procedure '" . $claim->cptKey($prockey) . "' has no charges!\n";
@@ -1311,12 +1282,17 @@ function gen_x12_837($pid, $encounter, &$log, $encounter_claim=false) {
       $out .= "~\n";
 //**Comment added by Daniel Pflieger:  IBH dev Sherwin removed this.  Not sure why.
       if ($claim->providerTaxonomy($prockey)) {
+
+			// testing removing this line to see if it solves duplication issues
+			/*
         ++$edicount;
         $out .= "PRV" .
           "*PE" . // PErforming provider
           "*" . ($CMS_5010 ? "PXC" : "ZZ") .
           "*" . $claim->providerTaxonomy($prockey) .
           "~\n";
+			*/
+
       }
 
       // Segment PRV*PE (Rendering Provider Specialty Information) omitted.

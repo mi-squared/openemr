@@ -125,6 +125,7 @@ $menu_json='[
     {"label":"Visits","icon":"fa-caret-right","children":[
       {"label":"Daily Report","menu_id":"rep0","target":"rep","url":"/interface/reports/daily_summary_report.php","children":[],"requirement":0},
       {"label":"Appointments","menu_id":"rep0","target":"rep","url":"/interface/reports/appointments_report.php","children":[],"requirement":0,"global_req":"!disable_calendar"},
+      {"label":"Appointments Enhanced Report","menu_id":"rep0","target":"rep","url":"/interface/reports/enhanced_appointments_report.php","children":[],"requirement":0,"global_req":"!disable_calendar"},
       {"label":"Patient Flow Board","menu_id":"rep0","target":"rep","url":"/interface/reports/patient_flow_board_report.php","children":[],"requirement":0,"global_req_strict":["!disable_pat_trkr","!disable_calendar"]},
       {"label":"Encounters","menu_id":"rep0","target":"rep","url":"/interface/reports/encounters_report.php","children":[],"requirement":0},
       {"label":"Appt-Enc","menu_id":"rep0","target":"rep","url":"/interface/reports/appt_encounter_report.php","children":[],"requirement":0,"global_req":"!disable_calendar"},

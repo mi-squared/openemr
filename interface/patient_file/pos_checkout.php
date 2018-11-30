@@ -68,7 +68,7 @@ $facilityService = new FacilityService();
 
 $currdecimals = $GLOBALS['currency_decimals'];
 
-$details = empty($_GET['details']) ? 0 : 1;
+$details = empty($_GET['details']) ? 1 : 0;  //Reverse defaults to Show Details
 
 $patient_id = empty($_GET['ptid']) ? $pid : 0 + $_GET['ptid'];
 
@@ -365,9 +365,9 @@ while ($inrow = sqlFetchArray($inres)) {
 <?php } ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php if ($details) { ?>
-<a href='pos_checkout.php?details=0&ptid=<?php echo attr($patient_id); ?>&enc=<?php echo attr($encounter); ?>' onclick='top.restoreSession()'><?php echo xlt('Hide Details'); ?></a>
+<a href='pos_checkout.php?details=1&ptid=<?php echo attr($patient_id); ?>&enc=<?php echo attr($encounter); ?>' onclick='top.restoreSession()'><?php echo xlt('Hide Details'); ?></a>
 <?php } else { ?>
-<a href='pos_checkout.php?details=1&ptid=<?php echo attr($patient_id); ?>&enc=<?php echo attr($encounter); ?>' onclick='top.restoreSession()'><?php echo xlt('Show Details'); ?></a>
+<a href='pos_checkout.php?details=0&ptid=<?php echo attr($patient_id); ?>&enc=<?php echo attr($encounter); ?>' onclick='top.restoreSession()'><?php echo xlt('Show Details'); ?></a>
 <?php } ?>
 </p>
 </div>

@@ -464,7 +464,17 @@ function ibh_get_prior_auth ($id) {
 	// cycle through each of the valid 7-ish codes
 	foreach ($actual_codes as $billing_code) {
 		
-		$bsql = "SELECT id, units FROM billing WHERE pid='$pid' AND code='$billing_code' AND (date >='$auth_from' AND date <= '$auth_to')";
+		$billing_code = explode(":", $billing_code);
+        $cpt4 = $billing_code[0];
+
+        if(isset($billing_code[1])){
+            $mod = $billing_code[1];
+        }else{
+
+            $mod = "";
+        }
+
+        $bsql = "SELECT id, units FROM billing WHERE pid='$pid' AND code='$cpt4' AND modifier = '$mod' AND (date >='$auth_from' AND date <= '$auth_to')";
 		
         $billsq = sqlStatement($bsql);
         while($bill = sqlFetchArray($billsq)) {

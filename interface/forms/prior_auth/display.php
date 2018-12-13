@@ -19,7 +19,7 @@ require_once("../../globals.php");
 require_once("$srcdir/forms.inc");
 
 // IBH_DEV_CHG
-require_once("../../../_ibh/ibh_functions.php");
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 
 // global $pid;
 // We're NOT using the global $pid variable here
@@ -139,24 +139,21 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 
 <?php html_header_show();?>'
 
-		<?php html_header_show(); ?>
-		<script type="text/javascript" src="<?= $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
+<?php html_header_show();?>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/ajtooltip.js"></script>
 
-		<!-- pop up calendar -->
-		<style type="text/css">@import url(<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar.css);</style>
-		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
-		<?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
-		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
-		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/textformat.js"></script>
-		<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
-		<link rel="stylesheet" href="<?php echo $css_header; ?>" type="text/css">
+<style type="text/css">@import url(<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar.css);</style>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar_en.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/textformat.js"></script>
 
 
+<link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
+<link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
 
-<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
-<link rel="stylesheet" href="<?= $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
-
-</>
+</head>
 <body class="overview-pane">
 <div class="ibh-wrapper">
 		
@@ -165,7 +162,7 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 		<div class='top-message'><?=$top_mssg?></div>
 <?php	} ?>
 <ul class="ibh-top-buttons">
-	<li><a href="<?= $GLOBALS['webroot'] ?>/_ibh/interface/prior_auths_overview.php">ALL PRIOR AUTHS</a></li>
+	<li><a href="<?php echo $GLOBALS['webroot'] ?>/_ibh/interface/prior_auths_overview.php">ALL PRIOR AUTHS</a></li>
 	<li><a href="display.php?pid=<?=$_pid?>">PATIENT LIST (active)</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="display.php?pid=<?=$_pid?>&show_archived=true" style='color:#777'>(include archived)</a></li>
 	<li><a href="display.php?action=new&pid=<?=$_pid?>">CREATE A NEW PA FOR <?=$patient['fname'] . " " . $patient['lname']?></a></li>
 	
@@ -584,7 +581,7 @@ $prior_auths = ibh_get_patient_prior_auths($_pid, $show_archived, $pan_filter);
 
 
 $(document).ready(function(){
-
+	
 	function no_dash(n) {
 		return n.replace(/-/g, "");
 	}
@@ -679,16 +676,9 @@ $(document).ready(function(){
 		 		$("#prior_auth_number_row").hide();
 	 		}
 		});
-
-    if (typeof $("#auth_from").val() === 'undefined') {
-        $("#auth_from").datepicker().datepicker("setDate", new Date());
-    }
-
-    if (typeof $("#auth_to").val() === 'undefined') {
-        $("#auth_to").datepicker().datepicker("setDate", new Date());
-    }
-
-    /*Calendar.setup({inputField:"dob", ifFormat:"%Y-%m-%d", button:"img_dob"});*/
+		
+		
+		/*Calendar.setup({inputField:"dob", ifFormat:"%Y-%m-%d", button:"img_dob"});*/
 		Calendar.setup({inputField:"auth_from", ifFormat:"%Y-%m-%d", button:"img_auth_from"});
 		Calendar.setup({inputField:"auth_to", ifFormat:"%Y-%m-%d", button:"img_auth_to"});
 

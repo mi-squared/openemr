@@ -3,7 +3,7 @@
 {php}html_header_show();{/php}
 
 <!-- other supporting javascript code -->
-<script type="text/javascript" src="{$FORM_ACTION}library/js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="{$FORM_ACTION}/library/js/jquery.js"></script>
 <script type="text/javascript" src="{$FORM_ACTION}/library/textformat.js"></script>
 
 
@@ -50,7 +50,7 @@ a {
 </style>
 <script>
 function showHint(str) {
-    if (str.length == 0) {
+    if (str.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
     } else {
@@ -74,18 +74,18 @@ function showHint(str) {
                 alert("FROM: date is greater than TO: date ");
 				return false;
             }
-            var AuthReq = document.getElementById("noAuthReq").checked;
+            var AuthReq = document.getElementById("noAuthReq").checked;	
             var Claims = document.getElementById("claims").value;
             //var ClearReq = document.getElementById("clear_req").checked; // Not needed will delete
 			var n = Claims.length;
-
+			
             if(document.getElementById("noAuthReq").checked && n === 0){
-
+			    
 			      alert("Please fill in number of claims");
 			      return false;
-
+				 
             }
-
+         
         }
 
 </script>
@@ -93,12 +93,13 @@ function showHint(str) {
 {/literal}
 </head>
 <body bgcolor="{$STYLE.BGCOLOR2}">
+
 <p><span class="title">Prior Authorization Form</span></p>
 <form name="prior_auth" method="post" action="{$FORM_ACTION}/interface/forms/prior_auth/save.php">
 <table>
 <tr>
-    <td align="right">No Auth# Req:</td><td><input type="radio" name="not_req" value="Yes" id="noAuthReq" title="Select when No Authorization Number Required"
-	       {if $NoAuth == "Yes"} checked {/if}>{if $NoAuth == "Yes"}<br><input type="radio" name="not_req" id="clear_req" value=""
+    <td align="right">No Auth# Req:</td><td><input type="radio" name="not_req" value="Yes" id="noAuthReq" title="Select when No Authorization Number Required" 
+	       {if $NoAuth == "Yes"} checked {/if}>{if $NoAuth == "Yes"}<br><input type="radio" name="not_req" id="clear_req" value="" 
 		    title="Click here to clear the No Auth need flag" onclick = 'clearThis("claims")'>Clear</td>{/if}
 </tr>
 <tr>
@@ -106,7 +107,8 @@ function showHint(str) {
 
 </tr>
 <tr>
-	<td colspan="2"><textarea name="comments" value="{$prior_auth->get_comments()}" wrap="virtual" cols="75" rows="8">{$prior_auth->get_comments()}</textarea></td>
+	<td align="right">Auth #:</td><td><input type="text" size="35" name="prior_auth_number" value="{$prior_auth->get_prior_auth_number()}"></td>
+
 </tr>
 <tr>
     <td align="right">Description:</td><td><input type="text" size="55" name="desc" value="{$prior_auth->get_desc()}"></td>
@@ -130,9 +132,9 @@ function showHint(str) {
    <img src="../../pic/show_calendar.gif" align="absbottom" width="24" height="22"
     id="img_auth_to" border="0" alt="[?]" style="cursor:pointer;cursor:hand"
 	title="{php}xl('Click here to choose a date','e');{/php}"/>
+	
 
-
-
+        
     </td>
 </tr>
 <tr>
@@ -145,7 +147,7 @@ function showHint(str) {
     <td align="right">Auth Phone:</td><td> <input type="text" size="15" name="auth_phone" value="{$prior_auth->get_auth_phone()}">  </td>
 </tr>
 <tr>
-    <td align="right">Code:</td><td>
+    <td align="right">Code:</td><td> 
 	<input type="text" size="5" name="code1" value="{$prior_auth->get_code1()}">
 	<input type="text" size="5" name="code2" value="{$prior_auth->get_code2()}">
 	<input type="text" size="5" name="code3" value="{$prior_auth->get_code3()}">
@@ -156,7 +158,7 @@ function showHint(str) {
 
 </tr>
 <tr>
-
+	
 </tr>
 <tr>
 	<td align="right">Notes:</td><td colspan="2"><textarea name="comments" value="{$prior_auth->get_comments()}" wrap="virtual" cols="75" rows="8">{$prior_auth->get_comments()}</textarea></td>
@@ -165,8 +167,8 @@ function showHint(str) {
 	<td align="right">Auth Alert:</td><td><input type="text" size="5" value="" />
         <select><option name="units" value="" /></option>
 		        <option name="units" value="days" {if $Alert == "days"}selected{/if}/>Days</option>
-                <option name="units" value="units" {if $Alert == "units"}selected{/if}/>Units</option>
-                <option name="units" value="open" {if $Alert == "open"}selected{/if}/>Open Auth</option>
+                <option name="units" value="units" {if $Alert == "units"}selected{/if}/>Units</option> 
+                <option name="units" value="open" {if $Alert == "open"}selected{/if}/>Open Auth</option> 
                 </select>	</td>
 </tr>
 <tr>

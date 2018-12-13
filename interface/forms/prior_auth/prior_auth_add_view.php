@@ -290,7 +290,7 @@ $patient = ibh_get_patient($_pid);
 
             $.ajax({
                 type: "POST",
-                url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2.php",
+                url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display.php",
                 data: {
 
                     id: id,
@@ -359,7 +359,7 @@ $patient = ibh_get_patient($_pid);
             if(action == 'add') {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2.php",
+                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display.php",
                     data: {
                         id: 'new',
                         func: 'add_auth',
@@ -381,7 +381,7 @@ $patient = ibh_get_patient($_pid);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2.php",
+                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display.php",
                     data: {
                         id: '<?php echo $_GET['id']; ?>',
                         func: 'edit',

@@ -213,7 +213,7 @@ $patient = ibh_get_patient($_pid);
                     'copy', 'excel', 'pdf', 'csv'
                 ],
 				ajax:{ type: "POST",
-					url: "../../../library/ajax/display2.php",
+					url: "../../../library/ajax/display.php",
 					data: {
 						func:"display_prior_auth",
 						pid: "<?php echo $patient['id'] ?>"

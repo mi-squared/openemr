@@ -1,5 +1,5 @@
 <?php
-// library/ajax/display2_ajax.php
+// library/ajax/display.php
 // Copyright (C) 2018 -Daniel Pflieger
 // daniel@growlingflea.com daniel@mi-squared.com
 //

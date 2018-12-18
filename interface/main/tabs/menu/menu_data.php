@@ -45,6 +45,7 @@ $menu_json='[
       {"label":"Pending Approval","menu_id":"apr0","target":"pat","url":"/interface/patient_file/ccr_pending_approval.php","children":[],"requirement":0}],"requirement":0}],"requirement":0},
   {"label":"Employee","menu_id":"emp1","children":[
     {"label":"Payroll","menu_id":"emp11","target":"pat","url":"/interface/reports/appointments_report_payroll.php","children":[],"requirement":0},
+    {"label":"Enhanced Payroll Report","menu_id":"emp11","target":"pat","url":"/interface/reports/payroll_report_enhanced.php","children":[],"requirement":0},
     {"label":"PTO, Milage","menu_id":"emp12","target":"pat","url":"/interface/payroll/misc_payroll_entry.php","children":[],"requirement":0,"acl_req":["acct","eob"],"global_req":"enable_edihistory_in_left_menu"}],"requirement":0,"global_req":"enable_fees_in_left_menu"},
  
   {"label":"Fees","menu_id":"feeimg","children":[

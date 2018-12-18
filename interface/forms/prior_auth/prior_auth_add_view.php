@@ -80,7 +80,7 @@ $patient = ibh_get_patient($_pid);
 
         <br>
     </div>
-    <form name="prior_auth" method="post" action="<?php echo $GLOBALS['webroot'] ?>/library/ajax/display_ajax.php">
+    <form name="prior_auth" method="post" action="<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2_ajax.php">
         <input id="id" type="hidden" name="id" value="<?=$pa_id?>">
         <input id="pid" type="hidden" name="pid" value="<?=$_pid?>">
 
@@ -290,7 +290,7 @@ $patient = ibh_get_patient($_pid);
 
             $.ajax({
                 type: "POST",
-                url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display.php",
+                url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2_ajax.php",
                 data: {
 
                     id: id,
@@ -359,7 +359,7 @@ $patient = ibh_get_patient($_pid);
             if(action == 'add') {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display.php",
+                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2_ajax.php",
                     data: {
                         id: 'new',
                         func: 'add_auth',
@@ -381,7 +381,7 @@ $patient = ibh_get_patient($_pid);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display.php",
+                    url: "<?php echo $GLOBALS['webroot'] ?>/library/ajax/display2_ajax.php",
                     data: {
                         id: '<?php echo $_GET['id']; ?>',
                         func: 'edit',

@@ -136,18 +136,16 @@ if($_POST['func'] == "show_appointments"){
     $from_date = $_POST['from_date'];
     $to_date   = $_POST['to_date'];
 
-    $form_apptstatus = ">";
-
-
-
     //function fetchAppointments( $from_date, $to_date, $patient_id = null, $provider_id = null, $facility_id = null, $pc_appstatus = null, $with_out_provider = null, $with_out_facility = null, $pc_catid = null, $tracker_board = false, $nextX = 0 )
-    $query = "select pc_eid, pd.lname, pd.fname, pc_eventDate, pc_startTime, pc_endTime, pc_title, pc_facility, ope.encounter , pc_apptstatus, " .
-            " b.units, u.lname as ulname, u.fname as ufname , b.code_type, b.code, b.code_text " .
+    $query = "select pc_eid, pd.pid, pd.lname, pd.fname, pc_eventDate, pc_startTime, pc_endTime, pc_title, pc_facility, ope.encounter , " .
+            " pc_apptstatus, lo.title as status, " .
+            " ope.encounter, u.lname as ulname, u.fname as ufname  " .
             "from openemr_postcalendar_events ope ".
             "join patient_data pd on pc_pid = pd.pid " .
             "JOIN users AS u ON u.id = ope.pc_aid " .
-            "left JOIN billing b on ope.encounter = b.encounter " .
-            "where pc_eventDate >= ? and pc_eventDate <= ? AND pc_apptstatus = '>' ";
+            "join list_options as lo on lo.option_id = pc_apptstatus " .
+
+            "where pc_eventDate >= ? and pc_eventDate <= ?   ";
 
 
     if($_POST['category'] != "ALL" && !empty($_POST['category'])){
@@ -182,15 +180,35 @@ if($_POST['func'] == "show_appointments"){
         $row['client_name'] = $appointment['lname'] . " , " . $appointment['fname'];
         $row['appt_date']   = $appointment['pc_eventDate'];
         $row['appt_title']  = $appointment['pc_title'];
-        $row['appt_status'] = $appointment['appt_status'];
         $row['pc_startTime'] = $appointment['pc_startTime'];
         $row['pc_endTime'] = $appointment['pc_endTime'];
-        $row['units'] = $appointment['units'];
-        $row['CPT'] = $appointment['code_type'] . ":" . $appointment['code'];
-        $row['code_text'] = $appointment['code_text'];
-
-
+        $row['status'] = $appointment['status'];
         $row['encounter']   = $appointment['encounter'];
+        $row['pid']   = $appointment['pid'];
+
+        //query for the subreport
+        //get the Procedure codes:
+        if(!empty($appointment['encounter'])) {
+            $sub1sql = "select concat(code, modifier) as code, code_text, activity, units, justify from billing " .
+                "where encounter = '{$appointment['encounter']}' and code_type = 'CPT4'";
+
+            $icd10_result = sqlStatement($sub1sql);
+            $row['encounter_details'] = array();
+            while ($code = sqlFetchArray($icd10_result)) {
+
+
+                //get the justify code
+                $code['justify'] = str_replace("ICD10|", '', $code['justify']);
+                $code['justify'] = str_replace(":", '', $code['justify']);
+
+                $jsql = "select code_text from codes where code like '%".$code['justify']."%' AND active = 1";
+                $justify = sqlStatement($jsql);
+                $jred = sqlFetchArray($justify);
+                $code['justify_text'] = $jred['code_text'];
+                array_push($row['encounter_details'], $code);
+
+            }
+        }
 
         array_push($response['data'], $row);
 

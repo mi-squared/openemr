@@ -1130,6 +1130,7 @@ if (!empty($reg)) {
    <li><a class="collapsed" id="feeimg" ><span><?php xl('Employee','e') ?></span></a>
        <ul>
        <?php  if (acl_check('admin', 'super'    )) genMiscLink('RBot', 'adm', '0', xl('Payroll'), 'reports/appointments_report_payroll.php' ); ?>
+       <?php  if (acl_check('admin', 'super'    )) genMiscLink('RBot', 'adm', '0', xl('Enhanced Payroll'), 'reports/payroll_report_enhanced.php' ); ?>
 	   <?php  genMiscLink('RBot', 'rep', '0', xl('PTO, Milage'), 'payroll/misc_payroll_entry.php' ); ?>
 	   </ul>
    </li>

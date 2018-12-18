@@ -59,11 +59,45 @@ $form_apptcat = $_POST['appcat'];
 
         $(document).ready(function() {
 
+            function format ( d , className ) {
+                var encounter_details = d.encounter_details;
+                var response = "" +
+
+                        '<table align="center"  class = " sub_report  compact formtable className ' + className + ' " style="width:87%; padding: 5px 205px 5px 205px; background-color:rgba(233, 239, 231, 255);" >' ;
+
+                            response += '<tr class="'+className+'"></tr>';
+                            encounter_details.forEach(function(detail){
+                             response +=   '<tr class="'+className+'">' +
+
+                                                '<td width="20%">CPT4 ' + detail.code +     '</td>' +
+
+                                                 '<td width="25%">' + detail.code_text +     '</td>' +
+
+                                                 '<td width="5%">' + detail.units +     '</td>' +
+
+                                                 '<td width="50%">' + detail.justify_text +     '</td>' +
+                                            '</tr>' ;
+
+                                });
+
+
+            response +='</table>';
+
+
+
+
+
+
+                return response;
+
+            }
+
             var oTable;
 
-            oTable=$('#show_sms_table').DataTable({
+            oTable=$('#show_enhanced_appointment_report').DataTable({
                 dom: 'Bfrtip',
-                autoWidth: false,
+                autoWidth: true,
+                scrollX:false,
                 "order": [[ 3, "asc" ], [ 4, "asc" ]],
 
                 buttons: [
@@ -84,23 +118,24 @@ $form_apptcat = $_POST['appcat'];
                 },
 
                 columns:[
+                    { 'data': 'pc_eid'},
+                    { 'data': 'encounter'},
                     { 'data': 'provider'},
                     { 'data': 'client_name'},
-                    { 'data': 'encounter'},
+                    { 'data': 'pid'},
                     { 'data': 'appt_date'},
                     { 'data': 'pc_startTime'},
                     { 'data': 'pc_endTime'},
-                    { 'data': 'units'},
                     { 'data': 'appt_title'},
-                    { 'data': 'CPT'},
-                    { 'data': 'code_text'}
+                    { 'data': 'status'}
+
 
 
                 ],
 
                 "columnDefs": [
 
-                    {className: "compact", "targets": [ 0 ] },
+                    {className: "compact", "targets": [ 0,1,2 ] },
 
 
 
@@ -120,8 +155,14 @@ $form_apptcat = $_POST['appcat'];
 
                 ],
                 "rowCallback": function( row, data ) {
-
-
+                    //We are passing the row which is the closes tr.
+                    //we need to make a child row from t0.
+                    var t0 = oTable.row(row);
+                    var className = row.className;
+                    var enc = data.encounter;
+                    if(enc > 0 ) {
+                        var ch = t0.child(format(data, className)).show()
+                    }
                 },
                 "iDisplayLength": 100,
                 "select":true,
@@ -180,21 +221,14 @@ $form_apptcat = $_POST['appcat'];
                     .draw();
             } );
 
-            $('#column6_search_show_appt_table').on( 'keyup', function () {
+            $('#column7_search_show_appt_table').on( 'keyup', function () {
                 oTable
                     .columns( 7 )
                     .search( this.value )
                     .draw();
             } );
 
-            $('#column6_search_show_appt_table').on( 'keyup', function () {
-                oTable
-                    .columns( 8 )
-                    .search( this.value )
-                    .draw();
-            } );
-
-            $('#column6_search_show_appt_table').on( 'keyup', function () {
+            $('#column8_search_show_appt_table').on( 'keyup', function () {
                 oTable
                     .columns( 8 )
                     .search( this.value )
@@ -202,6 +236,16 @@ $form_apptcat = $_POST['appcat'];
             } );
 
 
+            $('#column9_search_show_appt_table').on( 'keyup', function () {
+                oTable
+                    .columns( 9 )
+                    .search( this.value )
+                    .draw();
+            } );
+
+
+
+            $('.sub_report').css('color', 'blue');
 
 
             $("button.dt-button").css('color', 'black !important');
@@ -314,43 +358,36 @@ $form_apptcat = $_POST['appcat'];
 
 
 
-
-<table cellpadding="0" cellspacing="0" border="0" class="display formtable session_table" id="show_sms_table">
+<table width="98%" cellpadding="0" cellspacing="0"  table-layout="fixed"
+       class="display formtable session_table compact " id="show_enhanced_appointment_report">
     <thead align="left" class="dataTable-header">
 
     <tr >
 
-        <th ><input  id = 'column0_search_show_appt_table' style = "width:14em;" ></th>
-        <th ><input  id = 'column1_search_show_appt_table' style = "width:14em;" ></th>
-        <th ><input  id = 'column2_search_show_appt_table' style = "width:8em;" ></th>
-        <th ><input  id = 'column3_search_show_appt_table' style = "width:4em;" ></th>
+        <th ><input  id = 'column0_search_show_appt_table' style = "width:7em;" ></th>
+        <th ><input  id = 'column1_search_show_appt_table' style = "width:7em;" ></th>
+        <th ><input  id = 'column2_search_show_appt_table' style = "width:14em;" ></th>
+        <th ><input  id = 'column3_search_show_appt_table' style = "width:14em;" ></th>
         <th ><input  id = 'column4_search_show_appt_table' style = "width:4em;" ></th>
-        <th ><input  id = 'column5_search_show_appt_table' style = "width:8em;" ></th>
-        <th ><input  id = 'column6_search_show_appt_table' style = "width:3em;" ></th>
-        <th ><input  id = 'column7_search_show_appt_table' style = "width:8em;" ></th>
-        <th ><input  id = 'column8_search_show_appt_table' style = "width:8em;" ></th>
-        <th ><input  id = 'column9_search_show_appt_table' style = "width:8em;" ></th>
-
-
-
-
-
-
+        <th ><input  id = 'column5_search_show_appt_table' style = "width:6em;" ></th>
+        <th ><input  id = 'column6_search_show_appt_table' style = "width:6em;" ></th>
+        <th ><input  id = 'column7_search_show_appt_table' style = "width:6em;" ></th>
+        <th ><input  id = 'column8_search_show_appt_table' style = "width:24em;" ></th>
+        <th ><input  id = 'column9_search_show_appt_table' style = "width:6em;" ></th>
 
     </tr>
 
     <tr>
-
+        <th> <?php xl('Appt. ID','e'); ?> </th>
+        <th> <?php xl('Encounter','e'); ?> </th>
         <th> <?php xl('Provider','e'); ?> </th>
         <th> <?php xl('Client','e'); ?> </th>
-        <th> <?php xl('Encounter','e'); ?> </th>
+        <th> <?php xl('PID','e'); ?> </th>
         <th> <?php xl('Appt Date','e'); ?> </th>
         <th> <?php xl('Start Time','e'); ?> </th>
         <th> <?php xl('End Time','e'); ?> </th>
-        <th> <?php xl('Units','e'); ?> </th>
         <th> <?php xl('Appt Title','e'); ?> </th>
-        <th> <?php xl('Code','e'); ?> </th>
-        <th> <?php xl('Procedure Title','e'); ?> </th>
+        <th> <?php xl('Status','e'); ?> </th>
 
 
 

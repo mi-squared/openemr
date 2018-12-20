@@ -14,6 +14,8 @@ define("IBH_TRANSPORTATION_FEE", 20);
 function ibh_getEncounterCodeInfo($code) {
 		
 		$code = trim($code);
+
+
 		
 		$codes = array(
 			"Individual Therapy 30 min"=>array("mod"=>0.5),
@@ -463,7 +465,7 @@ function ibh_get_prior_auth ($id) {
 	
 	// cycle through each of the valid 7-ish codes
 	foreach ($actual_codes as $billing_code) {
-		
+
 		$billing_code = explode(":", $billing_code);
         $cpt4 = $billing_code[0];
 
@@ -565,7 +567,15 @@ function ibh_check_for_prior_auth_day_alerts() {
 	// the EXACT "days remaining" as they have days remaining
 	$auths = array();
 	$today = date("Y-m-d");
-	$res = sqlStatement("SELECT id FROM form_prior_auth WHERE auth_from < '$today' AND auth_to > '$today' ORDER BY date DESC");
+
+
+    //
+
+    $sql = "SELECT id, pid, auth_from, auth_to, units, alert_units, alert_days, " .
+        " DATE_FORMAT('{$today}','%Y-%m-%d') , datediff(auth_to, DATE_FORMAT('{$today}','%Y-%m-%d') ) as date_diff  " .
+        "FROM form_prior_auth WHERE (datediff(auth_to, DATE_FORMAT('{$today}','%Y-%m-%d') ) > -7) and (datediff(auth_to, DATE_FORMAT('{$today}','%Y-%m-%d') ) = alert_days) ORDER BY date DESC";
+
+	$res = sqlStatement($sql);
 	$ret = "";
 	
 	
@@ -1247,7 +1257,7 @@ function esign_interpreter($pid, $encounter, $minutes, $name, $modifier = ''){
     if($modifier == '1'){
         $modifier = "";
     }
-
+	
     sqlStatement("INSERT INTO billing SET " .
                 "date = '$en' , " .
                 "code_type = 'CPT4', " .
@@ -1341,23 +1351,23 @@ function ibh_get_location($claim, $claim_location = 11) {
 // FORMERLY update_fs.php
 
 function esign_interactive_complexity($encounter, $pid, $modifier = ''){
-	
+
     //Get date of the encounter.
     //so that the correct billing entry can be recorded
-    
+
 	$t = date("H:m:s");
 
     $res = ibh_get_encounter_info($encounter);
-    
+
     $e_date = $res['date'];
     $prov = $res['provider_id'];
-    
+
     $en_date = explode(" ", $e_date);
     $en = $en_date[0] . " " . $t; // fudging here... adding a current time to time of encounter...
-		
+
 	$justify = ibh_get_patient_diagnosis($pid);
 	$just = explode(":", $justify);
-   
+
     if(is_array($modifier)){
 
         $modifier = implode(':', $modifier);

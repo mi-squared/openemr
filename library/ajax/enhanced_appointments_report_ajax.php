@@ -186,6 +186,11 @@ if($_POST['func'] == "show_appointments"){
         $row['encounter']   = $appointment['encounter'];
         $row['pid']   = $appointment['pid'];
 
+        //get the  minutes of the appointments
+
+        $row['appt_lenth_hours'] = round(abs(strtotime($appointment['pc_startTime']) - strtotime($appointment['pc_endTime'])) / 3600,2);
+        $row['appt_lenth_minutes'] = round(abs(strtotime($appointment['pc_startTime']) - strtotime($appointment['pc_endTime'])) / 60,2);
+
         //query for the subreport
         //get the Procedure codes:
         if(!empty($appointment['encounter'])) {
@@ -205,6 +210,9 @@ if($_POST['func'] == "show_appointments"){
                 $justify = sqlStatement($jsql);
                 $jred = sqlFetchArray($justify);
                 $code['justify_text'] = $jred['code_text'];
+                $code['pc_startTime'] = $appointment['pc_startTime'];
+                $code['pc_endTime'] = $appointment['pc_endTime'];
+                $code['unit_time'] = $row['appt_lenth_minutes'] . " \ " . $code['units'];
                 array_push($row['encounter_details'], $code);
 
             }

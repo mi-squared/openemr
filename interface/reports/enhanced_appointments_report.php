@@ -69,13 +69,13 @@ $form_apptcat = $_POST['appcat'];
                             encounter_details.forEach(function(detail){
                              response +=   '<tr class="'+className+'">' +
 
-                                                '<td width="10%">CPT4 ' + detail.code +     '</td>' +
+                                                '<td width="20%">CPT4 ' + detail.code +     '</td>' +
 
                                                  '<td width="25%">' + detail.code_text +     '</td>' +
 
-                                                 '<td width="10%">' + detail.pc_startTime + '-' + detail.pc_endTime + '</td>' +
+                                                 '<td width="5%">' + detail.units +     '</td>' +
 
-                                                 '<td width="45%">' + detail.justify_text +     '</td>' +
+                                                 '<td width="50%">' + detail.justify_text +     '</td>' +
                                             '</tr>' ;
 
                                 });
@@ -124,7 +124,8 @@ $form_apptcat = $_POST['appcat'];
                     { 'data': 'client_name'},
                     { 'data': 'pid'},
                     { 'data': 'appt_date'},
-                    { 'data[encounter_details]': 'unit_time'},
+                    { 'data': 'pc_startTime'},
+                    { 'data': 'pc_endTime'},
                     { 'data': 'appt_title'},
                     { 'data': 'status'}
 
@@ -134,7 +135,7 @@ $form_apptcat = $_POST['appcat'];
 
                 "columnDefs": [
 
-                    {className: "compact", "targets": [ 0,1,2,3 ] },
+                    {className: "compact", "targets": [ 0,1,2 ] },
 
 
 
@@ -235,7 +236,12 @@ $form_apptcat = $_POST['appcat'];
             } );
 
 
-
+            $('#column9_search_show_appt_table').on( 'keyup', function () {
+                oTable
+                    .columns( 9 )
+                    .search( this.value )
+                    .draw();
+            } );
 
 
 
@@ -364,10 +370,10 @@ $form_apptcat = $_POST['appcat'];
         <th ><input  id = 'column3_search_show_appt_table' style = "width:14em;" ></th>
         <th ><input  id = 'column4_search_show_appt_table' style = "width:4em;" ></th>
         <th ><input  id = 'column5_search_show_appt_table' style = "width:6em;" ></th>
-        <th ><input  id = 'column6_search_show_appt_table' style = "width:12em;" ></th>
-        <th ><input  id = 'column7_search_show_appt_table' style = "width:20em;" ></th>
-        <th ><input  id = 'column8_search_show_appt_table' style = "width:12em;" ></th>
-
+        <th ><input  id = 'column6_search_show_appt_table' style = "width:6em;" ></th>
+        <th ><input  id = 'column7_search_show_appt_table' style = "width:6em;" ></th>
+        <th ><input  id = 'column8_search_show_appt_table' style = "width:24em;" ></th>
+        <th ><input  id = 'column9_search_show_appt_table' style = "width:6em;" ></th>
 
     </tr>
 
@@ -378,8 +384,8 @@ $form_apptcat = $_POST['appcat'];
         <th> <?php xl('Client','e'); ?> </th>
         <th> <?php xl('PID','e'); ?> </th>
         <th> <?php xl('Appt Date','e'); ?> </th>
-        <th> <?php xl('Minutes / Units','e'); ?> </th>
-
+        <th> <?php xl('Start Time','e'); ?> </th>
+        <th> <?php xl('End Time','e'); ?> </th>
         <th> <?php xl('Appt Title','e'); ?> </th>
         <th> <?php xl('Status','e'); ?> </th>
 

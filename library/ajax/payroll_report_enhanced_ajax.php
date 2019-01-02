@@ -30,6 +30,21 @@ if($_POST['func'] == 'display_payroll'){
     $topresult = sqlStatement($topsql);
     $index = 0;
     while($toprow = sqlFetchArray($topresult)){
+
+        //we want to skip all appointments that have 0 encounters
+
+        $count_sql = "select count(*) as count from billing b " .
+            " join openemr_postcalendar_events ope on b.encounter = ope.encounter " .
+            " join users u on u.id = ope.pc_aid ".
+            " join patient_data pd on pd.pid = ope.pc_pid " .
+            " join facility f on pc_facility = f.id " .
+            " where   b.encounter != 0 " .
+            " AND pc_eventDate >= ? AND pc_eventDate <= ? AND pc_catid = {$toprow['pc_catid']} and code_type = 'CPT4'";
+
+        $count_result = sqlQuery($count_sql, array($_POST['form_from_date'], $_POST['form_to_date']));
+
+        if($count_result['count'] == 0) continue;
+
         $catname = $toprow['pc_catname'];
         array_push($tableData['data'],  $toprow);
 

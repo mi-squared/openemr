@@ -219,7 +219,7 @@ if ($result3['provider']) {   // Use provider in case there is an ins record w/ 
  }
 
  function newEvt() {
-  dlgopen('../../main/calendar/add_edit_event.php?patientid=<?php echo htmlspecialchars($pid,ENT_QUOTES); ?>', '_blank', 750, 525); //*** IBH Modofy (775,375)
+  dlgopen('../../main/calendar/add_edit_event.php?patientid=<?php echo htmlspecialchars($pid,ENT_QUOTES); ?>', '_blank', 950, 650); //*** IBH Modify
   return false;
  }
 

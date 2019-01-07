@@ -672,9 +672,11 @@ if ($GLOBALS['patient_id_category_name']) {
           <a href="../../reports/external_data.php" onclick='top.restoreSession()'>
           <?php echo xlt('External Data'); ?></a>
 
-          | <?php //***IBH Add ?>
-          <a href="../../forms/prior_auth/display.php?pid=<?=$pid?>" <?php if(getSupervisor($authUser) != "Supervisor") if(!$GLOBALS['large_prior_auth_screen']){ echo "class='iframe large_modal'";}  ?>onclick='top.restoreSession()'>
-          <?php echo htmlspecialchars(xl('Prior Auth'),ENT_NOQUOTES); ?></a>
+          |
+          <?php //***IBH Add ?>
+          <?php //Added for customer IBH functionality ?>
+          <a href="../../forms/prior_auth/display2.php?pid=<?=$pid?>" <?php if(getSupervisor($authUser) != "Supervisor") if(!$GLOBALS['large_prior_auth_screen']){ echo "class='iframe large_modal'";}  ?> onclick='top.restoreSession()'>
+              <?php echo htmlspecialchars(xl('Prior Auth'),ENT_NOQUOTES); ?></a>
           <?php //***IBH Add END ?>
 
 <!-- DISPLAYING HOOKS STARTS HERE -->

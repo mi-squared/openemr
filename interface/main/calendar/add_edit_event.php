@@ -15,6 +15,7 @@
  *
  * @package OpenEMR
  * @author  Rod Roark <rod@sunsetsystems.com>
+ * @author  Daniel Pflieger <daniel@growlingflea.com> Custom code for Idaho Behavioral Health
  * @link    http://www.open-emr.org
  */
 
@@ -911,8 +912,9 @@ if ($_POST['form_action'] == "save") {
   "authorized != 0 AND active = 1 ORDER BY lname, fname");
 
  // Get event categories.
+ //***IBH modified in IBH500, replaced pc_seq with pc_catname
  $cres = sqlStatement("SELECT pc_catid, pc_catname, pc_recurrtype, pc_duration, pc_end_all_day " .
-  "FROM openemr_postcalendar_categories where pc_active = 1 ORDER BY pc_seq");
+  "FROM openemr_postcalendar_categories ORDER BY pc_catname");
 
  // Fix up the time format for AM/PM.
  $startampm = '1';
@@ -961,9 +963,10 @@ td { font-size:0.8em; }
  if($_GET['prov']==true){
   $cattype=1;
  }
- $cres = sqlStatement("SELECT pc_catid, pc_cattype, pc_catname, " .
+//***IBH modified in IBH500, replaced pc_seq with pc_catname
+$cres = sqlStatement("SELECT pc_catid, pc_cattype, pc_catname, " .
   "pc_recurrtype, pc_duration, pc_end_all_day " .
-  "FROM openemr_postcalendar_categories where pc_active = 1 ORDER BY pc_seq");
+  "FROM openemr_postcalendar_categories ORDER BY pc_catname");
  $catoptions = "";
  $prefcat_options = "    <option value='0'>-- " . xlt("None") . " --</option>\n";
  $thisduration = 0;
@@ -1261,7 +1264,7 @@ echo '
 			top.restoreSession();
 			opener.document.location="../../new/new.php";
 			// Close the window
-			// window.close();  //***IBH modified
+		    window.close(); 
 </script>';
 }
 $classprov='current';
@@ -1417,15 +1420,14 @@ $classpati='';
         $selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
         echo "<option value={$facrow['id']} $selected>{$facrow['name']}</option>";
         *************************************************************/
-        //***IBH modified.  1316,17 stay but everthing else in while loop commented out
-        //if ($_SESSION['authorizedUser'] || in_array($facrow, $facils)) {
+        if ($_SESSION['authorizedUser'] || in_array($facrow, $facils)) {
           $selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
           echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
-
-        //} else{
-		 //$selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
-          //echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
-        //}
+        }
+        else{
+		$selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
+         echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
+        }
         /************************************************************/
       }
       // EOS E2F
@@ -1740,7 +1742,7 @@ if ($repeatexdate != "") {
    <b><?php echo xlt('Comments'); ?>:</b>
   </td>
   <td colspan='4' nowrap>
-  <!-- prior auth added by Sherwin 4/28/16 -->
+  <?php //***IBH Modified ?>
    <input type='text' size='40' name='form_comments' style='width:100%' value='<?php echo attr($hometext); ?>' title='<?php echo xla('Additional Information for calendar and show patient copay & balance');?>' />
   </td>
  </tr>
@@ -1818,8 +1820,11 @@ if ($repeatexdate != "") {
 <div id="recurr_popup" style="visibility: hidden; position: absolute; top: 50px; left: 50px; width: 400px; border: 3px outset yellow; background-color: yellow; padding: 5px;">
 <?php echo xlt('Apply the changes to the Current event only, to this and all Future occurrences, or to All occurrences?') ?>
 <br>
+    <?php //***IBH Modified for 500: removed the ability to submit changes for all appts (past, future) at once since this is dangerous
+    //Fully aware that this can be turned off/on in Admin but we removed it anyway.
+    // ?>
 <?php if($GLOBALS['submit_changes_for_all_appts_at_once']) {?>
-    <input type="button" name="all_events" id="all_events" value="  <?php echo xla('All'); ?>  ">
+<!--    <input type="button" name="all_events" id="all_events" value="  --><?php //echo xla('All'); ?><!--  ">-->
 <?php } ?>
 <input type="button" name="future_events" id="future_events" value="<?php echo xla('Future'); ?>">
 <input type="button" name="current_event" id="current_event" value="<?php echo xla('Current'); ?>">

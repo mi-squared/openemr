@@ -27,7 +27,7 @@
         <span class="patientDataColumn">
             <span style="float:left;" class="fa-stack"><a data-bind="click: viewPtFinder" href="#">
                 <i class="fa fa-list fa-stack-1x" aria-hidden="true"></i>
-                <strong><i style="margin: 10px 0 0 10px;" class="fa fa-search fa-stack-x" aria-hidden="true"></i></strong>
+                <strong><i style="margin: 5px 0 0 10px;" class="fa fa-search fa-w-6 fa-2x" aria-hidden="true"></i></strong>
             </a></span>
             <div class="patientInfo">
                 <?php echo xlt("Patient"); ?>:
@@ -41,7 +41,7 @@
                     <?php echo xlt("None");?>
                 <!-- /ko -->
                 <!-- ko if: patient -->
-                    <a class="css_button_small" href="#" class="clear" data-bind="click:clearPatient" title="<?php echo xlt("Clear") ?>">
+                    <a class="css_button_lg" href="#" class="clear" data-bind="click:clearPatient" title="<?php echo xlt("Clear") ?>">
                         <i style="font-size:150%;" class="fa fa-times"></i>
                     </a>
                 <!-- /ko -->

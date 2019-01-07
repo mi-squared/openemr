@@ -166,7 +166,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
             var response = "";
             response += '<table  border=".125" class="formtable session_table compact odd " style="background-color:rgba(86,183,60,.1); width:90%; ">' +
                 '<tr class="detail_row">' +
-                '<th style="width:10%" >Appt. Id</th>' +
+                '<th style="width:10%" >Date of Service</th>' +
                 '<th style="width:10%">Code</th>' +
                 '<th style="width:10%">Encounter</th>' +
                 '<th style="width:20%">Provider</th>' +
@@ -188,7 +188,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                 details.forEach(function (detail) {
 
                     response += '<tr class="detail_row" >' + '' +
-                        '<td style="width:10%; padding-left:2%">' + detail.pc_eid + '</td>' +
+                        '<td style="width:10%; padding-left:2%">' + detail.pc_eventDate + '</td>' +
                         '<td style="width:10%; padding-left:2%" >' + detail.code + '</td>' +
                         '<td style="width:10%; padding-left:2%">' + detail.encounter + '</td>' +
                         '<td style="width:20%; padding-left:2%">' + detail.provider + '</td>' +

@@ -62,7 +62,7 @@ if($_POST['func'] == 'display_payroll'){
 
         if(isset($_POST['billing_code']) && strlen($_POST['billing_code']) > 0){
 
-            $count_sql .= "AND code = '{$_POST['code']}' ";
+            $count_sql .= "AND pc_catid = '{$_POST['billing_code']}' ";
 
         }
 
@@ -99,7 +99,7 @@ if($_POST['func'] == 'display_payroll'){
 
         if(isset($_POST['billing_code']) && strlen($_POST['billing_code']) > 0){
 
-            $sql .= "AND code = '{$_POST['code']}' ";
+            $sql .= "AND occ.pc_catid = '{$_POST['billing_code']}' ";
 
         }
 

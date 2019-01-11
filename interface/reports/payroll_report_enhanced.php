@@ -43,15 +43,15 @@ function ibh_getPayrollCodePulldown($code) {
 
     $html = "<select id='codes' name='billing_code'><option value=''>All Codes</option>";
 
-    $cres = sqlStatement("SELECT pc_catname FROM openemr_postcalendar_categories WHERE pc_catname LIKE '%:%' ORDER BY pc_catname");
+    $cres = sqlStatement("SELECT pc_catname, pc_catid FROM openemr_postcalendar_categories WHERE pc_catname LIKE '%:%' ORDER BY pc_catname");
 
     while ($crow = sqlFetchArray($cres)) {
 
         $code_name = $crow['pc_catname'];
+        $cat_id = $crow['pc_catid'];
+        $ex_code = $cat_id;
 
-        $ex_code = trim(explode(":", $code_name)[1]);
-
-        $html .= "<option value='" . $ex_code . "'";
+        $html .= "<option value='" . $cat_id . "'";
 
         if ($ex_code == $code) {
             $html .= " selected";
@@ -164,7 +164,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
         function format( d , className ) {
 
             var response = "";
-            response += '<table  border=".125" class="formtable session_table compact odd " style="background-color:rgba(86,183,60,.1); width:90%; ">' +
+            response += '<table  border=".125" class="detail_row formtable session_table compact odd " style="background-color:rgba(86,183,60,.1); width:100%; ">' +
                 '<tr class="detail_row">' +
                 '<th style="width:10%" >Date of Service</th>' +
                 '<th style="width:10%">Code</th>' +
@@ -175,7 +175,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                 '<th style="width:5%">Billing Units</th>' +
                 '<th style="width:5%">Payroll Units</th></tr>';
 
-            response += '<table  class = "detail_row formtable session_table compact  odd" style=" width:90%;' +
+            response += '<table  class = "detail_row formtable session_table compact  odd" style=" width:100%;' +
                 'background-color:rgba(169,172,213,1); ">';
 
              var details = d.details;
@@ -188,7 +188,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 
                 details.forEach(function (detail) {
 
-                    response += '<tr class="detail_row cell-border" >' +
+                    response += '<tr>' +
                         '<td style="width:10%; padding-left:2%">' + detail.pc_eventDate + '</td>' +
                         '<td style="width:10%; padding-left:2%" >' + detail.code + '</td>' +
                         '<td style="width:10%; padding-left:2%">' + detail.encounter + '</td>' +
@@ -203,7 +203,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 
                 });
 
-                response += '<tr class="highlight">' +
+                response += '<tr>' +
                     "<td style='width:10%; padding-left:2%'></td>" +
                     "<td style='width:10%; padding-left:2%'></td>" +
                     "<td style='width:10%; padding-left:2%'></td> " +
@@ -457,7 +457,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
     </tr>
     <tr align="center" >
 
-        <th>Sort</th>
+        <th>Search Code</th>
     </tr>
 
     </thead>

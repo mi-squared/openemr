@@ -1818,7 +1818,7 @@ if ($repeatexdate != "") {
 
 <div id="checkins"></div> <?php //***IBH added ?>
 <div id="recurr_popup" style="visibility: hidden; position: absolute; top: 50px; left: 50px; width: 400px; border: 3px outset yellow; background-color: yellow; padding: 5px;">
-<?php echo xlt('Apply the changes to the Current event only, to this and all Future occurrences, or to All occurrences?') ?>
+<?php echo xlt('Apply the changes to the Current event only or to this and all Future occurrences?') //***IBH Modify: message matches modification ?>
 <br>
     <?php //***IBH Modified for 500: removed the ability to submit changes for all appts (past, future) at once since this is dangerous
     //Fully aware that this can be turned off/on in Admin but we removed it anyway.
@@ -1826,9 +1826,11 @@ if ($repeatexdate != "") {
 <?php if($GLOBALS['submit_changes_for_all_appts_at_once']) {?>
 <!--    <input type="button" name="all_events" id="all_events" value="  --><?php //echo xla('All'); ?><!--  ">-->
 <?php } ?>
-<input type="button" name="future_events" id="future_events" value="<?php echo xla('Future'); ?>">
-<input type="button" name="current_event" id="current_event" value="<?php echo xla('Current'); ?>">
+<?php //***IBH Modify : we changed the order of the buttons to limit the change of 'future' being pressed?>
 <input type="button" name="recurr_cancel" id="recurr_cancel" value="<?php echo xla('Cancel'); ?>">
+<input type="button" name="current_event" id="current_event" value="<?php echo xla('Current'); ?>">
+<input type="button" name="future_events" id="future_events" value="<?php echo xla('Future'); ?>">
+
 </div>
 
 <?php //***IBH modified, body ending comes at end of file ?>
@@ -1846,6 +1848,7 @@ if ($repeatexdate != "") {
  Calendar.setup({inputField:"form_date", ifFormat:"%Y-%m-%d", button:"img_date"});
  Calendar.setup({inputField:"form_enddate", ifFormat:"%Y-%m-%d", button:"img_enddate"});
  Calendar.setup({inputField:"form_dob", ifFormat:"%Y-%m-%d", button:"img_dob"});
+
 </script>
 
 <script language="javascript">
@@ -1859,6 +1862,8 @@ $(document).ready(function(){
     $("#cancel").click(function() { window.close(); });
 
     // buttons affecting the modification of a repeating event
+    $("#current_event").css({width: '150px'}).focus();
+    $("#future_events").css({float: 'right'}).focus();
     $("#all_events").click(function() { $("#recurr_affect").val("all"); EnableForm(); SubmitForm(); });
     $("#future_events").click(function() { $("#recurr_affect").val("future"); EnableForm(); SubmitForm(); });
     $("#current_event").click(function() { $("#recurr_affect").val("current"); EnableForm(); SubmitForm(); });

@@ -172,9 +172,10 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                 '<th style="width:20%">Provider</th>' +
                 '<th style="width:20%">Patient</th>' +
                 '<th style="width:20%">Facility</th>' +
-                '<th style="width:10%">Units</th></tr>';
+                '<th style="width:5%">Billing Units</th>' +
+                '<th style="width:5%">Payroll Units</th></tr>';
 
-            response += '<table  class = "detail_row formtable session_table compact cell-border odd" style=" width:90%;' +
+            response += '<table  class = "detail_row formtable session_table compact  odd" style=" width:90%;' +
                 'background-color:rgba(169,172,213,1); ">';
 
              var details = d.details;
@@ -187,22 +188,34 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 
                 details.forEach(function (detail) {
 
-                    response += '<tr class="detail_row" >' + '' +
+                    response += '<tr class="detail_row cell-border" >' +
                         '<td style="width:10%; padding-left:2%">' + detail.pc_eventDate + '</td>' +
                         '<td style="width:10%; padding-left:2%" >' + detail.code + '</td>' +
                         '<td style="width:10%; padding-left:2%">' + detail.encounter + '</td>' +
                         '<td style="width:20%; padding-left:2%">' + detail.provider + '</td>' +
                         '<td style="width:20%; padding-left:2%">' + detail.patientName + '</td>' +
                         '<td style="width:20%; padding-left:2%">' + detail.facility + '</td>' +
-                        '<td style="width:10%; padding-left:2%">' + detail.units + '</td>' +
+                        '<td style="width:5%; padding-left:2%">' + detail.units + '</td>' +
+                        '<td style="width:5%; padding-left:2%">' + detail.payroll_units + '</td>' +
 
 
                         '</tr>';
 
                 });
+
+                response += '<tr class="highlight">' +
+                    "<td style='width:10%; padding-left:2%'></td>" +
+                    "<td style='width:10%; padding-left:2%'></td>" +
+                    "<td style='width:10%; padding-left:2%'></td> " +
+                    "<td style='width:20%; padding-left:2%'></td>" +
+                    "<td style='width:20%; padding-left:2%'></td>" +
+                    "<td style='width:20%; padding-left:2%; font-size:15px;'>Totals: </td>" +
+                    "<td style='width:5%; padding-left:2%; font-size:15px;'>" + d.total_billing_units + "</td>" +
+                    "<td style='width:5%; padding-left:2%; font-size:15px;'>" + d.total_payroll_units + "</td></tr>";
+                response += '</table>'
             }
             response += "</table>";
-            response += '</table>'
+
 
 
 
@@ -245,7 +258,8 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                 order:[[0, "desc"]],
                 columns:[
 
-                    {'data' : 'pc_catname', "className": "dt-center"}
+                    {'data' : 'pc_catname', "className": "dt-center", 'width' : '81%'},
+
 
 
                 ],
@@ -271,7 +285,8 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                 "iDisplayLength": 100,
                 "select":true,
                 "searching":true,
-                "retrieve" : true
+                "retrieve" : true,
+
 
             });
 
@@ -493,6 +508,9 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 
 
     });
+
+
+
 
 </script>
 </html>

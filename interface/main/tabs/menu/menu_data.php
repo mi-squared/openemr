@@ -33,8 +33,7 @@ $menu_json='[
     {"label":"New","menu_id":"new0","target":"pat","url":"/interface/new/new.php","children":[],"requirement":0,"global_req":"!full_new_patient_form"},
     {"label":"Summary","menu_id":"dem1","target":"pat","url":"/interface/patient_file/summary/demographics.php","children":[],"requirement":1},
     {"label":"Visits","icon":"fa-caret-right","children":[
-      {"label":"Calendar","menu_id":"cal0","target":"cal","url":"/interface/main/main_info.php","children":[],"requirement":0,"global_req_strict":["ippf_specific","!disable_calendar"]},
-      
+      {"label":"Calendar","menu_id":"cal0","target":"cal","url":"/interface/main/main_info.php","children":[],"requirement":0,"global_req_strict":["ippf_specific","!disable_calendar"]},      
       {"label":"Current","menu_id":"enc2","target":"enc","url":"/interface/patient_file/encounter/encounter_top.php","children":[],"requirement":3},
       {"label":"Visit History","menu_id":"ens1","target":"enc","url":"/interface/patient_file/history/encounters.php","children":[],"requirement":1}],"requirement":0},
     {"label":"Records","icon":"fa-caret-right","children":[
@@ -166,7 +165,23 @@ $menu_json='[
     {"label":"Blank Forms","icon":"fa-caret-right","children":[
       {"label":"Demographics","url":"/interface/patient_file/summary/demographics_print.php","target":"rep","children":[],"requirement":0},
       {"label":"Superbill/Fee Sheet","url":"/interface/patient_file/printed_fee_sheet.php","target":"rep","children":[],"requirement":0},
-      {"label":"Referral","url":"/interface/patient_file/transaction/print_referral.php","target":"rep","children":[],"requirement":0}],"requirement":0},
+      {"label":"Referral","url":"/interface/patient_file/transaction/print_referral.php","target":"rep","children":[],"requirement":0},
+      {"label":"CBRS Case Management Assessment","url":"/interface/forms/LBF/printable.php?formname=LBFmastertreatment","target":"rep","children":[],"requirement":0},
+        {"label":"CBRS Service Progress Note","url":"/interface/forms/LBF/printable.php?formname=LBFprogressnote","target":"rep","children":[],"requirement":0},        
+        {"label":"CBRS/CM Treatment Plan and Review","url":"/interface/forms/LBF/printable.php?formname=LBFcbrscmtreatplan","target":"rep","children":[],"requirement":0},
+        {"label":"Clinic Progress Note","url":"/interface/forms/LBF/printable.php?formname=LBFcliprognote","target":"rep","children":[],"requirement":0},
+        {"label":"Clinic Tx Plan and Review","url":"/interface/forms/LBF/printable.php?formname=LBFclinictxplan","target":"rep","children":[],"requirement":0},
+        {"label":"CM Service Progress Note","url":"/interface/forms/LBF/printable.php?formname=LBFcmserviceprogress","target":"rep","children":[],"requirement":0},
+        {"label":"Comprehensive Diagnostic Assessment","url":"/interface/forms/LBF/printable.php?formname=LBFcomp","target":"rep","children":[],"requirement":0},
+        {"label":"Dr. Ward Note","url":"/interface/forms/LBF/printable.php?formname=LBFdrward","target":"rep","children":[],"requirement":0},
+        {"label":"Family Support Case Note","url":"/interface/forms/LBF/printable.php?formname=LBFfamsupcasnote","target":"rep","children":[],"requirement":0},
+        {"label":"Family Support Recovery Plan","url":"/interface/forms/LBF/printable.php?formname=LBFfamilysuprecplan","target":"rep","children":[],"requirement":0}, 
+       {"label":"Medication Management Evaluation","url":"/interface/forms/LBF/printable.php?formname=LBFmedmaneval","target":"rep","children":[],"requirement":0},
+       {"label":"Medication Management Note","url":"/interface/forms/LBF/printable.php?formname=LBFmedicationmgt","target":"rep","children":[],"requirement":0},
+       {"label":"Patient Diagnosis","url":"/interface/forms/LBF/printable.php?formname=LBFdiag","target":"rep","children":[],"requirement":0},
+       {"label":"Peer Support Case Note","url":"/interface/forms/LBF/printable.php?formname=LBFpeersupportcase","target":"rep","children":[],"requirement":0},
+       {"label":"Peer Support Recovery Plan","url":"/interface/forms/LBF/printable.php?formname=LBFpeerplan","target":"rep","children":[],"requirement":0},
+       {"label":"Transition Plan","url":"/interface/forms/LBF/printable.php?formname=LBFtransitionplan","target":"rep","children":[],"requirement":0}],"requirement":0},
     {"label":"Services","icon":"fa-caret-right","children":[
       {"label":"Background Services","menu_id":"rep0","target":"rep","url":"/interface/reports/background_services.php","children":[],"requirement":0},
       {"label":"Direct Message Log","menu_id":"rep0","target":"rep","url":"/interface/reports/direct_message_log.php","children":[],"requirement":0}],"requirement":0,"acl_req":["admin","super"]}],"requirement":0},

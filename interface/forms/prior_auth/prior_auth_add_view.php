@@ -66,6 +66,8 @@ $patient = ibh_get_patient($_pid);
 
     <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/interface/themes/style_metal.css" type="text/css">
     <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
+    <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
+    <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/interface/main/tabs/js/include_opener.js"></script
 
 </head>
 <body class="overview-pane">
@@ -279,8 +281,8 @@ $patient = ibh_get_patient($_pid);
 
         //handle the cancel button
         $('.btn_prior_auth_cancel').on('click', function(){
-            var p = window.self;
-            p.close();
+
+            window.close();
         });
 
         //Fill in all available form field if this is an edit

@@ -216,7 +216,7 @@ $patient = ibh_get_patient($_pid);
 					url: "../../../library/ajax/display2_ajax.php",
 					data: {
 						func:"display_prior_auth",
-						pid: "<?php echo $patient['id'] ?>"
+						pid: "<?php echo $patient['pid'] ?>"
 					}, complete: function(){
 
 						$('#image').hide();

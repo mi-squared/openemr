@@ -60,12 +60,9 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 <script type="text/javascript" src="../../../library/dialog.js?v=<?php echo $v_js_includes; ?>"></script>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
-
+<script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/_ibh/js/jquery_latest.min.js"></script>
-
-
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/_ibh/js/jquery.tablesort.js"></script>
-
 
 <!-- IBH_DEV -->
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot']; ?>/_ibh/css/encounter.css" type="text/css">

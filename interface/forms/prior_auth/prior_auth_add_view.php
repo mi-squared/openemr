@@ -91,7 +91,6 @@ $patient = ibh_get_patient($_pid);
             <tr class="nav-bar" >
                 <td class="menu-button new_prior_auth_save"><button class="btn_prior_auth_save" align = "top" value="refresh" type="button" name="prior_auth_refresh" ><?php echo htmlspecialchars(xl('Save')) ?></button></td>
                 <td class="menu-button new_prior_auth_cancel"><button class="btn_prior_auth_cancel"  align = "top" value="add" type="button" name="prior_auth_add" ><?php echo htmlspecialchars(xl('Cancel')) ?></button></td>
-                <td class="menu-button new_prior_auth_test"><button class="btn_prior_auth_test"  align = "top" value="add" type="button" name="prior_auth_add" ><?php echo htmlspecialchars(xl('Test')) ?></button></td>
 
                 <td width="60%"></td>
             </tr>
@@ -239,7 +238,6 @@ $patient = ibh_get_patient($_pid);
             <tr class="nav-bar" >
                 <td class="menu-button new_prior_auth_save"><button class="btn_prior_auth_save" align = "top" value="refresh" type="button" name="prior_auth_refresh" ><?php echo htmlspecialchars(xl('Save')) ?></button></td>
                 <td class="menu-button new_prior_auth_cancel"><button class="btn_prior_auth_cancel"  align = "top" value="add" type="button" name="prior_auth_add" ><?php echo htmlspecialchars(xl('Cancel')) ?></button></td>
-                <td class="menu-button new_prior_auth_test"><button class="btn_prior_auth_test"  align = "top" value="add" type="button" name="prior_auth_add" ><?php echo htmlspecialchars(xl('Test')) ?></button></td>
                 <td width="60%"></td>
             </tr>
         </table>

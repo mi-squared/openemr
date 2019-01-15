@@ -76,7 +76,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
     <script type="text/javascript">
         jQuery(document).ready(function() {
             init();
-
+            alert("This is the right site but not the current database. Any changes made will NOT be saved.  If you don't see this message, you are OK! ")
             var productRegistrationController = new ProductRegistrationController();
             productRegistrationController.getProductRegistrationStatus(function(err, data) {
                 if (err) { return; }

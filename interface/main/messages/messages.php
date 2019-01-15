@@ -63,6 +63,9 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 <script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-2-1/index.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/_ibh/js/jquery_latest.min.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/_ibh/js/jquery.tablesort.js"></script>
+<script type='text/javascript' src='<?php echo $GLOBALS['webroot'] ?>/library/dialog.js'></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/fancybox-1.3.4/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/library/js/fancybox-1.3.4/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 
 <!-- IBH_DEV -->
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot']; ?>/_ibh/css/encounter.css" type="text/css">

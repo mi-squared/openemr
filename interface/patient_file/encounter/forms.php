@@ -7,6 +7,7 @@ use ESign\Api;
 
 require_once("../../globals.php");
 require_once("$srcdir/forms.inc");
+require_once("$srcdir/billing.inc"); //***IBH Added
 require_once("$srcdir/formdata.inc.php");
 require_once("$srcdir/calendar.inc");
 require_once("$srcdir/acl.inc");
@@ -20,8 +21,7 @@ require_once("forms_review_header.php"); //added
 // IBH_DEV_CHG
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
 
-
-
+//***IBH ADD Begin
 $hide_alert = filter_input(INPUT_GET, 'hi', FILTER_VALIDATE_INT);
 $ct = filter_input(INPUT_GET, 'ct', FILTER_VALIDATE_INT);
 $sup_alerted1 = filter_input(INPUT_GET, 's1');
@@ -96,7 +96,7 @@ if (isset($_POST['supervisor-comments'])) {
 
     $slash_date = $einfo['slash_date'];
 
-    $encounter_link = "<a class='encounter-setter' data-date='" . $slash_date . "' data-enc='" . $encounter . "' href='".$GLOBALS['webroot']."/interface/patient_file/encounter/forms.php?pid=" . $einfo['pid'] . "&set_encounter=" . $encounter . "' target='RTop'>Click here to edit the LBF for this encounter.</a>";
+	$encounter_link = "<a class='encounter-setter' data-date='" . $slash_date . "' data-enc='" . $encounter . "' href='/openemr/interface/patient_file/encounter/forms.php?pid=" . $einfo['pid'] . "&set_encounter=" . $encounter . "' target='RTop'>Click here to edit the LBF for this encounter.</a>";
 
     $encounter_message = $date . " (" . $supervisor . " to " . $uname . ")<br>Encounter: " . $encounter . "<br>Comments: " . $comments . "<br>";
 
@@ -115,7 +115,7 @@ if (isset($_POST['supervisor-comments'])) {
     $sig_deleted_note .= $encounter_message;
 }
 
-// END IBH_DEV
+//***IBH Add end
 
 
 
@@ -130,10 +130,12 @@ if (isset($_POST['supervisor-comments'])) {
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
 <link rel="stylesheet" type="text/css" href="../../../library/js/fancybox-1.3.4/jquery.fancybox-1.3.4.css" media="screen" />
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
+    <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery-1.7.2.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['webroot'] ?>/library/ESign/css/esign.css" /><!-- added -->
 <link rel="stylesheet" href="<?php echo $GLOBALS['assets_static_relative']; ?>/modified/dygraphs-2-0-0/dygraph.css" type="text/css"></script><!-- added -->
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/_ibh/css/encounter.css" type="text/css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <!-- supporting javascript code -->
 <script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/jquery-min-1-7-2/index.js"></script><!-- changed -->
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dialog.js?v=<?php echo $v_js_includes; ?>"></script><!-- changed-->
@@ -142,7 +144,9 @@ if (isset($_POST['supervisor-comments'])) {
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
 <script type="text/javascript" src="../../../library/dynarch_calendar_setup.js"></script>
 <script type="text/javascript" src="../../../library/js/common.js"></script>
-<script type="text/javascript" src="../../../library/js/fancybox-1.3.4/jquery.fancybox-1.3.4.js"></script>
+    <?php //***IBH Modify ?>
+<script type="text/javascript" src="../../../library/js/fancybox-1.3.4/jquery.fancybox-1.3.4.pack.js"></script>
+    <?php //***IBH Modify ?>
 <script src="<?php echo $GLOBALS['webroot'] ?>/library/ESign/js/jquery.esign.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['assets_static_relative']; ?>/modified/dygraphs-2-0-0/dygraph.js?v=<?php echo $v_js_includes; ?>"></script>
 </head> <!--this was missing -->

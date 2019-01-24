@@ -164,6 +164,7 @@ function postToGet($arin)
     padding:0% 2% 0% 2.5%;
   }
   img { max-width:700px; }
+
 </style>
 
 <?php if (!$PDF_OUTPUT) { ?>
@@ -784,7 +785,7 @@ foreach ($ar as $key => $val) {
                 <div name="search_div" id="search_div_<?php echo attr($form_id)?>_<?php echo attr($res[1])?>" class="report_search_div class_<?php echo attr($res[1]); ?>">
                 <?php
                 if (substr($res[1], 0, 3) == 'LBF') {
-                    call_user_func("lbf_report", $pid, $form_encounter, $N, $form_id, $res[1]);
+                    call_user_func("lbf_report", $pid, $form_encounter, $N, $form_id, $res[1], true); // KCC MSD-1744
                 } else {
                     call_user_func($res[1] . "_report", $pid, $form_encounter, $N, $form_id);
                 }

@@ -3008,7 +3008,7 @@ function display_layout_rows($formtype, $result1, $result2 = '')
                 disp_end_cell();
                 //echo "<td class='label_custom' colspan='$titlecols' valign='top'";
                 $titlecols_esc = htmlspecialchars($titlecols, ENT_QUOTES);
-                echo "<td class='label_custom' colspan='$titlecols_esc' ";
+                echo "<td class='label_custom' valign='top' colspan='$titlecols_esc' "; // KCC MSD-1744 added valign
                 //if ($cell_count == 2) echo " style='padding-left:10pt'";
                 echo ">";
                 $cell_count += $titlecols;

@@ -204,3 +204,7 @@ div.closeDlgIframe:before {
     top: 0;
     height: 100%;
 }
+
+table.padding-below-rows td { /* KCC MSD-1744 */
+    padding-bottom: 10px;
+}

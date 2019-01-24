@@ -67,7 +67,7 @@ function lbf_report($pid, $encounter, $cols, $id, $formname, $no_wrap = false)
         }
     }
 
-    echo "<table>\n";
+    echo "<table class='padding-below-rows'>\n"; // KCC MSD-1744
     display_layout_rows($formname, $arr);
     echo "</table>\n";
 }

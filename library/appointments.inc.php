@@ -132,6 +132,11 @@ function fetchEvents($from_date, $to_date, $where_param = null, $orderby_param =
             $where .= $where_param;
         }
 
+        $external_filter = do_action('filter_patient_select_appointments', $_SESSION['authUser'] );
+        if ( $external_filter ) {
+            $where .= " AND ".$external_filter;
+        }
+
         $order_by = "e.pc_eventDate, e.pc_startTime";
         if ($orderby_param) {
              $order_by = $orderby_param;

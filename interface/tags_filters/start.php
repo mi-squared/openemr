@@ -35,6 +35,21 @@ function tf_filter_patient_select_pnuserapi( $username )
 }
 add_action( 'filter_patient_select_pnuserapi', 'tf_filter_patient_select_pnuserapi' );
 
+function tf_filter_patient_select_appointments( $username )
+{
+    // Fetch all the group filters
+    $repo = new FilterRepository();
+    $where = "";
+    $patientsToHide = $repo->fetchPatientsToHideForUser( $username );
+    if ( count( $patientsToHide ) ) {
+        $pidString = implode(",", $patientsToHide);
+        $where = " ( p.pid IS NULL OR p.pid NOT IN ( $pidString ) ) ";
+    }
+
+    return $where;
+}
+add_action( 'filter_patient_select_appointments', 'tf_filter_patient_select_appointments' );
+
 function add_tags_filters_navigation()
 {
     include __DIR__."/views/tags_filters_left_nav.php";

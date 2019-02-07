@@ -76,7 +76,7 @@ require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
     <script type="text/javascript">
         jQuery(document).ready(function() {
             init();
-            alert("**Reminder** We are currently working to restore data from Thursday 1/10 thru Sat 1/12.  Please do not replicate your work unless advised otherwise. **Reminder**");
+
             var productRegistrationController = new ProductRegistrationController();
             productRegistrationController.getProductRegistrationStatus(function(err, data) {
                 if (err) { return; }

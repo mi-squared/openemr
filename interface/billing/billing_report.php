@@ -405,20 +405,16 @@ $ThisPageSearchCriteriaQueryDropDownMasterDefaultKey=array();
 $ThisPageSearchCriteriaIncludeMaster=array();
 
 if ($daysheet) {
-
-	//**IBH Modify
-$ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Provider"),xl("Date of Entry"),xl("Date of Billing"),xl("Patient Name"),xl("Patient Id"),xl("Insurance Company"),xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),xl("Billing Status"),xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner"),xl("User"),xl("Claim Type"));
-
-    //***IBH Modify
-$ThisPageSearchCriteriaKeyMaster="form_encounter.date,billing.provider_id,billing.date,claims.process_time,patient_data.fname,".               "form_encounter.pid,claims.payer_id,form_encounter.encounter,insurance_data.provider,billing.id,billing.billed,".
-                                 "billing.authorized,form_encounter.last_level_billed,billing.x12_partner_id,billing.user,claims.target";
-//***IBH Modify
-$ThisPageSearchCriteriaDataTypeMaster="datetime,query_drop_down,datetime,datetime,text_like,".
+$ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Date of Entry"),xl("Date of Billing"),xl("Claim Type"),xl("Patient Name"),xl("Patient Id"),xl("Insurance Company"),xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),xl("Billing Status"),xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner"),xl("User") );
+$ThisPageSearchCriteriaKeyMaster="form_encounter.date,billing.date,claims.process_time,claims.target,patient_data.fname,".
+                                 "form_encounter.pid,claims.payer_id,form_encounter.encounter,insurance_data.provider,billing.id,billing.billed,".
+                                 "billing.authorized,form_encounter.last_level_billed,billing.x12_partner_id,billing.user";
+$ThisPageSearchCriteriaDataTypeMaster="datetime,datetime,datetime,radio,text_like,".
                                       "text,include,text,radio,radio,radio,".
-									  "radio_like,radio,query_drop_down,text,radio";
-
-
-} else {
+                                      "radio_like,radio,query_drop_down,text";
+}
+else
+{
 
 $ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Date of Entry"),xl("Date of Billing"),xl("Claim Type"),xl("Patient Name"),xl("Patient Id"),xl("Insurance Company"),xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),xl("Billing Status"),xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner") );
 $ThisPageSearchCriteriaKeyMaster="form_encounter.date,billing.date,claims.process_time,claims.target,patient_data.fname,".
@@ -446,23 +442,10 @@ $ThisPageSearchCriteriaDisplayRadioMaster[5]= array( xl("All"),xl("Authorized"),
 $ThisPageSearchCriteriaRadioKeyMaster[5]="%,1,0";
 $ThisPageSearchCriteriaDisplayRadioMaster[6]= array( xl("All"),xl("None"),xl("Ins 1"),xl("Ins 2 or Ins 3") );
 $ThisPageSearchCriteriaRadioKeyMaster[6]="all,0,1,2";
-
-
-//***IBH ADD
-$ThisPageSearchCriteriaQueryDropDownMaster[1]="SELECT CONCAT(`lname`,', ', `fname`) as name,id FROM users WHERE active=1  AND authorized = 1 AND fname IS NOT NULL ORDER BY lname;";
-//***IBH ADD
-$ThisPageSearchCriteriaQueryDropDownMasterDefault[1]= xl("Select...");//Only one item will be here
-$ThisPageSearchCriteriaQueryDropDownMasterDefaultKey[1]="select";//Only one item will be here
-
-
 //The below section is needed if there is any 'query_drop_down' type in the $ThisPageSearchCriteriaDataTypeMaster
-//***IBH Modify
-$ThisPageSearchCriteriaQueryDropDownMaster[2]="SELECT name,id FROM x12_partners;";
-$ThisPageSearchCriteriaQueryDropDownMasterDefault[2]= xl("All");//Only one item will be here
-$ThisPageSearchCriteriaQueryDropDownMasterDefaultKey[2]="all";//Only one item will be here
-
-
-
+$ThisPageSearchCriteriaQueryDropDownMaster[1]="SELECT name,id FROM x12_partners;";
+$ThisPageSearchCriteriaQueryDropDownMasterDefault[1]= xl("All");//Only one item will be here
+$ThisPageSearchCriteriaQueryDropDownMasterDefaultKey[1]="all";//Only one item will be here
 //The below section is needed if there is any 'include' type in the $ThisPageSearchCriteriaDataTypeMaster
 //Function name is added here.Corresponding include files need to be included in the respective pages as done in this page.
 //It is labled(Included for Insurance ajax criteria)(Line:-279-299).
@@ -484,8 +467,7 @@ if(!isset($_REQUEST['mode']))//default case
  
  }
 ?>
-    <?php //***IBH Modify ?>
-<table width='100%' border="0" cellspacing="0" cellpadding="0" data-foo="foobar">
+<table width='100%' border="0" cellspacing="0" cellpadding="0">
  <tr>
       <td width="25%">&nbsp;</td>
       <td width="50%">

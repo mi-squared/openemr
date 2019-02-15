@@ -780,6 +780,23 @@ if(is_array($ret))
         }
       }
 
+	  //Here we want to skip if there is documents are not esigned & locked
+	  //Which means the lock bit should be 1
+	  //***IBH Modify
+	  $skipping = FALSE;
+	  //Added by sherwin 08-29-2016
+	  //check the table to see if there is a signature lock on file
+	  //Have to look it up three ways because the recording of the lock bit is not consistant.
+	  $sql = sqlQuery("SELECT count('is_lock') as count FROM esign_signatures AS a, forms AS b WHERE b.encounter = ? AND b.id = a.tid AND a.is_lock = 1", array($iter['enc_encounter']));
+	  $sqlb = sqlQuery("SELECT count('is_lock') as count FROM esign_signatures AS a, form_encounter AS b WHERE b.encounter = ? AND b.id = a.tid AND a.is_lock = 1", array($iter['enc_encounter']));
+      $sqlc = sqlQuery("SELECT count('is_lock') as count FROM esign_signatures AS a, forms AS b WHERE encounter = ? AND a.tid = b.form_id AND is_lock = 1", array($iter['enc_encounter']));
+                       //SELECT count('is_lock') FROM esign_signatures AS a, `forms` AS b WHERE `encounter` = 6022 AND a.tid = b.form_id AND is_lock = 1
+	  if($sql['count'] == 0 && $sqlb['count'] == 0 && $sqlc['count'] == 0){
+          $skipping = TRUE;
+          $last_encounter_id = $this_encounter_id;
+          continue;
+	  }
+	  //***IBH Modify End
       $name = getPatientData($iter['enc_pid'], "fname, mname, lname, pubpid, billing_note, DATE_FORMAT(DOB,'%Y-%m-%d') as DOB_YMD");
 
       # Check if patient has primary insurance and a subscriber exists for it.

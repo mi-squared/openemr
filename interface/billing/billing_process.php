@@ -71,7 +71,7 @@ function append_claim(&$segs) {
       if (!$bat_content) {
         $bat_sendid = trim($elems[6]);
         $bat_recvid = trim($elems[8]);
-        $bat_sender = $GS02 ? $GS02 : $bat_sendid;
+        $bat_sender = isset($GS02) ? $GS02 : $bat_sendid;
         $bat_content = substr($seg, 0, 70) .
           "$bat_yymmdd*$bat_hhmm*" . $elems[11] . "*" . $elems[12] . "*$bat_icn*" .
           $elems[14] . "*" . $elems[15] . "*:~";
@@ -133,7 +133,7 @@ function send_batch() {
 process_form($_POST);
 
 function process_form($ar) {
-  global $bill_info, $webserver_root, $bat_filename, $pdf;
+  global $bill_info, $webserver_root, $bat_filename, $pdf, $bat_content;
 
   if (isset($ar['bn_x12']) || isset($ar['bn_x12_encounter']) || isset($ar['bn_process_hcfa']) || isset($ar['bn_hcfa_txt_file']) || isset($ar['bn_process_hcfa_form'])) {
     if ($GLOBALS['billing_log_option'] == 1) {

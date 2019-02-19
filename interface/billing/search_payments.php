@@ -254,7 +254,7 @@ if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)){ //test for MSIE x.x;
 		$(".medium_modal").fancybox( {
 			'overlayOpacity' : 0.0,
 			'showCloseButton' : true,
-			'frameHeight' : 1250,
+			'frameHeight' : 500,
 			'frameWidth' : 1097,
 			'centerOnScroll' : false
 		});
@@ -268,7 +268,7 @@ if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)){ //test for MSIE x.x;
 		$(".medium_modal").fancybox( {
 			'overlayOpacity' : 0.0,
 			'showCloseButton' : true,
-			'frameHeight' : 1250,
+			'frameHeight' : 500,
 			'frameWidth' : 1050,
 			'centerOnScroll' : false
 		});
@@ -283,7 +283,7 @@ else
 	$(".medium_modal").fancybox( {
 		'overlayOpacity' : 0.0,
 		'showCloseButton' : true,
-		'frameHeight' : 1250,
+		'frameHeight' : 500,
 		'frameWidth' : 1050,
 		'centerOnScroll' : false
 	});

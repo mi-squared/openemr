@@ -24,21 +24,22 @@ function getBillingByEncounter ($pid,$encounter, $cols = "code_type, code, code_
     }
     return $all;
 }
-
+//***IBH add
 function getTimeDuration($pid, $date, $encounter){
 
-    $sql = "SELECT code_text FROM billing WHERE pid = '$pid' AND date LIKE '%$date%' AND encounter = '$encounter'";
+    $sql = "SELECT code_text FROM billing WHERE pid = $pid AND date LIKE '%{$date}%' AND encounter = $encounter";
 	$res = sqlQuery($sql);
 	$title_code = $res['code_text'];
 
     $timesql = "SELECT pc_startTime, pc_endTime FROM `openemr_postcalendar_events` 
-	             WHERE `pc_pid` LIKE '$pid' AND `pc_title` LIKE '%$title_code%' 
-				 AND `pc_eventDate` LIKE '%$date%' ";
+	             WHERE `pc_pid` LIKE '$pid' AND `pc_title` LIKE '%{$title_code}%' 
+				 AND `pc_eventDate` LIKE '%{$date}%' ";
 
     $timeres = sqlQuery($timesql);
 
 	return $timeres ;
 }
+//***IBH add
 function getBillingEncounterAll ($pid, $encounter, $cols = "date, code_type, code, modifier,justify,notecodes,fee,units,code_text" )
 {
     $res = sqlStatement("select $cols from billing where pid = ? and encounter = ? ", array($pid, $encounter));

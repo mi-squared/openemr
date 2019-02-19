@@ -10,7 +10,7 @@ require_once(dirname(__FILE__) . "/classes/Address.class.php");
 require_once(dirname(__FILE__) . "/classes/InsuranceCompany.class.php");
 require_once(dirname(__FILE__) . "/invoice_summary.inc.php");
 
-require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");//***IBH add
 
 
 
@@ -202,8 +202,8 @@ class Claim {
     *****************************************************************/
     $provider_id = $this->encounter['provider_id'];
 
+    //***IBH Add
 				  // check to see if the user is LCPC, LPC, LCSW, SNTC, PSYD, DNP, FNPC for billing purpose
-				  // added by sherwin 08-19-2016
 				  // only want to do this if the insurance is Medicaid
             $sql = "SELECT provider FROM insurance_data WHERE pid = '$pid'";
 			 $i_row = sqlQuery($sql);
@@ -219,8 +219,7 @@ class Claim {
 					   }
 
 			    }
-
-				/********************** Switch rendering provider in flight **********************/
+    //***IBH End
 
     $sql = "SELECT * FROM users WHERE id = '$provider_id'";
     $this->provider = sqlQuery($sql);
@@ -1035,9 +1034,7 @@ class Claim {
     return str_replace('-', '', substr($this->encounter['date'], 0, 10));
   }
 
-
-
- //Added by sherwin 3/20/2016 insert data from the prior auth form not the misc billing options
+ //***IBH Add
 
   function priorAuthz() {
 	  $billing_code = $this->procs[0]['code']; // just the billing code, like 98404

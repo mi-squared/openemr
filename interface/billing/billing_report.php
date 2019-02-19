@@ -407,26 +407,32 @@ $ThisPageSearchCriteriaIncludeMaster=array();
 if ($daysheet) {
 
 	//**IBH Modify
-$ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Provider"),xl("Date of Entry"),xl("Date of Billing"),xl("Patient Name"),xl("Patient Id"),xl("Insurance Company"),xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),xl("Billing Status"),xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner"),xl("User"),xl("Claim Type"));
+$ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Provider"),xl("Date of Entry"),
+    xl("Date of Billing"),xl("Patient Name"),xl("Patient Id"),xl("Insurance Company"),
+    xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),xl("Billing Status"),
+    xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner"),xl("Claim Type"));
 
     //***IBH Modify
 $ThisPageSearchCriteriaKeyMaster="form_encounter.date,billing.provider_id,billing.date,claims.process_time,patient_data.fname,".               "form_encounter.pid,claims.payer_id,form_encounter.encounter,insurance_data.provider,billing.id,billing.billed,".
-                                 "billing.authorized,form_encounter.last_level_billed,billing.x12_partner_id,billing.user,claims.target";
+                                 "billing.authorized,form_encounter.last_level_billed,billing.x12_partner_id,claims.target";
 //***IBH Modify
 $ThisPageSearchCriteriaDataTypeMaster="datetime,query_drop_down,datetime,datetime,text_like,".
                                       "text,include,text,radio,radio,radio,".
-									  "radio_like,radio,query_drop_down,text,radio";
+                                      "radio_like,radio,query_drop_down,radio";
+}
+else
+{
 
-
-} else {
-
-$ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Date of Entry"),xl("Date of Billing"),xl("Claim Type"),xl("Patient Name"),xl("Patient Id"),xl("Insurance Company"),xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),xl("Billing Status"),xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner") );
-$ThisPageSearchCriteriaKeyMaster="form_encounter.date,billing.date,claims.process_time,claims.target,patient_data.fname,".
+$ThisPageSearchCriteriaDisplayMaster= array( xl("Date of Service"),xl("Provider"), xl("Date of Entry"),xl("Date of Billing"),
+    xl("Claim Type"),xl("Patient Name"),xl("Patient Id"),
+    xl("Insurance Company"),xl("Encounter"),xl("Whether Insured"),xl("Charge Coded"),
+    xl("Billing Status"),xl("Authorization Status"),xl("Last Level Billed"),xl("X12 Partner"), xl("Claim Type") );
+$ThisPageSearchCriteriaKeyMaster="form_encounter.date, billing.provider_id, billing.date,claims.process_time,patient_data.fname,".
                                  "form_encounter.pid,claims.payer_id,form_encounter.encounter,insurance_data.provider,billing.id,billing.billed,".
-                                 "billing.authorized,form_encounter.last_level_billed,billing.x12_partner_id";
-$ThisPageSearchCriteriaDataTypeMaster="datetime,datetime,datetime,radio,text_like,".
+                                 "billing.authorized,form_encounter.last_level_billed,billing.x12_partner_id, claims.target";
+    $ThisPageSearchCriteriaDataTypeMaster="datetime,query_drop_down,datetime,datetime,text_like,".
                                       "text,include,text,radio,radio,radio,".
-                                      "radio_like,radio,query_drop_down";
+        "radio_like,radio,query_drop_down,radio";
 
 
 
@@ -434,18 +440,19 @@ $ThisPageSearchCriteriaDataTypeMaster="datetime,datetime,datetime,radio,text_lik
 //The below section is needed if there is any 'radio' or 'radio_like' type in the $ThisPageSearchCriteriaDataTypeMaster
 //$ThisPageSearchCriteriaDisplayRadioMaster,$ThisPageSearchCriteriaRadioKeyMaster ==>For each radio data type this pair comes.
 //The key value 'all' indicates that no action need to be taken based on this.For that the key must be 'all'.Display value can be any thing.
-$ThisPageSearchCriteriaDisplayRadioMaster[1] = array( xl("All"),xl("eClaims"),xl("Paper") );//Display Value
-$ThisPageSearchCriteriaRadioKeyMaster[1]="all,standard,hcfa";//Key
-$ThisPageSearchCriteriaDisplayRadioMaster[2]= array( xl("All"),xl("Insured"),xl("Non-Insured") );//Display Value
-$ThisPageSearchCriteriaRadioKeyMaster[2]="all,1,0";//Key
-$ThisPageSearchCriteriaDisplayRadioMaster[3]= array( xl("All"),xl("Coded"),xl("Not Coded") );//Display Value
-$ThisPageSearchCriteriaRadioKeyMaster[3]="all,not null,null";//Key
-$ThisPageSearchCriteriaDisplayRadioMaster[4]= array( xl("All"),xl("Unbilled"),xl("Billed"),xl("Denied") );//Display Value
-$ThisPageSearchCriteriaRadioKeyMaster[4]="all,0,1,7";//Key
-$ThisPageSearchCriteriaDisplayRadioMaster[5]= array( xl("All"),xl("Authorized"),xl("Unauthorized") );
-$ThisPageSearchCriteriaRadioKeyMaster[5]="%,1,0";
-$ThisPageSearchCriteriaDisplayRadioMaster[6]= array( xl("All"),xl("None"),xl("Ins 1"),xl("Ins 2 or Ins 3") );
-$ThisPageSearchCriteriaRadioKeyMaster[6]="all,0,1,2";
+
+$ThisPageSearchCriteriaDisplayRadioMaster[1]= array( xl("All"),xl("Insured"),xl("Non-Insured") );//Display Value
+$ThisPageSearchCriteriaRadioKeyMaster[1]="all,1,0";//Key
+$ThisPageSearchCriteriaDisplayRadioMaster[2]= array( xl("All"),xl("Coded"),xl("Not Coded") );//Display Value
+$ThisPageSearchCriteriaRadioKeyMaster[2]="all,not null,null";//Key
+$ThisPageSearchCriteriaDisplayRadioMaster[3]= array( xl("All"),xl("Unbilled"),xl("Billed"),xl("Denied") );//Display Value
+$ThisPageSearchCriteriaRadioKeyMaster[3]="all,0,1,7";//Key
+$ThisPageSearchCriteriaDisplayRadioMaster[4]= array( xl("All"),xl("Authorized"),xl("Unauthorized") );
+$ThisPageSearchCriteriaRadioKeyMaster[4]="%,1,0";
+$ThisPageSearchCriteriaDisplayRadioMaster[5]= array( xl("All"),xl("None"),xl("Ins 1"),xl("Ins 2 or Ins 3") );
+$ThisPageSearchCriteriaRadioKeyMaster[5]="all,0,1,2";
+$ThisPageSearchCriteriaDisplayRadioMaster[6] = array( xl("All"),xl("eClaims"),xl("Paper") );//Display Value
+$ThisPageSearchCriteriaRadioKeyMaster[6]="all,standard,hcfa";//Key
 
 
 //***IBH ADD
@@ -484,8 +491,7 @@ if(!isset($_REQUEST['mode']))//default case
  
  }
 ?>
-    <?php //***IBH Modify ?>
-<table width='100%' border="0" cellspacing="0" cellpadding="0" data-foo="foobar">
+<table width='100%' border="0" cellspacing="0" cellpadding="0">
  <tr>
       <td width="25%">&nbsp;</td>
       <td width="50%">
@@ -885,11 +891,19 @@ if(is_array($ret))
         $lhtml .= "&nbsp;<span class=text>Bill: ";
         $lhtml .= "<select name='claims[" . attr($this_encounter_id) . "][payer]' style='background-color:$bgcolor'>";
 
+//        $query = "SELECT id.provider AS id, id.type, id.date, " .
+//          "ic.x12_default_partner_id AS ic_x12id, ic.name AS provider " .
+//          "FROM insurance_data AS id, insurance_companies AS ic WHERE " .
+//          "ic.id = id.provider AND " .
+//          "id.pid = ? AND " .
+//          "id.date <= ? " .
+//          "ORDER BY id.type ASC, id.date DESC";
+
         $query = "SELECT id.provider AS id, id.type, id.date, " .
           "ic.x12_default_partner_id AS ic_x12id, ic.name AS provider " .
-          "FROM insurance_data AS id, insurance_companies AS ic WHERE " .
-          "ic.id = id.provider AND " .
-          "id.pid = ? AND " .
+          " FROM insurance_data id " .
+          " JOIN insurance_companies ic on ic.id = id.provider  " .
+          " WHERE id.pid = ? AND " .
           "id.date <= ? " .
           "ORDER BY id.type ASC, id.date DESC";
 

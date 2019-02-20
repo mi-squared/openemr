@@ -263,13 +263,13 @@ for ($t = 0; $t < count($test_code); $t++) {
 	$code_key = "aoe".$code."_code";
 	$label_key = "aoe".$code."_label";
 	$text_key = "aoe".$code."_text";
-	for ($a = 0; $a < count(${$code_key}); $a++) {
+	for ($a = 0; $a < count($_POST[$code_key]); $a++) {
 		$key = "aoe".$a."_code";
-		$qcode = ${$code_key}[$a];
+		$qcode = $_POST[$code_key][$a];
 		$key = "aoe".$a."_label";
-		$label = ${$label_key}[$a];
+		$label = $_POST[$label_key][$a];
 		$key = "aoe".$a."_text";
-		$qtext = ${$text_key}[$a];
+		$qtext = $_POST[$text_key][$a];
 		
 		// save answer record
 		$qseq = $a +1;

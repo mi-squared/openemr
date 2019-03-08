@@ -173,10 +173,8 @@ function DOBandEncounter($pc_eid=0) { //***IBH modified
 		 $encounter = todaysEncounterCheck($_POST['form_pid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false);
 		 if($encounter){
 				 $info_msg .= xl("New encounter created with id");
-				 $info_msg .= " $encounter" . " and pc_eid " . $pc_eid; //***IBH Modified
-				 if ($pc_eid) { //**IBH added If statement
-					sqlStatement("UPDATE openemr_postcalendar_events SET encounter=? WHERE pc_eid=?", array($encounter, $pc_eid) );
-				 }
+				 $info_msg .= " $encounter"; //***IBH Modified
+
 		 }
                  # Capture the appt status and room number for patient tracker. This will map the encounter to it also.
                  if ( isset($GLOBALS['temporary-eid-for-manage-tracker']) || !empty($_GET['eid']) ) {
@@ -184,8 +182,17 @@ function DOBandEncounter($pc_eid=0) { //***IBH modified
                     // appointment. It is set in the InsertEvent() function. Note that in the case of spearating a recurrent appointment, the get eid
                     // parameter is actually erroneous(is eid of the recurrent appt and not the new separated appt), so need to use the
                     // temporary-eid-for-manage-tracker global instead.
-                    $temp_eid = (isset($GLOBALS['temporary-eid-for-manage-tracker'])) ? $GLOBALS['temporary-eid-for-manage-tracker'] : $_GET['eid'];
-	 	    manage_tracker_status($event_date,$appttime,$temp_eid,$_POST['form_pid'],$_SESSION["authUser"],$_POST['form_apptstatus'],$_POST['form_room'],$encounter);
+                        $temp_eid = (isset($GLOBALS['temporary-eid-for-manage-tracker'])) ? $GLOBALS['temporary-eid-for-manage-tracker'] : $_GET['eid'];
+                     if ($temp_eid && $encounter) { //**IBH added If statement
+
+                         sqlStatement("UPDATE openemr_postcalendar_events SET encounter=? WHERE pc_eid=?", array($encounter, $temp_eid) );
+
+                     }else if($encounter){
+
+                         sqlStatement("UPDATE openemr_postcalendar_events SET encounter=? WHERE pc_eid=?", array($encounter, $pc_eid) );
+                     }
+
+                     manage_tracker_status($event_date,$appttime,$temp_eid,$_POST['form_pid'],$_SESSION["authUser"],$_POST['form_apptstatus'],$_POST['form_room'],$encounter);
                  }
      }
      else
@@ -2067,8 +2074,9 @@ function SubmitForm() {
 <?php
 	// adds functionality to check if there's an existing prior auth  //***IBH added
 
+require_once($GLOBALS['srcdir'].'/patient_tracker.inc.php');
 
-	include($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/interface/add_edit_event.php");
+include($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/interface/add_edit_event.php");
 ?>
 
 </body>

@@ -1528,14 +1528,20 @@ function esign_interactive_complexity($encounter, $pid, $modifier = ''){
 				
 				// if there's a diagnosis
 				if(!empty($js[0])){
-					
+					global $event_date,$appttime,$temp_eid;
 					$find = sqlStatement("SELECT * FROM billing WHERE code_text=? AND encounter='$encounter'", array($desc));
 					// $res = sqlFetchArray($find);
 			
 					if (sqlNumRows($find) == 0){ 
 						 
 					sqlStatement("UPDATE openemr_postcalendar_events SET pc_apptstatus = '>' WHERE encounter='$encounter' AND pc_apptstatus = '@'");
-                    
+
+                    //get the appointment info that was just created
+                    $mts_sql = "select * from openemr_postcalendar_events where pc_apptstatus = '>' and encounter = '$encounter'";
+                    $query = sqlStatement($mts_sql);
+                    $ret = sqlFetchArray($query);
+
+                    manage_tracker_status($ret['pc_eventDate'],$ret['pc_startTime'],$ret['pc_eid'],$ret['pc_pid'],$_SESSION["authUser"],">",$_POST['form_room'],$encounter);
 						
                     sqlStatement("INSERT INTO billing SET " .
                             "date = '$en' , " .

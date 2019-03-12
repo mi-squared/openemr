@@ -29,6 +29,7 @@ require_once $GLOBALS['srcdir'].'/ESign/Form/Configuration.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Factory.php';
 require_once $GLOBALS['srcdir'].'/ESign/Form/Log.php';
 require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php");//**IBH added
+require_once( $GLOBALS['srcdir'].'/patient_tracker.inc.php');
 
 class Form_Controller extends Abstract_Controller
 {

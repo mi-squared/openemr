@@ -1777,11 +1777,18 @@ if ($repeatexdate != "") {
 
 </table></td></tr>
 <tr class='text'><td colspan='10' class="buttonbar">
-        <?php //***IBH added 1612-1626, 1628-36 ?>
+        <?php //***IBH added 1612-1626, 1628-36  ?>
 <div class="icopay">
 <?php
 
 	$sql = (!empty($patientid))? "SELECT copay FROM `insurance_data` WHERE pid =" . $patientid : false ;
+
+    if(!empty($patientid)){
+    //***IBH add.  Co-pay was not displaying most recent copay.
+         $sql .= " and type = 'primary' order by id desc ";
+
+    }
+
 	$res = (!empty($patientid)) ?  sqlQuery($sql) : false ;
 
     print (!empty($res['copay'])) ? "<p>Collect Copay: ".$res['copay']."</p>" : "<p>No copay required</p>";

@@ -227,6 +227,7 @@ if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $
     //
     if ($stmt['cid'] != $row['pid']) {
       if (!empty($stmt)) ++$stmt_count;
+      fwrite($fhprint, make_statement($stmt));
       $stmt['fid'] = $row['id'];
       $stmt['cid'] = $row['pid'];
       $stmt['pid'] = $row['pid'];
@@ -291,11 +292,12 @@ if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $
     }
 
 
-    fwrite($fhprint, make_statement($stmt));
+
 
   } // end while
 
     if (!empty($stmt)) ++$stmt_count;
+    fwrite($fhprint, make_statement($stmt));
     fclose($fhprint);
     sleep(1);
 

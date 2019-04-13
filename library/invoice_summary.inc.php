@@ -73,7 +73,8 @@ function ar_get_invoice_summary($patient_id, $encounter_id, $with_detail = false
       $codes[$code]['dtl'][$tmpkey] = $tmp;
     }
   }
-
+  //***IBH Modified
+ /*
   // Get charges from product sales.
   $query = "SELECT s.drug_id, s.sale_date, s.fee, s.quantity " .
     "FROM drug_sales AS s " .
@@ -95,6 +96,7 @@ function ar_get_invoice_summary($patient_id, $encounter_id, $with_detail = false
       $codes[$code]['dtl'][$tmpkey] = $tmp;
     }
   }
+  */
 
   // Get payments and adjustments. (includes copays)
   $res = sqlStatement("SELECT " .

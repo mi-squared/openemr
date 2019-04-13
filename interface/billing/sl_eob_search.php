@@ -289,6 +289,8 @@ if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $
         "last_stmt_date = '$today', stmt_count = stmt_count + 1 " .
         "WHERE id = " . $row['id']);
     }
+
+
     fwrite($fhprint, make_statement($stmt));
 
   } // end while

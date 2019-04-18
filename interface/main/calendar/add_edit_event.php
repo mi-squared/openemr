@@ -1816,9 +1816,31 @@ if ($repeatexdate != "") {
   <input type='button' id='find_available' value='<?php echo xla('Find Available');?>' />
 <?php } ?>
 
+<?php
+    //***IBH Add: Remove the ability to delete an encounter if there is documentation associated with the account
+    //*** The ability should only be given to supervisors
+
+    $hidden = false;
+    //See if forms exist
+    if(isset($eid)) {
+        $res = sqlQuery("select count(*) as count from openemr_postcalendar_events ope join forms f " .
+            "on f.encounter = ope.encounter where pc_eid = ?", $eid);
+
+        $count = $res['count'];
+
+        $res = sqlQuery("select count(*) as count from users where username = '{$_SESSION['pc_username']}' and info like '%Supervisor%'");
+        $super = $res['count'];
+        $hidden = ($super == 0 && $count > 0 ) ? true : false;
+    }
+    //if there are documents and
+
+
+
+?>
 &nbsp;
-<input type='button' name='form_delete' id='form_delete' value='<?php echo xla('Delete');?>'<?php if (!$eid) echo " disabled" ?> />
+<input type='button' name='form_delete' id='form_delete' value='<?php echo xla('Delete');?>'<?php if (!$eid || $hidden) echo " disabled" ?> />
 &nbsp;
+
 <input type='button' id='cancel' value='<?php echo xla('Cancel');?>' />
 &nbsp;
 <input type='button' name='form_duplicate' id='form_duplicate' value='<?php echo xla('Create Duplicate');?>' />

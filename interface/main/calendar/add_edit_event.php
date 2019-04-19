@@ -1822,7 +1822,7 @@ if ($repeatexdate != "") {
 
     $hidden = false;
     //See if forms exist
-    if(isset($eid)) {
+    if(! empty($eid)) {
         $res = sqlQuery("select count(*) as count from openemr_postcalendar_events ope join forms f " .
             "on f.encounter = ope.encounter where pc_eid = ?", $eid);
 

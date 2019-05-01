@@ -28,9 +28,10 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 	
 	var is_supervisor = <?=$is_supervisor?>;
 
-		
+
 	function copayComment() {}
-	
+
+
 	
 	$(document).ready(function(){
 		
@@ -47,9 +48,17 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			runPriorAuthCheck();
 			runCheckInCheck();
 		}
-		
-	
-		
+
+        window.dateChanged = function() {
+
+		    
+            runPAExceptions();
+
+            runPriorAuthCheck();
+            runCheckInCheck();
+        }
+
+
 		function getCatNumber() {
 			var category = $("select[name=form_category] option:selected").text();
 			var csplit = category.split(":");
@@ -273,8 +282,14 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			runCheckInCheck();
 			
 		});
-		
-		
+
+
+
+
+
+
+
+
 		
 		
 		
@@ -282,5 +297,7 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 	
 	
 	});
+
+
 </script>
 

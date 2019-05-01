@@ -55,6 +55,13 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			var csplit = category.split(":");
 			return $.trim(csplit[1]);
 		}
+
+		function getApptDate(){
+
+		    var apptDate = $("#form_date").val();
+		    return apptDate;
+
+        }
 		
 		
 		function runCheckInCheck() {
@@ -154,6 +161,8 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 			var prior_auth_okay = false; // starts as false if all is working
 			
 			var cat = getCatNumber();
+
+			var dates = getApptDate();
 			
 			console.log("cat:" + cat);
 						
@@ -170,7 +179,7 @@ $is_supervisor = ibh_user_is_supervisor() ? "true": "false";
 				
 				$.ajax({
 					url:"<?= $GLOBALS['webroot'] ?>/_ibh/ajax/get_patient_prior_auths.php",
-					data:{cat:cat, pid:pid},
+					data:{cat:cat, pid:pid, apptdate:dates},
 					success: function(data) {
 						// console.log("prior auths", data);
 						// $("#form_save").removeAttr("disabled");

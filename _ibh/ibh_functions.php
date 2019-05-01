@@ -369,7 +369,12 @@ function ibh_get_patient_prior_auths($pid, $valid=false, $pan="") {
 		$today = date("Y-m-d");
 		// get only active prior auths
 		$dates = "AND archived=0 AND auth_to >= '$today'";
-	} 
+	}
+
+	if ($_GET['apptdate']){
+
+	    $dates .= "  AND auth_to >= '{$_GET['apptdate']}' AND auth_from <= '{$_GET['apptdate']}'  ";
+    }
 	
 	if ($pan) {
 		$dates .= " AND prior_auth_number='$pan'";

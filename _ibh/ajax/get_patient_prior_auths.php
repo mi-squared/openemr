@@ -9,7 +9,7 @@
 	
 	$category = $_GET['cat'];
 	$_pid = $_GET['pid'];
-	
+	$date = $_GET['date'];
 
 	$prior_auths = ibh_get_patient_prior_auths($_pid, true);
 	

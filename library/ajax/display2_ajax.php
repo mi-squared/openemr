@@ -270,12 +270,21 @@ if($_POST['func'] == "display_prior_auth"){
 
             foreach($row['codes'] as $bcode){
 
-
                 $billing_code = explode(':', $bcode);
                 $code = $billing_code[0];
                 $modifier = $billing_code[1];
 
-                $bsql = "SELECT date, encounter, code, code_text, id, units, modifier FROM billing WHERE pid='$pid' AND code='$code' AND modifier='$modifier' AND (date >='{$from}' AND date <= '{$to}')";
+                if(in_array($code, "H0031, H0032")) {
+
+                    $bsql = "SELECT date, encounter, code, code_text, id, units, modifier FROM billing WHERE pid='$pid' AND code='$code' AND modifier='$modifier' AND (date >='{$from}' AND date <= '{$to}')";
+
+                }else{
+
+                    $bsql = "SELECT date, encounter, code, code_text, id, units, modifier FROM billing WHERE pid='$pid' AND code='$code' AND (date >='{$from}' AND date <= '{$to}')";
+
+                }
+
+
                 $billsq = sqlStatement($bsql);
                 while($bill = sqlFetchArray($billsq)) {
 

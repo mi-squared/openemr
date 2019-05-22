@@ -481,7 +481,17 @@ function ibh_get_prior_auth ($id) {
             $mod = "";
         }
 
-        $bsql = "SELECT id, units FROM billing WHERE pid='$pid' AND code='$cpt4' AND modifier = '$mod' AND (date >='$auth_from' AND date <= '$auth_to')";
+
+        //***IBH HARD CODE: Required CPT Codes that need modifier.
+        if(in_array($cpt4, "H0031, H0032")) {
+
+            $bsql = "SELECT date, encounter, code, code_text, id, units, modifier FROM billing WHERE pid='$pid' AND code='$cpt4' AND modifier='$mod' AND (date >='{$auth_from}' AND date <= '{$auth_to}')";
+
+        }else{
+
+            $bsql = "SELECT date, encounter, code, code_text, id, units, modifier FROM billing WHERE pid='$pid' AND code='$cpt4'  AND (date >='{$auth_from}' AND date <= '{$auth_to}')";
+
+        }
 		
         $billsq = sqlStatement($bsql);
         while($bill = sqlFetchArray($billsq)) {

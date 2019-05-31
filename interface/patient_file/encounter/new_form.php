@@ -6,6 +6,7 @@
 
 include_once("../../globals.php");
 require_once $GLOBALS['srcdir'].'/ESign/Api.php';
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/_ibh/ibh_functions.php"); //***IBH Add
 
 $esignApi = new Esign\Api();
 ?>
@@ -14,7 +15,7 @@ $esignApi = new Esign\Api();
 <head>
 <?php } ?>
 <?php html_header_show();?>
-<link rel="stylesheet" href="<?php echo $css_header; ?>" type="text/css">
+<link rel="stylesheet" href="<?php echo $GLOBALS['css_header']; ?>" type="text/css">
 
 <script language="JavaScript">
 
@@ -233,12 +234,23 @@ if ( $encounterLocked === false ) {
       if(!$StringEcho){
         $StringEcho= '<ul id="sddm">';
       }
-      $StringEcho.= "<li class=\"encounter-form-category-li\"><a href='JavaScript:void(0);' onClick=\"mopen('lbf');\" >".xl('Layout Based') ."</a><div id='lbf' ><table border='0'  cellspacing='0' cellpadding='0'>";
-      while ($lrow = sqlFetchArray($lres)) {
-      $option_id = $lrow['option_id']; // should start with LBF
-      $title = $lrow['title'];
-      $StringEcho.= "<tr><td style='border-top: 1px solid #000000;padding:0px;'><a href='" . $rootdir .'/patient_file/encounter/load_form.php?formname='
-    				.urlencode($option_id) ."' >" . xl_form_title($title) . "</a></td></tr>";
+
+      //iThis is the code that shows the encounter menu when we are in a form
+        //get the number of layout based forms that exist
+        $encounter_forms = ibh_getEncounterForms($encounter);
+        $num_forms = $encounter_forms['lbf_count'];
+      if($num_forms < 1) {
+          $StringEcho .= "<li class=\"encounter-form-category-li\"><a href='JavaScript:void(0);' onClick=\"mopen('lbf');\" >" . xl('Layout Based') . "</a><div id='lbf' ><table border='0'  cellspacing='0' cellpadding='0'>";
+          while ($lrow = sqlFetchArray($lres)) {
+              $option_id = $lrow['option_id']; // should start with LBF
+              $title = $lrow['title'];
+              $StringEcho .= "<tr><td style='border-top: 1px solid #000000;padding:0px;'><a href='" . $rootdir . '/patient_file/encounter/load_form.php?formname='
+                  . urlencode($option_id) . "' >" . xl_form_title($title) . "</a></td></tr>";
+          }
+      }else{
+          $warning = "LBF Exists for this encounter";
+          $StringEcho .= "<li class=\"encounter-form-category-li\"><a href='JavaScript:void(0);' onClick=\"mopen('lbf');\" >" . xl('Layout Based Disabled') . "</a><div id='lbf' ><table border='0'  cellspacing='0' cellpadding='0'>";
+          $StringEcho .= "<tr><td style='border-top: 1px solid #000000;padding:0px;'>" . xl_form_title($warning) . "</a></td></tr>";
       }
     }
 }

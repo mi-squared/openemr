@@ -1506,7 +1506,7 @@ function esign_interactive_complexity($encounter, $pid, $modifier = ''){
                 $desc = icd($code, $type);
 
 
-				//Set the units for these CPT codes
+				//Set the units for these CPT codes //***IBH HARD CODE
 				if(	$c == "T1017" ||
 					$c == "T1014" ||
 					$c == "T1017" ||

@@ -160,7 +160,7 @@ if (file_exists(dirname(__FILE__) . "/../../forms/track_anything/style.css")) { 
  <link rel="stylesheet" href="<?php echo $GLOBALS['web_root']?>/interface/forms/track_anything/style.css" type="text/css">
 <?php } ?>
 
-<?php //added
+<?php
 // If the user requested attachment of any orphaned procedure orders, do it.
 if (!empty($_GET['attachid'])) {
   $attachid = explode(',', $_GET['attachid']);
@@ -178,14 +178,14 @@ if (!empty($_GET['attachid'])) {
     }
   }
 }
-//end added
+
 ?>
 
 <script type="text/javascript">
 $.noConflict();
 jQuery(document).ready( function($) {
 
-	//Javascript IBH
+	//***IBH add
 	function ibhAlert() {
 
 		var alert = $("<div class='alert-box'>This encounter already has 1+ LBF associated with it.<br><div class='alert-close'>Got it!</div></div>").appendTo("body");
@@ -213,7 +213,7 @@ jQuery(document).ready( function($) {
 		$(".alert-box").remove();
 	});
 
-	//End Javascript IBH
+	//***IBH end add
 	var formConfig = <?php echo $esignApi->formConfigToJson(); ?>;
     $(".esign-button-form").esign( 
     	formConfig,
@@ -256,7 +256,7 @@ jQuery(document).ready( function($) {
             }
 		}
     );
-    $("a#supervisor").fancybox(); //added by IBH
+    $("#supervisor").fancybox(); //***IBH add
     $(".onerow").mouseover(function() { $(this).toggleClass("highlight"); });
     $(".onerow").mouseout(function() { $(this).toggleClass("highlight"); });
     $(".onerow").click(function() { GotoForm(this); });
@@ -304,15 +304,15 @@ jQuery(document).ready( function($) {
             var mode = "add";
             // Enable the reconciliation checkbox
             $("#med_reconc_perf").removeAttr("disabled");
-	    $("#soc_provided").removeAttr("disabled"); //added
+	    $("#soc_provided").removeAttr("disabled");
         }
         else {
             var mode = "remove";
             //Disable the reconciliation checkbox (also uncheck it if applicable)
             $("#med_reconc_perf").attr("disabled", true);
             $("#med_reconc_perf").removeAttr("checked");
-	    $("#soc_provided").attr("disabled",true);//added
-	    $("#soc_provided").removeAttr("checked");//added
+	    $("#soc_provided").attr("disabled",true);
+	    $("#soc_provided").removeAttr("checked");
         }
         top.restoreSession();
         $.post( "../../../library/ajax/amc_misc_data.php",
@@ -372,7 +372,7 @@ jQuery(document).ready( function($) {
         top.restoreSession();
         parent.location.href = "<?php echo $rootdir; ?>/patient_file/encounter/view_form.php?formname="+parts[0]+"&id="+parts[1];
     }
-//added
+
 <?php
   // If the user was not just asked about orphaned orders, build javascript for that.
   if (!isset($_GET['attachid'])) {
@@ -394,7 +394,7 @@ jQuery(document).ready( function($) {
     echo "  if (attachid) location.href = 'forms.php?attachid=' + attachid;\n";
   }
 ?>
-//end added
+
 });
 
  // Process click on Delete link.
@@ -404,7 +404,7 @@ jQuery(document).ready( function($) {
  }
 
  // Called by the deleter.php window on a successful delete.
- function imdeleted(EncounterId) { //function changed
+ function imdeleted(EncounterId) {
   top.window.parent.left_nav.removeOptionSelected(EncounterId);
   top.window.parent.left_nav.clearEncounter();
  }

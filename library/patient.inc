@@ -173,7 +173,9 @@ function getProviders() {
 //***IBH Added
 function getTitle($encounter){
 
-   $query = "SELECT a.pc_catname FROM openemr_postcalendar_categories AS a, form_encounter AS b WHERE b.encounter = $encounter AND a.pc_catid = b.pc_catid ";
+ //  $query = "SELECT a.pc_catname FROM openemr_postcalendar_categories AS a, form_encounter AS b WHERE b.encounter = $encounter AND a.pc_catid = b.pc_catid ";
+   $query = "select pc_catname from openemr_postcalendar_categories opc " .
+            "join form_encounter fe on opc.pc_catid = fe.pc_catid where encounter = $encounter";
       $res = sqlStatement($query);
 	  $title = sqlFetchArray($res);
 	  return $title['pc_catname'];

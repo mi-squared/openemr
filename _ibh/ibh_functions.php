@@ -6,8 +6,8 @@ function foo() {
 }
 
 
-define("IBH_INTERPRETER_FEE", 20);
-define("IBH_TRANSPORTATION_FEE", 20);
+define("IBH_INTERPRETER_FEE", 20); //***IBH HARD CODE
+define("IBH_TRANSPORTATION_FEE", 20);//***IBH HARD CODE
 
 
 
@@ -16,7 +16,7 @@ function ibh_getEncounterCodeInfo($code) {
 		$code = trim($code);
 
 
-		
+    //***IBH HARD CODE
 		$codes = array(
 			"Individual Therapy 30 min"=>array("mod"=>0.5),
 			"Individual Therapy 45 min"=>array("mod"=>1.0),
@@ -95,8 +95,8 @@ function ibh_get_diagnosis($pid) {
 
 
 function ibh_appt_status_picker($id="pc_apptstatus", $sel="") {
-	
-	
+
+    //***IBH HARD CODE
 	$status_arr = array(
 		array("symbol"=>"-", "label"=>"- None"),
 		array("symbol"=>"*", "label"=>"* Reminder done"),
@@ -727,7 +727,7 @@ function ibh_get_era_svc_codes($svc_list) {
 
 
 function ibh_get_era_warning_code($c) {
-	
+    //***IBH HARD CODE
 	$warning_codes = array(
 		"CO-18"=>"Duplicate Claim or service",
 		"OA-18"=>"Duplicate Claim or service",
@@ -1041,7 +1041,7 @@ function ibh_facility_pulldown($sel = "", $name="facility_id") {
 
 // This provides a quicker lookup!
 function ibh_get_facility_name($id = "") {
-	
+    //***IBH HARD CODE
 	if (!$id) return "Idaho Behavioral Health Boise";
 	
 	$facs = array("", "", "", // 0,1,2
@@ -1272,7 +1272,7 @@ function esign_interpreter($pid, $encounter, $minutes, $name, $modifier = ''){
     if($modifier == '1'){
         $modifier = "";
     }
-	
+    //***IBH HARD CODE
     sqlStatement("INSERT INTO billing SET " .
                 "date = '$en' , " .
                 "code_type = 'CPT4', " .
@@ -1620,8 +1620,8 @@ function ibh_form_link($long, $encounter=0, $pid=0) {
 	
 	$short = "";
 	$link = "";
-	
-	
+
+    //***IBH HARD CODE
 	switch ($long) {
 		case "Comprehensive Diagnostic Assessment": $short = "CDA"; break;
 		case "Clinic Tx Plan and Review": $short = "TX Plan"; break;

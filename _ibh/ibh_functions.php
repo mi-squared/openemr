@@ -1508,6 +1508,7 @@ function esign_interactive_complexity($encounter, $pid, $modifier = ''){
 
 				//Set the units for these CPT codes //***IBH HARD CODE
 				if(	$c == "T1017" ||
+                    $c == "T1016" ||
 					$c == "T1014" ||
 					$c == "T1017" ||
 					$c == "H2017" ||

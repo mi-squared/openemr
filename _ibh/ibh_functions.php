@@ -1513,6 +1513,7 @@ function esign_interactive_complexity($encounter, $pid, $modifier = ''){
 					$c == "T1017" ||
 					$c == "H2017" ||
 					$c == "H2011" ||
+                    $c == "H1011" ||
 					$c == "H0038" ||
 					$c == "H0046" ||
 					$c == "H0031" ||

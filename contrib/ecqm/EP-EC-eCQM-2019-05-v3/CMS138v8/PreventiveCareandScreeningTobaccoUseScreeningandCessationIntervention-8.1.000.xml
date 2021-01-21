@@ -1,0 +1,1993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <identifier id="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention" version="8.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_4" version="5.4"/>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="4.0.000"/>
+   </includes>
+   <parameters>
+      <def localId="36" locator="40:1-40:49" name="Measurement Period" accessLevel="Public">
+         <parameterTypeSpecifier localId="35" locator="40:32-40:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="34" locator="40:41-40:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public"/>
+   </codeSystems>
+   <valueSets>
+      <def localId="4" locator="9:1-9:74" name="Annual Wellness Visit" id="urn:oid:2.16.840.1.113883.3.526.3.1240" accessLevel="Public"/>
+      <def localId="5" locator="10:1-10:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public"/>
+      <def localId="6" locator="11:1-11:96" name="Health &amp; Behavioral Assessment - Individual" id="urn:oid:2.16.840.1.113883.3.526.3.1020" accessLevel="Public"/>
+      <def localId="7" locator="12:1-12:95" name="Health and Behavioral Assessment - Initial" id="urn:oid:2.16.840.1.113883.3.526.3.1245" accessLevel="Public"/>
+      <def localId="8" locator="13:1-13:99" name="Health and Behavioral Assessment, Reassessment" id="urn:oid:2.16.840.1.113883.3.526.3.1529" accessLevel="Public"/>
+      <def localId="9" locator="14:1-14:87" name="Home Healthcare Services" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1016" accessLevel="Public"/>
+      <def localId="10" locator="15:1-15:76" name="Limited Life Expectancy" id="urn:oid:2.16.840.1.113883.3.526.3.1259" accessLevel="Public"/>
+      <def localId="11" locator="16:1-16:67" name="Medical Reason" id="urn:oid:2.16.840.1.113883.3.526.3.1007" accessLevel="Public"/>
+      <def localId="12" locator="17:1-17:84" name="Occupational Therapy Evaluation" id="urn:oid:2.16.840.1.113883.3.526.3.1011" accessLevel="Public"/>
+      <def localId="13" locator="18:1-18:75" name="Office Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public"/>
+      <def localId="14" locator="19:1-19:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public"/>
+      <def localId="15" locator="20:1-20:78" name="Ophthalmological Services" id="urn:oid:2.16.840.1.113883.3.526.3.1285" accessLevel="Public"/>
+      <def localId="16" locator="21:1-21:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public"/>
+      <def localId="17" locator="22:1-22:125" name="Preventive Care Services - Established Office Visit, 18 and Up" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025" accessLevel="Public"/>
+      <def localId="18" locator="23:1-23:106" name="Preventive Care Services - Group Counseling" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1027" accessLevel="Public"/>
+      <def localId="19" locator="24:1-24:95" name="Preventive Care Services - Other" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1030" accessLevel="Public"/>
+      <def localId="20" locator="25:1-25:109" name="Preventive Care Services-Individual Counseling" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1026" accessLevel="Public"/>
+      <def localId="21" locator="26:1-26:119" name="Preventive Care Services-Initial Office Visit, 18 and Up" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023" accessLevel="Public"/>
+      <def localId="22" locator="27:1-27:88" name="Psych Visit - Diagnostic Evaluation" id="urn:oid:2.16.840.1.113883.3.526.3.1492" accessLevel="Public"/>
+      <def localId="23" locator="28:1-28:80" name="Psych Visit - Psychotherapy" id="urn:oid:2.16.840.1.113883.3.526.3.1496" accessLevel="Public"/>
+      <def localId="24" locator="29:1-29:67" name="Psychoanalysis" id="urn:oid:2.16.840.1.113883.3.526.3.1141" accessLevel="Public"/>
+      <def localId="25" locator="30:1-30:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public"/>
+      <def localId="26" locator="31:1-31:82" name="Speech and Hearing Evaluation" id="urn:oid:2.16.840.1.113883.3.526.3.1530" accessLevel="Public"/>
+      <def localId="27" locator="32:1-32:69" name="Tobacco Non-User" id="urn:oid:2.16.840.1.113883.3.526.3.1189" accessLevel="Public"/>
+      <def localId="28" locator="33:1-33:84" name="Tobacco Use Cessation Counseling" id="urn:oid:2.16.840.1.113883.3.526.3.509" accessLevel="Public"/>
+      <def localId="29" locator="34:1-34:90" name="Tobacco Use Cessation Pharmacotherapy" id="urn:oid:2.16.840.1.113883.3.526.3.1190" accessLevel="Public"/>
+      <def localId="30" locator="35:1-35:74" name="Tobacco Use Screening" id="urn:oid:2.16.840.1.113883.3.526.3.1278" accessLevel="Public"/>
+      <def localId="31" locator="36:1-36:65" name="Tobacco User" id="urn:oid:2.16.840.1.113883.3.526.3.1170" accessLevel="Public"/>
+   </valueSets>
+   <codes>
+      <def localId="33" locator="38:1-38:62" name="Birth date" id="21112-8" display="Birth date" accessLevel="Public">
+         <codeSystem localId="32" locator="38:35-38:41" name="LOINC"/>
+      </def>
+   </codes>
+   <statements>
+      <def locator="42:1-42:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="42:1-42:15" xmlns:ns0="urn:healthit-gov:qdm:v5_4" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="38" locator="44:1-45:50" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="38">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+	</a:s>
+               <a:s r="37">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="37" locator="45:2-45:50" xmlns:ns1="urn:healthit-gov:qdm:v5_4" dataType="ns1:PatientCharacteristicEthnicity" codeProperty="code" xsi:type="Retrieve">
+            <codes name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="40" locator="47:1-48:42" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="40">
+               <a:s>define &quot;SDE Payer&quot;:
+	</a:s>
+               <a:s r="39">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="39" locator="48:2-48:42" xmlns:ns2="urn:healthit-gov:qdm:v5_4" dataType="ns2:PatientCharacteristicPayer" codeProperty="code" xsi:type="Retrieve">
+            <codes name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="42" locator="50:1-51:40" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="42">
+               <a:s>define &quot;SDE Race&quot;:
+	</a:s>
+               <a:s r="41">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="41" locator="51:2-51:40" xmlns:ns3="urn:healthit-gov:qdm:v5_4" dataType="ns3:PatientCharacteristicRace" codeProperty="code" xsi:type="Retrieve">
+            <codes name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="44" locator="53:1-54:57" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="44">
+               <a:s>define &quot;SDE Sex&quot;:
+	</a:s>
+               <a:s r="43">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="43" locator="54:2-54:57" xmlns:ns4="urn:healthit-gov:qdm:v5_4" dataType="ns4:PatientCharacteristicSex" codeProperty="code" xsi:type="Retrieve">
+            <codes name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="72" locator="56:1-68:71" name="Office Based Visit During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="72">
+               <a:s>define &quot;Office Based Visit During Measurement Period&quot;:
+	</a:s>
+               <a:s r="71">
+                  <a:s>
+                     <a:s r="66">
+                        <a:s r="65">
+                           <a:s>( </a:s>
+                           <a:s r="65">
+                              <a:s r="63">
+                                 <a:s r="61">
+                                    <a:s r="59">
+                                       <a:s r="57">
+                                          <a:s r="55">
+                                             <a:s r="53">
+                                                <a:s r="51">
+                                                   <a:s r="49">
+                                                      <a:s r="47">
+                                                         <a:s r="45">
+                                                            <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                            <a:s>
+                                                               <a:s>&quot;Health &amp; Behavioral Assessment - Individual&quot;</a:s>
+                                                            </a:s>
+                                                            <a:s>]</a:s>
+                                                         </a:s>
+                                                         <a:s>
+		union </a:s>
+                                                         <a:s r="46">
+                                                            <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                            <a:s>
+                                                               <a:s>&quot;Health and Behavioral Assessment - Initial&quot;</a:s>
+                                                            </a:s>
+                                                            <a:s>]</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>
+		union </a:s>
+                                                      <a:s r="48">
+                                                         <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                         <a:s>
+                                                            <a:s>&quot;Health and Behavioral Assessment, Reassessment&quot;</a:s>
+                                                         </a:s>
+                                                         <a:s>]</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+		union </a:s>
+                                                   <a:s r="50">
+                                                      <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Home Healthcare Services&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+		union </a:s>
+                                                <a:s r="52">
+                                                   <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                   <a:s>
+                                                      <a:s>&quot;Occupational Therapy Evaluation&quot;</a:s>
+                                                   </a:s>
+                                                   <a:s>]</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+		union </a:s>
+                                             <a:s r="54">
+                                                <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                <a:s>
+                                                   <a:s>&quot;Office Visit&quot;</a:s>
+                                                </a:s>
+                                                <a:s>]</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+		union </a:s>
+                                          <a:s r="56">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Ophthalmological Services&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+		union </a:s>
+                                       <a:s r="58">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Psych Visit - Diagnostic Evaluation&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+		union </a:s>
+                                    <a:s r="60">
+                                       <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Psych Visit - Psychotherapy&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+		union </a:s>
+                                 <a:s r="62">
+                                    <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Psychoanalysis&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+		union </a:s>
+                              <a:s r="64">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Speech and Hearing Evaluation&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> OfficeBasedEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="70">
+                     <a:s>where </a:s>
+                     <a:s r="70">
+                        <a:s r="68">
+                           <a:s r="67">
+                              <a:s>OfficeBasedEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="68">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> during </a:s>
+                        <a:s r="69">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="71" locator="57:2-68:71" xsi:type="Query">
+            <source localId="66" locator="57:2-67:88" alias="OfficeBasedEncounter">
+               <expression localId="65" locator="57:2-67:67" xsi:type="Union">
+                  <operand localId="63" locator="57:4-66:50" xsi:type="Union">
+                     <operand localId="59" locator="57:4-64:71" xsi:type="Union">
+                        <operand localId="55" locator="57:4-62:48" xsi:type="Union">
+                           <operand localId="51" locator="57:4-60:60" xsi:type="Union">
+                              <operand localId="47" locator="57:4-58:78" xsi:type="Union">
+                                 <operand localId="45" locator="57:4-57:74" xmlns:ns5="urn:healthit-gov:qdm:v5_4" dataType="ns5:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                                    <codes name="Health &amp; Behavioral Assessment - Individual" xsi:type="ValueSetRef"/>
+                                 </operand>
+                                 <operand localId="46" locator="58:9-58:78" xmlns:ns6="urn:healthit-gov:qdm:v5_4" dataType="ns6:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                                    <codes name="Health and Behavioral Assessment - Initial" xsi:type="ValueSetRef"/>
+                                 </operand>
+                              </operand>
+                              <operand xsi:type="Union">
+                                 <operand localId="48" locator="59:9-59:82" xmlns:ns7="urn:healthit-gov:qdm:v5_4" dataType="ns7:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                                    <codes name="Health and Behavioral Assessment, Reassessment" xsi:type="ValueSetRef"/>
+                                 </operand>
+                                 <operand localId="50" locator="60:9-60:60" xmlns:ns8="urn:healthit-gov:qdm:v5_4" dataType="ns8:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                                    <codes name="Home Healthcare Services" xsi:type="ValueSetRef"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="Union">
+                              <operand localId="52" locator="61:9-61:67" xmlns:ns9="urn:healthit-gov:qdm:v5_4" dataType="ns9:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                                 <codes name="Occupational Therapy Evaluation" xsi:type="ValueSetRef"/>
+                              </operand>
+                              <operand localId="54" locator="62:9-62:48" xmlns:ns10="urn:healthit-gov:qdm:v5_4" dataType="ns10:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                                 <codes name="Office Visit" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Union">
+                           <operand localId="56" locator="63:9-63:61" xmlns:ns11="urn:healthit-gov:qdm:v5_4" dataType="ns11:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                              <codes name="Ophthalmological Services" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand localId="58" locator="64:9-64:71" xmlns:ns12="urn:healthit-gov:qdm:v5_4" dataType="ns12:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                              <codes name="Psych Visit - Diagnostic Evaluation" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand localId="60" locator="65:9-65:63" xmlns:ns13="urn:healthit-gov:qdm:v5_4" dataType="ns13:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Psych Visit - Psychotherapy" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="62" locator="66:9-66:50" xmlns:ns14="urn:healthit-gov:qdm:v5_4" dataType="ns14:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Psychoanalysis" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="64" locator="67:9-67:65" xmlns:ns15="urn:healthit-gov:qdm:v5_4" dataType="ns15:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                     <codes name="Speech and Hearing Evaluation" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="70" locator="68:3-68:71" xsi:type="IncludedIn">
+               <operand localId="68" locator="68:9-68:43" path="relevantPeriod" scope="OfficeBasedEncounter" xsi:type="Property"/>
+               <operand localId="69" locator="68:52-68:71" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="90" locator="70:1-77:70" name="Preventive Visit During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="90">
+               <a:s>define &quot;Preventive Visit During Measurement Period&quot;:
+	</a:s>
+               <a:s r="89">
+                  <a:s>
+                     <a:s r="84">
+                        <a:s r="83">
+                           <a:s>( </a:s>
+                           <a:s r="83">
+                              <a:s r="81">
+                                 <a:s r="79">
+                                    <a:s r="77">
+                                       <a:s r="75">
+                                          <a:s r="73">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Annual Wellness Visit&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                          <a:s>
+		union </a:s>
+                                          <a:s r="74">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Preventive Care Services - Established Office Visit, 18 and Up&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+		union </a:s>
+                                       <a:s r="76">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Preventive Care Services - Group Counseling&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+		union </a:s>
+                                    <a:s r="78">
+                                       <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Preventive Care Services - Other&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+		union </a:s>
+                                 <a:s r="80">
+                                    <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Preventive Care Services-Individual Counseling&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+		union </a:s>
+                              <a:s r="82">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Preventive Care Services-Initial Office Visit, 18 and Up&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> PreventiveEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="88">
+                     <a:s>where </a:s>
+                     <a:s r="88">
+                        <a:s r="86">
+                           <a:s r="85">
+                              <a:s>PreventiveEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="86">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> during </a:s>
+                        <a:s r="87">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="89" locator="71:2-77:70" xsi:type="Query">
+            <source localId="84" locator="71:2-76:114" alias="PreventiveEncounter">
+               <expression localId="83" locator="71:2-76:94" xsi:type="Union">
+                  <operand localId="79" locator="71:4-74:68" xsi:type="Union">
+                     <operand localId="75" locator="71:4-72:98" xsi:type="Union">
+                        <operand localId="73" locator="71:4-71:52" xmlns:ns16="urn:healthit-gov:qdm:v5_4" dataType="ns16:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Annual Wellness Visit" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="74" locator="72:9-72:98" xmlns:ns17="urn:healthit-gov:qdm:v5_4" dataType="ns17:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Preventive Care Services - Established Office Visit, 18 and Up" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand localId="76" locator="73:9-73:79" xmlns:ns18="urn:healthit-gov:qdm:v5_4" dataType="ns18:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Preventive Care Services - Group Counseling" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="78" locator="74:9-74:68" xmlns:ns19="urn:healthit-gov:qdm:v5_4" dataType="ns19:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Preventive Care Services - Other" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Union">
+                     <operand localId="80" locator="75:9-75:82" xmlns:ns20="urn:healthit-gov:qdm:v5_4" dataType="ns20:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                        <codes name="Preventive Care Services-Individual Counseling" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="82" locator="76:9-76:92" xmlns:ns21="urn:healthit-gov:qdm:v5_4" dataType="ns21:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" xsi:type="Retrieve">
+                        <codes name="Preventive Care Services-Initial Office Visit, 18 and Up" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="88" locator="77:3-77:70" xsi:type="IncludedIn">
+               <operand localId="86" locator="77:9-77:42" path="relevantPeriod" scope="PreventiveEncounter" xsi:type="Property"/>
+               <operand localId="87" locator="77:51-77:70" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="110" locator="79:1-84:62" name="Screened and Identified as Tobacco User" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="110">
+               <a:s>define &quot;Screened and Identified as Tobacco User&quot;:
+	</a:s>
+               <a:s r="109">
+                  <a:s>
+                     <a:s r="104">
+                        <a:s r="103">
+                           <a:s>( </a:s>
+                           <a:s r="103">
+                              <a:s>Last(</a:s>
+                              <a:s r="102">
+                                 <a:s>
+                                    <a:s r="92">
+                                       <a:s r="91">
+                                          <a:s r="91">
+                                             <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Tobacco Use Screening&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> TobaccoUseScreening</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+			</a:s>
+                                 <a:s r="98">
+                                    <a:s>where </a:s>
+                                    <a:s r="98">
+                                       <a:s r="94">
+                                          <a:s r="93">
+                                             <a:s>TobaccoUseScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="94">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="98">
+                                          <a:s r="97">
+                                             <a:s>24 months</a:s>
+                                          </a:s>
+                                          <a:s> or less on or before</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="96">
+                                          <a:s>end of </a:s>
+                                          <a:s r="95">
+                                             <a:s>&quot;Measurement Period&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+			</a:s>
+                                 <a:s r="101">
+                                    <a:s>sort by </a:s>
+                                    <a:s r="100">
+                                       <a:s r="99">
+                                          <a:s>authorDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+	)</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s> MostRecentTobaccoUseScreening</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="108">
+                     <a:s>where </a:s>
+                     <a:s r="108">
+                        <a:s r="106">
+                           <a:s r="105">
+                              <a:s>MostRecentTobaccoUseScreening</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="106">
+                              <a:s>result</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="107">
+                           <a:s>&quot;Tobacco User&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="109" locator="80:2-84:62" xsi:type="Query">
+            <source localId="104" locator="80:2-83:33" alias="MostRecentTobaccoUseScreening">
+               <expression localId="103" locator="80:2-83:3" xsi:type="Last">
+                  <source localId="102" locator="80:9-82:25" xsi:type="Query">
+                     <source localId="92" locator="80:9-80:78" alias="TobaccoUseScreening">
+                        <expression localId="91" locator="80:9-80:58" xmlns:ns22="urn:healthit-gov:qdm:v5_4" dataType="ns22:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Tobacco Use Screening" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <where localId="98" locator="81:4-81:102" xsi:type="In">
+                        <operand localId="94" locator="81:10-81:43" path="authorDatetime" scope="TobaccoUseScreening" xsi:type="Property"/>
+                        <operand locator="81:45-81:61" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low locator="81:76-81:102" xsi:type="Subtract">
+                              <operand localId="96" locator="81:76-81:102" xsi:type="End">
+                                 <operand localId="95" locator="81:83-81:102" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </operand>
+                              <operand localId="97" locator="81:45-81:53" value="24" unit="months" xsi:type="Quantity"/>
+                           </low>
+                           <high localId="96" locator="81:76-81:102" xsi:type="End">
+                              <operand localId="95" locator="81:83-81:102" name="Measurement Period" xsi:type="ParameterRef"/>
+                           </high>
+                        </operand>
+                     </where>
+                     <sort localId="101" locator="82:4-82:25">
+                        <by localId="100" locator="82:12-82:25" direction="asc" path="authorDatetime" xsi:type="ByColumn"/>
+                     </sort>
+                  </source>
+               </expression>
+            </source>
+            <where localId="108" locator="84:3-84:62" xsi:type="InValueSet">
+               <code asType="t:Code" xsi:type="As">
+                  <operand localId="106" locator="84:9-84:44" path="result" scope="MostRecentTobaccoUseScreening" xsi:type="Property"/>
+               </code>
+               <valueset localId="107" locator="84:49-84:62" name="Tobacco User"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="130" locator="86:1-91:66" name="Screened and Identified as Tobacco Non User" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="130">
+               <a:s>define &quot;Screened and Identified as Tobacco Non User&quot;:
+	</a:s>
+               <a:s r="129">
+                  <a:s>
+                     <a:s r="124">
+                        <a:s r="123">
+                           <a:s>( </a:s>
+                           <a:s r="123">
+                              <a:s>Last(</a:s>
+                              <a:s r="122">
+                                 <a:s>
+                                    <a:s r="112">
+                                       <a:s r="111">
+                                          <a:s r="111">
+                                             <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Tobacco Use Screening&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> TobaccoUseScreening</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+			</a:s>
+                                 <a:s r="118">
+                                    <a:s>where </a:s>
+                                    <a:s r="118">
+                                       <a:s r="114">
+                                          <a:s r="113">
+                                             <a:s>TobaccoUseScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="114">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="118">
+                                          <a:s r="117">
+                                             <a:s>24 months</a:s>
+                                          </a:s>
+                                          <a:s> or less on or before</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="116">
+                                          <a:s>end of </a:s>
+                                          <a:s r="115">
+                                             <a:s>&quot;Measurement Period&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+			</a:s>
+                                 <a:s r="121">
+                                    <a:s>sort by </a:s>
+                                    <a:s r="120">
+                                       <a:s r="119">
+                                          <a:s>authorDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+	)</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s> MostRecentTobaccoUseScreening</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="128">
+                     <a:s>where </a:s>
+                     <a:s r="128">
+                        <a:s r="126">
+                           <a:s r="125">
+                              <a:s>MostRecentTobaccoUseScreening</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="126">
+                              <a:s>result</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="127">
+                           <a:s>&quot;Tobacco Non-User&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="129" locator="87:2-91:66" xsi:type="Query">
+            <source localId="124" locator="87:2-90:33" alias="MostRecentTobaccoUseScreening">
+               <expression localId="123" locator="87:2-90:3" xsi:type="Last">
+                  <source localId="122" locator="87:9-89:25" xsi:type="Query">
+                     <source localId="112" locator="87:9-87:78" alias="TobaccoUseScreening">
+                        <expression localId="111" locator="87:9-87:58" xmlns:ns23="urn:healthit-gov:qdm:v5_4" dataType="ns23:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" xsi:type="Retrieve">
+                           <codes name="Tobacco Use Screening" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <where localId="118" locator="88:4-88:102" xsi:type="In">
+                        <operand localId="114" locator="88:10-88:43" path="authorDatetime" scope="TobaccoUseScreening" xsi:type="Property"/>
+                        <operand locator="88:45-88:61" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low locator="88:76-88:102" xsi:type="Subtract">
+                              <operand localId="116" locator="88:76-88:102" xsi:type="End">
+                                 <operand localId="115" locator="88:83-88:102" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </operand>
+                              <operand localId="117" locator="88:45-88:53" value="24" unit="months" xsi:type="Quantity"/>
+                           </low>
+                           <high localId="116" locator="88:76-88:102" xsi:type="End">
+                              <operand localId="115" locator="88:83-88:102" name="Measurement Period" xsi:type="ParameterRef"/>
+                           </high>
+                        </operand>
+                     </where>
+                     <sort localId="121" locator="89:4-89:25">
+                        <by localId="120" locator="89:12-89:25" direction="asc" path="authorDatetime" xsi:type="ByColumn"/>
+                     </sort>
+                  </source>
+               </expression>
+            </source>
+            <where localId="128" locator="91:3-91:66" xsi:type="InValueSet">
+               <code asType="t:Code" xsi:type="As">
+                  <operand localId="126" locator="91:9-91:44" path="result" scope="MostRecentTobaccoUseScreening" xsi:type="Property"/>
+               </code>
+               <valueset localId="127" locator="91:49-91:66" name="Tobacco Non-User"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="151" locator="183:1-189:3" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="151">
+               <a:s>define &quot;Initial Population&quot;:
+	</a:s>
+               <a:s r="150">
+                  <a:s r="142">
+                     <a:s>exists </a:s>
+                     <a:s r="141">
+                        <a:s>( </a:s>
+                        <a:s r="141">
+                           <a:s>
+                              <a:s r="132">
+                                 <a:s r="131">
+                                    <a:s r="131">
+                                       <a:s>[&quot;Patient Characteristic Birthdate&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Birth date&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> BirthDate</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+			</a:s>
+                           <a:s r="140">
+                              <a:s>where </a:s>
+                              <a:s r="140">
+                                 <a:s r="138">
+                                    <a:s r="133">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="138">
+                                       <a:s>&quot;CalendarAgeInYearsAt&quot;(</a:s>
+                                       <a:s r="135">
+                                          <a:s r="134">
+                                             <a:s>BirthDate</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="135">
+                                             <a:s>birthDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="137">
+                                          <a:s>start of </a:s>
+                                          <a:s r="136">
+                                             <a:s>&quot;Measurement Period&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>>= 18</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+	)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		and </a:s>
+                  <a:s r="149">
+                     <a:s>( </a:s>
+                     <a:s r="149">
+                        <a:s r="146">
+                           <a:s r="144">
+                              <a:s>Count(</a:s>
+                              <a:s r="143">
+                                 <a:s>&quot;Office Based Visit During Measurement Period&quot;</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s>>= 2</a:s>
+                        </a:s>
+                        <a:s>
+				or </a:s>
+                        <a:s r="148">
+                           <a:s>exists </a:s>
+                           <a:s r="147">
+                              <a:s>&quot;Preventive Visit During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+		)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="150" locator="184:2-189:3" xsi:type="And">
+            <operand localId="142" locator="184:2-186:2" xsi:type="Exists">
+               <operand localId="141" locator="184:9-186:2" xsi:type="Query">
+                  <source localId="132" locator="184:11-184:70" alias="BirthDate">
+                     <expression localId="131" locator="184:11-184:60" xmlns:ns24="urn:healthit-gov:qdm:v5_4" dataType="ns24:PatientCharacteristicBirthdate" codeProperty="code" xsi:type="Retrieve">
+                        <codes xsi:type="ToList">
+                           <operand name="Birth date" xsi:type="CodeRef"/>
+                        </codes>
+                     </expression>
+                  </source>
+                  <where localId="140" locator="185:4-185:99" xsi:type="GreaterOrEqual">
+                     <operand localId="138" locator="185:10-185:94" name="CalendarAgeInYearsAt" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="135" locator="185:40-185:62" path="birthDatetime" scope="BirthDate" xsi:type="Property"/>
+                        <operand localId="137" locator="185:65-185:93" xsi:type="Start">
+                           <operand localId="136" locator="185:74-185:93" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="139" locator="185:98-185:99" valueType="t:Integer" value="18" xsi:type="Literal"/>
+                  </where>
+               </operand>
+            </operand>
+            <operand localId="149" locator="187:7-189:3" xsi:type="Or">
+               <operand localId="146" locator="187:9-187:65" xsi:type="GreaterOrEqual">
+                  <operand localId="144" locator="187:9-187:61" xsi:type="Count">
+                     <source localId="143" locator="187:15-187:60" name="Office Based Visit During Measurement Period" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="145" locator="187:65" valueType="t:Integer" value="2" xsi:type="Literal"/>
+               </operand>
+               <operand localId="148" locator="188:8-188:58" xsi:type="Exists">
+                  <operand localId="147" locator="188:15-188:58" name="Preventive Visit During Measurement Period" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="153" locator="93:1-94:21" name="Denominator 1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="153">
+               <a:s>define &quot;Denominator 1&quot;:
+	</a:s>
+               <a:s r="152">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="152" locator="94:2-94:21" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="158" locator="96:1-98:59" name="Denominator 2" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="158">
+               <a:s>define &quot;Denominator 2&quot;:
+	</a:s>
+               <a:s r="157">
+                  <a:s r="154">
+                     <a:s>&quot;Initial Population&quot;</a:s>
+                  </a:s>
+                  <a:s>
+		and </a:s>
+                  <a:s r="156">
+                     <a:s r="155">
+                        <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                     </a:s>
+                     <a:s> is not null</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="157" locator="97:2-98:59" xsi:type="And">
+            <operand localId="154" locator="97:2-97:21" name="Initial Population" xsi:type="ExpressionRef"/>
+            <operand localId="156" locator="98:7-98:59" xsi:type="Not">
+               <operand locator="98:7-98:59" xsi:type="IsNull">
+                  <operand localId="155" locator="98:7-98:47" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="160" locator="100:1-101:21" name="Denominator 3" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="160">
+               <a:s>define &quot;Denominator 3&quot;:
+	</a:s>
+               <a:s r="159">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="159" locator="101:2-101:21" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="168" locator="103:1-105:82" name="Has Limited Life Expectancy" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="168">
+               <a:s>define &quot;Has Limited Life Expectancy&quot;:
+	</a:s>
+               <a:s r="167">
+                  <a:s>
+                     <a:s r="162">
+                        <a:s r="161">
+                           <a:s r="161">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Limited Life Expectancy&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> LimitedLifeExpectancy</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="166">
+                     <a:s>where </a:s>
+                     <a:s r="166">
+                        <a:s r="164">
+                           <a:s r="163">
+                              <a:s>LimitedLifeExpectancy</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="164">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> overlaps after </a:s>
+                        <a:s r="165">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="167" locator="104:2-105:82" xsi:type="Query">
+            <source localId="162" locator="104:2-104:63" alias="LimitedLifeExpectancy">
+               <expression localId="161" locator="104:2-104:41" xmlns:ns25="urn:healthit-gov:qdm:v5_4" dataType="ns25:Diagnosis" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Limited Life Expectancy" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="166" locator="105:3-105:82" xsi:type="OverlapsAfter">
+               <operand localId="164" locator="105:9-105:46" path="prevalencePeriod" scope="LimitedLifeExpectancy" xsi:type="Property"/>
+               <operand localId="165" locator="105:63-105:82" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="183" locator="177:1-181:66" name="Medical Reason for Not Screening for Tobacco Use" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="183">
+               <a:s>define &quot;Medical Reason for Not Screening for Tobacco Use&quot;:
+	</a:s>
+               <a:s r="182">
+                  <a:s>
+                     <a:s r="170">
+                        <a:s r="169">
+                           <a:s r="169">
+                              <a:s>[&quot;Assessment, Not Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Tobacco Use Screening&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoTobaccoUseScreening</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="181">
+                     <a:s>where </a:s>
+                     <a:s r="181">
+                        <a:s r="176">
+                           <a:s r="172">
+                              <a:s r="171">
+                                 <a:s>NoTobaccoUseScreening</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="172">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="176">
+                              <a:s r="175">
+                                 <a:s>24 months</a:s>
+                              </a:s>
+                              <a:s> or less before</a:s>
+                           </a:s>
+                           <a:s> 
+		</a:s>
+                           <a:s r="174">
+                              <a:s>end of </a:s>
+                              <a:s r="173">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+			and </a:s>
+                        <a:s r="180">
+                           <a:s r="178">
+                              <a:s r="177">
+                                 <a:s>NoTobaccoUseScreening</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="178">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="179">
+                              <a:s>&quot;Medical Reason&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="182" locator="178:2-181:66" xsi:type="Query">
+            <source localId="170" locator="178:2-178:77" alias="NoTobaccoUseScreening">
+               <expression localId="169" locator="178:2-178:55" xmlns:ns26="urn:healthit-gov:qdm:v5_4" dataType="ns26:NegativeAssessmentPerformed" templateId="NegativeAssessmentPerformed" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Tobacco Use Screening" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="181" locator="179:3-181:66" xsi:type="And">
+               <operand localId="176" locator="179:9-180:29" xsi:type="In">
+                  <operand localId="172" locator="179:9-179:44" path="authorDatetime" scope="NoTobaccoUseScreening" xsi:type="Property"/>
+                  <operand locator="179:46-179:62" lowClosed="true" highClosed="false" xsi:type="Interval">
+                     <low locator="180:3-180:29" xsi:type="Subtract">
+                        <operand localId="174" locator="180:3-180:29" xsi:type="End">
+                           <operand localId="173" locator="180:10-180:29" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                        <operand localId="175" locator="179:46-179:54" value="24" unit="months" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="174" locator="180:3-180:29" xsi:type="End">
+                        <operand localId="173" locator="180:10-180:29" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </high>
+                  </operand>
+               </operand>
+               <operand localId="180" locator="181:8-181:66" xsi:type="InValueSet">
+                  <code localId="178" locator="181:8-181:46" path="negationRationale" scope="NoTobaccoUseScreening" xsi:type="Property"/>
+                  <valueset localId="179" locator="181:51-181:66" name="Medical Reason"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="189" locator="107:1-109:41" name="Denominator Exceptions 1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="189">
+               <a:s>define &quot;Denominator Exceptions 1&quot;:
+	</a:s>
+               <a:s r="188">
+                  <a:s r="185">
+                     <a:s>exists </a:s>
+                     <a:s r="184">
+                        <a:s>&quot;Medical Reason for Not Screening for Tobacco Use&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		or </a:s>
+                  <a:s r="187">
+                     <a:s>exists </a:s>
+                     <a:s r="186">
+                        <a:s>&quot;Has Limited Life Expectancy&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="188" locator="108:2-109:41" xsi:type="Or">
+            <operand localId="185" locator="108:2-108:58" xsi:type="Exists">
+               <operand localId="184" locator="108:9-108:58" name="Medical Reason for Not Screening for Tobacco Use" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="187" locator="109:6-109:41" xsi:type="Exists">
+               <operand localId="186" locator="109:13-109:41" name="Has Limited Life Expectancy" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="211" locator="161:1-167:74" name="Medical Reason for Not Counseling Tobacco User" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="211">
+               <a:s>define &quot;Medical Reason for Not Counseling Tobacco User&quot;:
+	</a:s>
+               <a:s r="210">
+                  <a:s>
+                     <a:s r="191">
+                        <a:s r="190">
+                           <a:s r="190">
+                              <a:s>[&quot;Intervention, Not Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Tobacco Use Cessation Counseling&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoTobaccoCessationCounseling</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="205">
+                     <a:s>with </a:s>
+                     <a:s r="193">
+                        <a:s r="192">
+                           <a:s>
+                              <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ScreenedTobaccoUser</a:s>
+                     </a:s>
+                     <a:s>
+			such that </a:s>
+                     <a:s r="204">
+                        <a:s r="198">
+                           <a:s r="195">
+                              <a:s r="194">
+                                 <a:s>NoTobaccoCessationCounseling</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="195">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> same or after </a:s>
+                           <a:s r="197">
+                              <a:s r="196">
+                                 <a:s>ScreenedTobaccoUser</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="197">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+				and </a:s>
+                        <a:s r="203">
+                           <a:s r="200">
+                              <a:s r="199">
+                                 <a:s>NoTobaccoCessationCounseling</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="200">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> before 
+				</a:s>
+                           <a:s r="202">
+                              <a:s>end of </a:s>
+                              <a:s r="201">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="209">
+                     <a:s>where </a:s>
+                     <a:s r="209">
+                        <a:s r="207">
+                           <a:s r="206">
+                              <a:s>NoTobaccoCessationCounseling</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="207">
+                              <a:s>negationRationale</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="208">
+                           <a:s>&quot;Medical Reason&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="210" locator="162:2-167:74" xsi:type="Query">
+            <source localId="191" locator="162:2-162:97" alias="NoTobaccoCessationCounseling">
+               <expression localId="190" locator="162:2-162:68" xmlns:ns27="urn:healthit-gov:qdm:v5_4" dataType="ns27:NegativeInterventionPerformed" templateId="NegativeInterventionPerformed" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Tobacco Use Cessation Counseling" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="205" locator="163:3-166:31" alias="ScreenedTobaccoUser" xsi:type="With">
+               <expression localId="192" locator="163:8-163:48" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               <suchThat localId="204" locator="164:14-166:31" xsi:type="And">
+                  <operand localId="198" locator="164:14-164:105" xsi:type="SameOrAfter">
+                     <operand localId="195" locator="164:14-164:56" path="authorDatetime" scope="NoTobaccoCessationCounseling" xsi:type="Property"/>
+                     <operand localId="197" locator="164:72-164:105" path="authorDatetime" scope="ScreenedTobaccoUser" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="203" locator="165:9-166:31" xsi:type="Before">
+                     <operand localId="200" locator="165:9-165:51" path="authorDatetime" scope="NoTobaccoCessationCounseling" xsi:type="Property"/>
+                     <operand localId="202" locator="166:5-166:31" xsi:type="End">
+                        <operand localId="201" locator="166:12-166:31" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="209" locator="167:3-167:74" xsi:type="InValueSet">
+               <code localId="207" locator="167:9-167:54" path="negationRationale" scope="NoTobaccoCessationCounseling" xsi:type="Property"/>
+               <valueset localId="208" locator="167:59-167:74" name="Medical Reason"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="235" locator="169:1-175:70" name="Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="235">
+               <a:s>define &quot;Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy&quot;:
+	</a:s>
+               <a:s r="234">
+                  <a:s>
+                     <a:s r="215">
+                        <a:s r="214">
+                           <a:s r="214">
+                              <a:s>[&quot;Medication, Not Ordered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Tobacco Use Cessation Pharmacotherapy&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoPharmacotherapyOrdered</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="229">
+                     <a:s>with </a:s>
+                     <a:s r="217">
+                        <a:s r="216">
+                           <a:s>
+                              <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ScreenedTobaccoUser</a:s>
+                     </a:s>
+                     <a:s>
+			such that </a:s>
+                     <a:s r="228">
+                        <a:s r="222">
+                           <a:s r="219">
+                              <a:s r="218">
+                                 <a:s>NoPharmacotherapyOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="219">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> same or after </a:s>
+                           <a:s r="221">
+                              <a:s r="220">
+                                 <a:s>ScreenedTobaccoUser</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="221">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+				and </a:s>
+                        <a:s r="227">
+                           <a:s r="224">
+                              <a:s r="223">
+                                 <a:s>NoPharmacotherapyOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="224">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> before 
+				</a:s>
+                           <a:s r="226">
+                              <a:s>end of </a:s>
+                              <a:s r="225">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="233">
+                     <a:s>where </a:s>
+                     <a:s r="233">
+                        <a:s r="231">
+                           <a:s r="230">
+                              <a:s>NoPharmacotherapyOrdered</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="231">
+                              <a:s>negationRationale</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="232">
+                           <a:s>&quot;Medical Reason&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="234" locator="170:2-175:70" xsi:type="Query">
+            <source localId="215" locator="170:2-170:94" alias="NoPharmacotherapyOrdered">
+               <expression localId="214" locator="170:2-170:69" xmlns:ns28="urn:healthit-gov:qdm:v5_4" dataType="ns28:NegativeMedicationOrder" templateId="NegativeMedicationOrder" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Tobacco Use Cessation Pharmacotherapy" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="229" locator="171:3-174:31" alias="ScreenedTobaccoUser" xsi:type="With">
+               <expression localId="216" locator="171:8-171:48" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               <suchThat localId="228" locator="172:14-174:31" xsi:type="And">
+                  <operand localId="222" locator="172:14-172:101" xsi:type="SameOrAfter">
+                     <operand localId="219" locator="172:14-172:52" path="authorDatetime" scope="NoPharmacotherapyOrdered" xsi:type="Property"/>
+                     <operand localId="221" locator="172:68-172:101" path="authorDatetime" scope="ScreenedTobaccoUser" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="227" locator="173:9-174:31" xsi:type="Before">
+                     <operand localId="224" locator="173:9-173:47" path="authorDatetime" scope="NoPharmacotherapyOrdered" xsi:type="Property"/>
+                     <operand localId="226" locator="174:5-174:31" xsi:type="End">
+                        <operand localId="225" locator="174:12-174:31" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="233" locator="175:3-175:70" xsi:type="InValueSet">
+               <code localId="231" locator="175:9-175:50" path="negationRationale" scope="NoPharmacotherapyOrdered" xsi:type="Property"/>
+               <valueset localId="232" locator="175:55-175:70" name="Medical Reason"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="242" locator="111:1-114:41" name="Denominator Exceptions 2" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="242">
+               <a:s>define &quot;Denominator Exceptions 2&quot;:
+	</a:s>
+               <a:s r="241">
+                  <a:s r="238">
+                     <a:s r="213">
+                        <a:s>exists </a:s>
+                        <a:s r="212">
+                           <a:s>&quot;Medical Reason for Not Counseling Tobacco User&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+		or </a:s>
+                     <a:s r="237">
+                        <a:s>exists </a:s>
+                        <a:s r="236">
+                           <a:s>&quot;Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		or </a:s>
+                  <a:s r="240">
+                     <a:s>exists </a:s>
+                     <a:s r="239">
+                        <a:s>&quot;Has Limited Life Expectancy&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="241" locator="112:2-114:41" xsi:type="Or">
+            <operand localId="238" locator="112:2-113:79" xsi:type="Or">
+               <operand localId="213" locator="112:2-112:56" xsi:type="Exists">
+                  <operand localId="212" locator="112:9-112:56" name="Medical Reason for Not Counseling Tobacco User" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="237" locator="113:6-113:79" xsi:type="Exists">
+                  <operand localId="236" locator="113:13-113:79" name="Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="240" locator="114:6-114:41" xsi:type="Exists">
+               <operand localId="239" locator="114:13-114:41" name="Has Limited Life Expectancy" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="254" locator="116:1-120:41" name="Denominator Exceptions 3" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="254">
+               <a:s>define &quot;Denominator Exceptions 3&quot;:
+	</a:s>
+               <a:s r="253">
+                  <a:s r="250">
+                     <a:s r="247">
+                        <a:s r="244">
+                           <a:s>exists </a:s>
+                           <a:s r="243">
+                              <a:s>&quot;Medical Reason for Not Screening for Tobacco Use&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+		or </a:s>
+                        <a:s r="246">
+                           <a:s>exists </a:s>
+                           <a:s r="245">
+                              <a:s>&quot;Medical Reason for Not Counseling Tobacco User&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+		or </a:s>
+                     <a:s r="249">
+                        <a:s>exists </a:s>
+                        <a:s r="248">
+                           <a:s>&quot;Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		or </a:s>
+                  <a:s r="252">
+                     <a:s>exists </a:s>
+                     <a:s r="251">
+                        <a:s>&quot;Has Limited Life Expectancy&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="253" locator="117:2-120:41" xsi:type="Or">
+            <operand localId="250" locator="117:2-119:79" xsi:type="Or">
+               <operand localId="247" locator="117:2-118:60" xsi:type="Or">
+                  <operand localId="244" locator="117:2-117:58" xsi:type="Exists">
+                     <operand localId="243" locator="117:9-117:58" name="Medical Reason for Not Screening for Tobacco Use" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="246" locator="118:6-118:60" xsi:type="Exists">
+                     <operand localId="245" locator="118:13-118:60" name="Medical Reason for Not Counseling Tobacco User" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="249" locator="119:6-119:79" xsi:type="Exists">
+                  <operand localId="248" locator="119:13-119:79" name="Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="252" locator="120:6-120:41" xsi:type="Exists">
+               <operand localId="251" locator="120:13-120:41" name="Has Limited Life Expectancy" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="272" locator="122:1-127:31" name="Tobacco User Received Cessation Counseling" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="272">
+               <a:s>define &quot;Tobacco User Received Cessation Counseling&quot;:
+	</a:s>
+               <a:s r="271">
+                  <a:s>
+                     <a:s r="256">
+                        <a:s r="255">
+                           <a:s r="255">
+                              <a:s>[&quot;Intervention, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Tobacco Use Cessation Counseling&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> TobaccoCessationCounseling</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="270">
+                     <a:s>with </a:s>
+                     <a:s r="258">
+                        <a:s r="257">
+                           <a:s>
+                              <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ScreenedTobaccoUser</a:s>
+                     </a:s>
+                     <a:s>
+			such that </a:s>
+                     <a:s r="269">
+                        <a:s r="263">
+                           <a:s r="260">
+                              <a:s r="259">
+                                 <a:s>TobaccoCessationCounseling</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="260">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> starts same or after </a:s>
+                           <a:s r="262">
+                              <a:s r="261">
+                                 <a:s>ScreenedTobaccoUser</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="262">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+				and </a:s>
+                        <a:s r="268">
+                           <a:s r="265">
+                              <a:s r="264">
+                                 <a:s>TobaccoCessationCounseling</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="265">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> starts before 
+				</a:s>
+                           <a:s r="267">
+                              <a:s>end of </a:s>
+                              <a:s r="266">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="271" locator="123:2-127:31" xsi:type="Query">
+            <source localId="256" locator="123:2-123:91" alias="TobaccoCessationCounseling">
+               <expression localId="255" locator="123:2-123:64" xmlns:ns29="urn:healthit-gov:qdm:v5_4" dataType="ns29:PositiveInterventionPerformed" templateId="PositiveInterventionPerformed" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Tobacco Use Cessation Counseling" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="270" locator="124:3-127:31" alias="ScreenedTobaccoUser" xsi:type="With">
+               <expression localId="257" locator="124:8-124:48" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               <suchThat localId="269" locator="125:14-127:31" xsi:type="And">
+                  <operand localId="263" locator="125:14-125:110" xsi:type="SameOrAfter">
+                     <operand locator="125:56-125:61" xsi:type="Start">
+                        <operand localId="260" locator="125:14-125:54" path="relevantPeriod" scope="TobaccoCessationCounseling" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="262" locator="125:77-125:110" path="authorDatetime" scope="ScreenedTobaccoUser" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="268" locator="126:9-127:31" xsi:type="Before">
+                     <operand locator="126:51-126:56" xsi:type="Start">
+                        <operand localId="265" locator="126:9-126:49" path="relevantPeriod" scope="TobaccoCessationCounseling" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="267" locator="127:5-127:31" xsi:type="End">
+                        <operand localId="266" locator="127:12-127:31" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="278" locator="129:1-131:58" name="Numerator 1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="278">
+               <a:s>define &quot;Numerator 1&quot;:
+	</a:s>
+               <a:s r="277">
+                  <a:s r="274">
+                     <a:s r="273">
+                        <a:s>&quot;Screened and Identified as Tobacco Non User&quot;</a:s>
+                     </a:s>
+                     <a:s> is not null</a:s>
+                  </a:s>
+                  <a:s>
+		or </a:s>
+                  <a:s r="276">
+                     <a:s r="275">
+                        <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                     </a:s>
+                     <a:s> is not null</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="277" locator="130:2-131:58" xsi:type="Or">
+            <operand localId="274" locator="130:2-130:58" xsi:type="Not">
+               <operand locator="130:2-130:58" xsi:type="IsNull">
+                  <operand localId="273" locator="130:2-130:46" name="Screened and Identified as Tobacco Non User" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="276" locator="131:6-131:58" xsi:type="Not">
+               <operand locator="131:6-131:58" xsi:type="IsNull">
+                  <operand localId="275" locator="131:6-131:46" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="298" locator="154:1-159:31" name="Tobacco Cessation Pharmacotherapy Ordered for Tobacco User" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="298">
+               <a:s>define &quot;Tobacco Cessation Pharmacotherapy Ordered for Tobacco User&quot;:
+	</a:s>
+               <a:s r="297">
+                  <a:s>
+                     <a:s r="282">
+                        <a:s r="281">
+                           <a:s r="281">
+                              <a:s>[&quot;Medication, Order&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Tobacco Use Cessation Pharmacotherapy&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> PharmacotherapyOrdered</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="296">
+                     <a:s>with </a:s>
+                     <a:s r="284">
+                        <a:s r="283">
+                           <a:s>
+                              <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ScreenedTobaccoUser</a:s>
+                     </a:s>
+                     <a:s>
+			such that </a:s>
+                     <a:s r="295">
+                        <a:s r="289">
+                           <a:s r="286">
+                              <a:s r="285">
+                                 <a:s>PharmacotherapyOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="286">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> same or after </a:s>
+                           <a:s r="288">
+                              <a:s r="287">
+                                 <a:s>ScreenedTobaccoUser</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="288">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+				and </a:s>
+                        <a:s r="294">
+                           <a:s r="291">
+                              <a:s r="290">
+                                 <a:s>PharmacotherapyOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="291">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> before 
+				</a:s>
+                           <a:s r="293">
+                              <a:s>end of </a:s>
+                              <a:s r="292">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="297" locator="155:2-159:31" xsi:type="Query">
+            <source localId="282" locator="155:2-155:86" alias="PharmacotherapyOrdered">
+               <expression localId="281" locator="155:2-155:63" xmlns:ns30="urn:healthit-gov:qdm:v5_4" dataType="ns30:PositiveMedicationOrder" templateId="PositiveMedicationOrder" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Tobacco Use Cessation Pharmacotherapy" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="296" locator="156:3-159:31" alias="ScreenedTobaccoUser" xsi:type="With">
+               <expression localId="283" locator="156:8-156:48" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               <suchThat localId="295" locator="157:14-159:31" xsi:type="And">
+                  <operand localId="289" locator="157:14-157:99" xsi:type="SameOrAfter">
+                     <operand localId="286" locator="157:14-157:50" path="authorDatetime" scope="PharmacotherapyOrdered" xsi:type="Property"/>
+                     <operand localId="288" locator="157:66-157:99" path="authorDatetime" scope="ScreenedTobaccoUser" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="294" locator="158:9-159:31" xsi:type="Before">
+                     <operand localId="291" locator="158:9-158:45" path="authorDatetime" scope="PharmacotherapyOrdered" xsi:type="Property"/>
+                     <operand localId="293" locator="159:5-159:31" xsi:type="End">
+                        <operand localId="292" locator="159:12-159:31" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="319" locator="147:1-152:31" name="Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="319">
+               <a:s>define &quot;Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User&quot;:
+	</a:s>
+               <a:s r="318">
+                  <a:s>
+                     <a:s r="303">
+                        <a:s r="302">
+                           <a:s r="302">
+                              <a:s>[&quot;Medication, Active&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Tobacco Use Cessation Pharmacotherapy&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> TakingPharmacotherapy</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		</a:s>
+                  <a:s r="317">
+                     <a:s>with </a:s>
+                     <a:s r="305">
+                        <a:s r="304">
+                           <a:s>
+                              <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ScreenedTobaccoUser</a:s>
+                     </a:s>
+                     <a:s>
+			such that </a:s>
+                     <a:s r="316">
+                        <a:s r="310">
+                           <a:s r="307">
+                              <a:s r="306">
+                                 <a:s>ScreenedTobaccoUser</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="307">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> during </a:s>
+                           <a:s r="309">
+                              <a:s r="308">
+                                 <a:s>TakingPharmacotherapy</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="309">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+				and </a:s>
+                        <a:s r="315">
+                           <a:s r="312">
+                              <a:s r="311">
+                                 <a:s>TakingPharmacotherapy</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="312">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> starts before 
+				</a:s>
+                           <a:s r="314">
+                              <a:s>end of </a:s>
+                              <a:s r="313">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="318" locator="148:2-152:31" xsi:type="Query">
+            <source localId="303" locator="148:2-148:86" alias="TakingPharmacotherapy">
+               <expression localId="302" locator="148:2-148:64" xmlns:ns31="urn:healthit-gov:qdm:v5_4" dataType="ns31:MedicationActive" codeProperty="code" xsi:type="Retrieve">
+                  <codes name="Tobacco Use Cessation Pharmacotherapy" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="317" locator="149:3-152:31" alias="ScreenedTobaccoUser" xsi:type="With">
+               <expression localId="304" locator="149:8-149:48" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+               <suchThat localId="316" locator="150:14-152:31" xsi:type="And">
+                  <operand localId="310" locator="150:14-150:91" xsi:type="In">
+                     <operand localId="307" locator="150:14-150:47" path="authorDatetime" scope="ScreenedTobaccoUser" xsi:type="Property"/>
+                     <operand localId="309" locator="150:56-150:91" path="relevantPeriod" scope="TakingPharmacotherapy" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="315" locator="151:9-152:31" xsi:type="Before">
+                     <operand locator="151:46-151:51" xsi:type="Start">
+                        <operand localId="312" locator="151:9-151:44" path="relevantPeriod" scope="TakingPharmacotherapy" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="314" locator="152:5-152:31" xsi:type="End">
+                        <operand localId="313" locator="152:12-152:31" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="323" locator="133:1-136:84" name="Numerator 2" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="323">
+               <a:s>define &quot;Numerator 2&quot;:
+	</a:s>
+               <a:s r="322">
+                  <a:s r="301">
+                     <a:s r="280">
+                        <a:s>exists </a:s>
+                        <a:s r="279">
+                           <a:s>&quot;Tobacco User Received Cessation Counseling&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+		or </a:s>
+                     <a:s r="300">
+                        <a:s>exists </a:s>
+                        <a:s r="299">
+                           <a:s>&quot;Tobacco Cessation Pharmacotherapy Ordered for Tobacco User&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+		or </a:s>
+                  <a:s r="321">
+                     <a:s>exists </a:s>
+                     <a:s r="320">
+                        <a:s>&quot;Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="322" locator="134:2-136:84" xsi:type="Or">
+            <operand localId="301" locator="134:2-135:72" xsi:type="Or">
+               <operand localId="280" locator="134:2-134:52" xsi:type="Exists">
+                  <operand localId="279" locator="134:9-134:52" name="Tobacco User Received Cessation Counseling" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="300" locator="135:6-135:72" xsi:type="Exists">
+                  <operand localId="299" locator="135:13-135:72" name="Tobacco Cessation Pharmacotherapy Ordered for Tobacco User" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="321" locator="136:6-136:84" xsi:type="Exists">
+               <operand localId="320" locator="136:13-136:84" name="Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="338" locator="138:1-145:3" name="Numerator 3" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="338">
+               <a:s>define &quot;Numerator 3&quot;:
+	</a:s>
+               <a:s r="337">
+                  <a:s r="325">
+                     <a:s r="324">
+                        <a:s>&quot;Screened and Identified as Tobacco Non User&quot;</a:s>
+                     </a:s>
+                     <a:s> is not null</a:s>
+                  </a:s>
+                  <a:s>
+		or </a:s>
+                  <a:s r="336">
+                     <a:s>( </a:s>
+                     <a:s r="336">
+                        <a:s r="327">
+                           <a:s r="326">
+                              <a:s>&quot;Screened and Identified as Tobacco User&quot;</a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                        <a:s>
+				and </a:s>
+                        <a:s r="335">
+                           <a:s>( </a:s>
+                           <a:s r="335">
+                              <a:s r="332">
+                                 <a:s r="329">
+                                    <a:s>exists </a:s>
+                                    <a:s r="328">
+                                       <a:s>&quot;Tobacco User Received Cessation Counseling&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+						or </a:s>
+                                 <a:s r="331">
+                                    <a:s>exists </a:s>
+                                    <a:s r="330">
+                                       <a:s>&quot;Tobacco Cessation Pharmacotherapy Ordered for Tobacco User&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+						or </a:s>
+                              <a:s r="334">
+                                 <a:s>exists </a:s>
+                                 <a:s r="333">
+                                    <a:s>&quot;Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+				)</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+		)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="337" locator="139:2-145:3" xsi:type="Or">
+            <operand localId="325" locator="139:2-139:58" xsi:type="Not">
+               <operand locator="139:2-139:58" xsi:type="IsNull">
+                  <operand localId="324" locator="139:2-139:46" name="Screened and Identified as Tobacco Non User" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="336" locator="140:6-145:3" xsi:type="And">
+               <operand localId="327" locator="140:8-140:60" xsi:type="Not">
+                  <operand locator="140:8-140:60" xsi:type="IsNull">
+                     <operand localId="326" locator="140:8-140:48" name="Screened and Identified as Tobacco User" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="335" locator="141:9-144:5" xsi:type="Or">
+                  <operand localId="332" locator="141:11-142:76" xsi:type="Or">
+                     <operand localId="329" locator="141:11-141:61" xsi:type="Exists">
+                        <operand localId="328" locator="141:18-141:61" name="Tobacco User Received Cessation Counseling" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="331" locator="142:10-142:76" xsi:type="Exists">
+                        <operand localId="330" locator="142:17-142:76" name="Tobacco Cessation Pharmacotherapy Ordered for Tobacco User" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="334" locator="143:10-143:88" xsi:type="Exists">
+                     <operand localId="333" locator="143:17-143:88" name="Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

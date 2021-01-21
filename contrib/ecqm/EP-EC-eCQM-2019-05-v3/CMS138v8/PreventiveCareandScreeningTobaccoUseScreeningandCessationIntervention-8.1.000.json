@@ -1,0 +1,4142 @@
+{
+   "library" : {
+      "identifier" : {
+         "id" : "PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention",
+         "version" : "8.1.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "3:1-3:23",
+            "localIdentifier" : "QDM",
+            "uri" : "urn:healthit-gov:qdm:v5_4",
+            "version" : "5.4"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "5:1-5:64",
+            "localIdentifier" : "Global",
+            "path" : "MATGlobalCommonFunctions",
+            "version" : "4.0.000"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "36",
+            "locator" : "40:1-40:49",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "parameterTypeSpecifier" : {
+               "localId" : "35",
+               "locator" : "40:32-40:49",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "34",
+                  "locator" : "40:41-40:48",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "3",
+            "locator" : "7:1-7:51",
+            "name" : "LOINC",
+            "id" : "urn:oid:2.16.840.1.113883.6.1",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "4",
+            "locator" : "9:1-9:74",
+            "name" : "Annual Wellness Visit",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1240",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "5",
+            "locator" : "10:1-10:58",
+            "name" : "Ethnicity",
+            "id" : "urn:oid:2.16.840.1.114222.4.11.837",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "6",
+            "locator" : "11:1-11:96",
+            "name" : "Health & Behavioral Assessment - Individual",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1020",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "7",
+            "locator" : "12:1-12:95",
+            "name" : "Health and Behavioral Assessment - Initial",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1245",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "8",
+            "locator" : "13:1-13:99",
+            "name" : "Health and Behavioral Assessment, Reassessment",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1529",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "9",
+            "locator" : "14:1-14:87",
+            "name" : "Home Healthcare Services",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1016",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "10",
+            "locator" : "15:1-15:76",
+            "name" : "Limited Life Expectancy",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1259",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "11",
+            "locator" : "16:1-16:67",
+            "name" : "Medical Reason",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1007",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "12",
+            "locator" : "17:1-17:84",
+            "name" : "Occupational Therapy Evaluation",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1011",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "13",
+            "locator" : "18:1-18:75",
+            "name" : "Office Visit",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "14",
+            "locator" : "19:1-19:68",
+            "name" : "ONC Administrative Sex",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "15",
+            "locator" : "20:1-20:78",
+            "name" : "Ophthalmological Services",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1285",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "16",
+            "locator" : "21:1-21:55",
+            "name" : "Payer",
+            "id" : "urn:oid:2.16.840.1.114222.4.11.3591",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "17",
+            "locator" : "22:1-22:125",
+            "name" : "Preventive Care Services - Established Office Visit, 18 and Up",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "18",
+            "locator" : "23:1-23:106",
+            "name" : "Preventive Care Services - Group Counseling",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1027",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "19",
+            "locator" : "24:1-24:95",
+            "name" : "Preventive Care Services - Other",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1030",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "20",
+            "locator" : "25:1-25:109",
+            "name" : "Preventive Care Services-Individual Counseling",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1026",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "21",
+            "locator" : "26:1-26:119",
+            "name" : "Preventive Care Services-Initial Office Visit, 18 and Up",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "22",
+            "locator" : "27:1-27:88",
+            "name" : "Psych Visit - Diagnostic Evaluation",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1492",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "23",
+            "locator" : "28:1-28:80",
+            "name" : "Psych Visit - Psychotherapy",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1496",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "24",
+            "locator" : "29:1-29:67",
+            "name" : "Psychoanalysis",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1141",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "25",
+            "locator" : "30:1-30:53",
+            "name" : "Race",
+            "id" : "urn:oid:2.16.840.1.114222.4.11.836",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "26",
+            "locator" : "31:1-31:82",
+            "name" : "Speech and Hearing Evaluation",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1530",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "27",
+            "locator" : "32:1-32:69",
+            "name" : "Tobacco Non-User",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1189",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "28",
+            "locator" : "33:1-33:84",
+            "name" : "Tobacco Use Cessation Counseling",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.509",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "29",
+            "locator" : "34:1-34:90",
+            "name" : "Tobacco Use Cessation Pharmacotherapy",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1190",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "30",
+            "locator" : "35:1-35:74",
+            "name" : "Tobacco Use Screening",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1278",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "31",
+            "locator" : "36:1-36:65",
+            "name" : "Tobacco User",
+            "id" : "urn:oid:2.16.840.1.113883.3.526.3.1170",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "33",
+            "locator" : "38:1-38:62",
+            "name" : "Birth date",
+            "id" : "21112-8",
+            "display" : "Birth date",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "localId" : "32",
+               "locator" : "38:35-38:41",
+               "name" : "LOINC"
+            }
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "42:1-42:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "42:1-42:15",
+                  "dataType" : "{urn:healthit-gov:qdm:v5_4}Patient",
+                  "templateId" : "Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "38",
+            "locator" : "44:1-45:50",
+            "name" : "SDE Ethnicity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "38",
+                  "s" : [ {
+                     "value" : [ "define ","\"SDE Ethnicity\"",":\n\t" ]
+                  }, {
+                     "r" : "37",
+                     "s" : [ {
+                        "value" : [ "[","\"Patient Characteristic Ethnicity\"",": " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "\"Ethnicity\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "37",
+               "locator" : "45:2-45:50",
+               "dataType" : "{urn:healthit-gov:qdm:v5_4}PatientCharacteristicEthnicity",
+               "codeProperty" : "code",
+               "type" : "Retrieve",
+               "codes" : {
+                  "name" : "Ethnicity",
+                  "type" : "ValueSetRef"
+               }
+            }
+         }, {
+            "localId" : "40",
+            "locator" : "47:1-48:42",
+            "name" : "SDE Payer",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "40",
+                  "s" : [ {
+                     "value" : [ "define ","\"SDE Payer\"",":\n\t" ]
+                  }, {
+                     "r" : "39",
+                     "s" : [ {
+                        "value" : [ "[","\"Patient Characteristic Payer\"",": " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "\"Payer\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "39",
+               "locator" : "48:2-48:42",
+               "dataType" : "{urn:healthit-gov:qdm:v5_4}PatientCharacteristicPayer",
+               "codeProperty" : "code",
+               "type" : "Retrieve",
+               "codes" : {
+                  "name" : "Payer",
+                  "type" : "ValueSetRef"
+               }
+            }
+         }, {
+            "localId" : "42",
+            "locator" : "50:1-51:40",
+            "name" : "SDE Race",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "42",
+                  "s" : [ {
+                     "value" : [ "define ","\"SDE Race\"",":\n\t" ]
+                  }, {
+                     "r" : "41",
+                     "s" : [ {
+                        "value" : [ "[","\"Patient Characteristic Race\"",": " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "\"Race\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "41",
+               "locator" : "51:2-51:40",
+               "dataType" : "{urn:healthit-gov:qdm:v5_4}PatientCharacteristicRace",
+               "codeProperty" : "code",
+               "type" : "Retrieve",
+               "codes" : {
+                  "name" : "Race",
+                  "type" : "ValueSetRef"
+               }
+            }
+         }, {
+            "localId" : "44",
+            "locator" : "53:1-54:57",
+            "name" : "SDE Sex",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "44",
+                  "s" : [ {
+                     "value" : [ "define ","\"SDE Sex\"",":\n\t" ]
+                  }, {
+                     "r" : "43",
+                     "s" : [ {
+                        "value" : [ "[","\"Patient Characteristic Sex\"",": " ]
+                     }, {
+                        "s" : [ {
+                           "value" : [ "\"ONC Administrative Sex\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "43",
+               "locator" : "54:2-54:57",
+               "dataType" : "{urn:healthit-gov:qdm:v5_4}PatientCharacteristicSex",
+               "codeProperty" : "code",
+               "type" : "Retrieve",
+               "codes" : {
+                  "name" : "ONC Administrative Sex",
+                  "type" : "ValueSetRef"
+               }
+            }
+         }, {
+            "localId" : "72",
+            "locator" : "56:1-68:71",
+            "name" : "Office Based Visit During Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "72",
+                  "s" : [ {
+                     "value" : [ "define ","\"Office Based Visit During Measurement Period\"",":\n\t" ]
+                  }, {
+                     "r" : "71",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "66",
+                           "s" : [ {
+                              "r" : "65",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "65",
+                                 "s" : [ {
+                                    "r" : "63",
+                                    "s" : [ {
+                                       "r" : "61",
+                                       "s" : [ {
+                                          "r" : "59",
+                                          "s" : [ {
+                                             "r" : "57",
+                                             "s" : [ {
+                                                "r" : "55",
+                                                "s" : [ {
+                                                   "r" : "53",
+                                                   "s" : [ {
+                                                      "r" : "51",
+                                                      "s" : [ {
+                                                         "r" : "49",
+                                                         "s" : [ {
+                                                            "r" : "47",
+                                                            "s" : [ {
+                                                               "r" : "45",
+                                                               "s" : [ {
+                                                                  "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                               }, {
+                                                                  "s" : [ {
+                                                                     "value" : [ "\"Health & Behavioral Assessment - Individual\"" ]
+                                                                  } ]
+                                                               }, {
+                                                                  "value" : [ "]" ]
+                                                               } ]
+                                                            }, {
+                                                               "value" : [ "\n\t\tunion " ]
+                                                            }, {
+                                                               "r" : "46",
+                                                               "s" : [ {
+                                                                  "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                               }, {
+                                                                  "s" : [ {
+                                                                     "value" : [ "\"Health and Behavioral Assessment - Initial\"" ]
+                                                                  } ]
+                                                               }, {
+                                                                  "value" : [ "]" ]
+                                                               } ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ "\n\t\tunion " ]
+                                                         }, {
+                                                            "r" : "48",
+                                                            "s" : [ {
+                                                               "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                            }, {
+                                                               "s" : [ {
+                                                                  "value" : [ "\"Health and Behavioral Assessment, Reassessment\"" ]
+                                                               } ]
+                                                            }, {
+                                                               "value" : [ "]" ]
+                                                            } ]
+                                                         } ]
+                                                      }, {
+                                                         "value" : [ "\n\t\tunion " ]
+                                                      }, {
+                                                         "r" : "50",
+                                                         "s" : [ {
+                                                            "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                         }, {
+                                                            "s" : [ {
+                                                               "value" : [ "\"Home Healthcare Services\"" ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ "]" ]
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "\n\t\tunion " ]
+                                                   }, {
+                                                      "r" : "52",
+                                                      "s" : [ {
+                                                         "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                      }, {
+                                                         "s" : [ {
+                                                            "value" : [ "\"Occupational Therapy Evaluation\"" ]
+                                                         } ]
+                                                      }, {
+                                                         "value" : [ "]" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "\n\t\tunion " ]
+                                                }, {
+                                                   "r" : "54",
+                                                   "s" : [ {
+                                                      "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                   }, {
+                                                      "s" : [ {
+                                                         "value" : [ "\"Office Visit\"" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "]" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "\n\t\tunion " ]
+                                             }, {
+                                                "r" : "56",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Ophthalmological Services\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "\n\t\tunion " ]
+                                          }, {
+                                             "r" : "58",
+                                             "s" : [ {
+                                                "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Psych Visit - Diagnostic Evaluation\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n\t\tunion " ]
+                                       }, {
+                                          "r" : "60",
+                                          "s" : [ {
+                                             "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "\"Psych Visit - Psychotherapy\"" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\tunion " ]
+                                    }, {
+                                       "r" : "62",
+                                       "s" : [ {
+                                          "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                       }, {
+                                          "s" : [ {
+                                             "value" : [ "\"Psychoanalysis\"" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "]" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n\t\tunion " ]
+                                 }, {
+                                    "r" : "64",
+                                    "s" : [ {
+                                       "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                    }, {
+                                       "s" : [ {
+                                          "value" : [ "\"Speech and Hearing Evaluation\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "]" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " )" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","OfficeBasedEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "70",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "70",
+                           "s" : [ {
+                              "r" : "68",
+                              "s" : [ {
+                                 "r" : "67",
+                                 "s" : [ {
+                                    "value" : [ "OfficeBasedEncounter" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "68",
+                                 "s" : [ {
+                                    "value" : [ "relevantPeriod" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","during"," " ]
+                           }, {
+                              "r" : "69",
+                              "s" : [ {
+                                 "value" : [ "\"Measurement Period\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "71",
+               "locator" : "57:2-68:71",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "66",
+                  "locator" : "57:2-67:88",
+                  "alias" : "OfficeBasedEncounter",
+                  "expression" : {
+                     "localId" : "65",
+                     "locator" : "57:2-67:67",
+                     "type" : "Union",
+                     "operand" : [ {
+                        "localId" : "63",
+                        "locator" : "57:4-66:50",
+                        "type" : "Union",
+                        "operand" : [ {
+                           "localId" : "59",
+                           "locator" : "57:4-64:71",
+                           "type" : "Union",
+                           "operand" : [ {
+                              "localId" : "55",
+                              "locator" : "57:4-62:48",
+                              "type" : "Union",
+                              "operand" : [ {
+                                 "localId" : "51",
+                                 "locator" : "57:4-60:60",
+                                 "type" : "Union",
+                                 "operand" : [ {
+                                    "localId" : "47",
+                                    "locator" : "57:4-58:78",
+                                    "type" : "Union",
+                                    "operand" : [ {
+                                       "localId" : "45",
+                                       "locator" : "57:4-57:74",
+                                       "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                       "templateId" : "PositiveEncounterPerformed",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "Health & Behavioral Assessment - Individual",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    }, {
+                                       "localId" : "46",
+                                       "locator" : "58:9-58:78",
+                                       "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                       "templateId" : "PositiveEncounterPerformed",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "Health and Behavioral Assessment - Initial",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    } ]
+                                 }, {
+                                    "type" : "Union",
+                                    "operand" : [ {
+                                       "localId" : "48",
+                                       "locator" : "59:9-59:82",
+                                       "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                       "templateId" : "PositiveEncounterPerformed",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "Health and Behavioral Assessment, Reassessment",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    }, {
+                                       "localId" : "50",
+                                       "locator" : "60:9-60:60",
+                                       "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                       "templateId" : "PositiveEncounterPerformed",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "Home Healthcare Services",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "type" : "Union",
+                                 "operand" : [ {
+                                    "localId" : "52",
+                                    "locator" : "61:9-61:67",
+                                    "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                    "templateId" : "PositiveEncounterPerformed",
+                                    "codeProperty" : "code",
+                                    "type" : "Retrieve",
+                                    "codes" : {
+                                       "name" : "Occupational Therapy Evaluation",
+                                       "type" : "ValueSetRef"
+                                    }
+                                 }, {
+                                    "localId" : "54",
+                                    "locator" : "62:9-62:48",
+                                    "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                    "templateId" : "PositiveEncounterPerformed",
+                                    "codeProperty" : "code",
+                                    "type" : "Retrieve",
+                                    "codes" : {
+                                       "name" : "Office Visit",
+                                       "type" : "ValueSetRef"
+                                    }
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Union",
+                              "operand" : [ {
+                                 "localId" : "56",
+                                 "locator" : "63:9-63:61",
+                                 "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                 "templateId" : "PositiveEncounterPerformed",
+                                 "codeProperty" : "code",
+                                 "type" : "Retrieve",
+                                 "codes" : {
+                                    "name" : "Ophthalmological Services",
+                                    "type" : "ValueSetRef"
+                                 }
+                              }, {
+                                 "localId" : "58",
+                                 "locator" : "64:9-64:71",
+                                 "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                                 "templateId" : "PositiveEncounterPerformed",
+                                 "codeProperty" : "code",
+                                 "type" : "Retrieve",
+                                 "codes" : {
+                                    "name" : "Psych Visit - Diagnostic Evaluation",
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           } ]
+                        }, {
+                           "type" : "Union",
+                           "operand" : [ {
+                              "localId" : "60",
+                              "locator" : "65:9-65:63",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Psych Visit - Psychotherapy",
+                                 "type" : "ValueSetRef"
+                              }
+                           }, {
+                              "localId" : "62",
+                              "locator" : "66:9-66:50",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Psychoanalysis",
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        } ]
+                     }, {
+                        "localId" : "64",
+                        "locator" : "67:9-67:65",
+                        "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                        "templateId" : "PositiveEncounterPerformed",
+                        "codeProperty" : "code",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Speech and Hearing Evaluation",
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "70",
+                  "locator" : "68:3-68:71",
+                  "type" : "IncludedIn",
+                  "operand" : [ {
+                     "localId" : "68",
+                     "locator" : "68:9-68:43",
+                     "path" : "relevantPeriod",
+                     "scope" : "OfficeBasedEncounter",
+                     "type" : "Property"
+                  }, {
+                     "localId" : "69",
+                     "locator" : "68:52-68:71",
+                     "name" : "Measurement Period",
+                     "type" : "ParameterRef"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "90",
+            "locator" : "70:1-77:70",
+            "name" : "Preventive Visit During Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "90",
+                  "s" : [ {
+                     "value" : [ "define ","\"Preventive Visit During Measurement Period\"",":\n\t" ]
+                  }, {
+                     "r" : "89",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "84",
+                           "s" : [ {
+                              "r" : "83",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "83",
+                                 "s" : [ {
+                                    "r" : "81",
+                                    "s" : [ {
+                                       "r" : "79",
+                                       "s" : [ {
+                                          "r" : "77",
+                                          "s" : [ {
+                                             "r" : "75",
+                                             "s" : [ {
+                                                "r" : "73",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Annual Wellness Visit\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "\n\t\tunion " ]
+                                             }, {
+                                                "r" : "74",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Preventive Care Services - Established Office Visit, 18 and Up\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "\n\t\tunion " ]
+                                          }, {
+                                             "r" : "76",
+                                             "s" : [ {
+                                                "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Preventive Care Services - Group Counseling\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n\t\tunion " ]
+                                       }, {
+                                          "r" : "78",
+                                          "s" : [ {
+                                             "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "\"Preventive Care Services - Other\"" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\tunion " ]
+                                    }, {
+                                       "r" : "80",
+                                       "s" : [ {
+                                          "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                       }, {
+                                          "s" : [ {
+                                             "value" : [ "\"Preventive Care Services-Individual Counseling\"" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "]" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n\t\tunion " ]
+                                 }, {
+                                    "r" : "82",
+                                    "s" : [ {
+                                       "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                    }, {
+                                       "s" : [ {
+                                          "value" : [ "\"Preventive Care Services-Initial Office Visit, 18 and Up\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "]" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " )" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","PreventiveEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "88",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "88",
+                           "s" : [ {
+                              "r" : "86",
+                              "s" : [ {
+                                 "r" : "85",
+                                 "s" : [ {
+                                    "value" : [ "PreventiveEncounter" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "86",
+                                 "s" : [ {
+                                    "value" : [ "relevantPeriod" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","during"," " ]
+                           }, {
+                              "r" : "87",
+                              "s" : [ {
+                                 "value" : [ "\"Measurement Period\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "89",
+               "locator" : "71:2-77:70",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "84",
+                  "locator" : "71:2-76:114",
+                  "alias" : "PreventiveEncounter",
+                  "expression" : {
+                     "localId" : "83",
+                     "locator" : "71:2-76:94",
+                     "type" : "Union",
+                     "operand" : [ {
+                        "localId" : "79",
+                        "locator" : "71:4-74:68",
+                        "type" : "Union",
+                        "operand" : [ {
+                           "localId" : "75",
+                           "locator" : "71:4-72:98",
+                           "type" : "Union",
+                           "operand" : [ {
+                              "localId" : "73",
+                              "locator" : "71:4-71:52",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Annual Wellness Visit",
+                                 "type" : "ValueSetRef"
+                              }
+                           }, {
+                              "localId" : "74",
+                              "locator" : "72:9-72:98",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Preventive Care Services - Established Office Visit, 18 and Up",
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        }, {
+                           "type" : "Union",
+                           "operand" : [ {
+                              "localId" : "76",
+                              "locator" : "73:9-73:79",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Preventive Care Services - Group Counseling",
+                                 "type" : "ValueSetRef"
+                              }
+                           }, {
+                              "localId" : "78",
+                              "locator" : "74:9-74:68",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Preventive Care Services - Other",
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        } ]
+                     }, {
+                        "type" : "Union",
+                        "operand" : [ {
+                           "localId" : "80",
+                           "locator" : "75:9-75:82",
+                           "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                           "templateId" : "PositiveEncounterPerformed",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Preventive Care Services-Individual Counseling",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "localId" : "82",
+                           "locator" : "76:9-76:92",
+                           "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveEncounterPerformed",
+                           "templateId" : "PositiveEncounterPerformed",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Preventive Care Services-Initial Office Visit, 18 and Up",
+                              "type" : "ValueSetRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "88",
+                  "locator" : "77:3-77:70",
+                  "type" : "IncludedIn",
+                  "operand" : [ {
+                     "localId" : "86",
+                     "locator" : "77:9-77:42",
+                     "path" : "relevantPeriod",
+                     "scope" : "PreventiveEncounter",
+                     "type" : "Property"
+                  }, {
+                     "localId" : "87",
+                     "locator" : "77:51-77:70",
+                     "name" : "Measurement Period",
+                     "type" : "ParameterRef"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "110",
+            "locator" : "79:1-84:62",
+            "name" : "Screened and Identified as Tobacco User",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "110",
+                  "s" : [ {
+                     "value" : [ "define ","\"Screened and Identified as Tobacco User\"",":\n\t" ]
+                  }, {
+                     "r" : "109",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "104",
+                           "s" : [ {
+                              "r" : "103",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "103",
+                                 "s" : [ {
+                                    "value" : [ "Last","(" ]
+                                 }, {
+                                    "r" : "102",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "r" : "92",
+                                          "s" : [ {
+                                             "r" : "91",
+                                             "s" : [ {
+                                                "r" : "91",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Assessment, Performed\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Tobacco Use Screening\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","TobaccoUseScreening" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\t\t" ]
+                                    }, {
+                                       "r" : "98",
+                                       "s" : [ {
+                                          "value" : [ "where " ]
+                                       }, {
+                                          "r" : "98",
+                                          "s" : [ {
+                                             "r" : "94",
+                                             "s" : [ {
+                                                "r" : "93",
+                                                "s" : [ {
+                                                   "value" : [ "TobaccoUseScreening" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "94",
+                                                "s" : [ {
+                                                   "value" : [ "authorDatetime" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " " ]
+                                          }, {
+                                             "r" : "98",
+                                             "s" : [ {
+                                                "r" : "97",
+                                                "s" : [ {
+                                                   "value" : [ "24 ","months" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " or less on or before" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " " ]
+                                          }, {
+                                             "r" : "96",
+                                             "s" : [ {
+                                                "value" : [ "end of " ]
+                                             }, {
+                                                "r" : "95",
+                                                "s" : [ {
+                                                   "value" : [ "\"Measurement Period\"" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\t\t" ]
+                                    }, {
+                                       "r" : "101",
+                                       "s" : [ {
+                                          "value" : [ "sort by " ]
+                                       }, {
+                                          "r" : "100",
+                                          "s" : [ {
+                                             "r" : "99",
+                                             "s" : [ {
+                                                "value" : [ "authorDatetime" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n\t)" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","MostRecentTobaccoUseScreening" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "108",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "108",
+                           "s" : [ {
+                              "r" : "106",
+                              "s" : [ {
+                                 "r" : "105",
+                                 "s" : [ {
+                                    "value" : [ "MostRecentTobaccoUseScreening" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "106",
+                                 "s" : [ {
+                                    "value" : [ "result" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " in " ]
+                           }, {
+                              "r" : "107",
+                              "s" : [ {
+                                 "value" : [ "\"Tobacco User\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "109",
+               "locator" : "80:2-84:62",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "104",
+                  "locator" : "80:2-83:33",
+                  "alias" : "MostRecentTobaccoUseScreening",
+                  "expression" : {
+                     "localId" : "103",
+                     "locator" : "80:2-83:3",
+                     "type" : "Last",
+                     "source" : {
+                        "localId" : "102",
+                        "locator" : "80:9-82:25",
+                        "type" : "Query",
+                        "source" : [ {
+                           "localId" : "92",
+                           "locator" : "80:9-80:78",
+                           "alias" : "TobaccoUseScreening",
+                           "expression" : {
+                              "localId" : "91",
+                              "locator" : "80:9-80:58",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveAssessmentPerformed",
+                              "templateId" : "PositiveAssessmentPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Tobacco Use Screening",
+                                 "type" : "ValueSetRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "98",
+                           "locator" : "81:4-81:102",
+                           "type" : "In",
+                           "operand" : [ {
+                              "localId" : "94",
+                              "locator" : "81:10-81:43",
+                              "path" : "authorDatetime",
+                              "scope" : "TobaccoUseScreening",
+                              "type" : "Property"
+                           }, {
+                              "locator" : "81:45-81:61",
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "locator" : "81:76-81:102",
+                                 "type" : "Subtract",
+                                 "operand" : [ {
+                                    "localId" : "96",
+                                    "locator" : "81:76-81:102",
+                                    "type" : "End",
+                                    "operand" : {
+                                       "localId" : "95",
+                                       "locator" : "81:83-81:102",
+                                       "name" : "Measurement Period",
+                                       "type" : "ParameterRef"
+                                    }
+                                 }, {
+                                    "localId" : "97",
+                                    "locator" : "81:45-81:53",
+                                    "value" : 24,
+                                    "unit" : "months",
+                                    "type" : "Quantity"
+                                 } ]
+                              },
+                              "high" : {
+                                 "localId" : "96",
+                                 "locator" : "81:76-81:102",
+                                 "type" : "End",
+                                 "operand" : {
+                                    "localId" : "95",
+                                    "locator" : "81:83-81:102",
+                                    "name" : "Measurement Period",
+                                    "type" : "ParameterRef"
+                                 }
+                              }
+                           } ]
+                        },
+                        "sort" : {
+                           "localId" : "101",
+                           "locator" : "82:4-82:25",
+                           "by" : [ {
+                              "localId" : "100",
+                              "locator" : "82:12-82:25",
+                              "direction" : "asc",
+                              "path" : "authorDatetime",
+                              "type" : "ByColumn"
+                           } ]
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "108",
+                  "locator" : "84:3-84:62",
+                  "type" : "InValueSet",
+                  "code" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "106",
+                        "locator" : "84:9-84:44",
+                        "path" : "result",
+                        "scope" : "MostRecentTobaccoUseScreening",
+                        "type" : "Property"
+                     }
+                  },
+                  "valueset" : {
+                     "localId" : "107",
+                     "locator" : "84:49-84:62",
+                     "name" : "Tobacco User"
+                  }
+               }
+            }
+         }, {
+            "localId" : "130",
+            "locator" : "86:1-91:66",
+            "name" : "Screened and Identified as Tobacco Non User",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "130",
+                  "s" : [ {
+                     "value" : [ "define ","\"Screened and Identified as Tobacco Non User\"",":\n\t" ]
+                  }, {
+                     "r" : "129",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "124",
+                           "s" : [ {
+                              "r" : "123",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "123",
+                                 "s" : [ {
+                                    "value" : [ "Last","(" ]
+                                 }, {
+                                    "r" : "122",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "r" : "112",
+                                          "s" : [ {
+                                             "r" : "111",
+                                             "s" : [ {
+                                                "r" : "111",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Assessment, Performed\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Tobacco Use Screening\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","TobaccoUseScreening" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\t\t" ]
+                                    }, {
+                                       "r" : "118",
+                                       "s" : [ {
+                                          "value" : [ "where " ]
+                                       }, {
+                                          "r" : "118",
+                                          "s" : [ {
+                                             "r" : "114",
+                                             "s" : [ {
+                                                "r" : "113",
+                                                "s" : [ {
+                                                   "value" : [ "TobaccoUseScreening" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "114",
+                                                "s" : [ {
+                                                   "value" : [ "authorDatetime" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " " ]
+                                          }, {
+                                             "r" : "118",
+                                             "s" : [ {
+                                                "r" : "117",
+                                                "s" : [ {
+                                                   "value" : [ "24 ","months" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " or less on or before" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " " ]
+                                          }, {
+                                             "r" : "116",
+                                             "s" : [ {
+                                                "value" : [ "end of " ]
+                                             }, {
+                                                "r" : "115",
+                                                "s" : [ {
+                                                   "value" : [ "\"Measurement Period\"" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\t\t" ]
+                                    }, {
+                                       "r" : "121",
+                                       "s" : [ {
+                                          "value" : [ "sort by " ]
+                                       }, {
+                                          "r" : "120",
+                                          "s" : [ {
+                                             "r" : "119",
+                                             "s" : [ {
+                                                "value" : [ "authorDatetime" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n\t)" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","MostRecentTobaccoUseScreening" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "128",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "128",
+                           "s" : [ {
+                              "r" : "126",
+                              "s" : [ {
+                                 "r" : "125",
+                                 "s" : [ {
+                                    "value" : [ "MostRecentTobaccoUseScreening" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "126",
+                                 "s" : [ {
+                                    "value" : [ "result" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " in " ]
+                           }, {
+                              "r" : "127",
+                              "s" : [ {
+                                 "value" : [ "\"Tobacco Non-User\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "129",
+               "locator" : "87:2-91:66",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "124",
+                  "locator" : "87:2-90:33",
+                  "alias" : "MostRecentTobaccoUseScreening",
+                  "expression" : {
+                     "localId" : "123",
+                     "locator" : "87:2-90:3",
+                     "type" : "Last",
+                     "source" : {
+                        "localId" : "122",
+                        "locator" : "87:9-89:25",
+                        "type" : "Query",
+                        "source" : [ {
+                           "localId" : "112",
+                           "locator" : "87:9-87:78",
+                           "alias" : "TobaccoUseScreening",
+                           "expression" : {
+                              "localId" : "111",
+                              "locator" : "87:9-87:58",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveAssessmentPerformed",
+                              "templateId" : "PositiveAssessmentPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Tobacco Use Screening",
+                                 "type" : "ValueSetRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "118",
+                           "locator" : "88:4-88:102",
+                           "type" : "In",
+                           "operand" : [ {
+                              "localId" : "114",
+                              "locator" : "88:10-88:43",
+                              "path" : "authorDatetime",
+                              "scope" : "TobaccoUseScreening",
+                              "type" : "Property"
+                           }, {
+                              "locator" : "88:45-88:61",
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "low" : {
+                                 "locator" : "88:76-88:102",
+                                 "type" : "Subtract",
+                                 "operand" : [ {
+                                    "localId" : "116",
+                                    "locator" : "88:76-88:102",
+                                    "type" : "End",
+                                    "operand" : {
+                                       "localId" : "115",
+                                       "locator" : "88:83-88:102",
+                                       "name" : "Measurement Period",
+                                       "type" : "ParameterRef"
+                                    }
+                                 }, {
+                                    "localId" : "117",
+                                    "locator" : "88:45-88:53",
+                                    "value" : 24,
+                                    "unit" : "months",
+                                    "type" : "Quantity"
+                                 } ]
+                              },
+                              "high" : {
+                                 "localId" : "116",
+                                 "locator" : "88:76-88:102",
+                                 "type" : "End",
+                                 "operand" : {
+                                    "localId" : "115",
+                                    "locator" : "88:83-88:102",
+                                    "name" : "Measurement Period",
+                                    "type" : "ParameterRef"
+                                 }
+                              }
+                           } ]
+                        },
+                        "sort" : {
+                           "localId" : "121",
+                           "locator" : "89:4-89:25",
+                           "by" : [ {
+                              "localId" : "120",
+                              "locator" : "89:12-89:25",
+                              "direction" : "asc",
+                              "path" : "authorDatetime",
+                              "type" : "ByColumn"
+                           } ]
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "128",
+                  "locator" : "91:3-91:66",
+                  "type" : "InValueSet",
+                  "code" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "126",
+                        "locator" : "91:9-91:44",
+                        "path" : "result",
+                        "scope" : "MostRecentTobaccoUseScreening",
+                        "type" : "Property"
+                     }
+                  },
+                  "valueset" : {
+                     "localId" : "127",
+                     "locator" : "91:49-91:66",
+                     "name" : "Tobacco Non-User"
+                  }
+               }
+            }
+         }, {
+            "localId" : "151",
+            "locator" : "183:1-189:3",
+            "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "151",
+                  "s" : [ {
+                     "value" : [ "define ","\"Initial Population\"",":\n\t" ]
+                  }, {
+                     "r" : "150",
+                     "s" : [ {
+                        "r" : "142",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "141",
+                           "s" : [ {
+                              "value" : [ "( " ]
+                           }, {
+                              "r" : "141",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "132",
+                                    "s" : [ {
+                                       "r" : "131",
+                                       "s" : [ {
+                                          "r" : "131",
+                                          "s" : [ {
+                                             "value" : [ "[","\"Patient Characteristic Birthdate\"",": " ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "\"Birth date\"" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","BirthDate" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n\t\t\t" ]
+                              }, {
+                                 "r" : "140",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "140",
+                                    "s" : [ {
+                                       "r" : "138",
+                                       "s" : [ {
+                                          "r" : "133",
+                                          "s" : [ {
+                                             "value" : [ "Global" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "138",
+                                          "s" : [ {
+                                             "value" : [ "\"CalendarAgeInYearsAt\"","(" ]
+                                          }, {
+                                             "r" : "135",
+                                             "s" : [ {
+                                                "r" : "134",
+                                                "s" : [ {
+                                                   "value" : [ "BirthDate" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "135",
+                                                "s" : [ {
+                                                   "value" : [ "birthDatetime" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ", " ]
+                                          }, {
+                                             "r" : "137",
+                                             "s" : [ {
+                                                "value" : [ "start of " ]
+                                             }, {
+                                                "r" : "136",
+                                                "s" : [ {
+                                                   "value" : [ "\"Measurement Period\"" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ")" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">="," ","18" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t)" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tand " ]
+                     }, {
+                        "r" : "149",
+                        "s" : [ {
+                           "value" : [ "( " ]
+                        }, {
+                           "r" : "149",
+                           "s" : [ {
+                              "r" : "146",
+                              "s" : [ {
+                                 "r" : "144",
+                                 "s" : [ {
+                                    "value" : [ "Count","(" ]
+                                 }, {
+                                    "r" : "143",
+                                    "s" : [ {
+                                       "value" : [ "\"Office Based Visit During Measurement Period\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ">="," ","2" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tor " ]
+                           }, {
+                              "r" : "148",
+                              "s" : [ {
+                                 "value" : [ "exists " ]
+                              }, {
+                                 "r" : "147",
+                                 "s" : [ {
+                                    "value" : [ "\"Preventive Visit During Measurement Period\"" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t)" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "150",
+               "locator" : "184:2-189:3",
+               "type" : "And",
+               "operand" : [ {
+                  "localId" : "142",
+                  "locator" : "184:2-186:2",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "141",
+                     "locator" : "184:9-186:2",
+                     "type" : "Query",
+                     "source" : [ {
+                        "localId" : "132",
+                        "locator" : "184:11-184:70",
+                        "alias" : "BirthDate",
+                        "expression" : {
+                           "localId" : "131",
+                           "locator" : "184:11-184:60",
+                           "dataType" : "{urn:healthit-gov:qdm:v5_4}PatientCharacteristicBirthdate",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "type" : "ToList",
+                              "operand" : {
+                                 "name" : "Birth date",
+                                 "type" : "CodeRef"
+                              }
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "140",
+                        "locator" : "185:4-185:99",
+                        "type" : "GreaterOrEqual",
+                        "operand" : [ {
+                           "localId" : "138",
+                           "locator" : "185:10-185:94",
+                           "name" : "CalendarAgeInYearsAt",
+                           "libraryName" : "Global",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "135",
+                              "locator" : "185:40-185:62",
+                              "path" : "birthDatetime",
+                              "scope" : "BirthDate",
+                              "type" : "Property"
+                           }, {
+                              "localId" : "137",
+                              "locator" : "185:65-185:93",
+                              "type" : "Start",
+                              "operand" : {
+                                 "localId" : "136",
+                                 "locator" : "185:74-185:93",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef"
+                              }
+                           } ]
+                        }, {
+                           "localId" : "139",
+                           "locator" : "185:98-185:99",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "18",
+                           "type" : "Literal"
+                        } ]
+                     }
+                  }
+               }, {
+                  "localId" : "149",
+                  "locator" : "187:7-189:3",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "146",
+                     "locator" : "187:9-187:65",
+                     "type" : "GreaterOrEqual",
+                     "operand" : [ {
+                        "localId" : "144",
+                        "locator" : "187:9-187:61",
+                        "type" : "Count",
+                        "source" : {
+                           "localId" : "143",
+                           "locator" : "187:15-187:60",
+                           "name" : "Office Based Visit During Measurement Period",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "localId" : "145",
+                        "locator" : "187:65",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     } ]
+                  }, {
+                     "localId" : "148",
+                     "locator" : "188:8-188:58",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "147",
+                        "locator" : "188:15-188:58",
+                        "name" : "Preventive Visit During Measurement Period",
+                        "type" : "ExpressionRef"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "153",
+            "locator" : "93:1-94:21",
+            "name" : "Denominator 1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "153",
+                  "s" : [ {
+                     "value" : [ "define ","\"Denominator 1\"",":\n\t" ]
+                  }, {
+                     "r" : "152",
+                     "s" : [ {
+                        "value" : [ "\"Initial Population\"" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "152",
+               "locator" : "94:2-94:21",
+               "name" : "Initial Population",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "158",
+            "locator" : "96:1-98:59",
+            "name" : "Denominator 2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "158",
+                  "s" : [ {
+                     "value" : [ "define ","\"Denominator 2\"",":\n\t" ]
+                  }, {
+                     "r" : "157",
+                     "s" : [ {
+                        "r" : "154",
+                        "s" : [ {
+                           "value" : [ "\"Initial Population\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tand " ]
+                     }, {
+                        "r" : "156",
+                        "s" : [ {
+                           "r" : "155",
+                           "s" : [ {
+                              "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                           } ]
+                        }, {
+                           "value" : [ " is not null" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "157",
+               "locator" : "97:2-98:59",
+               "type" : "And",
+               "operand" : [ {
+                  "localId" : "154",
+                  "locator" : "97:2-97:21",
+                  "name" : "Initial Population",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "156",
+                  "locator" : "98:7-98:59",
+                  "type" : "Not",
+                  "operand" : {
+                     "locator" : "98:7-98:59",
+                     "type" : "IsNull",
+                     "operand" : {
+                        "localId" : "155",
+                        "locator" : "98:7-98:47",
+                        "name" : "Screened and Identified as Tobacco User",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "160",
+            "locator" : "100:1-101:21",
+            "name" : "Denominator 3",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "160",
+                  "s" : [ {
+                     "value" : [ "define ","\"Denominator 3\"",":\n\t" ]
+                  }, {
+                     "r" : "159",
+                     "s" : [ {
+                        "value" : [ "\"Initial Population\"" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "159",
+               "locator" : "101:2-101:21",
+               "name" : "Initial Population",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "168",
+            "locator" : "103:1-105:82",
+            "name" : "Has Limited Life Expectancy",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "168",
+                  "s" : [ {
+                     "value" : [ "define ","\"Has Limited Life Expectancy\"",":\n\t" ]
+                  }, {
+                     "r" : "167",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "162",
+                           "s" : [ {
+                              "r" : "161",
+                              "s" : [ {
+                                 "r" : "161",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Diagnosis\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Limited Life Expectancy\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","LimitedLifeExpectancy" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "166",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "166",
+                           "s" : [ {
+                              "r" : "164",
+                              "s" : [ {
+                                 "r" : "163",
+                                 "s" : [ {
+                                    "value" : [ "LimitedLifeExpectancy" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "164",
+                                 "s" : [ {
+                                    "value" : [ "prevalencePeriod" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","overlaps after"," " ]
+                           }, {
+                              "r" : "165",
+                              "s" : [ {
+                                 "value" : [ "\"Measurement Period\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "167",
+               "locator" : "104:2-105:82",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "162",
+                  "locator" : "104:2-104:63",
+                  "alias" : "LimitedLifeExpectancy",
+                  "expression" : {
+                     "localId" : "161",
+                     "locator" : "104:2-104:41",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}Diagnosis",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Limited Life Expectancy",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "166",
+                  "locator" : "105:3-105:82",
+                  "type" : "OverlapsAfter",
+                  "operand" : [ {
+                     "localId" : "164",
+                     "locator" : "105:9-105:46",
+                     "path" : "prevalencePeriod",
+                     "scope" : "LimitedLifeExpectancy",
+                     "type" : "Property"
+                  }, {
+                     "localId" : "165",
+                     "locator" : "105:63-105:82",
+                     "name" : "Measurement Period",
+                     "type" : "ParameterRef"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "183",
+            "locator" : "177:1-181:66",
+            "name" : "Medical Reason for Not Screening for Tobacco Use",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "183",
+                  "s" : [ {
+                     "value" : [ "define ","\"Medical Reason for Not Screening for Tobacco Use\"",":\n\t" ]
+                  }, {
+                     "r" : "182",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "170",
+                           "s" : [ {
+                              "r" : "169",
+                              "s" : [ {
+                                 "r" : "169",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Assessment, Not Performed\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Tobacco Use Screening\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","NoTobaccoUseScreening" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "181",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "181",
+                           "s" : [ {
+                              "r" : "176",
+                              "s" : [ {
+                                 "r" : "172",
+                                 "s" : [ {
+                                    "r" : "171",
+                                    "s" : [ {
+                                       "value" : [ "NoTobaccoUseScreening" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "172",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " " ]
+                              }, {
+                                 "r" : "176",
+                                 "s" : [ {
+                                    "r" : "175",
+                                    "s" : [ {
+                                       "value" : [ "24 ","months" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " or less before" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " \n\t\t" ]
+                              }, {
+                                 "r" : "174",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "173",
+                                    "s" : [ {
+                                       "value" : [ "\"Measurement Period\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\tand " ]
+                           }, {
+                              "r" : "180",
+                              "s" : [ {
+                                 "r" : "178",
+                                 "s" : [ {
+                                    "r" : "177",
+                                    "s" : [ {
+                                       "value" : [ "NoTobaccoUseScreening" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "178",
+                                    "s" : [ {
+                                       "value" : [ "negationRationale" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " in " ]
+                              }, {
+                                 "r" : "179",
+                                 "s" : [ {
+                                    "value" : [ "\"Medical Reason\"" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "182",
+               "locator" : "178:2-181:66",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "170",
+                  "locator" : "178:2-178:77",
+                  "alias" : "NoTobaccoUseScreening",
+                  "expression" : {
+                     "localId" : "169",
+                     "locator" : "178:2-178:55",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}NegativeAssessmentPerformed",
+                     "templateId" : "NegativeAssessmentPerformed",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Tobacco Use Screening",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "181",
+                  "locator" : "179:3-181:66",
+                  "type" : "And",
+                  "operand" : [ {
+                     "localId" : "176",
+                     "locator" : "179:9-180:29",
+                     "type" : "In",
+                     "operand" : [ {
+                        "localId" : "172",
+                        "locator" : "179:9-179:44",
+                        "path" : "authorDatetime",
+                        "scope" : "NoTobaccoUseScreening",
+                        "type" : "Property"
+                     }, {
+                        "locator" : "179:46-179:62",
+                        "lowClosed" : true,
+                        "highClosed" : false,
+                        "type" : "Interval",
+                        "low" : {
+                           "locator" : "180:3-180:29",
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "localId" : "174",
+                              "locator" : "180:3-180:29",
+                              "type" : "End",
+                              "operand" : {
+                                 "localId" : "173",
+                                 "locator" : "180:10-180:29",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef"
+                              }
+                           }, {
+                              "localId" : "175",
+                              "locator" : "179:46-179:54",
+                              "value" : 24,
+                              "unit" : "months",
+                              "type" : "Quantity"
+                           } ]
+                        },
+                        "high" : {
+                           "localId" : "174",
+                           "locator" : "180:3-180:29",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "173",
+                              "locator" : "180:10-180:29",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           }
+                        }
+                     } ]
+                  }, {
+                     "localId" : "180",
+                     "locator" : "181:8-181:66",
+                     "type" : "InValueSet",
+                     "code" : {
+                        "localId" : "178",
+                        "locator" : "181:8-181:46",
+                        "path" : "negationRationale",
+                        "scope" : "NoTobaccoUseScreening",
+                        "type" : "Property"
+                     },
+                     "valueset" : {
+                        "localId" : "179",
+                        "locator" : "181:51-181:66",
+                        "name" : "Medical Reason"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "189",
+            "locator" : "107:1-109:41",
+            "name" : "Denominator Exceptions 1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "189",
+                  "s" : [ {
+                     "value" : [ "define ","\"Denominator Exceptions 1\"",":\n\t" ]
+                  }, {
+                     "r" : "188",
+                     "s" : [ {
+                        "r" : "185",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "184",
+                           "s" : [ {
+                              "value" : [ "\"Medical Reason for Not Screening for Tobacco Use\"" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tor " ]
+                     }, {
+                        "r" : "187",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "186",
+                           "s" : [ {
+                              "value" : [ "\"Has Limited Life Expectancy\"" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "188",
+               "locator" : "108:2-109:41",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "185",
+                  "locator" : "108:2-108:58",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "184",
+                     "locator" : "108:9-108:58",
+                     "name" : "Medical Reason for Not Screening for Tobacco Use",
+                     "type" : "ExpressionRef"
+                  }
+               }, {
+                  "localId" : "187",
+                  "locator" : "109:6-109:41",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "186",
+                     "locator" : "109:13-109:41",
+                     "name" : "Has Limited Life Expectancy",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "211",
+            "locator" : "161:1-167:74",
+            "name" : "Medical Reason for Not Counseling Tobacco User",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "211",
+                  "s" : [ {
+                     "value" : [ "define ","\"Medical Reason for Not Counseling Tobacco User\"",":\n\t" ]
+                  }, {
+                     "r" : "210",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "191",
+                           "s" : [ {
+                              "r" : "190",
+                              "s" : [ {
+                                 "r" : "190",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Intervention, Not Performed\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Tobacco Use Cessation Counseling\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","NoTobaccoCessationCounseling" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "205",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "193",
+                           "s" : [ {
+                              "r" : "192",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ScreenedTobaccoUser" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t\tsuch that " ]
+                        }, {
+                           "r" : "204",
+                           "s" : [ {
+                              "r" : "198",
+                              "s" : [ {
+                                 "r" : "195",
+                                 "s" : [ {
+                                    "r" : "194",
+                                    "s" : [ {
+                                       "value" : [ "NoTobaccoCessationCounseling" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "195",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","same or after"," " ]
+                              }, {
+                                 "r" : "197",
+                                 "s" : [ {
+                                    "r" : "196",
+                                    "s" : [ {
+                                       "value" : [ "ScreenedTobaccoUser" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "197",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tand " ]
+                           }, {
+                              "r" : "203",
+                              "s" : [ {
+                                 "r" : "200",
+                                 "s" : [ {
+                                    "r" : "199",
+                                    "s" : [ {
+                                       "value" : [ "NoTobaccoCessationCounseling" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "200",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","before"," \n\t\t\t\t" ]
+                              }, {
+                                 "r" : "202",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "201",
+                                    "s" : [ {
+                                       "value" : [ "\"Measurement Period\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "209",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "209",
+                           "s" : [ {
+                              "r" : "207",
+                              "s" : [ {
+                                 "r" : "206",
+                                 "s" : [ {
+                                    "value" : [ "NoTobaccoCessationCounseling" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "207",
+                                 "s" : [ {
+                                    "value" : [ "negationRationale" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " in " ]
+                           }, {
+                              "r" : "208",
+                              "s" : [ {
+                                 "value" : [ "\"Medical Reason\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "210",
+               "locator" : "162:2-167:74",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "191",
+                  "locator" : "162:2-162:97",
+                  "alias" : "NoTobaccoCessationCounseling",
+                  "expression" : {
+                     "localId" : "190",
+                     "locator" : "162:2-162:68",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}NegativeInterventionPerformed",
+                     "templateId" : "NegativeInterventionPerformed",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Tobacco Use Cessation Counseling",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "205",
+                  "locator" : "163:3-166:31",
+                  "alias" : "ScreenedTobaccoUser",
+                  "type" : "With",
+                  "expression" : {
+                     "localId" : "192",
+                     "locator" : "163:8-163:48",
+                     "name" : "Screened and Identified as Tobacco User",
+                     "type" : "ExpressionRef"
+                  },
+                  "suchThat" : {
+                     "localId" : "204",
+                     "locator" : "164:14-166:31",
+                     "type" : "And",
+                     "operand" : [ {
+                        "localId" : "198",
+                        "locator" : "164:14-164:105",
+                        "type" : "SameOrAfter",
+                        "operand" : [ {
+                           "localId" : "195",
+                           "locator" : "164:14-164:56",
+                           "path" : "authorDatetime",
+                           "scope" : "NoTobaccoCessationCounseling",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "197",
+                           "locator" : "164:72-164:105",
+                           "path" : "authorDatetime",
+                           "scope" : "ScreenedTobaccoUser",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "localId" : "203",
+                        "locator" : "165:9-166:31",
+                        "type" : "Before",
+                        "operand" : [ {
+                           "localId" : "200",
+                           "locator" : "165:9-165:51",
+                           "path" : "authorDatetime",
+                           "scope" : "NoTobaccoCessationCounseling",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "202",
+                           "locator" : "166:5-166:31",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "201",
+                              "locator" : "166:12-166:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ],
+               "where" : {
+                  "localId" : "209",
+                  "locator" : "167:3-167:74",
+                  "type" : "InValueSet",
+                  "code" : {
+                     "localId" : "207",
+                     "locator" : "167:9-167:54",
+                     "path" : "negationRationale",
+                     "scope" : "NoTobaccoCessationCounseling",
+                     "type" : "Property"
+                  },
+                  "valueset" : {
+                     "localId" : "208",
+                     "locator" : "167:59-167:74",
+                     "name" : "Medical Reason"
+                  }
+               }
+            }
+         }, {
+            "localId" : "235",
+            "locator" : "169:1-175:70",
+            "name" : "Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "235",
+                  "s" : [ {
+                     "value" : [ "define ","\"Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy\"",":\n\t" ]
+                  }, {
+                     "r" : "234",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "215",
+                           "s" : [ {
+                              "r" : "214",
+                              "s" : [ {
+                                 "r" : "214",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Medication, Not Ordered\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Tobacco Use Cessation Pharmacotherapy\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","NoPharmacotherapyOrdered" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "229",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "217",
+                           "s" : [ {
+                              "r" : "216",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ScreenedTobaccoUser" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t\tsuch that " ]
+                        }, {
+                           "r" : "228",
+                           "s" : [ {
+                              "r" : "222",
+                              "s" : [ {
+                                 "r" : "219",
+                                 "s" : [ {
+                                    "r" : "218",
+                                    "s" : [ {
+                                       "value" : [ "NoPharmacotherapyOrdered" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "219",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","same or after"," " ]
+                              }, {
+                                 "r" : "221",
+                                 "s" : [ {
+                                    "r" : "220",
+                                    "s" : [ {
+                                       "value" : [ "ScreenedTobaccoUser" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "221",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tand " ]
+                           }, {
+                              "r" : "227",
+                              "s" : [ {
+                                 "r" : "224",
+                                 "s" : [ {
+                                    "r" : "223",
+                                    "s" : [ {
+                                       "value" : [ "NoPharmacotherapyOrdered" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "224",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","before"," \n\t\t\t\t" ]
+                              }, {
+                                 "r" : "226",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "225",
+                                    "s" : [ {
+                                       "value" : [ "\"Measurement Period\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "233",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "233",
+                           "s" : [ {
+                              "r" : "231",
+                              "s" : [ {
+                                 "r" : "230",
+                                 "s" : [ {
+                                    "value" : [ "NoPharmacotherapyOrdered" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "231",
+                                 "s" : [ {
+                                    "value" : [ "negationRationale" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " in " ]
+                           }, {
+                              "r" : "232",
+                              "s" : [ {
+                                 "value" : [ "\"Medical Reason\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "234",
+               "locator" : "170:2-175:70",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "215",
+                  "locator" : "170:2-170:94",
+                  "alias" : "NoPharmacotherapyOrdered",
+                  "expression" : {
+                     "localId" : "214",
+                     "locator" : "170:2-170:69",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}NegativeMedicationOrder",
+                     "templateId" : "NegativeMedicationOrder",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Tobacco Use Cessation Pharmacotherapy",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "229",
+                  "locator" : "171:3-174:31",
+                  "alias" : "ScreenedTobaccoUser",
+                  "type" : "With",
+                  "expression" : {
+                     "localId" : "216",
+                     "locator" : "171:8-171:48",
+                     "name" : "Screened and Identified as Tobacco User",
+                     "type" : "ExpressionRef"
+                  },
+                  "suchThat" : {
+                     "localId" : "228",
+                     "locator" : "172:14-174:31",
+                     "type" : "And",
+                     "operand" : [ {
+                        "localId" : "222",
+                        "locator" : "172:14-172:101",
+                        "type" : "SameOrAfter",
+                        "operand" : [ {
+                           "localId" : "219",
+                           "locator" : "172:14-172:52",
+                           "path" : "authorDatetime",
+                           "scope" : "NoPharmacotherapyOrdered",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "221",
+                           "locator" : "172:68-172:101",
+                           "path" : "authorDatetime",
+                           "scope" : "ScreenedTobaccoUser",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "localId" : "227",
+                        "locator" : "173:9-174:31",
+                        "type" : "Before",
+                        "operand" : [ {
+                           "localId" : "224",
+                           "locator" : "173:9-173:47",
+                           "path" : "authorDatetime",
+                           "scope" : "NoPharmacotherapyOrdered",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "226",
+                           "locator" : "174:5-174:31",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "225",
+                              "locator" : "174:12-174:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ],
+               "where" : {
+                  "localId" : "233",
+                  "locator" : "175:3-175:70",
+                  "type" : "InValueSet",
+                  "code" : {
+                     "localId" : "231",
+                     "locator" : "175:9-175:50",
+                     "path" : "negationRationale",
+                     "scope" : "NoPharmacotherapyOrdered",
+                     "type" : "Property"
+                  },
+                  "valueset" : {
+                     "localId" : "232",
+                     "locator" : "175:55-175:70",
+                     "name" : "Medical Reason"
+                  }
+               }
+            }
+         }, {
+            "localId" : "242",
+            "locator" : "111:1-114:41",
+            "name" : "Denominator Exceptions 2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "242",
+                  "s" : [ {
+                     "value" : [ "define ","\"Denominator Exceptions 2\"",":\n\t" ]
+                  }, {
+                     "r" : "241",
+                     "s" : [ {
+                        "r" : "238",
+                        "s" : [ {
+                           "r" : "213",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "212",
+                              "s" : [ {
+                                 "value" : [ "\"Medical Reason for Not Counseling Tobacco User\"" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\tor " ]
+                        }, {
+                           "r" : "237",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "236",
+                              "s" : [ {
+                                 "value" : [ "\"Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tor " ]
+                     }, {
+                        "r" : "240",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "239",
+                           "s" : [ {
+                              "value" : [ "\"Has Limited Life Expectancy\"" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "241",
+               "locator" : "112:2-114:41",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "238",
+                  "locator" : "112:2-113:79",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "213",
+                     "locator" : "112:2-112:56",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "212",
+                        "locator" : "112:9-112:56",
+                        "name" : "Medical Reason for Not Counseling Tobacco User",
+                        "type" : "ExpressionRef"
+                     }
+                  }, {
+                     "localId" : "237",
+                     "locator" : "113:6-113:79",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "236",
+                        "locator" : "113:13-113:79",
+                        "name" : "Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy",
+                        "type" : "ExpressionRef"
+                     }
+                  } ]
+               }, {
+                  "localId" : "240",
+                  "locator" : "114:6-114:41",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "239",
+                     "locator" : "114:13-114:41",
+                     "name" : "Has Limited Life Expectancy",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "254",
+            "locator" : "116:1-120:41",
+            "name" : "Denominator Exceptions 3",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "254",
+                  "s" : [ {
+                     "value" : [ "define ","\"Denominator Exceptions 3\"",":\n\t" ]
+                  }, {
+                     "r" : "253",
+                     "s" : [ {
+                        "r" : "250",
+                        "s" : [ {
+                           "r" : "247",
+                           "s" : [ {
+                              "r" : "244",
+                              "s" : [ {
+                                 "value" : [ "exists " ]
+                              }, {
+                                 "r" : "243",
+                                 "s" : [ {
+                                    "value" : [ "\"Medical Reason for Not Screening for Tobacco Use\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\tor " ]
+                           }, {
+                              "r" : "246",
+                              "s" : [ {
+                                 "value" : [ "exists " ]
+                              }, {
+                                 "r" : "245",
+                                 "s" : [ {
+                                    "value" : [ "\"Medical Reason for Not Counseling Tobacco User\"" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\tor " ]
+                        }, {
+                           "r" : "249",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "248",
+                              "s" : [ {
+                                 "value" : [ "\"Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tor " ]
+                     }, {
+                        "r" : "252",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "251",
+                           "s" : [ {
+                              "value" : [ "\"Has Limited Life Expectancy\"" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "253",
+               "locator" : "117:2-120:41",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "250",
+                  "locator" : "117:2-119:79",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "247",
+                     "locator" : "117:2-118:60",
+                     "type" : "Or",
+                     "operand" : [ {
+                        "localId" : "244",
+                        "locator" : "117:2-117:58",
+                        "type" : "Exists",
+                        "operand" : {
+                           "localId" : "243",
+                           "locator" : "117:9-117:58",
+                           "name" : "Medical Reason for Not Screening for Tobacco Use",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "localId" : "246",
+                        "locator" : "118:6-118:60",
+                        "type" : "Exists",
+                        "operand" : {
+                           "localId" : "245",
+                           "locator" : "118:13-118:60",
+                           "name" : "Medical Reason for Not Counseling Tobacco User",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }, {
+                     "localId" : "249",
+                     "locator" : "119:6-119:79",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "248",
+                        "locator" : "119:13-119:79",
+                        "name" : "Medical Reason for Not Ordering Tobacco Cessation Pharmacotherapy",
+                        "type" : "ExpressionRef"
+                     }
+                  } ]
+               }, {
+                  "localId" : "252",
+                  "locator" : "120:6-120:41",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "251",
+                     "locator" : "120:13-120:41",
+                     "name" : "Has Limited Life Expectancy",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "272",
+            "locator" : "122:1-127:31",
+            "name" : "Tobacco User Received Cessation Counseling",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "272",
+                  "s" : [ {
+                     "value" : [ "define ","\"Tobacco User Received Cessation Counseling\"",":\n\t" ]
+                  }, {
+                     "r" : "271",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "256",
+                           "s" : [ {
+                              "r" : "255",
+                              "s" : [ {
+                                 "r" : "255",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Intervention, Performed\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Tobacco Use Cessation Counseling\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","TobaccoCessationCounseling" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "270",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "258",
+                           "s" : [ {
+                              "r" : "257",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ScreenedTobaccoUser" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t\tsuch that " ]
+                        }, {
+                           "r" : "269",
+                           "s" : [ {
+                              "r" : "263",
+                              "s" : [ {
+                                 "r" : "260",
+                                 "s" : [ {
+                                    "r" : "259",
+                                    "s" : [ {
+                                       "value" : [ "TobaccoCessationCounseling" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "260",
+                                    "s" : [ {
+                                       "value" : [ "relevantPeriod" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","starts same or after"," " ]
+                              }, {
+                                 "r" : "262",
+                                 "s" : [ {
+                                    "r" : "261",
+                                    "s" : [ {
+                                       "value" : [ "ScreenedTobaccoUser" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "262",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tand " ]
+                           }, {
+                              "r" : "268",
+                              "s" : [ {
+                                 "r" : "265",
+                                 "s" : [ {
+                                    "r" : "264",
+                                    "s" : [ {
+                                       "value" : [ "TobaccoCessationCounseling" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "265",
+                                    "s" : [ {
+                                       "value" : [ "relevantPeriod" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","starts before"," \n\t\t\t\t" ]
+                              }, {
+                                 "r" : "267",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "266",
+                                    "s" : [ {
+                                       "value" : [ "\"Measurement Period\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "271",
+               "locator" : "123:2-127:31",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "256",
+                  "locator" : "123:2-123:91",
+                  "alias" : "TobaccoCessationCounseling",
+                  "expression" : {
+                     "localId" : "255",
+                     "locator" : "123:2-123:64",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveInterventionPerformed",
+                     "templateId" : "PositiveInterventionPerformed",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Tobacco Use Cessation Counseling",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "270",
+                  "locator" : "124:3-127:31",
+                  "alias" : "ScreenedTobaccoUser",
+                  "type" : "With",
+                  "expression" : {
+                     "localId" : "257",
+                     "locator" : "124:8-124:48",
+                     "name" : "Screened and Identified as Tobacco User",
+                     "type" : "ExpressionRef"
+                  },
+                  "suchThat" : {
+                     "localId" : "269",
+                     "locator" : "125:14-127:31",
+                     "type" : "And",
+                     "operand" : [ {
+                        "localId" : "263",
+                        "locator" : "125:14-125:110",
+                        "type" : "SameOrAfter",
+                        "operand" : [ {
+                           "locator" : "125:56-125:61",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "260",
+                              "locator" : "125:14-125:54",
+                              "path" : "relevantPeriod",
+                              "scope" : "TobaccoCessationCounseling",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "localId" : "262",
+                           "locator" : "125:77-125:110",
+                           "path" : "authorDatetime",
+                           "scope" : "ScreenedTobaccoUser",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "localId" : "268",
+                        "locator" : "126:9-127:31",
+                        "type" : "Before",
+                        "operand" : [ {
+                           "locator" : "126:51-126:56",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "265",
+                              "locator" : "126:9-126:49",
+                              "path" : "relevantPeriod",
+                              "scope" : "TobaccoCessationCounseling",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "localId" : "267",
+                           "locator" : "127:5-127:31",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "266",
+                              "locator" : "127:12-127:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "278",
+            "locator" : "129:1-131:58",
+            "name" : "Numerator 1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "278",
+                  "s" : [ {
+                     "value" : [ "define ","\"Numerator 1\"",":\n\t" ]
+                  }, {
+                     "r" : "277",
+                     "s" : [ {
+                        "r" : "274",
+                        "s" : [ {
+                           "r" : "273",
+                           "s" : [ {
+                              "value" : [ "\"Screened and Identified as Tobacco Non User\"" ]
+                           } ]
+                        }, {
+                           "value" : [ " is not null" ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tor " ]
+                     }, {
+                        "r" : "276",
+                        "s" : [ {
+                           "r" : "275",
+                           "s" : [ {
+                              "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                           } ]
+                        }, {
+                           "value" : [ " is not null" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "277",
+               "locator" : "130:2-131:58",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "274",
+                  "locator" : "130:2-130:58",
+                  "type" : "Not",
+                  "operand" : {
+                     "locator" : "130:2-130:58",
+                     "type" : "IsNull",
+                     "operand" : {
+                        "localId" : "273",
+                        "locator" : "130:2-130:46",
+                        "name" : "Screened and Identified as Tobacco Non User",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "localId" : "276",
+                  "locator" : "131:6-131:58",
+                  "type" : "Not",
+                  "operand" : {
+                     "locator" : "131:6-131:58",
+                     "type" : "IsNull",
+                     "operand" : {
+                        "localId" : "275",
+                        "locator" : "131:6-131:46",
+                        "name" : "Screened and Identified as Tobacco User",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "298",
+            "locator" : "154:1-159:31",
+            "name" : "Tobacco Cessation Pharmacotherapy Ordered for Tobacco User",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "298",
+                  "s" : [ {
+                     "value" : [ "define ","\"Tobacco Cessation Pharmacotherapy Ordered for Tobacco User\"",":\n\t" ]
+                  }, {
+                     "r" : "297",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "282",
+                           "s" : [ {
+                              "r" : "281",
+                              "s" : [ {
+                                 "r" : "281",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Medication, Order\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Tobacco Use Cessation Pharmacotherapy\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","PharmacotherapyOrdered" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "296",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "284",
+                           "s" : [ {
+                              "r" : "283",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ScreenedTobaccoUser" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t\tsuch that " ]
+                        }, {
+                           "r" : "295",
+                           "s" : [ {
+                              "r" : "289",
+                              "s" : [ {
+                                 "r" : "286",
+                                 "s" : [ {
+                                    "r" : "285",
+                                    "s" : [ {
+                                       "value" : [ "PharmacotherapyOrdered" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "286",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","same or after"," " ]
+                              }, {
+                                 "r" : "288",
+                                 "s" : [ {
+                                    "r" : "287",
+                                    "s" : [ {
+                                       "value" : [ "ScreenedTobaccoUser" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "288",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tand " ]
+                           }, {
+                              "r" : "294",
+                              "s" : [ {
+                                 "r" : "291",
+                                 "s" : [ {
+                                    "r" : "290",
+                                    "s" : [ {
+                                       "value" : [ "PharmacotherapyOrdered" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "291",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","before"," \n\t\t\t\t" ]
+                              }, {
+                                 "r" : "293",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "292",
+                                    "s" : [ {
+                                       "value" : [ "\"Measurement Period\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "297",
+               "locator" : "155:2-159:31",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "282",
+                  "locator" : "155:2-155:86",
+                  "alias" : "PharmacotherapyOrdered",
+                  "expression" : {
+                     "localId" : "281",
+                     "locator" : "155:2-155:63",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}PositiveMedicationOrder",
+                     "templateId" : "PositiveMedicationOrder",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Tobacco Use Cessation Pharmacotherapy",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "296",
+                  "locator" : "156:3-159:31",
+                  "alias" : "ScreenedTobaccoUser",
+                  "type" : "With",
+                  "expression" : {
+                     "localId" : "283",
+                     "locator" : "156:8-156:48",
+                     "name" : "Screened and Identified as Tobacco User",
+                     "type" : "ExpressionRef"
+                  },
+                  "suchThat" : {
+                     "localId" : "295",
+                     "locator" : "157:14-159:31",
+                     "type" : "And",
+                     "operand" : [ {
+                        "localId" : "289",
+                        "locator" : "157:14-157:99",
+                        "type" : "SameOrAfter",
+                        "operand" : [ {
+                           "localId" : "286",
+                           "locator" : "157:14-157:50",
+                           "path" : "authorDatetime",
+                           "scope" : "PharmacotherapyOrdered",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "288",
+                           "locator" : "157:66-157:99",
+                           "path" : "authorDatetime",
+                           "scope" : "ScreenedTobaccoUser",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "localId" : "294",
+                        "locator" : "158:9-159:31",
+                        "type" : "Before",
+                        "operand" : [ {
+                           "localId" : "291",
+                           "locator" : "158:9-158:45",
+                           "path" : "authorDatetime",
+                           "scope" : "PharmacotherapyOrdered",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "293",
+                           "locator" : "159:5-159:31",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "292",
+                              "locator" : "159:12-159:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "319",
+            "locator" : "147:1-152:31",
+            "name" : "Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "319",
+                  "s" : [ {
+                     "value" : [ "define ","\"Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User\"",":\n\t" ]
+                  }, {
+                     "r" : "318",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "303",
+                           "s" : [ {
+                              "r" : "302",
+                              "s" : [ {
+                                 "r" : "302",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Medication, Active\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Tobacco Use Cessation Pharmacotherapy\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","TakingPharmacotherapy" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\t" ]
+                     }, {
+                        "r" : "317",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "305",
+                           "s" : [ {
+                              "r" : "304",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ScreenedTobaccoUser" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t\tsuch that " ]
+                        }, {
+                           "r" : "316",
+                           "s" : [ {
+                              "r" : "310",
+                              "s" : [ {
+                                 "r" : "307",
+                                 "s" : [ {
+                                    "r" : "306",
+                                    "s" : [ {
+                                       "value" : [ "ScreenedTobaccoUser" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "307",
+                                    "s" : [ {
+                                       "value" : [ "authorDatetime" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","during"," " ]
+                              }, {
+                                 "r" : "309",
+                                 "s" : [ {
+                                    "r" : "308",
+                                    "s" : [ {
+                                       "value" : [ "TakingPharmacotherapy" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "309",
+                                    "s" : [ {
+                                       "value" : [ "relevantPeriod" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tand " ]
+                           }, {
+                              "r" : "315",
+                              "s" : [ {
+                                 "r" : "312",
+                                 "s" : [ {
+                                    "r" : "311",
+                                    "s" : [ {
+                                       "value" : [ "TakingPharmacotherapy" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "312",
+                                    "s" : [ {
+                                       "value" : [ "relevantPeriod" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","starts before"," \n\t\t\t\t" ]
+                              }, {
+                                 "r" : "314",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "313",
+                                    "s" : [ {
+                                       "value" : [ "\"Measurement Period\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "318",
+               "locator" : "148:2-152:31",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "303",
+                  "locator" : "148:2-148:86",
+                  "alias" : "TakingPharmacotherapy",
+                  "expression" : {
+                     "localId" : "302",
+                     "locator" : "148:2-148:64",
+                     "dataType" : "{urn:healthit-gov:qdm:v5_4}MedicationActive",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Tobacco Use Cessation Pharmacotherapy",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "317",
+                  "locator" : "149:3-152:31",
+                  "alias" : "ScreenedTobaccoUser",
+                  "type" : "With",
+                  "expression" : {
+                     "localId" : "304",
+                     "locator" : "149:8-149:48",
+                     "name" : "Screened and Identified as Tobacco User",
+                     "type" : "ExpressionRef"
+                  },
+                  "suchThat" : {
+                     "localId" : "316",
+                     "locator" : "150:14-152:31",
+                     "type" : "And",
+                     "operand" : [ {
+                        "localId" : "310",
+                        "locator" : "150:14-150:91",
+                        "type" : "In",
+                        "operand" : [ {
+                           "localId" : "307",
+                           "locator" : "150:14-150:47",
+                           "path" : "authorDatetime",
+                           "scope" : "ScreenedTobaccoUser",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "309",
+                           "locator" : "150:56-150:91",
+                           "path" : "relevantPeriod",
+                           "scope" : "TakingPharmacotherapy",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "localId" : "315",
+                        "locator" : "151:9-152:31",
+                        "type" : "Before",
+                        "operand" : [ {
+                           "locator" : "151:46-151:51",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "312",
+                              "locator" : "151:9-151:44",
+                              "path" : "relevantPeriod",
+                              "scope" : "TakingPharmacotherapy",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "localId" : "314",
+                           "locator" : "152:5-152:31",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "313",
+                              "locator" : "152:12-152:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "323",
+            "locator" : "133:1-136:84",
+            "name" : "Numerator 2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "323",
+                  "s" : [ {
+                     "value" : [ "define ","\"Numerator 2\"",":\n\t" ]
+                  }, {
+                     "r" : "322",
+                     "s" : [ {
+                        "r" : "301",
+                        "s" : [ {
+                           "r" : "280",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "279",
+                              "s" : [ {
+                                 "value" : [ "\"Tobacco User Received Cessation Counseling\"" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\tor " ]
+                        }, {
+                           "r" : "300",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "299",
+                              "s" : [ {
+                                 "value" : [ "\"Tobacco Cessation Pharmacotherapy Ordered for Tobacco User\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tor " ]
+                     }, {
+                        "r" : "321",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "320",
+                           "s" : [ {
+                              "value" : [ "\"Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User\"" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "322",
+               "locator" : "134:2-136:84",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "301",
+                  "locator" : "134:2-135:72",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "280",
+                     "locator" : "134:2-134:52",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "279",
+                        "locator" : "134:9-134:52",
+                        "name" : "Tobacco User Received Cessation Counseling",
+                        "type" : "ExpressionRef"
+                     }
+                  }, {
+                     "localId" : "300",
+                     "locator" : "135:6-135:72",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "299",
+                        "locator" : "135:13-135:72",
+                        "name" : "Tobacco Cessation Pharmacotherapy Ordered for Tobacco User",
+                        "type" : "ExpressionRef"
+                     }
+                  } ]
+               }, {
+                  "localId" : "321",
+                  "locator" : "136:6-136:84",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "320",
+                     "locator" : "136:13-136:84",
+                     "name" : "Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "338",
+            "locator" : "138:1-145:3",
+            "name" : "Numerator 3",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "338",
+                  "s" : [ {
+                     "value" : [ "define ","\"Numerator 3\"",":\n\t" ]
+                  }, {
+                     "r" : "337",
+                     "s" : [ {
+                        "r" : "325",
+                        "s" : [ {
+                           "r" : "324",
+                           "s" : [ {
+                              "value" : [ "\"Screened and Identified as Tobacco Non User\"" ]
+                           } ]
+                        }, {
+                           "value" : [ " is not null" ]
+                        } ]
+                     }, {
+                        "value" : [ "\n\t\tor " ]
+                     }, {
+                        "r" : "336",
+                        "s" : [ {
+                           "value" : [ "( " ]
+                        }, {
+                           "r" : "336",
+                           "s" : [ {
+                              "r" : "327",
+                              "s" : [ {
+                                 "r" : "326",
+                                 "s" : [ {
+                                    "value" : [ "\"Screened and Identified as Tobacco User\"" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " is not null" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n\t\t\t\tand " ]
+                           }, {
+                              "r" : "335",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "335",
+                                 "s" : [ {
+                                    "r" : "332",
+                                    "s" : [ {
+                                       "r" : "329",
+                                       "s" : [ {
+                                          "value" : [ "exists " ]
+                                       }, {
+                                          "r" : "328",
+                                          "s" : [ {
+                                             "value" : [ "\"Tobacco User Received Cessation Counseling\"" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n\t\t\t\t\t\tor " ]
+                                    }, {
+                                       "r" : "331",
+                                       "s" : [ {
+                                          "value" : [ "exists " ]
+                                       }, {
+                                          "r" : "330",
+                                          "s" : [ {
+                                             "value" : [ "\"Tobacco Cessation Pharmacotherapy Ordered for Tobacco User\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n\t\t\t\t\t\tor " ]
+                                 }, {
+                                    "r" : "334",
+                                    "s" : [ {
+                                       "value" : [ "exists " ]
+                                    }, {
+                                       "r" : "333",
+                                       "s" : [ {
+                                          "value" : [ "\"Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n\t\t\t\t)" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n\t\t)" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "337",
+               "locator" : "139:2-145:3",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "325",
+                  "locator" : "139:2-139:58",
+                  "type" : "Not",
+                  "operand" : {
+                     "locator" : "139:2-139:58",
+                     "type" : "IsNull",
+                     "operand" : {
+                        "localId" : "324",
+                        "locator" : "139:2-139:46",
+                        "name" : "Screened and Identified as Tobacco Non User",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "localId" : "336",
+                  "locator" : "140:6-145:3",
+                  "type" : "And",
+                  "operand" : [ {
+                     "localId" : "327",
+                     "locator" : "140:8-140:60",
+                     "type" : "Not",
+                     "operand" : {
+                        "locator" : "140:8-140:60",
+                        "type" : "IsNull",
+                        "operand" : {
+                           "localId" : "326",
+                           "locator" : "140:8-140:48",
+                           "name" : "Screened and Identified as Tobacco User",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }, {
+                     "localId" : "335",
+                     "locator" : "141:9-144:5",
+                     "type" : "Or",
+                     "operand" : [ {
+                        "localId" : "332",
+                        "locator" : "141:11-142:76",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "localId" : "329",
+                           "locator" : "141:11-141:61",
+                           "type" : "Exists",
+                           "operand" : {
+                              "localId" : "328",
+                              "locator" : "141:18-141:61",
+                              "name" : "Tobacco User Received Cessation Counseling",
+                              "type" : "ExpressionRef"
+                           }
+                        }, {
+                           "localId" : "331",
+                           "locator" : "142:10-142:76",
+                           "type" : "Exists",
+                           "operand" : {
+                              "localId" : "330",
+                              "locator" : "142:17-142:76",
+                              "name" : "Tobacco Cessation Pharmacotherapy Ordered for Tobacco User",
+                              "type" : "ExpressionRef"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "334",
+                        "locator" : "143:10-143:88",
+                        "type" : "Exists",
+                        "operand" : {
+                           "localId" : "333",
+                           "locator" : "143:17-143:88",
+                           "name" : "Tobacco Cessation Pharmacotherapy Actively Being Taken by Tobacco User",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  } ]
+               } ]
+            }
+         } ]
+      }
+   }
+}

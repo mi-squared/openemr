@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QualityMeasureDocument xmlns="urn:hl7-org:v3" xmlns:cql-ext="urn:hhs-cql:hqmf-n1-extensions:v1"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         
+      <!--
+			**************************************************************
+			Measure Details Section
+			**************************************************************
+		-->
+         
+      <typeId extension="POQM_HD000001UV02" root="2.16.840.1.113883.1.3"/>
+   <templateId>
+      <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.1.2"/>
+   </templateId>
+   <id root="40280382-68d3-a5fe-0169-0c9018ca11d2"/>
+   <code code="57024-2" codeSystem="2.16.840.1.113883.6.1">
+      <displayName value="Health Quality Measure Document"/>
+   </code>
+   <title
+          value="Preventive Care and Screening: Screening for Depression and Follow-Up Plan"/>
+   <text
+         value="Percentage  of patients aged 12 years and older screened for depression on the date of the encounter or 14 days prior to the date of the encounter using an age appropriate standardized depression screening tool AND if positive, a follow-up plan is documented on the date of the eligible encounter"/>
+   <statusCode code="COMPLETED"/>
+   <setId root="9a031e24-3d9b-11e1-8634-00237d5bf174"/>
+   <versionNumber value="9.1.000"/>
+   <author>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="2.16.840.1.113883.3.7230"/>
+            </id>
+            <name>
+               <item>
+                  <part value="Quality Insights"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </author>
+   <custodian>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="9048cd4c-b61b-11e4-a71e-12e3f512a338"/>
+            </id>
+            <name>
+               <item>
+                  <part value="Centers for Medicare &amp; Medicaid Services (CMS)"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </custodian>
+   <verifier>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="2.16.840.1.113883.3.560"/>
+            </id>
+            <name>
+               <item>
+                  <part value="National Quality Forum"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </verifier>
+   <!--Payer-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.3591"/>
+         <title value="Payer"/>
+      </valueSet>
+   </definition>
+   <!--Depression Screening  Encounter Codes-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.1916"/>
+         <title value="Depression Screening  Encounter Codes"/>
+      </valueSet>
+   </definition>
+   <!--ONC Administrative Sex-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1"/>
+         <title value="ONC Administrative Sex"/>
+      </valueSet>
+   </definition>
+   <!--Depression medications - adolescent-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.469"/>
+         <title value="Depression medications - adolescent"/>
+      </valueSet>
+   </definition>
+   <!--Bipolar Diagnosis-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.450"/>
+         <title value="Bipolar Diagnosis"/>
+      </valueSet>
+   </definition>
+   <!--Depression medications - adult-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.470"/>
+         <title value="Depression medications - adult"/>
+      </valueSet>
+   </definition>
+   <!--Additional evaluation for depression - adolescent-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.1542"/>
+         <title value="Additional evaluation for depression - adolescent"/>
+      </valueSet>
+   </definition>
+   <!--Depression diagnosis-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.145"/>
+         <title value="Depression diagnosis"/>
+      </valueSet>
+   </definition>
+   <!--Referral for Depression Adult-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.538"/>
+         <title value="Referral for Depression Adult"/>
+      </valueSet>
+   </definition>
+   <!--Follow-up for depression - adult-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.468"/>
+         <title value="Follow-up for depression - adult"/>
+      </valueSet>
+   </definition>
+   <!--Ethnicity-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.837"/>
+         <title value="Ethnicity"/>
+      </valueSet>
+   </definition>
+   <!--Follow-up for depression - adolescent-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.467"/>
+         <title value="Follow-up for depression - adolescent"/>
+      </valueSet>
+   </definition>
+   <!--Race-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.836"/>
+         <title value="Race"/>
+      </valueSet>
+   </definition>
+   <!--Additional evaluation for depression - adult-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.1545"/>
+         <title value="Additional evaluation for depression - adult"/>
+      </valueSet>
+   </definition>
+   <!--Suicide Risk Assessment-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.559"/>
+         <title value="Suicide Risk Assessment"/>
+      </valueSet>
+   </definition>
+   <!--Referral for Depression Adolescent-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.537"/>
+         <title value="Referral for Depression Adolescent"/>
+      </valueSet>
+   </definition>
+   <!--Medical or Other reason not done-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.1.1502"/>
+         <title value="Medical or Other reason not done"/>
+      </valueSet>
+   </definition>
+   <!--Patient Reason refused-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.791"/>
+         <title value="Patient Reason refused"/>
+      </valueSet>
+   </definition>
+   <!--Negative Depression Screening-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.2451"/>
+         <title value="Negative Depression Screening"/>
+      </valueSet>
+   </definition>
+   <!--Positive Depression Screening-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.600.2450"/>
+         <title value="Positive Depression Screening"/>
+      </valueSet>
+   </definition>
+   <!--Adolescent depression screening assessment-CODE:/CodeSystem/LOINC/Version/2.63/Code/73831-0/Info-->
+      <definition>
+      <cql-ext:code code="73831-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+         <displayName value="Adolescent depression screening assessment"/>
+      </cql-ext:code>
+   </definition>
+   <!--Adult depression screening assessment-CODE:/CodeSystem/LOINC/Version/2.63/Code/73832-8/Info-->
+      <definition>
+      <cql-ext:code code="73832-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+         <displayName value="Adult depression screening assessment"/>
+      </cql-ext:code>
+   </definition>
+   <!--Birth date-CODE:/CodeSystem/LOINC/Version/2.52/Code/21112-8/Info-->
+      <definition>
+      <cql-ext:code code="21112-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+         <displayName value="Birth date"/>
+      </cql-ext:code>
+   </definition>
+   <relatedDocument typeCode="COMP">
+      <expressionDocument>
+         <id root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+         <text mediaType="text/cql">
+            <reference value="https://emeasuretool.cms.gov/libraries/9a031e24-3d9b-11e1-8634-00237d5bf174/PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan-9.1.000.cql"/>
+            <translation mediaType="application/elm+xml">
+               <reference value="https://emeasuretool.cms.gov/libraries/9a031e24-3d9b-11e1-8634-00237d5bf174/PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan-9.1.000.xml"/>
+            </translation>
+            <translation mediaType="application/elm+json">
+               <reference value="https://emeasuretool.cms.gov/libraries/9a031e24-3d9b-11e1-8634-00237d5bf174/PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan-9.1.000.json"/>
+            </translation>
+         </text>
+         <setId extension="9a031e24-3d9b-11e1-8634-00237d5bf174"
+                identifierName="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan"
+                root="https://emeasuretool.cms.gov/libraries"/>
+         <versionNumber value="9.1.000"/>
+      </expressionDocument>
+   </relatedDocument>
+   <relatedDocument typeCode="COMP">
+      <expressionDocument>
+         <id root="4028038268434da20168531138e502de"/>
+         <text mediaType="text/cql">
+            <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-4.0.000.cql"/>
+            <translation mediaType="application/elm+xml">
+               <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-4.0.000.xml"/>
+            </translation>
+            <translation mediaType="application/elm+json">
+               <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-4.0.000.json"/>
+            </translation>
+         </text>
+         <setId extension="8bdc0a19-b210-4a58-8a07-f5d95a34eca9"
+                identifierName="MATGlobalCommonFunctions"
+                root="https://emeasuretool.cms.gov/libraries"/>
+         <versionNumber value="4.0.000"/>
+      </expressionDocument>
+   </relatedDocument>
+   <controlVariable>
+      <measurePeriod>
+         <id extension="measureperiod" root="238f0938-5573-4a5d-9584-c7f0aa7e8b48"/>
+         <code code="MSRTP" codeSystem="2.16.840.1.113883.5.4">
+            <originalText value="Measurement Period"/>
+         </code>
+         <value xsi:type="PIVL_TS">
+            <phase highClosed="true" lowClosed="true">
+               <low value="20190101"/>
+               <width unit="a" value="1" xsi:type="PQ"/>
+            </phase>
+            <period unit="a" value="1"/>
+         </value>
+      </measurePeriod>
+   </controlVariable>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText value="eCQM Identifier (Measure Authoring Tool)"/>
+         </code>
+         <value mediaType="text/plain" value="2" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText value="NQF Number"/>
+         </code>
+         <value mediaType="text/plain" value="0418e" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="COPY" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Copyright"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Limited proprietary coding is contained in the measure specifications for convenience. Users of the proprietary code sets should obtain all necessary licenses from the owners of these code sets. Quality Insights, Inc. disclaims all liability for use or accuracy of any Current Procedural Terminology (CPT[R]) or other coding contained in the specifications.&#xA;&#xA;CPT(R) contained in the Measure specifications is copyright 2007-2018 American Medical Association. LOINC(R) copyright 2004-2018 Regenstrief Institute, Inc. This material contains SNOMED Clinical Terms(R) (SNOMED CT[R]) copyright 2004-2018 International Health Terminology Standards Development Organisation. All Rights Reserved."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DISC" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Disclaimer"/>
+         </code>
+         <value mediaType="text/plain"
+                value="These performance measures are not clinical guidelines and do not establish a standard of medical care, and have not been tested for all potential applications.&#xA;&#xA;THE MEASURES AND SPECIFICATIONS ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND.&#xA;&#xA;Due to technical limitations, registered trademarks are indicated by (R) or [R] and unregistered trademarks are indicated by (TM) or [TM]."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRSCORE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Measure Scoring"/>
+         </code>
+         <value code="PROPOR" codeSystem="2.16.840.1.113883.5.1063" xsi:type="CD">
+            <displayName value="Proportion"/>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRTYPE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Measure Type"/>
+         </code>
+         <value code="PROCESS" codeSystem="2.16.840.1.113883.5.1063" xsi:type="CD">
+            <displayName value="PROCESS"/>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="STRAT" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Stratification"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRADJ" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Risk Adjustment"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRAGG" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Rate Aggregation"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="RAT" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Rationale"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Depression is a serious medical illness associated with higher rates of chronic disease, increased health care utilization, and impaired functioning (Pratt &amp; Brody, 2014). 2016 U.S. survey data indicate that 12.8 percent of adolescents (2.2 million adolescents) had a major depressive episode (MDE) in the past year, with nine percent of adolescents (2.2 million adolescents) having one MDE with severe impairment; 6.7 percent of adults aged 18 or older (16.2 million adults) had at least one MDE in the past year, with 4.3 percent of adults (10.3 million adults) having one MDE with severe impairment in the past year (Substance Abuse and Mental Health Services Administration, 2017). Data indicate that severity of depressive symptoms factor into having difficulty with work, home, or social activities. For example, as the severity of depressive symptoms increased, rates of having difficulty with work, home, or social activities related to depressive symptoms increased. For those twelve and older with mild depressive symptoms, 45.7% reported difficulty with activities and those with severe depressive symptoms, 88.0% reported difficulty (Pratt &amp; Brody, 2014). Children and teens with major depressive disorder (MDD) has been found to have difficulty carrying out their daily activities, relating to others, and growing up healthy with an increased risk of suicide (Siu &amp; the U.S. Preventive Services Task Force [USPSTF], 2016). Additionally, perinatal depression (considered here as depression arising in the period from conception to the end of the first postnatal year) affects up to 15% of women. Depression and other mood disorders, such as bipolar disorder and anxiety disorders, especially during the perinatal period,  can have devastating effects on women, infants, and families (Molenaar et al., 2018). Maternal suicide rates rise over hemorrhage and hypertensive disorders as a cause of maternal mortality (American College of Obstetricians and Gynecologists, 2015). &#xA;&#xA;Negative outcomes associated with depression make it crucial to screen in order to identify and treat depression in its early stages. While Primary Care Providers (PCPs) serve as the first line of defense in the detection of depression, studies show that PCPs fail to recognize up to 50% of depressed patients (Borner, 2010, p. 948). “Coyle et al. (2003) suggested that the picture is more grim for adolescents, and that more than 70% of children and adolescents suffering from serious mood disorders go unrecognized or inadequately treated&quot; (Borner et al., 2010, p. 948 ). &quot;In nationally representative U.S. surveys, about eight percent of adolescents reported having major depression in the past year. Only 36% to 44% of children and adolescents with depression receive treatment, suggesting that the majority of depressed youth are undiagnosed and untreated&quot; (Siu on behalf of USPSTF,  2016, p. 360 &amp; 364).  Evidence supports that screening for depression in pregnant and postpartum women is of moderate net benefit and treatment options for positive depression screening should be available for patients twelve and older including pregnant and postpartum women. &#xA;&#xA;If preventing negative patient outcomes is not enough, the substantial economic burden of depression for individuals and society alike makes a case for screening for depression on a regular basis. Depression imposes economic burden through direct and indirect costs: &quot;In the United States, an estimated $22.8 billion was spent on depression treatment in 2009, and lost productivity cost an additional estimated $23 billion in 2011&quot; (Siu &amp; USPSTF, 2016, p. 383-384). &#xA;&#xA;This measure seeks to align with clinical guideline recommendations as well as the Healthy People 2020 recommendation for routine screening for mental health problems as a part of primary care for both children and adults (U.S. Department of Health and Human Services, 2014) and makes an important contribution to the quality domain of community and population health."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="CRS" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Clinical Recommendation Statement"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Adolescent Recommendation (12-18 years):&#xA;&#xA;&quot;The USPSTF recommends screening for MDD in adolescents aged 12 to 18 years. Screening should be implemented with adequate systems in place to ensure accurate diagnosis, effective treatment, and appropriate follow-up (B recommendation)&quot; (Siu on behalf of  USPSTF, 2016, p. 360).&#xA;&#xA;&quot;Clinicians and health care systems should try to consistently screen adolescents, ages 12-18,  for major depressive disorder, but only when systems are in place to ensure accurate diagnosis, careful selection of treatment, and close follow-up&quot; (Wilkinson et al., 2013, p. 16). &#xA;&#xA;Adult Recommendation (18 years and older):&#xA;&#xA;&quot;The USPSTF recommends screening for depression in the general adult population, including pregnant and postpartum women. Screening should be implemented with adequate systems in place to ensure accurate diagnosis, effective treatment, and appropriate follow-up (B recommendation)&quot; (Siu &amp; USPSTF, 2016, p. 380).&#xA;&#xA;The Institute for Clinical Systems Improvement (ICSI) health care guideline, Adult Depression in Primary Care, provides the following recommendations:&#xA;1. &quot;Clinicians should routinely screen all adults for depression using a standardized instrument.&quot;&#xA;2. &quot;Clinicians should establish and maintain follow-up with patients.&quot;&#xA;3. &quot;Clinicians should screen and monitor depression in pregnant and post-partum women.&quot; (Trangle et al., 2016, p. 8-10)."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IDUR" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Improvement Notation"/>
+         </code>
+         <value mediaType="text/plain" value="Higher score indicates better quality"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="American College of Obstetricians and Gynecologists. (2015). Committee Opinion No. 630: Screening for perinatal depression. Obstetrics &amp; Gynecology, 125(5), 1268-1271. Retrieved from http://www.acog.org/Resources-And-Publications/Committee-Opinions/Committee-on-Obstetric-Practice/Screening-for-Perinatal-Depression"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Borner, I., Braunstein, J. W., St. Victor, R., et al. (2010). Evaluation of a 2-question screening tool for detecting depression in adolescents in primary care. Clinical Pediatrics, 49(10), 947-995. doi: 10.1177/0009922810370203"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Coyle, J. T., Pine, D. S., Charney, D. S, et al. (2003). Depression and Bipolar Support Alliance consensus statement on the unmet needs in diagnosis and treatment of mood disorders in children and adolescents. Journal of the American Academy of Child and Adolescent Psychiatry, 42(12), 1494-1503."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Molenaar, N. M., Kamperman, A. M., Boyce, P., et al. (2018, March 5). Guidelines on treatment of perinatal depression with antidepressants: An international review. Australian &amp; New Zealand Journal of Psychiatry, 52(4), 320-327."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Pratt, L. A., &amp; Brody, D. J. (2014). Depression in the U.S. household population, 2009-2012. NCHS Data Brief No. 172. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention, National Center for Health Statistics."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Siu, A. L., on behalf of USPSTF. (2016). Screening for depression in children and adolescents: U.S. Preventive Services Task Force recommendation statement. Annals of Internal Medicine, 164(5), 360-366. Retrieved from http://annals.org/article.aspx?articleid=2490528"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Siu, A. L., &amp; USPSTF. (2016). Screening for depression in adults: U.S. Preventive Services Task Force recommendation statement. JAMA, 315(4), 380-387. doi:10.1001/jama.2015.18392. Retrieved from http://jama.jamanetwork.com/article.aspx?articleid=2484345"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Substance Abuse and Mental Health Services Administration. (2017). Key substance use and mental health indicators in the United States: Results from the 2016 National Survey on Drug Use and Health. Rockville, MD: Center for Behavioral Health Statistics and Quality, Substance Abuse and Mental Health Services Administration. Retrieved from https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR1-2016/NSDUH-FFR1-2016.htm"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Steinman, L. E., Frederick, J. T., Prohaska, T., et al. (2007). Recommendations for treating depression in community-based older adults. American Journal of Preventive Medicine, 33(3), 175-181. Retrieved from www.ajpm-online.net/article/S0749-3797%2807%2900330-3/abstract"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Trangle, M., Gursky, J., Haight, R., et al. (2016, March). Adult depression in primary care. Bloomington, MN: Institute for Clinical Systems Improvement."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="U.S. Department of Health and Human Services. (2014). Healthy People 2020: Mental health and mental disorder s.  Washington, DC: U.S. Department of Health and Human Services. Retrieved from http://www.healthypeople.gov/2020/topicsobjectives2020/objectiveslist.aspx?topicId=28"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Wilkinson, J., Bass, C., Diem, S., et al. (2013, September). Preventive services for children and adolescents. Bloomington, MN: Institute for Clinical Systems Improvement."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Zalsman, G., Brent, D. A., &amp; Weersing, V. R. (2006). Depressive disorders in childhood and adolescence: An overview—Epidemiology, clinical manifestation, and risk factors. Child and Adolescent Psychiatric Clinics of North America, 15(4), 827-841."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Definition"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Screening:&#xA;Completion of a clinical or diagnostic tool used to identify people at risk of developing or having a certain disease or condition, even in the absence of symptoms.  &#xA;Standardized Depression Screening Tool - A normalized and validated depression screening tool developed  for the patient population in which it is being utilized&#xA;&#xA;Examples of depression screening tools include but are not limited to: &#xA;*  Adolescent Screening Tools (12-17 years) &#xA;   *  Patient Health Questionnaire for Adolescents (PHQ-A)&#xA;   *  Beck Depression Inventory-Primary Care Version (BDI-PC)&#xA;   *  Mood Feeling Questionnaire (MFQ)&#xA;   *  Center for Epidemiologic Studies Depression Scale (CES-D)&#xA;   *  Patient Health Questionnaire (PHQ-9)&#xA;   *  Pediatric Symptom Checklist (PSC-17)&#xA;   *  PRIME MD-PHQ2 &#xA;*  Adult Screening Tools (18 years and older) &#xA;   *  Patient Health Questionnaire (PHQ9)&#xA;   *  Beck Depression Inventory (BDI or BDI-II)&#xA;   *  Center for Epidemiologic Studies Depression Scale (CES-D)&#xA;   *  Depression Scale (DEPS)&#xA;   *  Duke Anxiety-Depression Scale (DADS)&#xA;   *  Geriatric Depression Scale (GDS)&#xA;   *  Cornell Scale for Depression in Dementia (CSDD)&#xA;   *  PRIME MD-PHQ2 &#xA;   * Hamilton Rating Scale for Depression (HAM-D)&#xA;   * Quick Inventory of Depressive Symptomatology Self-Report (QID-SR)&#xA;   * Computerized Adaptive Testing Depression Inventory (CAT-DI)&#xA;   * Computerized Adaptive Diagnostic Screener (CAD-MDD)&#xA;* Perinatal Screening Tools&#xA;   *  Edinburgh Postnatal Depression Scale&#xA;   *  Postpartum Depression Screening Scale&#xA;   *  Patient Health Questionnaire 9 (PHQ-9)&#xA;   *  Beck Depression Inventory&#xA;   *  Beck Depression Inventory-II&#xA;   *  Center for Epidemiologic Studies Depression Scale&#xA;   *  Zung Self-rating Depression Scale&#xA;   &#xA;Follow-Up Plan: &#xA;Documented follow-up for a positive depression screening must include one or more of the following:&#xA; *  Additional evaluation or assessment for depression &#xA; *  Suicide Risk Assessment&#xA; *  Referral to a practitioner who is qualified to diagnose and treat depression&#xA; *  Pharmacological interventions&#xA; *  Other interventions or follow-up for the diagnosis or treatment of depression"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="GUIDE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Guidance"/>
+         </code>
+         <value mediaType="text/plain"
+                value="A depression screen is completed on the date of the encounter or up to 14 days prior to the date of the encounter using an age appropriate standardized depression screening tool AND if positive, either additional evaluation for depression, suicide risk assessment, referral to a practitioner who is qualified to diagnose and treat depression, pharmacological interventions, or other interventions or follow-up for the diagnosis or treatment of depression is documented on the date of the eligible encounter.&#xA;&#xA;Depression screening is required once per measurement period, not at all encounters; this is patient based and not an encounter based measure. &#xA;&#xA;Screening Tools:&#xA; *  The name of the age appropriate standardized depression screening tool utilized must be documented in the medical record &#xA; *  The depression screening must be reviewed and addressed in the office of the provider, filing the code, on the date of the encounter. Positive pre-screening results indicating a patient is at high risk for self-harm should receive more urgent intervention as determined by the provider practice.&#xA; *  The screening should occur during a qualified encounter or up to 14 days prior to the date of the qualifying encounter.&#xA; *  Standardized  depression screening tools should be normalized and validated for the age appropriate patient population in which they are used &#xA;&#xA;Follow-Up Plan:&#xA;&#xA;* The follow-up plan must be related to a positive depression screening, example: &quot;Patient referred for psychiatric evaluation due to positive depression screening.&quot;&#xA;&#xA;Examples of a follow-up plan include but are not limited to: &#xA;&#xA;* Additional evaluation or assessment for depression such as psychiatric interview, psychiatric evaluation, or assessment for bipolar disorder&#xA;* Completion of any Suicide Risk Assessment such as Beck Depression Inventory or Beck Hopelessness Scale&#xA;* Referral to a practitioner or program for further evaluation for depression, for example, referral to a psychiatrist, psychologist, social worker, mental health counselor, or other mental health service such as family or group therapy, support group, depression management program, or other service for treatment of depression&#xA;* Other interventions designed to treat depression such as psychotherapy, pharmacological interventions, or additional treatment options&#xA;* Pharmacologic treatment for depression is often indicated during pregnancy and/or lactation. Review and discussion of the risks of untreated versus treated depression is advised. Consideration of each patient's prior disease and treatment history, along with the risk profiles for individual pharmacologic agents, is important when selecting pharmacologic therapy with the greatest likelihood of treatment effect."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="TRANF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Transmission Format"/>
+         </code>
+         <value mediaType="text/plain" value="TBD" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IPOP" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Initial Population"/>
+         </code>
+         <value mediaType="text/plain"
+                value="All patients aged 12 years and older at the beginning of the measurement period with at least one eligible encounter during the measurement period"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENOM" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator"/>
+         </code>
+         <value mediaType="text/plain" value="Equals Initial Population" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENEX" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator Exclusions"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Patients with an active diagnosis for depression or a diagnosis of bipolar disorder"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="NUMER" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Numerator"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Patients screened for depression on the date of the encounter or up to 14 days prior to the date of the encounter using an age appropriate standardized tool AND if positive, a follow-up plan is documented on the date of the eligible encounter"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="NUMEX" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Numerator Exclusions"/>
+         </code>
+         <value mediaType="text/plain" value="Not Applicable" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator Exceptions"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Patient Reason(s)&#xA;Patient refuses to participate &#xA;OR&#xA;Medical Reason(s)&#x9;&#xA;Patient is in an urgent or emergent situation where time is of the essence and to delay treatment would jeopardize the patient's health status &#xA;OR&#xA;Situations where the patient's cognitive capacity, functional capacity or motivation to improve may impact the accuracy of results of standardized depression assessment tools.  For example: certain court appointed cases or cases of delirium"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="SDE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Supplemental Data Elements"/>
+         </code>
+         <value mediaType="text/plain"
+                value="For every patient evaluated by this measure also identify payer, race, ethnicity and sex"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <componentOf>
+      <qualityMeasureSet classCode="ACT">
+         <id root="6783ac98-a827-4437-bdaa-2994f0fb49bd"/>
+         <title value="Preventive Care and Screening"/>
+      </qualityMeasureSet>
+   </componentOf>
+   <!--Data Criteria Section-->
+   <component>
+      <dataCriteriaSection>
+         <templateId>
+            <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.2.6"/>
+         </templateId>
+         <code code="57025-9" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Data Criteria Section"/>
+         <text/>
+         <entry typeCode="DRIV">
+            <localVariableName value="Payer_PatientCharacteristicPayer_9zCII"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.58"/>
+               </templateId>
+               <id extension="Payer_PatientCharacteristicPayer"
+                   root="8a517e4a-bc7e-4732-a4b9-f82f4f2d6a4d"/>
+               <code code="48768-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Payer"/>
+               </code>
+               <title value="Patient Characteristic Payer"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.3591" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="DepressionScreeningEncounterCodes_EncounterPerformed_hcKDM"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="DepressionScreeningEncounterCodes_EncounterPerformed"
+                   root="04f6615c-81c1-449c-b477-70a87697193a"/>
+               <code valueSet="2.16.840.1.113883.3.600.1916"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="ONCAdministrativeSex_PatientCharacteristicSex_1OoZe"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.55"/>
+               </templateId>
+               <id extension="ONCAdministrativeSex_PatientCharacteristicSex"
+                   root="51fad7ac-01f3-4909-ac75-5137c88d2782"/>
+               <code code="263495000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                  <displayName value="Gender"/>
+               </code>
+               <title value="Patient Characteristic Sex"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.113762.1.4.1" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Depressionmedications-adolescent_MedicationOrder_Hgb0j"/>
+            <substanceAdministrationCriteria classCode="SBADM" moodCode="RQO">
+               <templateId>
+                  <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.4.51"/>
+               </templateId>
+               <id extension="Depressionmedications-adolescent_MedicationOrder"
+                   root="40280381-3e93-d1af-013e-9f64279f224f"/>
+               <title value="Medication, Order"/>
+               <statusCode code="ACTIVE"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113883.3.600.469"/>
+                     </playingMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="BipolarDiagnosis_Diagnosis_H1YWJ"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.110"/>
+               </templateId>
+               <id extension="BipolarDiagnosis_Diagnosis"
+                   root="3c230357-a77e-4b04-95b6-64edea004a54"/>
+               <code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                  <displayName value="Diagnosis"/>
+               </code>
+               <title value="Diagnosis"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.113883.3.600.450" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Depressionmedications-adult_MedicationOrder_SHoxA"/>
+            <substanceAdministrationCriteria classCode="SBADM" moodCode="RQO">
+               <templateId>
+                  <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.4.51"/>
+               </templateId>
+               <id extension="Depressionmedications-adult_MedicationOrder"
+                   root="40280381-3e93-d1af-013e-9f64279f2250"/>
+               <title value="Medication, Order"/>
+               <statusCode code="ACTIVE"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113883.3.600.470"/>
+                     </playingMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Additionalevaluationfordepression-adolescent_InterventionPerformed_B96o0"/>
+            <actCriteria classCode="ACT" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.36"/>
+               </templateId>
+               <id extension="Additionalevaluationfordepression-adolescent_InterventionPerformed"
+                   root="ffd9cd79-d134-4258-91f1-abb87efb104d"/>
+               <code valueSet="2.16.840.1.113883.3.600.1542"/>
+               <title value="Intervention, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Depressiondiagnosis_Diagnosis_397Oo"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.110"/>
+               </templateId>
+               <id extension="Depressiondiagnosis_Diagnosis"
+                   root="194d7683-260a-4fd3-aa65-bb27d2cf81bc"/>
+               <code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                  <displayName value="Diagnosis"/>
+               </code>
+               <title value="Diagnosis"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.113883.3.600.145" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="ReferralforDepressionAdult_InterventionOrder_6ozpU"/>
+            <actCriteria classCode="ACT" moodCode="RQO">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.35"/>
+               </templateId>
+               <id extension="ReferralforDepressionAdult_InterventionOrder"
+                   root="40280381-3e93-d1af-013e-9f64279f2254"/>
+               <code valueSet="2.16.840.1.113883.3.600.538"/>
+               <title value="Intervention, Order"/>
+               <statusCode code="ACTIVE"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Follow-upfordepression-adult_InterventionPerformed_KLsOS"/>
+            <actCriteria classCode="ACT" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.36"/>
+               </templateId>
+               <id extension="Follow-upfordepression-adult_InterventionPerformed"
+                   root="40280381-3e93-d1af-013e-9f64279f2252"/>
+               <code valueSet="2.16.840.1.113883.3.600.468"/>
+               <title value="Intervention, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Ethnicity_PatientCharacteristicEthnicity_53ZD9"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.56"/>
+               </templateId>
+               <id extension="Ethnicity_PatientCharacteristicEthnicity"
+                   root="afbb45c6-0aca-4911-9c0c-22d04b2a0e37"/>
+               <code code="54133-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Ethnicity"/>
+               </code>
+               <title value="Patient Characteristic Ethnicity"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.837" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Follow-upfordepression-adolescent_InterventionPerformed_VRBcV"/>
+            <actCriteria classCode="ACT" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.36"/>
+               </templateId>
+               <id extension="Follow-upfordepression-adolescent_InterventionPerformed"
+                   root="40280381-3e93-d1af-013e-9f64279f2251"/>
+               <code valueSet="2.16.840.1.113883.3.600.467"/>
+               <title value="Intervention, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Race_PatientCharacteristicRace_Od3kx"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.59"/>
+               </templateId>
+               <id extension="Race_PatientCharacteristicRace"
+                   root="cf558dad-1ce1-4b91-91db-954da9c6e69c"/>
+               <code code="32624-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Race"/>
+               </code>
+               <title value="Patient Characteristic Race"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.836" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Additionalevaluationfordepression-adult_InterventionPerformed_a4Dma"/>
+            <actCriteria classCode="ACT" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.36"/>
+               </templateId>
+               <id extension="Additionalevaluationfordepression-adult_InterventionPerformed"
+                   root="af06cc6b-5791-459e-9d68-631da83207a8"/>
+               <code valueSet="2.16.840.1.113883.3.600.1545"/>
+               <title value="Intervention, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="SuicideRiskAssessment_AssessmentPerformed_wY18p"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="SuicideRiskAssessment_AssessmentPerformed"
+                   root="40280381-3e93-d1af-013e-9f6427a0225e"/>
+               <code valueSet="2.16.840.1.113883.3.600.559"/>
+               <title value="Assessment, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="ReferralforDepressionAdolescent_InterventionOrder_2bBLV"/>
+            <actCriteria classCode="ACT" moodCode="RQO">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.35"/>
+               </templateId>
+               <id extension="ReferralforDepressionAdolescent_InterventionOrder"
+                   root="40280381-3e93-d1af-013e-9f64279f2253"/>
+               <code valueSet="2.16.840.1.113883.3.600.537"/>
+               <title value="Intervention, Order"/>
+               <statusCode code="ACTIVE"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="73831-0_AssessmentPerformed"
+                   root="EE9D0FBC-1128-4C9F-8AB3-444FE25BBC61"/>
+               <code code="73831-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+               <title value="Assessment, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <observationCriteria actionNegationInd="TRUE" classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="73831-0_AssessmentNotPerformed"
+                   root="49945087-390E-422D-B0D0-FACA15222F98"/>
+               <code code="73831-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+               <title value="Assessment, Not Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="73832-8_AssessmentPerformed"
+                   root="85959AE8-0EA6-4323-88C9-8AED6C8B993E"/>
+               <code code="73832-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+               <title value="Assessment, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <observationCriteria actionNegationInd="TRUE" classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="73832-8_AssessmentNotPerformed"
+                   root="11127E01-7228-4C4E-B6A0-6705FB899AB6"/>
+               <code code="73832-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+               <title value="Assessment, Not Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.54"/>
+               </templateId>
+               <id extension="21112-8_PatientCharacteristicBirthdate"
+                   root="58E2AD52-0D02-462A-BACB-A6FAD9E61027"/>
+               <code code="21112-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+               <title value="Patient Characteristic Birthdate"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+      </dataCriteriaSection>
+   </component>
+   <component>
+      <populationCriteriaSection>
+         <templateId>
+            <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.2.7"/>
+         </templateId>
+         <id extension="PopulationCriteria1" root="FC809B84-4A83-4048-BD33-C967DCB735D6"/>
+         <code code="57026-7" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Population Criteria Section"/>
+         <text/>
+         <component typeCode="COMP">
+            <initialPopulationCriteria classCode="OBS" moodCode="EVN">
+               <id extension="initialPopulation" root="45D03089-5245-44A4-A3BC-744E775E3755"/>
+               <code code="IPOP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;Initial Population&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </initialPopulationCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominator" root="21AAC89C-A927-4A71-8DF7-129EFD51DA08"/>
+               <code code="DENOM" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;Denominator&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorExclusionCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominatorExclusions" root="FAEEC269-82F2-4BEB-B39B-2500AA230BF6"/>
+               <code code="DENEX" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;Denominator Exclusions&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorExclusionCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorExceptionCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominatorExceptions" root="0C0CEB34-509A-4FBC-9AF5-322AF53E7C80"/>
+               <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;Denominator Exceptions&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorExceptionCriteria>
+         </component>
+         <component typeCode="COMP">
+            <numeratorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="numerator" root="658634EE-4328-4BA2-AC9B-A6499EF49FD1"/>
+               <code code="NUMER" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;Numerator&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </numeratorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="FCCD9CEF-F92F-4AD8-B35B-C49F3E660C11"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;SDE Ethnicity&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="A89E4706-333E-4DF2-A4C0-5A02FF9D4746"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;SDE Payer&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="B83ACE9D-CA88-48C8-B51D-F86A2ABEA134"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;SDE Race&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="653CEB2E-39FA-4A20-AE47-7DDD9BE10BC9"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningScreeningforDepressionandFollowUpPlan.&quot;SDE Sex&quot;"
+                         root="F599009C-0D5E-4C9A-9360-E1E5D702F8D9"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+      </populationCriteriaSection>
+   </component>
+</QualityMeasureDocument>

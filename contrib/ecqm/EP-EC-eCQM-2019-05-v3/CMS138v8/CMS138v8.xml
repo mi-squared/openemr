@@ -1,0 +1,1320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QualityMeasureDocument xmlns="urn:hl7-org:v3" xmlns:cql-ext="urn:hhs-cql:hqmf-n1-extensions:v1"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         
+      <!--
+			**************************************************************
+			Measure Details Section
+			**************************************************************
+		-->
+         
+      <typeId extension="POQM_HD000001UV02" root="2.16.840.1.113883.1.3"/>
+   <templateId>
+      <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.1.2"/>
+   </templateId>
+   <id root="40280382-6963-bf5e-0169-6d717fd50298"/>
+   <code code="57024-2" codeSystem="2.16.840.1.113883.6.1">
+      <displayName value="Health Quality Measure Document"/>
+   </code>
+   <title
+          value="Preventive Care and Screening: Tobacco Use: Screening and Cessation Intervention"/>
+   <text
+         value="Percentage of patients aged 18 years and older who were screened for tobacco use one or more times within 24 months AND who received tobacco cessation intervention if identified as a tobacco user&#xA;&#xA;Three rates are reported: &#xA;a. Percentage of patients aged 18 years and older who were screened for tobacco use one or more times within 24 months &#xA;b. Percentage of patients aged 18 years and older who were identified as a tobacco user who received tobacco cessation intervention  &#xA;c. Percentage of patients aged 18 years and older who were screened for tobacco use one or more times within 24 months AND who received tobacco cessation intervention if identified as a tobacco user"/>
+   <statusCode code="COMPLETED"/>
+   <setId root="e35791df-5b25-41bb-b260-673337bc44a8"/>
+   <versionNumber value="8.1.000"/>
+   <author>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="d041e15c-a7a0-41b8-be5b-87340ecd14bc"/>
+            </id>
+            <name>
+               <item>
+                  <part value="American Medical Association (AMA)"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </author>
+   <author>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="83e9797c-adec-4446-8c35-3ffd5d981c66"/>
+            </id>
+            <name>
+               <item>
+                  <part value="PCPI(R) Foundation (PCPI[R])"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </author>
+   <custodian>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="83e9797c-adec-4446-8c35-3ffd5d981c66"/>
+            </id>
+            <name>
+               <item>
+                  <part value="PCPI(R) Foundation (PCPI[R])"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </custodian>
+   <verifier>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="2.16.840.1.113883.3.560"/>
+            </id>
+            <name>
+               <item>
+                  <part value="National Quality Forum"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </verifier>
+   <!--Tobacco Use Screening-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1278"/>
+         <title value="Tobacco Use Screening"/>
+      </valueSet>
+   </definition>
+   <!--ONC Administrative Sex-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1"/>
+         <title value="ONC Administrative Sex"/>
+      </valueSet>
+   </definition>
+   <!--Health & Behavioral Assessment - Individual-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1020"/>
+         <title value="Health &amp; Behavioral Assessment - Individual"/>
+      </valueSet>
+   </definition>
+   <!--Preventive Care Services - Established Office Visit, 18 and Up-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1025"/>
+         <title value="Preventive Care Services - Established Office Visit, 18 and Up"/>
+      </valueSet>
+   </definition>
+   <!--Home Healthcare Services-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1016"/>
+         <title value="Home Healthcare Services"/>
+      </valueSet>
+   </definition>
+   <!--Psychoanalysis-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1141"/>
+         <title value="Psychoanalysis"/>
+      </valueSet>
+   </definition>
+   <!--Race-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.836"/>
+         <title value="Race"/>
+      </valueSet>
+   </definition>
+   <!--Limited Life Expectancy-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1259"/>
+         <title value="Limited Life Expectancy"/>
+      </valueSet>
+   </definition>
+   <!--Office Visit-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1001"/>
+         <title value="Office Visit"/>
+      </valueSet>
+   </definition>
+   <!--Preventive Care Services-Individual Counseling-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1026"/>
+         <title value="Preventive Care Services-Individual Counseling"/>
+      </valueSet>
+   </definition>
+   <!--Payer-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.3591"/>
+         <title value="Payer"/>
+      </valueSet>
+   </definition>
+   <!--Psych Visit - Diagnostic Evaluation-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1492"/>
+         <title value="Psych Visit - Diagnostic Evaluation"/>
+      </valueSet>
+   </definition>
+   <!--Psych Visit - Psychotherapy-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1496"/>
+         <title value="Psych Visit - Psychotherapy"/>
+      </valueSet>
+   </definition>
+   <!--Annual Wellness Visit-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1240"/>
+         <title value="Annual Wellness Visit"/>
+      </valueSet>
+   </definition>
+   <!--Tobacco Use Cessation Counseling-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.509"/>
+         <title value="Tobacco Use Cessation Counseling"/>
+      </valueSet>
+   </definition>
+   <!--Ethnicity-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.837"/>
+         <title value="Ethnicity"/>
+      </valueSet>
+   </definition>
+   <!--Occupational Therapy Evaluation-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1011"/>
+         <title value="Occupational Therapy Evaluation"/>
+      </valueSet>
+   </definition>
+   <!--Ophthalmological Services-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1285"/>
+         <title value="Ophthalmological Services"/>
+      </valueSet>
+   </definition>
+   <!--Speech and Hearing Evaluation-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1530"/>
+         <title value="Speech and Hearing Evaluation"/>
+      </valueSet>
+   </definition>
+   <!--Preventive Care Services - Other-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1030"/>
+         <title value="Preventive Care Services - Other"/>
+      </valueSet>
+   </definition>
+   <!--Tobacco Use Cessation Pharmacotherapy-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1190"/>
+         <title value="Tobacco Use Cessation Pharmacotherapy"/>
+      </valueSet>
+   </definition>
+   <!--Preventive Care Services - Group Counseling-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1027"/>
+         <title value="Preventive Care Services - Group Counseling"/>
+      </valueSet>
+   </definition>
+   <!--Health and Behavioral Assessment, Reassessment-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1529"/>
+         <title value="Health and Behavioral Assessment, Reassessment"/>
+      </valueSet>
+   </definition>
+   <!--Health and Behavioral Assessment - Initial-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1245"/>
+         <title value="Health and Behavioral Assessment - Initial"/>
+      </valueSet>
+   </definition>
+   <!--Preventive Care Services-Initial Office Visit, 18 and Up-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.464.1003.101.12.1023"/>
+         <title value="Preventive Care Services-Initial Office Visit, 18 and Up"/>
+      </valueSet>
+   </definition>
+   <!--Tobacco User-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1170"/>
+         <title value="Tobacco User"/>
+      </valueSet>
+   </definition>
+   <!--Tobacco Non-User-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1189"/>
+         <title value="Tobacco Non-User"/>
+      </valueSet>
+   </definition>
+   <!--Medical Reason-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.526.3.1007"/>
+         <title value="Medical Reason"/>
+      </valueSet>
+   </definition>
+   <!--Birth date-CODE:/CodeSystem/LOINC/Version/2.65/Code/21112-8/Info-->
+      <definition>
+      <cql-ext:code code="21112-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+         <displayName value="Birth date"/>
+      </cql-ext:code>
+   </definition>
+   <relatedDocument typeCode="COMP">
+      <expressionDocument>
+         <id root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+         <text mediaType="text/cql">
+            <reference value="https://emeasuretool.cms.gov/libraries/e35791df-5b25-41bb-b260-673337bc44a8/PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention-8.1.000.cql"/>
+            <translation mediaType="application/elm+xml">
+               <reference value="https://emeasuretool.cms.gov/libraries/e35791df-5b25-41bb-b260-673337bc44a8/PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention-8.1.000.xml"/>
+            </translation>
+            <translation mediaType="application/elm+json">
+               <reference value="https://emeasuretool.cms.gov/libraries/e35791df-5b25-41bb-b260-673337bc44a8/PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention-8.1.000.json"/>
+            </translation>
+         </text>
+         <setId extension="e35791df-5b25-41bb-b260-673337bc44a8"
+                identifierName="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention"
+                root="https://emeasuretool.cms.gov/libraries"/>
+         <versionNumber value="8.1.000"/>
+      </expressionDocument>
+   </relatedDocument>
+   <relatedDocument typeCode="COMP">
+      <expressionDocument>
+         <id root="4028038268434da20168531138e502de"/>
+         <text mediaType="text/cql">
+            <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-4.0.000.cql"/>
+            <translation mediaType="application/elm+xml">
+               <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-4.0.000.xml"/>
+            </translation>
+            <translation mediaType="application/elm+json">
+               <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-4.0.000.json"/>
+            </translation>
+         </text>
+         <setId extension="8bdc0a19-b210-4a58-8a07-f5d95a34eca9"
+                identifierName="MATGlobalCommonFunctions"
+                root="https://emeasuretool.cms.gov/libraries"/>
+         <versionNumber value="4.0.000"/>
+      </expressionDocument>
+   </relatedDocument>
+   <controlVariable>
+      <measurePeriod>
+         <id extension="measureperiod" root="4af315b0-5588-431f-8b14-bce3929ce203"/>
+         <code code="MSRTP" codeSystem="2.16.840.1.113883.5.4">
+            <originalText value="Measurement Period"/>
+         </code>
+         <value xsi:type="PIVL_TS">
+            <phase highClosed="true" lowClosed="true">
+               <low value="20190101"/>
+               <width unit="a" value="1" xsi:type="PQ"/>
+            </phase>
+            <period unit="a" value="1"/>
+         </value>
+      </measurePeriod>
+   </controlVariable>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText value="eCQM Identifier (Measure Authoring Tool)"/>
+         </code>
+         <value mediaType="text/plain" value="138" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText value="NQF Number"/>
+         </code>
+         <value mediaType="text/plain" value="0028e" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="COPY" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Copyright"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Copyright 2019 PCPI(R) Foundation and American Medical Association. All Rights Reserved."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DISC" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Disclaimer"/>
+         </code>
+         <value mediaType="text/plain"
+                value="The Measure is not a clinical guideline, does not establish a standard of medical care, and has not been tested for all potential applications. &#xA;&#xA;The Measure, while copyrighted, can be reproduced and distributed, without modification, for noncommercial purposes, e.g., use by health care providers in connection with their practices. Commercial use is defined as the sale, license, or distribution of the Measure for commercial gain, or incorporation of the Measure into a product or service that is sold, licensed or distributed for commercial gain. &#xA;&#xA;Commercial uses of the Measure require a license agreement between the user and the PCPI(R) Foundation (PCPI[R]) or the American Medical Association (AMA). Neither the AMA, nor the former AMA-convened Physician Consortium for Performance Improvement(R) (AMA-PCPI), nor PCPI, nor their members shall be responsible for any use of the Measure.&#xA;&#xA;AMA and PCPI encourage use of the Measure by other health care professionals, where appropriate.&#xA;&#xA;THE MEASURE AND SPECIFICATIONS ARE PROVIDED &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND.&#xA;&#xA;Limited proprietary coding is contained in the Measure specifications for convenience. Users of the proprietary code sets should obtain all necessary licenses from the owners of these code sets. The AMA, the PCPI and its members and former members of the AMA-PCPI disclaim all liability for use or accuracy of any Current Procedural Terminology (CPT[R]) or other coding contained in the specifications. &#xA;&#xA;CPT(R) contained in the Measure specifications is copyright 2004-2018 American Medical Association. LOINC(R) is copyright 2004-2018 Regenstrief Institute, Inc. This material contains SNOMED Clinical Terms(R) (SNOMED CT[R]) copyright 2004-2018 International Health Terminology Standards Development Organisation. ICD-10 is copyright 2018 World Health Organization. All Rights Reserved.&#xA;&#xA;Due to technical limitations, registered trademarks are indicated by (R) or [R]."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRSCORE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Measure Scoring"/>
+         </code>
+         <value code="PROPOR" codeSystem="2.16.840.1.113883.5.1063" xsi:type="CD">
+            <displayName value="Proportion"/>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRTYPE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Measure Type"/>
+         </code>
+         <value code="PROCESS" codeSystem="2.16.840.1.113883.5.1063" xsi:type="CD">
+            <displayName value="PROCESS"/>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="STRAT" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Stratification"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRADJ" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Risk Adjustment"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRAGG" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Rate Aggregation"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="RAT" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Rationale"/>
+         </code>
+         <value mediaType="text/plain"
+                value="This measure is intended to promote adult tobacco screening and tobacco cessation interventions for those who use tobacco products. There is good evidence that tobacco screening and brief cessation intervention (including counseling and/or pharmacotherapy) is successful in helping tobacco users quit. Tobacco users who are able to stop using tobacco lower their risk for heart disease, lung disease, and stroke."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="CRS" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Clinical Recommendation Statement"/>
+         </code>
+         <value mediaType="text/plain"
+                value="The USPSTF recommends that clinicians ask all adults about tobacco use, advise them to stop using tobacco, and provide behavioral interventions and U.S. Food and Drug Administration (FDA)-approved pharmacotherapy for cessation to adults who use tobacco (Grade A Recommendation) (U.S. Preventive Services Task Force, 2015).&#xA;&#xA;The USPSTF recommends that clinicians ask all pregnant women about tobacco use, advise them to stop using tobacco, and provide behavioral interventions for cessation to pregnant women who use tobacco (Grade A Recommendation) (U.S. Preventive Services Task Force, 2015).&#xA;&#xA;The USPSTF concludes that the current evidence is insufficient to recommend electronic nicotine delivery systems for tobacco cessation in adults, including pregnant women. The USPSTF recommends that clinicians direct patients who smoke tobacco to other cessation interventions with established effectiveness and safety (previously stated) (Grade I Statement) (U.S. Preventive Services Task Force, 2015)."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IDUR" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Improvement Notation"/>
+         </code>
+         <value mediaType="text/plain" value="Higher score indicates better quality"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Siu, A. L.; U.S. Preventive Services Task Force. (2015, October 20). Behavioral and pharmacotherapy interventions for tobacco smoking cessation in adults, including pregnant women: U.S. Preventive Services Task Force recommendation statement. Annals of Internal Medicine, 163(8), 622-634."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Definition"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Tobacco Use - Includes any type of tobacco&#xA;Tobacco Cessation Intervention - Includes brief counseling (3 minutes or less), and/or pharmacotherapy -- Note: Concepts aligned with brief counseling (e.g., minimal and intensive advice/counseling interventions conducted both in person and over the phone) are included in the value set for the numerator. Other concepts such as written self-help materials (e.g., brochures, pamphlets) and complementary/alternative therapies are not included in the value set and do not qualify for the numerator. Brief counseling also may be of longer duration or be performed more frequently, as evidence shows there is a dose-response relationship between the intensity of counseling provided (either length or frequency) and tobacco cessation rates (U.S. Preventive Services Task Force, 2015)."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="GUIDE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Guidance"/>
+         </code>
+         <value mediaType="text/plain"
+                value="If a patient uses any type of tobacco (i.e., smokes or uses smokeless tobacco), the expectation is that they should receive tobacco cessation intervention: either counseling and/or pharmacotherapy.&#xA;&#xA;In order to promote a team-based approach to patient care, the tobacco cessation intervention can be performed by another healthcare provider; therefore, the tobacco use screening and tobacco cessation intervention do not need to be performed by the same provider or clinician.   &#xA;&#xA;To satisfy the intent of this measure, a patient must have at least one tobacco use screening during the 24-month period. If a patient has multiple tobacco use screenings during the 24-month period, only the most recent screening, which has a documented status of tobacco user or tobacco non-user, will be used to satisfy the measure requirements.&#xA;&#xA;If tobacco use status of a patient is unknown, the patient does not meet the screening component required to be counted in the numerator and should be considered a measure failure. Instances where tobacco use status of &quot;unknown&quot; is recorded include: 1) the patient was not screened; or 2) the patient was screened and the patient (or caregiver) was unable to provide a definitive answer. If the patient does not meet the screening component of the numerator but has an allowable medical exception, then the patient should be removed from the denominator of the measure and reported as a valid exception.&#xA;&#xA;The medical reason exception may be applied to either the screening data element OR to any of the applicable tobacco cessation intervention data elements (counseling and/or pharmacotherapy) included in the measure. &#xA;&#xA;If a patient has a diagnosis of limited life expectancy, that patient has a valid denominator exception for not being screened for tobacco use or for not receiving tobacco use cessation intervention (counseling and/or pharmacotherapy) if identified as a tobacco user.&#xA;&#xA;As noted above in a recommendation statement from the USPSTF, the current evidence is insufficient to recommend electronic nicotine delivery systems (ENDS) including electronic cigarettes for tobacco cessation. Additionally, ENDS are not currently classified as tobacco in the recent evidence review to support the update of the USPSTF recommendation given that the devices do not burn or use tobacco leaves. In light of the current lack of evidence, the measure does not currently capture e-cigarette usage as either tobacco use or a cessation aid.&#xA;&#xA;The requirement of two or more visits is to establish that the eligible professional or eligible clinician has an existing relationship with the patient for certain types of encounters. &#xA;&#xA;This measure contains three reporting rates which aim to identify patients who were screened for tobacco use (rate/population 1), patients who were identified as tobacco users and who received tobacco cessation intervention (rate/population 2), and a comprehensive look at the overall performance on tobacco screening and cessation intervention (rate/population 3). By separating this measure into various reporting rates, the eligible professional or eligible clinician will be able to better ascertain where gaps in performance exist, and identify opportunities for improvement. The overall rate (rate/population 3) can be utilized to compare performance to published versions of this measure prior to the 2018 performance year, when the measure had a single performance rate. For accountability reporting in the CMS MIPS program, the rate for population 2 is used for performance.&#xA; &#xA;The denominator of population criteria 2 is a subset of the resulting numerator for population criteria 1, as population criteria 2 is limited to assessing if patients identified as tobacco users received an appropriate tobacco cessation intervention. For all patients, population criteria 1 and 3 are applicable, but population criteria 2 will only be applicable for those patients who are identified as tobacco users. Therefore, data for every patient that meets the initial population criteria will only be submitted for population 1 and 3, whereas data submitted for population 2 will be for a subset of patients who meet the initial population criteria, as the denominator has been further limited to those who were identified as tobacco users."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="TRANF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Transmission Format"/>
+         </code>
+         <value mediaType="text/plain" value="TBD" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IPOP" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Initial Population"/>
+         </code>
+         <value mediaType="text/plain"
+                value="All patients aged 18 years and older seen for at least two visits or at least one preventive visit during the measurement period"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENOM" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Population 1:&#xA;Equals Initial Population&#xA;&#xA;Population 2: &#xA;Equals Initial Population who were screened for tobacco use and identified as a tobacco user&#xA;&#xA;Population 3: &#xA;Equals Initial Population"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENEX" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator Exclusions"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="NUMER" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Numerator"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Population 1: &#xA;Patients who were screened for tobacco use at least once within 24 months &#xA; &#xA;Population 2: &#xA;Patients who received tobacco cessation intervention&#xA;&#xA;Population 3:&#xA;Patients who were screened for tobacco use at least once within 24 months AND who received tobacco cessation intervention if identified as a tobacco user"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="NUMEX" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Numerator Exclusions"/>
+         </code>
+         <value mediaType="text/plain" value="Not Applicable" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator Exceptions"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Population 1: &#xA;Documentation of medical reason(s) for not screening for tobacco use (e.g., limited life expectancy, other medical reason)&#xA; &#xA;Population 2:&#xA;Documentation of medical reason(s) for not providing tobacco cessation intervention (e.g., limited life expectancy, other medical reason)&#xA;&#xA;Population 3:&#xA;Documentation of medical reason(s) for not screening for tobacco use OR for not providing tobacco cessation intervention for patients identified as tobacco users (e.g., limited life expectancy, other medical reason)"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="SDE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Supplemental Data Elements"/>
+         </code>
+         <value mediaType="text/plain"
+                value="For every patient evaluated by this measure also identify payer, race, ethnicity and sex"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <componentOf>
+      <qualityMeasureSet classCode="ACT">
+         <id root="ecfa24cf-3c5a-437b-ba4f-db681c2c4bf2"/>
+         <title value="None"/>
+      </qualityMeasureSet>
+   </componentOf>
+   <!--Data Criteria Section-->
+   <component>
+      <dataCriteriaSection>
+         <templateId>
+            <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.2.6"/>
+         </templateId>
+         <code code="57025-9" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Data Criteria Section"/>
+         <text/>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseScreening_AssessmentNotPerformed_Mx1nC"/>
+            <observationCriteria actionNegationInd="TRUE" classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="TobaccoUseScreening_AssessmentNotPerformed"
+                   root="40280381-3d61-56a7-013e-5cba622c625a"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1278"/>
+               <title value="Assessment, Not Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseScreening_AssessmentPerformed_wBt1j"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.117"/>
+               </templateId>
+               <id extension="TobaccoUseScreening_AssessmentPerformed"
+                   root="40280381-3d61-56a7-013e-5cba622c625a"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1278"/>
+               <title value="Assessment, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="ONCAdministrativeSex_PatientCharacteristicSex_3Whqi"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.55"/>
+               </templateId>
+               <id extension="ONCAdministrativeSex_PatientCharacteristicSex"
+                   root="29a7d5db-b1bd-4696-a1d3-2c1c37ae523e"/>
+               <code code="263495000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                  <displayName value="Gender"/>
+               </code>
+               <title value="Patient Characteristic Sex"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.113762.1.4.1" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Health&amp;BehavioralAssessment-Individual_EncounterPerformed_rn04q"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="Health&amp;BehavioralAssessment-Individual_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845ee0"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1020"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PreventiveCareServices-EstablishedOfficeVisit18andUp_EncounterPerformed_2fYm1"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PreventiveCareServices-EstablishedOfficeVisit18andUp_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845eeb"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1025"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="HomeHealthcareServices_EncounterPerformed_dzXew"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="HomeHealthcareServices_EncounterPerformed"
+                   root="285331c9-f6fb-4183-9761-9b8d40b4a8b0"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1016"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Psychoanalysis_EncounterPerformed_4SQiS"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="Psychoanalysis_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845ee7"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1141"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Race_PatientCharacteristicRace_nSHjb"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.59"/>
+               </templateId>
+               <id extension="Race_PatientCharacteristicRace"
+                   root="31614ee5-9c0a-43fe-bc69-5b177e562625"/>
+               <code code="32624-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Race"/>
+               </code>
+               <title value="Patient Characteristic Race"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.836" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="LimitedLifeExpectancy_Diagnosis_f7Vln"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.110"/>
+               </templateId>
+               <id extension="LimitedLifeExpectancy_Diagnosis"
+                   root="7d2d6977-a185-4051-8396-a8e74f2ef007"/>
+               <code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                  <displayName value="Diagnosis"/>
+               </code>
+               <title value="Diagnosis"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.113883.3.526.3.1259" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="OfficeVisit_EncounterPerformed_aZ5lb"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="OfficeVisit_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845ee2"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1001"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PreventiveCareServices-IndividualCounseling_EncounterPerformed_c94BZ"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PreventiveCareServices-IndividualCounseling_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845eec"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1026"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Payer_PatientCharacteristicPayer_q4qCY"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.58"/>
+               </templateId>
+               <id extension="Payer_PatientCharacteristicPayer"
+                   root="b95e2328-b398-4b8e-a510-3d557a05aa4b"/>
+               <code code="48768-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Payer"/>
+               </code>
+               <title value="Patient Characteristic Payer"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.3591" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PsychVisit-DiagnosticEvaluation_EncounterPerformed_hb71H"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PsychVisit-DiagnosticEvaluation_EncounterPerformed"
+                   root="40280381-3d61-56a7-013e-5c42f8e45c38"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1492"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PsychVisit-Psychotherapy_EncounterPerformed_WfDox"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PsychVisit-Psychotherapy_EncounterPerformed"
+                   root="40280381-3d61-56a7-013e-5c4330265c3a"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1496"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="AnnualWellnessVisit_EncounterPerformed_YPC0b"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="AnnualWellnessVisit_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f855ef8"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1240"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseCessationCounseling_InterventionPerformed_NywiG"/>
+            <actCriteria classCode="ACT" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.36"/>
+               </templateId>
+               <id extension="TobaccoUseCessationCounseling_InterventionPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845eef"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.509"/>
+               <title value="Intervention, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseCessationCounseling_InterventionNotPerformed_eBNTv"/>
+            <actCriteria actionNegationInd="TRUE" classCode="ACT" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.36"/>
+               </templateId>
+               <id extension="TobaccoUseCessationCounseling_InterventionNotPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845eef"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.509"/>
+               <title value="Intervention, Not Performed"/>
+               <statusCode code="COMPLETED"/>
+            </actCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Ethnicity_PatientCharacteristicEthnicity_sqySz"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.56"/>
+               </templateId>
+               <id extension="Ethnicity_PatientCharacteristicEthnicity"
+                   root="46e0a119-cc5a-424a-bbd8-df164925dadc"/>
+               <code code="54133-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Ethnicity"/>
+               </code>
+               <title value="Patient Characteristic Ethnicity"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.837" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="OccupationalTherapyEvaluation_EncounterPerformed_XixUH"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="OccupationalTherapyEvaluation_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845ee1"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1011"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="OphthalmologicalServices_EncounterPerformed_MY2oy"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="OphthalmologicalServices_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f855ef7"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1285"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="SpeechandHearingEvaluation_EncounterPerformed_Z7zOm"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="SpeechandHearingEvaluation_EncounterPerformed"
+                   root="f630e391-cb27-48f0-924f-ec84d0d1c04e"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1530"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PreventiveCareServices-Other_EncounterPerformed_nGzNi"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PreventiveCareServices-Other_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845ee9"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1030"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseCessationPharmacotherapy_MedicationOrder_VcUED"/>
+            <substanceAdministrationCriteria classCode="SBADM" moodCode="RQO">
+               <templateId>
+                  <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.4.51"/>
+               </templateId>
+               <id extension="TobaccoUseCessationPharmacotherapy_MedicationOrder"
+                   root="8a4d92b2-3946-cdae-0139-77de6f855ef0"/>
+               <title value="Medication, Order"/>
+               <statusCode code="ACTIVE"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113883.3.526.3.1190"/>
+                     </playingMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseCessationPharmacotherapy_MedicationActive_Acv4o"/>
+            <substanceAdministrationCriteria classCode="SBADM" moodCode="EVN">
+               <templateId>
+                  <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.4.44"/>
+               </templateId>
+               <id extension="TobaccoUseCessationPharmacotherapy_MedicationActive"
+                   root="8a4d92b2-3946-cdae-0139-77de6f855ef0"/>
+               <title value="Medication, Active"/>
+               <statusCode code="ACTIVE"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113883.3.526.3.1190"/>
+                     </playingMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="TobaccoUseCessationPharmacotherapy_MedicationNotOrdered_NbzYS"/>
+            <substanceAdministrationCriteria actionNegationInd="TRUE" classCode="SBADM" moodCode="RQO">
+               <templateId>
+                  <item extension="2018-05-01" root="2.16.840.1.113883.10.20.28.4.51"/>
+               </templateId>
+               <id extension="TobaccoUseCessationPharmacotherapy_MedicationNotOrdered"
+                   root="8a4d92b2-3946-cdae-0139-77de6f855ef0"/>
+               <title value="Medication, Not Ordered"/>
+               <statusCode code="ACTIVE"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113883.3.526.3.1190"/>
+                     </playingMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PreventiveCareServices-GroupCounseling_EncounterPerformed_f9EA2"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PreventiveCareServices-GroupCounseling_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845ee8"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1027"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="HealthandBehavioralAssessmentReassessment_EncounterPerformed_MtCXM"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="HealthandBehavioralAssessmentReassessment_EncounterPerformed"
+                   root="e0046067-5a0f-4b02-86dc-4cc29f8abfe1"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1529"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="HealthandBehavioralAssessment-Initial_EncounterPerformed_xv4Ni"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="HealthandBehavioralAssessment-Initial_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845edf"/>
+               <code valueSet="2.16.840.1.113883.3.526.3.1245"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="PreventiveCareServices-InitialOfficeVisit18andUp_EncounterPerformed_yjUo2"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="PreventiveCareServices-InitialOfficeVisit18andUp_EncounterPerformed"
+                   root="8a4d92b2-3946-cdae-0139-77de6f845eea"/>
+               <code valueSet="2.16.840.1.113883.3.464.1003.101.12.1023"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.54"/>
+               </templateId>
+               <id extension="21112-8_PatientCharacteristicBirthdate"
+                   root="7B937835-6BE6-4139-A659-5C61D26CD40C"/>
+               <code code="21112-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+               <title value="Patient Characteristic Birthdate"/>
+               <statusCode code="COMPLETED"/>
+            </observationCriteria>
+         </entry>
+      </dataCriteriaSection>
+   </component>
+   <component>
+      <populationCriteriaSection>
+         <templateId>
+            <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.2.7"/>
+         </templateId>
+         <id extension="PopulationCriteria1" root="31C61706-F3BA-4E0D-9C9E-930EA65FBC98"/>
+         <code code="57026-7" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Population Criteria Section"/>
+         <text/>
+         <component typeCode="COMP">
+            <initialPopulationCriteria classCode="OBS" moodCode="EVN">
+               <id extension="initialPopulation" root="D8C43D40-88C5-4CBE-B13F-B340ED7B6F5E"/>
+               <code code="IPOP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Initial Population&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </initialPopulationCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominator" root="10BBDBA1-A63C-4B66-8788-D193D9F9C462"/>
+               <code code="DENOM" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Denominator 1&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorExceptionCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominatorExceptions" root="E19C7C19-F358-4A0C-B506-A3EF104E43F5"/>
+               <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Denominator Exceptions 1&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorExceptionCriteria>
+         </component>
+         <component typeCode="COMP">
+            <numeratorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="numerator" root="6EA80A06-9FEB-4A7C-A879-D37017E022D8"/>
+               <code code="NUMER" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Numerator 1&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </numeratorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="1FA9F7DB-E45E-4AE5-8E78-B2FADE7C8116"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Ethnicity&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="4B911252-8679-43FD-BD10-85DEC834D2BD"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Payer&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="BA6E2E56-E950-4D7F-A1C1-4E6C29FBE3A3"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Race&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="39B9FC3C-2677-48EE-8974-9C454DC202D5"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Sex&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+      </populationCriteriaSection>
+   </component>
+   <component>
+      <populationCriteriaSection>
+         <templateId>
+            <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.2.7"/>
+         </templateId>
+         <id extension="PopulationCriteria2" root="B207257C-B781-49A1-ACA3-E9E4CAE2B0BB"/>
+         <code code="57026-7" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Population Criteria Section"/>
+         <text/>
+         <component typeCode="COMP">
+            <initialPopulationCriteria classCode="OBS" moodCode="EVN">
+               <id extension="initialPopulation" root="4A5E0CA8-23F4-4B40-B521-B0EB98DE4C19"/>
+               <code code="IPOP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Initial Population&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </initialPopulationCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominator" root="E2AC3364-ECF8-4B9A-BC7E-88F0638C9EF2"/>
+               <code code="DENOM" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Denominator 2&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorExceptionCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominatorExceptions" root="21B0D1D6-E5CE-4D50-899E-9665897FFCF2"/>
+               <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Denominator Exceptions 2&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorExceptionCriteria>
+         </component>
+         <component typeCode="COMP">
+            <numeratorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="numerator" root="65501208-ACA6-49D3-A44C-2E65A46FD0C5"/>
+               <code code="NUMER" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Numerator 2&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </numeratorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="8F2CDDA4-EFD6-48A3-B6FC-7F62A96AB34A"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Ethnicity&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="D6399C0A-E192-4D62-AE74-4CA666A6BE20"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Payer&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="AA5F81B9-3F8E-457E-8CD4-DE3B1143C24D"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Race&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="409B922E-2AD1-4E1A-B549-0159F6D8B95F"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Sex&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+      </populationCriteriaSection>
+   </component>
+   <component>
+      <populationCriteriaSection>
+         <templateId>
+            <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.2.7"/>
+         </templateId>
+         <id extension="PopulationCriteria3" root="E6FD23BB-DBB4-4578-9926-543AB67F1F41"/>
+         <code code="57026-7" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Population Criteria Section"/>
+         <text/>
+         <component typeCode="COMP">
+            <initialPopulationCriteria classCode="OBS" moodCode="EVN">
+               <id extension="initialPopulation" root="664B4D06-0934-4A6E-BD9B-569460958414"/>
+               <code code="IPOP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Initial Population&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </initialPopulationCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominator" root="FCC62D91-8CD7-4627-B01D-5D92888D8EDD"/>
+               <code code="DENOM" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Denominator 3&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorExceptionCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominatorExceptions" root="FF00F193-4EC5-4B3A-BD1F-6ACD6784E52D"/>
+               <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Denominator Exceptions 3&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorExceptionCriteria>
+         </component>
+         <component typeCode="COMP">
+            <numeratorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="numerator" root="0E3F6868-3C2B-4372-B67B-42A15973D824"/>
+               <code code="NUMER" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;Numerator 3&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </numeratorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="0CA73BD9-FB20-4B37-842C-56D2B594D7D6"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Ethnicity&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="F7505FB2-BC57-4985-8FAF-CD31AA0EFD80"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Payer&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="3B159CA5-90C8-4AFB-8516-367866B37F31"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Race&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="FA2B6D58-C270-4F8F-A631-36FACACEF2D6"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="PreventiveCareandScreeningTobaccoUseScreeningandCessationIntervention.&quot;SDE Sex&quot;"
+                         root="D5101EB8-0EE6-4E45-BD84-06A47E28125D"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+      </populationCriteriaSection>
+   </component>
+</QualityMeasureDocument>

@@ -184,7 +184,8 @@ INSERT INTO `background_services` (`name`, `title`, `execute_interval`, `functio
 ('phimail', 'phiMail Direct Messaging Service', 5, 'phimail_check', '/library/direct_message_check.inc', 100);
 INSERT INTO `background_services` (`name`, `title`, `active`, `running`, `next_run`, `execute_interval`, `function`, `require_once`, `sort_order`) VALUES
 ('MedEx', 'MedEx Messaging Service', 0, 0, '2017-05-09 17:39:10', 0, 'start_MedEx', '/library/MedEx/MedEx_background.php', 100);
-
+INSERT INTO `background_services` (`name`, `title`, `active`, `running`, `next_run`, `execute_interval`, `function`, `require_once`, `sort_order`) VALUES
+('X12_SFTP', 'SFTP Claims to X12 Partner Service', 1, 0, '2021-01-18 11:25:10', 1, 'start_X12_SFTP', '/library/billing_sftp_service.php', 100);
 -- --------------------------------------------------------
 
 --
@@ -12289,4 +12290,16 @@ CREATE TABLE `oauth_trusted_user` (
 PRIMARY KEY (`id`),
 KEY `accounts_id` (`user_id`),
 KEY `clients_id` (`client_id`)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS `x12_remote_tracker`
+CREATE TABLE `x12_remote_tracker` (
+`id` bigint(20) NOT NULL,
+`x12_partner_id` int(11) NOT NULL,
+`x12_filename` varchar(255) NOT NULL,
+`status` varchar(255) NOT NULL,
+`claims` json DEFAULT NULL,
+`messages` json DEFAULT NULL,
+`created_at` datetime NOT NULL,
+`updated_at` datetime NOT NULL
 ) ENGINE=InnoDB;

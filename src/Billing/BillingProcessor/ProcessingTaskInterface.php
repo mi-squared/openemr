@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor;
 
 interface ProcessingTaskInterface
 {

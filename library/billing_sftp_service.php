@@ -28,7 +28,7 @@ require_once __DIR__.'/../interface/globals.php';
 function start_X12_SFTP()
 {
     if ($GLOBALS['auto_sftp_claims_to_x12_partner']) {
-        \OpenEMR\Billing\BillingTracker\X12RemoteTracker::sftpSendWaitingFiles();
+        \OpenEMR\Billing\BillingProcessor\X12RemoteTracker::sftpSendWaitingFiles();
     }
 }
 

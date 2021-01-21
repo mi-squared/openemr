@@ -1,9 +1,9 @@
 <?php
 
 
-namespace OpenEMR\Billing\BillingTracker\Traits;
+namespace OpenEMR\Billing\BillingProcessor\Traits;
 
-use OpenEMR\Billing\BillingTracker\BillingLogger;
+use OpenEMR\Billing\BillingProcessor\BillingLogger;
 
 trait WritesToBillingLog
 {

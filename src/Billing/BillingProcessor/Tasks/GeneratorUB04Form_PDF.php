@@ -1,13 +1,17 @@
 <?php
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-use OpenEMR\Billing\BillingTracker\Traits\WritesToBillingLog;
+use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
+use OpenEMR\Billing\BillingProcessor\LoggerInterface;
+use OpenEMR\Billing\BillingProcessor\BillingClaim;
+use OpenEMR\Billing\BillingProcessor\BillingClaimBatch;
+use OpenEMR\Billing\BillingProcessor\Traits\WritesToBillingLog;
 use OpenEMR\Billing\BillingUtilities;
 
 require_once __DIR__ . '/../../../interface/billing/ub04_dispose.php';
 
-class GeneratorUB04NoForm extends AbstractGenerator implements GeneratorInterface, LoggerInterface
+class GeneratorUB04Form_PDF extends AbstractGenerator implements GeneratorInterface, LoggerInterface
 {
     use WritesToBillingLog;
 
@@ -34,7 +38,7 @@ class GeneratorUB04NoForm extends AbstractGenerator implements GeneratorInterfac
 
     public function complete(array $context)
     {
-        ub04Dispose('download', $this->template, $this->batch->getBatFilename(), 'noform');
+        ub04Dispose('download', $this->template, $this->batch->getBatFilename(), 'form');
         exit();
     }
 }

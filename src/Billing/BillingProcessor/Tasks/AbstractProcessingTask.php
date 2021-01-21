@@ -1,7 +1,9 @@
 <?php
 
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor\Tasks;
+
+use OpenEMR\Billing\BillingProcessor\BillingClaim;
 
 abstract class AbstractProcessingTask
 {

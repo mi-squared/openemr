@@ -28,7 +28,7 @@ if (!CsrfUtils::verifyCsrfToken($_POST["csrf_token_form"])) {
 }
 
 // Initialize billing processor with the post variables from the billing manager form
-$billingProcessor = new \OpenEMR\Billing\BillingTracker\BillingProcessor($_POST);
+$billingProcessor = new \OpenEMR\Billing\BillingProcessor\BillingProcessor($_POST);
 $logger = $billingProcessor->execute();
 ?>
 <html>

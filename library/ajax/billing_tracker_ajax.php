@@ -20,7 +20,7 @@ if (!CsrfUtils::verifyCsrfToken($_GET["csrf_token_form"])) {
     CsrfUtils::csrfNotVerified();
 }
 
-$remoteTracker = new \OpenEMR\Billing\BillingTracker\X12RemoteTracker();
+$remoteTracker = new \OpenEMR\Billing\BillingProcessor\X12RemoteTracker();
 $claim_files = $remoteTracker->fetchAll();
 $response = new stdClass();
 $response->data = [];

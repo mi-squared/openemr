@@ -1,7 +1,7 @@
 <?php
 
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
 use OpenEMR\Common\Csrf\CsrfUtils;
 

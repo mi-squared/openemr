@@ -1,10 +1,13 @@
 <?php
 
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-
-use OpenEMR\Billing\BillingTracker\Traits\WritesToBillingLog;
+use OpenEMR\Billing\BillingProcessor\LoggerInterface;
+use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
+use OpenEMR\Billing\BillingProcessor\BillingClaim;
+use OpenEMR\Billing\BillingProcessor\BillingClaimBatch;
+use OpenEMR\Billing\BillingProcessor\Traits\WritesToBillingLog;
 
 class GeneratorExternal extends AbstractGenerator implements GeneratorInterface, LoggerInterface
 {

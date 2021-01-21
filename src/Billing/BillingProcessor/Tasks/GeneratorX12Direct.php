@@ -12,9 +12,14 @@
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-use OpenEMR\Billing\BillingTracker\Traits\WritesToBillingLog;
+use OpenEMR\Billing\BillingProcessor\BillingProcessor;
+use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
+use OpenEMR\Billing\BillingProcessor\LoggerInterface;
+use OpenEMR\Billing\BillingProcessor\BillingClaim;
+use OpenEMR\Billing\BillingProcessor\BillingClaimBatch;
+use OpenEMR\Billing\BillingProcessor\Traits\WritesToBillingLog;
 use OpenEMR\Billing\BillingUtilities;
 use OpenEMR\Billing\X125010837P;
 use OpenEMR\Common\Csrf\CsrfUtils;
@@ -99,17 +104,18 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
     {
         // If we are doing final billing (normal) or validate and mark-as-billed,
         // Then set up a new version
+        $return = true;
         if ($this->getAction() === BillingProcessor::NORMAL ||
             $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
 
             // This is a validation pass, but mark as billed if we're 'clearing'
             if ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-                $tmp = BillingUtilities::updateClaim(true, $claim->getPid(), $claim->getEncounter(), $claim->getPayorId(), $claim->getPayorType(), BillingClaim::STATUS_MARK_AS_BILLED);
+                $return = BillingUtilities::updateClaim(true, $claim->getPid(), $claim->getEncounter(), $claim->getPayorId(), $claim->getPayorType(), BillingClaim::STATUS_MARK_AS_BILLED);
             }
 
             // Do we really need to create another new version? Not sure exactly how this interacts
             // with the rest of the system
-            $tmp = BillingUtilities::updateClaim(
+            $return = BillingUtilities::updateClaim(
                 true,
                 $claim->getPid(),
                 $claim->getEncounter(),
@@ -142,7 +148,7 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
             // Do we need to do validate_payor_reset thing? It doesn't seem like it, maybe has to do with
             // secondary insurance?
             //validate_payer_reset($payer_id_held, $patient_id, $encounter);
-            return $tmp;
+            return $return;
         } else {
             // After we save the claim, update it with the filename (don't create a new revision)
             if (!BillingUtilities::updateClaim(false, $claim->getPid(), $claim->getEncounter(), -1, -1, 2, 2, $batch->getBatFilename())) {
@@ -177,7 +183,7 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
                 $x12_partner_batch->write_batch_file($x12_partner_id);
             }
 
-            $created_batches[]= $x12_partner_batch;
+            $created_batches[$x12_partner_id]= $x12_partner_batch;
         }
 
         // if validating (sending to screen for user)
@@ -200,9 +206,10 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
             // Build the download URLs for our claim files so we can present them to the
             // user for download.
             $html .= "<ul class='list-group'>";
-            foreach ($created_batches as $created_batch) {
+            foreach ($created_batches as $x12_partner_id => $created_batch) {
                 $file = $created_batch->getBatFilename();
                 $url = $GLOBALS['webroot'] . '/interface/billing/get_claim_file.php?key=' . $file .
+                    '&partner=' . $x12_partner_id .
                     '&csrf_token_form=' . CsrfUtils::collectCsrfToken();
                 $html .= "<li class='list-group-item d-flex justify-content-between align-items-center'><a href='$url'>$file</a></li>";
             }

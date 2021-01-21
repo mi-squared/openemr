@@ -1,10 +1,12 @@
 <?php
 
 
-namespace OpenEMR\Billing\BillingTracker;
+namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-
-use OpenEMR\Billing\BillingTracker\Traits\WritesToBillingLog;
+use OpenEMR\Billing\BillingProcessor\LoggerInterface;
+use OpenEMR\Billing\BillingProcessor\ProcessingTaskInterface;
+use OpenEMR\Billing\BillingProcessor\BillingClaim;
+use OpenEMR\Billing\BillingProcessor\Traits\WritesToBillingLog;
 
 class TaskMarkAsClear extends AbstractProcessingTask implements ProcessingTaskInterface, LoggerInterface
 {

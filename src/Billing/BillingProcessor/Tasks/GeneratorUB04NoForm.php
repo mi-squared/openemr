@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * This class represents the task that compiles claims into a UB04 form
+ *
+ * @package   OpenEMR
+ * @link      http://www.open-emr.org
+ * @author    Ken Chapple <ken@mi-squared.com>
+ * @author    Brady Miller <brady.g.miller@gmail.com>
+ * @author    Jerry Padgett <sjpadgett@gmail.com>
+ * @copyright Copyright (c) 2021 Ken Chapple <ken@mi-squared.com>
+ * @copyright Copyright (c) 2014-2020 Brady Miller <brady.g.miller@gmail.com>
+ * @copyright Copyright (c) 2017-2020 Jerry Padgett <sjpadgett@gmail.com>
+ * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
+ */
+
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
 use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
@@ -9,7 +23,7 @@ use OpenEMR\Billing\BillingProcessor\BillingClaimBatch;
 use OpenEMR\Billing\BillingProcessor\Traits\WritesToBillingLog;
 use OpenEMR\Billing\BillingUtilities;
 
-require_once __DIR__ . '/../../../interface/billing/ub04_dispose.php';
+require_once __DIR__ . '/../../../../interface/billing/ub04_dispose.php';
 
 class GeneratorUB04NoForm extends AbstractGenerator implements GeneratorInterface, LoggerInterface
 {
@@ -28,7 +42,7 @@ class GeneratorUB04NoForm extends AbstractGenerator implements GeneratorInterfac
         ub04_dispose();
     }
 
-    public function execute(BillingClaim $claim)
+    public function generate(BillingClaim $claim)
     {
         $log = "";
         $this->template[] = buildTemplate($claim->getPid(), $claim->getEncounter(), "", "", $log);
@@ -39,7 +53,7 @@ class GeneratorUB04NoForm extends AbstractGenerator implements GeneratorInterfac
         }
     }
 
-    public function complete(array $context)
+    public function completeToFile(array $context)
     {
         ub04Dispose('download', $this->template, $this->batch->getBatFilename(), 'noform');
         exit();

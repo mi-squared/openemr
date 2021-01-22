@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * This class represents the abstract implementation of GeneratorInterface
+ *
+ * The class implements the execute() method of the ProcessingTaskInterface
+ * and further breaks down the task depending on the action that is being
+ * run by the user.
+ *
+ * @package   OpenEMR
+ * @link      http://www.open-emr.org
+ * @author    Ken Chapple <ken@mi-squared.com>
+ * @copyright Copyright (c) 2021 Ken Chapple <ken@mi-squared.com>
+ * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
+ */
 
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
@@ -10,7 +23,7 @@ use OpenEMR\Common\Csrf\CsrfUtils;
 
 abstract class AbstractGenerator extends AbstractProcessingTask
 {
-    protected $action;
+    protected $action = null;
 
     public function __construct($action)
     {
@@ -43,6 +56,9 @@ abstract class AbstractGenerator extends AbstractProcessingTask
      * If needed the individual generator can override this method and
      * take control of the entire execute() process.
      *
+     * If the generator doesn't implement validation, and there's
+     * no action specified, just run generate()
+     *
      * @param BillingClaim $claim
      */
     public function execute(BillingClaim $claim)
@@ -55,7 +71,8 @@ abstract class AbstractGenerator extends AbstractProcessingTask
             }
         }
 
-        if ($this->getAction() === BillingProcessor::NORMAL) {
+        if ($this->getAction() === BillingProcessor::NORMAL ||
+            $this->getAction() === null) {
             $this->generate($claim);
         }
     }
@@ -69,6 +86,9 @@ abstract class AbstractGenerator extends AbstractProcessingTask
      * but if we are running 'normal' action, we'll complete to
      * file and write our batch file to EDI directory(ies).
      *
+     * If the generator doesn't implement validation, and there's
+     * no action specified, just run completeToFile()
+     *
      * @param array $context
      */
     public function complete(array $context)
@@ -80,7 +100,8 @@ abstract class AbstractGenerator extends AbstractProcessingTask
             }
         }
 
-        if ($this->getAction() === BillingProcessor::NORMAL) {
+        if ($this->getAction() === BillingProcessor::NORMAL ||
+            $this->getAction() === null) {
             $this->completeToFile($context);
         }
     }

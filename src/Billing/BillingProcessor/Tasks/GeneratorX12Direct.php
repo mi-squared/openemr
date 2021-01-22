@@ -4,17 +4,20 @@
  * This class represents the task that compiles claims into
  * x-12 batch files, one for each insurance/x-12 pair.
  *
+ * This task will be run in favor of Task\GeneratorX12 if
+ * the global is enabled "Generate X-12 Based On Insurance Company"
+ *
  * @package   OpenEMR
  * @link      http://www.open-emr.org
  * @author    Ken Chapple <ken@mi-squared.com>
  * @author    Daniel Pflieger <daniel@mi-squared.com>, <daniel@growlingflea.com>
  * @copyright Copyright (c) 2021 Ken Chapple <ken@mi-squared.com>
+ * @copyright Copyright (c) 2021 Daniel Pflieger <daniel@mi-squared.com>, <daniel@growlingflea.com>
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-use OpenEMR\Billing\BillingProcessor\BillingProcessor;
 use OpenEMR\Billing\BillingProcessor\GeneratorCanValidateInterface;
 use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
 use OpenEMR\Billing\BillingProcessor\LoggerInterface;
@@ -38,32 +41,24 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
      */
     protected $encounter_claim = false;
 
+    /**
+     * An array of batches, one for each x-12 partner, indexed by partner id
+     *
+     * @var array
+     */
     protected $x12_partner_batches = [];
 
+    /**
+     * An array of x-12 partners, indexed by partner id
+     *
+     * @var array
+     */
     protected $x12_partners = [];
 
     public function __construct($action, $encounter_claim = false)
     {
         parent::__construct($action);
         $this->encounter_claim = $encounter_claim;
-    }
-
-    protected function updateBatchFile(BillingClaim $claim)
-    {
-        // Get the correct batch file using the X-12 partner ID
-        $batch = $this->x12_partner_batches[$claim->getPartner()];
-
-        // Tell our batch that we've processed this claim
-        $batch->addClaim($claim);
-
-        // Use the tr3 format to output for direct-submission to insurance companies
-        $log = '';
-        $is_last_claim = $claim->getIsLast();
-        $segs = explode("~\n", X125010837P::gen_x12_837_tr3($claim->getPid(), $claim->getEncounter(), $log, $this->encounter_claim, $is_last_claim));
-        $this->appendToLog($log);
-        $batch->append_claim($segs);
-
-        return $batch;
     }
 
     /**
@@ -124,15 +119,26 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
         }
     }
 
+    /**
+     * In validate-only mode, we just build the batch and print to screen,
+     * the claim remains unaltered in the database.
+     *
+     * @param BillingClaim $claim
+     */
     public function validateOnly(BillingClaim $claim)
     {
         $this->updateBatchFile($claim);
     }
 
+    /**
+     * In validate-and-clear mode, we mark the claim as 'billed'
+     * and build the batch file.
+     *
+     * @param BillingClaim $claim
+     * @return mixed
+     */
     public function validateAndClear(BillingClaim $claim)
     {
-        // Do we really need to create another new version? Not sure exactly how this interacts
-        // with the rest of the system
         $return = BillingUtilities::updateClaim(
             true,
             $claim->getPid(),
@@ -150,6 +156,12 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
         return $this->updateBatchFile($claim);
     }
 
+    /**
+     * This is the 'normal' mode, where we validate and clear each claim,
+     * and also complete it and write the batch file to the database.
+     *
+     * @param BillingClaim $claim
+     */
     public function generate(BillingClaim $claim)
     {
         // If we are doing final billing (normal) or validate and mark-as-billed,
@@ -163,47 +175,29 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
     }
 
     /**
-     * This is the common finish function to both completeToFile (normal)
-     * and completeToScreen (validation). We pass the callback to let the
-     * caller specify what we do after we finish up.
+     * This is where the batch formatting work happens on each claim. This generator
+     * uses the TR3 format which has a different claim loop than the other
+     * gen_x12 function.
      *
-     * This uses the generator's 'action' attribute to decide whether
-     * to generate the edi file or not. If we're in NORMAL mode, generate the
-     * file.
-     *
-     * @param array $context
-     * @param callable $callback
+     * @param BillingClaim $claim
+     * @return mixed
      */
-    protected function finish(array $context, callable $callback)
+    protected function updateBatchFile(BillingClaim $claim)
     {
-        $format_bat = "";
-        $created_batches = [];
-        // Loop through all of the X12 batch files we've created, one per x-12 partner,
-        // and depending on the action we're running, either write the final claim
-        // to disk, or format the content for printing to the screen.
-        foreach ($this->x12_partner_batches as $x12_partner_id => $x12_partner_batch) {
+        // Get the correct batch file using the X-12 partner ID
+        $batch = $this->x12_partner_batches[$claim->getPartner()];
 
-            if (empty($x12_partner_batch->getBatContent())) {
-                // If we didn't write any claims for this X12 partner
-                // don't append the closing lines or write the claim file or do anything else
-                continue;
-            }
+        // Tell our batch that we've processed this claim
+        $batch->addClaim($claim);
 
-            $x12_partner_batch->append_claim_close();
+        // Use the tr3 format to output for direct-submission to insurance companies
+        $log = '';
+        $is_last_claim = $claim->getIsLast();
+        $segs = explode("~\n", X125010837P::gen_x12_837_tr3($claim->getPid(), $claim->getEncounter(), $log, $this->encounter_claim, $is_last_claim));
+        $this->appendToLog($log);
+        $batch->append_claim($segs);
 
-            // Write the batch content to formatted string for presenting to user
-            $format_bat .= str_replace('~', PHP_EOL, $x12_partner_batch->getBatContent()) . "\n";
-
-            // Store all the batches we create with the x12-partner ID as index
-            // so we can pass them to the callback
-            $created_batches[$x12_partner_id]= $x12_partner_batch;
-        }
-
-        // Call the callback with new context
-        $callback([
-            'created_batches' => $created_batches,
-            'format_bat' => $format_bat
-        ]);
+        return $batch;
     }
 
     /**
@@ -269,5 +263,49 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
             echo $wrap;
             exit();
         });
+    }
+
+    /**
+     * This is the common finish function to both completeToFile (normal)
+     * and completeToScreen (validation). We pass the callback to let the
+     * caller specify what we do after we finish up.
+     *
+     * This uses the generator's 'action' attribute to decide whether
+     * to generate the edi file or not. If we're in NORMAL mode, generate the
+     * file.
+     *
+     * @param array $context
+     * @param callable $callback
+     */
+    protected function finish(array $context, callable $callback)
+    {
+        $format_bat = "";
+        $created_batches = [];
+        // Loop through all of the X12 batch files we've created, one per x-12 partner,
+        // and depending on the action we're running, either write the final claim
+        // to disk, or format the content for printing to the screen.
+        foreach ($this->x12_partner_batches as $x12_partner_id => $x12_partner_batch) {
+
+            if (empty($x12_partner_batch->getBatContent())) {
+                // If we didn't write any claims for this X12 partner
+                // don't append the closing lines or write the claim file or do anything else
+                continue;
+            }
+
+            $x12_partner_batch->append_claim_close();
+
+            // Write the batch content to formatted string for presenting to user
+            $format_bat .= str_replace('~', PHP_EOL, $x12_partner_batch->getBatContent()) . "\n";
+
+            // Store all the batches we create with the x12-partner ID as index
+            // so we can pass them to the callback
+            $created_batches[$x12_partner_id]= $x12_partner_batch;
+        }
+
+        // Call the callback with new context
+        $callback([
+            'created_batches' => $created_batches,
+            'format_bat' => $format_bat
+        ]);
     }
 }

@@ -91,7 +91,7 @@ use OpenEMR\OeUI\OemrUI;
                     { "data": "created_at" },
                     { "data": "updated_at" },
                 ],
-                "order": [[1, 'asc']]
+                "order": [[4, 'asc']] // Order by 'Date Created' with newest first
             });
 
             oTable.on('preXhr.dt', function (e, settings, data) {

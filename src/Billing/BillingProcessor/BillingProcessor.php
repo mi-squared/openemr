@@ -133,13 +133,6 @@ class BillingProcessor
 
     protected function buildProcessingTaskFromPost($post)
     {
-//        if ($GLOBALS['ub04_support']) {
-//            require_once("./ub04_dispose.php");
-//            ub04_dispose();
-//        }
-//
-
-
         // Depending on which type of process we are running, create the appropriate
         // processing task object to process the claims and produce output (if any).
         // Determine which processing task the user wants us to run based on the input
@@ -172,12 +165,23 @@ class BillingProcessor
             $processing_task = new Tasks\GeneratorExternal($this->extractAction());
         }
 
-        $logger = new BillingLogger();
-        $processing_task->setLogger($logger);
+        // If the processing task can write to the billing log, let's set it's log
+        // instance. The default implementation of the LoggerInterface and the way
+        // this is usually implemented on tasks is the trait Traits\WritesToBillingLog
+        if ($processing_task instanceof LoggerInterface) {
+            $logger = new BillingLogger();
+            $processing_task->setLogger($logger);
+        }
 
         return $processing_task;
     }
 
+    /**
+     * Get the 'action' the user wants us to run based on UI input passed
+     * to us in the POST array
+     *
+     * @return string|null
+     */
     protected function extractAction()
     {
         $action = null;

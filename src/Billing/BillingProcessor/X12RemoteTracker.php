@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Model that provides tracking information for a run of claim processing using
  * the billing manager. Each run is saved as an entry in the billing_tracker_batch
@@ -12,7 +13,6 @@
  */
 
 namespace OpenEMR\Billing\BillingProcessor;
-
 
 use OpenEMR\Services\BaseService;
 use phpseclib\Net\SFTP;

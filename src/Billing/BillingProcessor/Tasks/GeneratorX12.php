@@ -1,9 +1,27 @@
 <?php
 
+/**
+ * This class represents the task that compiles claims into an X12 batch file
+ *
+ * @package   OpenEMR
+ * @link      http://www.open-emr.org
+ * @author    Ken Chapple <ken@mi-squared.com>
+ * @author    Brady Miller <brady.g.miller@gmail.com>
+ * @author    Daniel Pflieger <daniel@growlingflea.com>
+ * @author    Terry Hill <terry@lilysystems.com>
+ * @author    Jerry Padgett <sjpadgett@gmail.com>
+ * @author    Stephen Waite <stephen.waite@cmsvt.com>
+ * @copyright Copyright (c) 2021 Ken Chapple <ken@mi-squared.com>
+ * @copyright Copyright (c) 2021 Daniel Pflieger <daniel@growlingflea.com>
+ * @copyright Copyright (c) 2014-2020 Brady Miller <brady.g.miller@gmail.com>
+ * @copyright Copyright (c) 2016 Terry Hill <terry@lillysystems.com>
+ * @copyright Copyright (c) 2017-2020 Jerry Padgett <sjpadgett@gmail.com>
+ * @copyright Copyright (c) 2018-2020 Stephen Waite <stephen.waite@cmsvt.com>
+ * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
+ */
 
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-use OpenEMR\Billing\BillingProcessor\BillingProcessor;
 use OpenEMR\Billing\BillingProcessor\GeneratorCanValidateInterface;
 use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
 use OpenEMR\Billing\BillingProcessor\LoggerInterface;

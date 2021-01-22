@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * This class represents the task that compiles claims into a HCFA 1500
+ * PDF over the image of the actual CMS HCFA 1500 form.
+ *
+ * This generator will be run in favor of the Tasks\GeneratorHCFA_PDF
+ * if the setting in Globals > Billing is set for "Prints the CMS 1500 on the Preprinted form"
+ *
+ * @package   OpenEMR
+ * @link      http://www.open-emr.org
+ * @author    Ken Chapple <ken@mi-squared.com>
+ * @author    Brady Miller <brady.g.miller@gmail.com>
+ * @author    Jerry Padgett <sjpadgett@gmail.com>
+ * @copyright Copyright (c) 2021 Ken Chapple <ken@mi-squared.com>
+ * @copyright Copyright (c) 2014-2020 Brady Miller <brady.g.miller@gmail.com>
+ * @copyright Copyright (c) 2017-2020 Jerry Padgett <sjpadgett@gmail.com>
+ * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
+ */
+
 
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 

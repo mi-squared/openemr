@@ -3,10 +3,10 @@
 /**
  * This class represents the task that compiles claims into
  * a HCFA form batch. This prints the claim data only, with no
- * form fields that are present on the HCFA 1500 paper form.
+ * form fields (no background image) that are present on the HCFA 1500 paper form.
  *
- * The other HCFA generator will print the data over an image of
- * the paper form fields.
+ * The *other* HCFA generator will print the data over an image of
+ * the paper form fields if enabled in globals.
  *
  * @package   OpenEMR
  * @link      http://www.open-emr.org

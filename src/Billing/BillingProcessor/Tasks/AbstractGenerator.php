@@ -60,12 +60,22 @@ abstract class AbstractGenerator extends AbstractProcessingTask
         }
     }
 
+    /**
+     * This AbstractGenerator captures the complete method so we
+     * can filter by action and call the appropriate method
+     * on the child generator.
+     *
+     * If we are validating, just print to screen for the user,
+     * but if we are running 'normal' action, we'll complete to
+     * file and write our batch file to EDI directory(ies).
+     *
+     * @param array $context
+     */
     public function complete(array $context)
     {
         if ($this instanceof GeneratorCanValidateInterface) {
-            if ($this->getAction() === BillingProcessor::VALIDATE_ONLY) {
-                $this->completeToScreen($context);
-            } else if ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
+            if ($this->getAction() === BillingProcessor::VALIDATE_ONLY ||
+                $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
                 $this->completeToScreen($context);
             }
         }

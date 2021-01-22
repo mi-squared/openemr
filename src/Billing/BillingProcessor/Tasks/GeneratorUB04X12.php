@@ -3,6 +3,7 @@
 
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
+use OpenEMR\Billing\BillingProcessor\GeneratorCanValidateInterface;
 use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
 use OpenEMR\Billing\BillingProcessor\LoggerInterface;
 use OpenEMR\Billing\BillingProcessor\BillingClaim;
@@ -13,7 +14,7 @@ use OpenEMR\Billing\X125010837I;
 
 require_once __DIR__ . '/../../../interface/billing/ub04_dispose.php';
 
-class GeneratorUB04X12 extends AbstractGenerator implements GeneratorInterface, LoggerInterface
+class GeneratorUB04X12 extends AbstractGenerator implements GeneratorInterface, GeneratorCanValidateInterface, LoggerInterface
 {
     use WritesToBillingLog;
 
@@ -23,48 +24,8 @@ class GeneratorUB04X12 extends AbstractGenerator implements GeneratorInterface, 
 
     protected $batch;
 
-    public function setup(array $context)
+    protected function updateBatch(BillingClaim $claim)
     {
-        $this->batch = new BillingClaimBatch('.txt');
-    }
-
-    public function execute(BillingClaim $claim)
-    {
-        // If we are doing final billing (normal) or validate and mark-as-billed,
-        // Then set up a new version
-        if ($this->getAction() === BillingProcessor::NORMAL ||
-            $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-
-            // This is a validation pass, but mark as billed if we're 'clearing'
-            if ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-                $tmp = BillingUtilities::updateClaim(
-                    true,
-                    $claim->getPid(),
-                    $claim->getEncounter(),
-                    $claim->getPayorId(),
-                    $claim->getPayorType(),
-                    BillingClaim::STATUS_MARK_AS_BILLED
-                );
-            }
-
-            $this->ub04id = get_ub04_array($claim->getPid(), $claim->getEncounter());
-            $ub_save = json_encode($this->ub04id);
-            $tmp = BillingUtilities::updateClaim(
-                true,
-                $claim->getPid(),
-                $claim->getEncounter(),
-                $claim->getPayorId(),
-                $claim->getPayorType(),
-                BillingClaim::STATUS_MARK_AS_BILLED,
-                BillingClaim::BILL_PROCESS_IN_PROGRESS,
-                '',
-                $claim->getTarget(),
-                $claim->getPartner() . '-837I',
-                0,
-                $ub_save
-            );
-        }
-
         // Do the UB04 processing
         $log = '';
         $segs = explode("~\n", X125010837I::generateX12837I($claim->getPid(), $claim->getEncounter(), $log, $this->ub04id));
@@ -74,52 +35,94 @@ class GeneratorUB04X12 extends AbstractGenerator implements GeneratorInterface, 
         // Store the claims that are in this claims batch, because
         // if remote SFTP is enabled, we'll need the x12 partner ID to look up SFTP credentials
         $this->batch->addClaim($claim);
-
-        if ($this->getAction() === BillingProcessor::VALIDATE_ONLY ||
-            $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-            // Do we need to do the payor reset thing???
-            return $tmp;
-        } else if ($this->getAction() == BillingProcessor::NORMAL) {
-            $tmp = BillingUtilities::updateClaim(
-                false,
-                $claim->getPid(),
-                $claim->getEncounter(),
-                -1,
-                -1,
-                2,
-                2,
-                $this->batch->getBatFilename(),
-                'X12-837I',
-                -1,
-                0,
-                json_encode($this->ub04id)
-            );
-
-            // If we had an error, print to screen
-            if (!$tmp) {
-                $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");
-            }
-        }
-
-        return $tmp;
     }
 
-    public function complete(array $context)
+    public function setup(array $context)
+    {
+        $this->batch = new BillingClaimBatch('.txt');
+
+        // This was called at top of old billing_process.php so call in setup()
+        ub04_dispose();
+    }
+
+    public function validateOnly(BillingClaim $claim)
+    {
+        return $this->updateBatch($claim);
+    }
+
+    public function validateAndClear(BillingClaim $claim)
+    {
+        $this->ub04id = get_ub04_array($claim->getPid(), $claim->getEncounter());
+        $ub_save = json_encode($this->ub04id);
+        $tmp = BillingUtilities::updateClaim(
+            true,
+            $claim->getPid(),
+            $claim->getEncounter(),
+            $claim->getPayorId(),
+            $claim->getPayorType(),
+            BillingClaim::STATUS_MARK_AS_BILLED,
+            BillingClaim::BILL_PROCESS_IN_PROGRESS,
+            '',
+            $claim->getTarget(),
+            $claim->getPartner() . '-837I',
+            0,
+            $ub_save
+        );
+
+        return $this->updateBatch($claim);
+    }
+
+    /**
+     * In running the 'normal' action, this method is called
+     * by AbstractGenerator's execute() method.
+     *
+     * It marks the claim as billed and writes batch filename to
+     * the billing table.
+     *
+     * @param BillingClaim $claim
+     */
+    public function generate(BillingClaim $claim)
+    {
+        $this->validateAndClear();
+
+        $tmp = BillingUtilities::updateClaim(
+            false,
+            $claim->getPid(),
+            $claim->getEncounter(),
+            -1,
+            -1,
+            2,
+            2,
+            $this->batch->getBatFilename(),
+            'X12-837I',
+            -1,
+            0,
+            json_encode($this->ub04id)
+        );
+
+        // If we had an error, print to screen
+        if (!$tmp) {
+            $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");
+        }
+    }
+
+    public function completeToScreen(array $context)
     {
         $this->batch->append_claim_close();
 
-        if ($this->getAction() == BillingProcessor::VALIDATE_ONLY ||
-            ($this->getAction() == BillingProcessor::VALIDATE_AND_CLEAR)) {
-            $format_bat = str_replace('~', PHP_EOL, $this->batch->getBatContent());
-            $wrap = "<!DOCTYPE html><html><head></head><body><div style='overflow: hidden;'><pre>" . text($format_bat) . "</pre></div></body></html>";
-            echo $wrap;
-        } else if ($this->getAction() == BillingProcessor::NORMAL) {
-            $success = $this->batch->write_batch_file();
-            if ($success) {
-                $this->printToScreen(xl('X-12 Generated Successfully'));
-            } else {
-                $this->printToScreen(xl('Error Generating Batch File'));
-            }
+        $format_bat = str_replace('~', PHP_EOL, $this->batch->getBatContent());
+        $wrap = "<!DOCTYPE html><html><head></head><body><div style='overflow: hidden;'><pre>" . text($format_bat) . "</pre></div></body></html>";
+        echo $wrap;
+    }
+
+    public function completeToFile(array $context)
+    {
+        $this->batch->append_claim_close();
+        $success = $this->batch->write_batch_file();
+        if ($success) {
+            $this->printToScreen(xl('X-12 Generated Successfully'));
+        } else {
+            $this->printToScreen(xl('Error Generating Batch File'));
         }
     }
 }

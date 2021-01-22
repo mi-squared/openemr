@@ -131,9 +131,6 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
 
     public function validateAndClear(BillingClaim $claim)
     {
-        // This is a validation pass, but mark as billed if we're 'clearing'
-        $return = BillingUtilities::updateClaim(true, $claim->getPid(), $claim->getEncounter(), $claim->getPayorId(), $claim->getPayorType(), BillingClaim::STATUS_MARK_AS_BILLED);
-
         // Do we really need to create another new version? Not sure exactly how this interacts
         // with the rest of the system
         $return = BillingUtilities::updateClaim(
@@ -149,30 +146,16 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
             $claim->getPartner()
         );
 
-        $this->updateBatchFile($claim);
+        // Return the batch we updated (depending on x-12 partner)
+        return $this->updateBatchFile($claim);
     }
 
     public function generate(BillingClaim $claim)
     {
         // If we are doing final billing (normal) or validate and mark-as-billed,
-        // Then set up a new version
-        $return = true;
-        $return = BillingUtilities::updateClaim(
-            true,
-            $claim->getPid(),
-            $claim->getEncounter(),
-            $claim->getPayorId(),
-            $claim->getPayorType(),
-            BillingClaim::STATUS_MARK_AS_BILLED,
-            BillingClaim::BILL_PROCESS_IN_PROGRESS, // bill_process == 1 means??
-            '', // process_file
-            $claim->getTarget(),
-            $claim->getPartner()
-        );
-
         // Use the claim to update the appropriate batch file (depends on x-12 partner)
         // and return the batch we updated
-        $batch = $this->updateBatchFile($claim);
+        $batch = $this->validateAndClear($claim);
 
         if (!BillingUtilities::updateClaim(false, $claim->getPid(), $claim->getEncounter(), -1, -1, 2, 2, $batch->getBatFilename())) {
             $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");

@@ -138,11 +138,7 @@ class BillingProcessor
 //            ub04_dispose();
 //        }
 //
-//        $EXPORT_INC = "$webserver_root/custom/BillingExport.php";
-//        if (file_exists($EXPORT_INC)) {
-//            include_once($EXPORT_INC);
-//            $BILLING_EXPORT = true;
-//        }
+
 
         // Depending on which type of process we are running, create the appropriate
         // processing task object to process the claims and produce output (if any).

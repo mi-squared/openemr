@@ -23,6 +23,9 @@ class GeneratorUB04NoForm extends AbstractGenerator implements GeneratorInterfac
     public function setup(array $context)
     {
         $this->batch = new BillingClaimBatch('.pdf');
+
+        // This was called at top of old billing_process.php so call in setup()
+        ub04_dispose();
     }
 
     public function execute(BillingClaim $claim)

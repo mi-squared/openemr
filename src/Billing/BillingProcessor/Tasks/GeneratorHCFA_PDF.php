@@ -17,7 +17,7 @@
 
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
-use OpenEMR\Billing\BillingProcessor\BillingProcessor;
+use OpenEMR\Billing\BillingProcessor\GeneratorCanValidateInterface;
 use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
 use OpenEMR\Billing\BillingProcessor\LoggerInterface;
 use OpenEMR\Billing\BillingProcessor\BillingClaim;
@@ -26,7 +26,7 @@ use OpenEMR\Billing\BillingProcessor\Traits\WritesToBillingLog;
 use OpenEMR\Billing\BillingUtilities;
 use OpenEMR\Billing\Hcfa1500;
 
-class GeneratorHCFA_PDF extends AbstractGenerator implements GeneratorInterface, LoggerInterface
+class GeneratorHCFA_PDF extends AbstractGenerator implements GeneratorInterface, GeneratorCanValidateInterface, LoggerInterface
 {
     use WritesToBillingLog;
 
@@ -55,6 +55,14 @@ class GeneratorHCFA_PDF extends AbstractGenerator implements GeneratorInterface,
      */
     protected $createNewPage;
 
+    /**
+     * This function is called by the BillingProcessor before the main
+     * claim loop starts.
+     *
+     * Here we set up our PDF canvas and our batch file.
+     *
+     * @param array $context
+     */
     public function setup(array $context)
     {
         $post = $context['post'];
@@ -70,33 +78,14 @@ class GeneratorHCFA_PDF extends AbstractGenerator implements GeneratorInterface,
         $this->batch = new BillingClaimBatch('.pdf');
     }
 
-    public function execute(BillingClaim $claim)
+    /**
+     * Do the work to append the given claim to the PDF document we're
+     * working on generating
+     *
+     * @param BillingClaim $claim
+     */
+    protected function updateBatch(BillingClaim $claim)
     {
-        // If we are doing final billing (normal) or validate and mark-as-billed,
-        // Then set up a new version
-        if ($this->getAction() === BillingProcessor::NORMAL ||
-            $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-
-            // This is a validation pass
-            if ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-                $tmp = BillingUtilities::updateClaim(true, $claim->getPid(), $claim->getEncounter(), $claim->getPayorId(), $claim->getPayorType(), 2);
-            }
-
-            // Do we really need to create another new version? Not sure exactly how this interacts
-            // with the rest of the system
-            $tmp = BillingUtilities::updateClaim(
-                true,
-                $claim->getPid(),
-                $claim->getEncounter(),
-                $claim->getPayorId(),
-                $claim->getPayorType(),
-                BillingClaim::STATUS_MARK_AS_BILLED, // status == 2 means
-                BillingClaim::BILL_PROCESS_IN_PROGRESS, // bill_process == 1 means??
-                '', // process_file
-                'hcfa'
-            );
-        }
-
         // Do the actual claim processing
         $log = '';
         $hcfa = new Hcfa1500();
@@ -116,60 +105,113 @@ class GeneratorHCFA_PDF extends AbstractGenerator implements GeneratorInterface,
                 'leading' => 12
             ));
         }
+    }
 
-        // If we're just validating, do nothing, otherwise finalize the claim
-        if ($this->getAction() === BillingProcessor::VALIDATE_ONLY ||
-            ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR)) {
-            $this->printToScreen(xl("Successfully Validated claim") . ": " . $claim->getId());
-            //validate_payer_reset($payer_id_held, $patient_id, $encounter);
-            return;
-        } else if ($this->getAction() === BillingProcessor::NORMAL) {
+    /**
+     *
+     * Do validation, mark claim as billed and tell the billing table
+     * that the claim will be written to the given batch file name
+     *
+     * @param BillingClaim $claim
+     */
+    public function generate(BillingClaim $claim)
+    {
+        // Validate and mark as 'billed'
+        $this->validateAndClear($claim);
 
-            // Finalize the claim
-            if (!BillingUtilities::updateClaim(false, $claim->getPid(), $claim->getEncounter(), -1, -1, 2, 2, $this->batch->getBatFilename())) {
-                $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");
-            }
-
+        // Finalize the claim
+        if (!BillingUtilities::updateClaim(false, $claim->getPid(), $claim->getEncounter(), -1, -1, 2, 2, $this->batch->getBatFilename())) {
+            $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");
+        } else {
             $this->printToScreen(xl("Successfully processed claim") . ": " . $claim->getId());
         }
     }
 
     /**
-     * Generate the download output
+     * When user chooses "validate only" we just build the PDF
+     *
+     * @param BillingClaim $claim
+     */
+    public function validateOnly(BillingClaim $claim)
+    {
+        $this->updateBatch($claim);
+        $this->printToScreen(xl("Successfully Validated claim") . ": " . $claim->getId());
+    }
+
+    /**
+     * When the user chooses "validate and clear" we build the PDF
+     * and mark the claim as 'billed'
+     *
+     * @param BillingClaim $claim
+     */
+    public function validateAndClear(BillingClaim $claim)
+    {
+        $this->validateOnly($claim);
+
+        // This is a validation pass
+        $tmp = BillingUtilities::updateClaim(
+            true,
+            $claim->getPid(),
+            $claim->getEncounter(),
+            $claim->getPayorId(),
+            $claim->getPayorType(),
+            BillingClaim::STATUS_MARK_AS_BILLED, // status == 2 means
+            BillingClaim::BILL_PROCESS_IN_PROGRESS, // bill_process == 1 means??
+            '', // process_file
+            'hcfa'
+        );
+
+        $this->printToScreen(xl("Successfully marked claim") . ": " . $claim->getId() . xl(" as billed"));
+    }
+
+    /**
+     * This method is called when the user clicks "validate" or "validate and clear",
+     * and writes the HCFA file to the temporary directory.
      *
      * @param array $context
      */
-    public function complete(array $context)
+    public function completeToScreen(array $context)
     {
-        if ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR ||
-            $this->getAction() === BillingProcessor::VALIDATE_ONLY) {
+        // If we are just validating, make a temp file
+        $tmp_claim_file = $GLOBALS['temporary_files_dir'] .
+            DIRECTORY_SEPARATOR .
+            $this->batch->getBatFilename();
+        file_put_contents($tmp_claim_file, $this->pdf->ezOutput());
 
-            // If we are just validating, make a temp file
-            $tmp_claim_file = $GLOBALS['temporary_files_dir'] .
-                DIRECTORY_SEPARATOR .
-                $this->batch->getBatFilename();
-            file_put_contents($tmp_claim_file, $this->pdf->ezOutput());
-
-            // If we are just validating, the output should be a PDF presented
-            // to the user, but we don't save to the edi/ directory.
-            // This just writes to a tmp file, serves to user and then removes tmp file
-            $this->logger->setLogCompleteCallback($this, 'initiateTmpDownload');
-
-        } else if ($this->getAction() === BillingProcessor::NORMAL) {
-
-            // If a writable edi directory exists (and it should), write the pdf to it.
-            $fh = @fopen($GLOBALS['OE_SITE_DIR'] . "/documents/edi/{$this->batch->getBatFilename()}", 'a');
-            if ($fh) {
-                fwrite($fh, $this->pdf->ezOutput());
-                fclose($fh);
-            }
-
-            // Tell the billing_process.php script to initiate a download of this file
-            // that's in the edi directory
-            $this->logger->setLogCompleteCallback($this, 'initiateDownload');
-        }
+        // If we are just validating, the output should be a PDF presented
+        // to the user, but we don't save to the edi/ directory.
+        // This just writes to a tmp file, serves to user and then removes tmp file
+        $this->logger->setLogCompleteCallback($this, 'initiateTmpDownload');
     }
 
+    /**
+     * This method is called when the user clicks "continue" and initiates
+     * 'normal' operation.
+     *
+     * Write the HCFA file to the edi directory.
+     *
+     * @param array $context
+     */
+    public function completeToFile(array $context)
+    {
+        // If a writable edi directory exists (and it should), write the pdf to it.
+        $fh = @fopen($GLOBALS['OE_SITE_DIR'] . "/documents/edi/{$this->batch->getBatFilename()}", 'a');
+        if ($fh) {
+            fwrite($fh, $this->pdf->ezOutput());
+            fclose($fh);
+        }
+
+        // Tell the billing_process.php script to initiate a download of this file
+        // that's in the edi directory
+        $this->logger->setLogCompleteCallback($this, 'initiateDownload');
+    }
+
+    /**
+     * This is the callback function passed to the logger, called when the
+     * result screen is finished rendering. This prints some JS that will
+     * start the download of the HCFA pdf after messages have been printed to the
+     * screen
+     */
     public function initiateDownload()
     {
         // This uses our parent's method to print the JS that automatically initiates
@@ -177,6 +219,14 @@ class GeneratorHCFA_PDF extends AbstractGenerator implements GeneratorInterface,
         $this->printDownloadClaimFileJS($this->batch->getBatFilename());
     }
 
+    /**
+     * This is the callback function passed to the logger, called when the
+     * result screen is finished rendering. This prints some JS that will
+     * start the download of the 'temporary' HCFA pdf after messages have been printed to the
+     * screen. The delete flag tells get_claim_file.php endpoint to delete the file after
+     * download. The location string tells get_claim_file.php that the file is in
+     * the globally-configured tmp directory.
+     */
     public function initiateTmpDownload()
     {
         // This uses our parent's method to print the JS that automatically initiates

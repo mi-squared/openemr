@@ -163,7 +163,7 @@ class BillingProcessor
         } else if (isset($post['bn_process_hcfa'])) {
             $processing_task = new Tasks\GeneratorHCFA_PDF($this->extractAction());
         } else if (isset($post['bn_process_hcfa_form'])) {
-            $processing_task = new Tasks\ProcessHCFAForm($this->extractAction());
+            $processing_task = new Tasks\GeneratorHCFA_PDF_IMG($this->extractAction());
         } else if (isset($post['bn_ub04_x12'])) {
             $processing_task = new Tasks\GeneratorUB04X12($this->extractAction());
         } else if (isset($post['bn_process_ub04_form'])) {

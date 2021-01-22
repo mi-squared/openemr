@@ -15,6 +15,7 @@
 namespace OpenEMR\Billing\BillingProcessor\Tasks;
 
 use OpenEMR\Billing\BillingProcessor\BillingProcessor;
+use OpenEMR\Billing\BillingProcessor\GeneratorCanValidateInterface;
 use OpenEMR\Billing\BillingProcessor\GeneratorInterface;
 use OpenEMR\Billing\BillingProcessor\LoggerInterface;
 use OpenEMR\Billing\BillingProcessor\BillingClaim;
@@ -24,7 +25,7 @@ use OpenEMR\Billing\BillingUtilities;
 use OpenEMR\Billing\X125010837P;
 use OpenEMR\Common\Csrf\CsrfUtils;
 
-class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface, LoggerInterface
+class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface, GeneratorCanValidateInterface, LoggerInterface
 {
     use WritesToBillingLog;
 
@@ -39,10 +40,30 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
 
     protected $x12_partner_batches = [];
 
+    protected $x12_partners = [];
+
     public function __construct($action, $encounter_claim = false)
     {
         parent::__construct($action);
         $this->encounter_claim = $encounter_claim;
+    }
+
+    protected function updateBatchFile(BillingClaim $claim)
+    {
+        // Get the correct batch file using the X-12 partner ID
+        $batch = $this->x12_partner_batches[$claim->getPartner()];
+
+        // Tell our batch that we've processed this claim
+        $batch->addClaim($claim);
+
+        // Use the tr3 format to output for direct-submission to insurance companies
+        $log = '';
+        $is_last_claim = $claim->getIsLast();
+        $segs = explode("~\n", X125010837P::gen_x12_837_tr3($claim->getPid(), $claim->getEncounter(), $log, $this->encounter_claim, $is_last_claim));
+        $this->appendToLog($log);
+        $batch->append_claim($segs);
+
+        return $batch;
     }
 
     /**
@@ -86,6 +107,9 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
                 $batch->setBatFiledir($row['x12_sftp_local_dir']);
             }
 
+            // Store the x-12 partner's data in case we need to reference it (like need the Name or something)
+            $this->x12_partners[$row['id']] = $row;
+
             // Store the directory in an associative array with the partner ID as the index
             $this->x12_partner_batches[$row['id']] = $batch;
 
@@ -100,64 +124,74 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
         }
     }
 
-    public function execute(BillingClaim $claim)
+    public function validateOnly(BillingClaim $claim)
+    {
+        $this->updateBatchFile($claim);
+    }
+
+    public function validateAndClear(BillingClaim $claim)
+    {
+        // This is a validation pass, but mark as billed if we're 'clearing'
+        $return = BillingUtilities::updateClaim(true, $claim->getPid(), $claim->getEncounter(), $claim->getPayorId(), $claim->getPayorType(), BillingClaim::STATUS_MARK_AS_BILLED);
+
+        // Do we really need to create another new version? Not sure exactly how this interacts
+        // with the rest of the system
+        $return = BillingUtilities::updateClaim(
+            true,
+            $claim->getPid(),
+            $claim->getEncounter(),
+            $claim->getPayorId(),
+            $claim->getPayorType(),
+            BillingClaim::STATUS_MARK_AS_BILLED,
+            BillingClaim::BILL_PROCESS_IN_PROGRESS, // bill_process == 1 means??
+            '', // process_file
+            $claim->getTarget(),
+            $claim->getPartner()
+        );
+
+        $this->updateBatchFile($claim);
+    }
+
+    public function generate(BillingClaim $claim)
     {
         // If we are doing final billing (normal) or validate and mark-as-billed,
         // Then set up a new version
         $return = true;
-        if ($this->getAction() === BillingProcessor::NORMAL ||
-            $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
+        $return = BillingUtilities::updateClaim(
+            true,
+            $claim->getPid(),
+            $claim->getEncounter(),
+            $claim->getPayorId(),
+            $claim->getPayorType(),
+            BillingClaim::STATUS_MARK_AS_BILLED,
+            BillingClaim::BILL_PROCESS_IN_PROGRESS, // bill_process == 1 means??
+            '', // process_file
+            $claim->getTarget(),
+            $claim->getPartner()
+        );
 
-            // This is a validation pass, but mark as billed if we're 'clearing'
-            if ($this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-                $return = BillingUtilities::updateClaim(true, $claim->getPid(), $claim->getEncounter(), $claim->getPayorId(), $claim->getPayorType(), BillingClaim::STATUS_MARK_AS_BILLED);
-            }
+        // Use the claim to update the appropriate batch file (depends on x-12 partner)
+        // and return the batch we updated
+        $batch = $this->updateBatchFile($claim);
 
-            // Do we really need to create another new version? Not sure exactly how this interacts
-            // with the rest of the system
-            $return = BillingUtilities::updateClaim(
-                true,
-                $claim->getPid(),
-                $claim->getEncounter(),
-                $claim->getPayorId(),
-                $claim->getPayorType(),
-                BillingClaim::STATUS_MARK_AS_BILLED,
-                BillingClaim::BILL_PROCESS_IN_PROGRESS, // bill_process == 1 means??
-                '', // process_file
-                $claim->getTarget(),
-                $claim->getPartner()
-            );
-        }
-
-        // Get the correct batch file using the X-12 partner ID
-        $batch = $this->x12_partner_batches[$claim->getPartner()];
-
-        // Tell our batch that we've processed this claim
-        $batch->addClaim($claim);
-
-        // Use the tr3 format to output for direct-submission to insurance companies
-        $log = '';
-        $is_last_claim = $claim->getIsLast();
-        $segs = explode("~\n", X125010837P::gen_x12_837_tr3($claim->getPid(), $claim->getEncounter(), $log, $this->encounter_claim, $is_last_claim));
-        $this->appendToLog($log);
-        $batch->append_claim($segs);
-
-        // If we're validating only, exit. Otherwise finish the claim
-        if ($this->getAction() === BillingProcessor::VALIDATE_ONLY) {
-            // Don't finalize the claim, just return after we write the claim to the batch file
-            // Do we need to do validate_payor_reset thing? It doesn't seem like it, maybe has to do with
-            // secondary insurance?
-            //validate_payer_reset($payer_id_held, $patient_id, $encounter);
-            return $return;
-        } else {
-            // After we save the claim, update it with the filename (don't create a new revision)
-            if (!BillingUtilities::updateClaim(false, $claim->getPid(), $claim->getEncounter(), -1, -1, 2, 2, $batch->getBatFilename())) {
-                $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");
-            }
+        if (!BillingUtilities::updateClaim(false, $claim->getPid(), $claim->getEncounter(), -1, -1, 2, 2, $batch->getBatFilename())) {
+            $this->printToScreen(xl("Internal error: claim ") . $claim->getId() . xl(" not found!") . "\n");
         }
     }
 
-    public function complete(array $context)
+    /**
+     * This is the common finish function to both completeToFile (normal)
+     * and completeToScreen (validation). We pass the callback to let the
+     * caller specify what we do after we finish up.
+     *
+     * This uses the generator's 'action' attribute to decide whether
+     * to generate the edi file or not. If we're in NORMAL mode, generate the
+     * file.
+     *
+     * @param array $context
+     * @param callable $callback
+     */
+    protected function finish(array $context, callable $callback)
     {
         $format_bat = "";
         $created_batches = [];
@@ -174,25 +208,37 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
 
             $x12_partner_batch->append_claim_close();
 
-            // If this is the final, validated claim, write to the edi location
-            // for this x12 partner
-            if ($this->getAction() === BillingProcessor::VALIDATE_ONLY ||
-                $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-                $format_bat .= str_replace('~', PHP_EOL, $x12_partner_batch->getBatContent()) . "\n";
-            } else if ($this->getAction() === BillingProcessor::NORMAL) {
-                $x12_partner_batch->write_batch_file($x12_partner_id);
-            }
+            // Write the batch content to formatted string for presenting to user
+            $format_bat .= str_replace('~', PHP_EOL, $x12_partner_batch->getBatContent()) . "\n";
 
+            // Store all the batches we create with the x12-partner ID as index
+            // so we can pass them to the callback
             $created_batches[$x12_partner_id]= $x12_partner_batch;
         }
 
-        // if validating (sending to screen for user)
-        if ($this->getAction() === BillingProcessor::VALIDATE_ONLY ||
-            $this->getAction() === BillingProcessor::VALIDATE_AND_CLEAR) {
-            $wrap = "<!DOCTYPE html><html><head></head><body><div style='overflow: hidden;'><pre>" . text($format_bat) . "</pre></div></body></html>";
-            echo $wrap;
-            exit();
-        } else if ($this->getAction() === BillingProcessor::NORMAL) {
+        // Call the callback with new context
+        $callback([
+            'created_batches' => $created_batches,
+            'format_bat' => $format_bat
+        ]);
+    }
+
+    /**
+     * Complete the file and write formatted content to the edi directory.
+     *
+     * When running 'normal' action, this method is called
+     * by AbstractGenerator's complete() method.
+     *
+     * We call finish with a closure that
+     *
+     * @param array $context
+     */
+    public function completeToFile(array $context)
+    {
+        $this->finish($context, function ($context)   {
+
+            // Get the created_batches from the finish method
+            $created_batches = $context['created_batches'];
 
             // In the "normal" operation, we have written the batch files to disk above, and
             // need to build a presentation for the user to download them.
@@ -207,21 +253,38 @@ class GeneratorX12Direct extends AbstractGenerator implements GeneratorInterface
             // user for download.
             $html .= "<ul class='list-group'>";
             foreach ($created_batches as $x12_partner_id => $created_batch) {
+                // This is the final, validated claim, write to the edi location for this x12 partner
+                $created_batch->write_batch_file($x12_partner_id);
+                $x12_partner_name = text($this->x12_partners[$x12_partner_id]['name']);
+                // For the modal, build a list of downloads
                 $file = $created_batch->getBatFilename();
                 $url = $GLOBALS['webroot'] . '/interface/billing/get_claim_file.php?key=' . $file .
                     '&partner=' . $x12_partner_id .
                     '&csrf_token_form=' . CsrfUtils::collectCsrfToken();
-                $html .= "<li class='list-group-item d-flex justify-content-between align-items-center'><a href='$url'>$file</a></li>";
+                $html .=
+                    "<li class='list-group-item d-flex justify-content-between align-items-center'>
+                        <a href='$url'>$file</a>
+                        <span class='badge badge-primary badge-pill'>$x12_partner_name</span>
+                    </li>";
             }
             $html .= "</ul>";
             $html .= "</div></body></html>";
 
-            // The logger gets is accessible in the billing_process.php page with the results.
-            // We want all the good formatting that comes with the billing_process.php page (at the bottom)
-            // but we don't want to show the close button because the modal already has that.
-            $this->logger->setShowCloseButton(false);
             echo $html;
-        }
+        });
+    }
 
+    public function completeToScreen(array $context)
+    {
+        $this->finish($context, function ($context) {
+
+            // Get the format_bat string from the finish method
+            $format_bat = $context['format_bat'];
+
+            // if validating (sending to screen for user)
+            $wrap = "<!DOCTYPE html><html><head></head><body><div style='overflow: hidden;'><pre>" . text($format_bat) . "</pre></div></body></html>";
+            echo $wrap;
+            exit();
+        });
     }
 }

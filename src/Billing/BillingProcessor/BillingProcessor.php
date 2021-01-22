@@ -113,7 +113,6 @@ class BillingProcessor
         $processingTask->setup([
             'claims' => $claims,
             'post' => $this->post
-
         ]);
 
         // Go through each claim and process it while organizing them into batches

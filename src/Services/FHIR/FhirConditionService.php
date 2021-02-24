@@ -120,9 +120,10 @@ class FhirConditionService extends FhirServiceBase
         if (!empty($dataRecord['diagnosis'])) {
             $diagnosisCoding = new FHIRCoding();
             $diagnosisCode = new FHIRCodeableConcept();
-            foreach ($dataRecord['diagnosis'] as $code => $display) {
-                $diagnosisCoding->setCode($code);
-                $diagnosisCoding->setDisplay($display);
+            foreach ($dataRecord['diagnosis'] as $code) {
+                $diagnosisCoding->setCode($code['code']);
+                $diagnosisCoding->setDisplay($code['description']);
+                $diagnosisCoding->setSystem($code['system']);
                 $diagnosisCode->addCoding($diagnosisCoding);
             }
             $conditionResource->setCode($diagnosisCode);

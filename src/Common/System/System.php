@@ -44,6 +44,33 @@ class System
     }
 
     /**
+     * Start a process running in the background using the command parameter.
+     *
+     * Returns the process ID if successful, false otherwise.
+     *
+     * @param $command
+     * @return false|mixed
+     */
+    public function run_background_process($command)
+    {
+        $cmd = $this->escapeshellcmd($command);
+
+        $descriptorspec = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w']
+        ];
+        $pid = false;
+        $process = proc_open($cmd . " > /dev/null &", $descriptorspec, $pipes);
+        if ($process !== false) {
+            $process_details = proc_get_status($process);
+            $pid = $process_details['pid'];
+        }
+
+        return $pid;
+    }
+
+    /**
      * Cleans up the system command by escaping any arguments or injections that could be inserted here
      * @param string $command a command or command string that needs to be sanitized.
      * @return string The cleaned up string.

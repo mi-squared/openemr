@@ -379,8 +379,14 @@ class BaseService
         $diagnosis = array();
         foreach ($diags as $diag) {
             $codedesc = lookup_code_descriptions($diag);
-            $code = explode(':', $diag)[1];
-            $diagnosis[$code] = $codedesc;
+            $diag_parts = explode(':', $diag);
+            $system = $diag_parts[0];
+            $code = $diag_parts[1];
+            $diagnosis[] = [
+                'code' => $code,
+                'system' => $system,
+                'description' => $codedesc
+            ];
         }
         return $diagnosis;
     }

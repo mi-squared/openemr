@@ -15,13 +15,27 @@ namespace OpenEMR\Cqm\Qdm;
 class DiagnosisComponent extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
+    /**
+     * @property System.Code $code
+     */
     public $code = null;
 
+    /**
+     * @property System.Code $presentOnAdmissionIndicator
+     */
     public $presentOnAdmissionIndicator = null;
 
+    /**
+     * @property System.Integer $rank
+     */
     public $rank = null;
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::DiagnosisComponent';
 
 
 }

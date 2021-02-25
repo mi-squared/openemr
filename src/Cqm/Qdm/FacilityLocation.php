@@ -15,11 +15,22 @@ namespace OpenEMR\Cqm\Qdm;
 class FacilityLocation extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
+    /**
+     * @property System.Code $code
+     */
     public $code = null;
 
+    /**
+     * @property interval<System.DateTime> $locationPeriod
+     */
     public $locationPeriod = null;
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::FacilityLocation';
 
 
 }

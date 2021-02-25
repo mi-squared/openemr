@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeAssessmentPerformed extends AssessmentPerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Assessment, Not Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeAssessmentPerformed';
 
 
 }

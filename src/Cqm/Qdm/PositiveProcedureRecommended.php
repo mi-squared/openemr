@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveProcedureRecommended extends ProcedureRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Procedure, Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveProcedureRecommended';
 
 
 }

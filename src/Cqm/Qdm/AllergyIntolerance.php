@@ -15,25 +15,57 @@ namespace OpenEMR\Cqm\Qdm;
 class AllergyIntolerance extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property interval<System.DateTime> $prevalencePeriod
+     */
     public $prevalencePeriod = null;
 
+    /**
+     * @property System.Code $type
+     */
     public $type = null;
 
+    /**
+     * @property System.Code $severity
+     */
     public $severity = null;
 
+    /**
+     * @property System.Any $recorder
+     */
     public $recorder = null;
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Allergy/Intolerance';
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.119';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'allergy';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'intolerance';
+
+    public $_type = 'QDM::AllergyIntolerance';
 
 
 }

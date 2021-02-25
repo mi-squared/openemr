@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PatientEntity extends Entity
 {
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.136';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.161';
+
+    public $_type = 'QDM::PatientEntity';
 
 
 }

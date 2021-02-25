@@ -15,7 +15,12 @@ namespace OpenEMR\Cqm\Qdm;
 class ResultComponent extends Component
 {
 
+    /**
+     * @property interval<System.Quantity> $referenceRange
+     */
     public $referenceRange = null;
+
+    public $_type = 'QDM::ResultComponent';
 
 
 }

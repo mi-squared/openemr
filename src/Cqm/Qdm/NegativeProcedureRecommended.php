@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeProcedureRecommended extends ProcedureRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Procedure, Not Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeProcedureRecommended';
 
 
 }

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeLaboratoryTestPerformed extends LaboratoryTestPerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Laboratory Test, Not Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeLaboratoryTestPerformed';
 
 
 }

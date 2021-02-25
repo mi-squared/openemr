@@ -15,11 +15,22 @@ namespace OpenEMR\Cqm\Qdm;
 class Identifier extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
+    /**
+     * @property System.String $namingSystem
+     */
     public $namingSystem = null;
 
+    /**
+     * @property System.String $value
+     */
     public $value = null;
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::Identifier';
 
 
 }

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveDiagnosticStudyRecommended extends DiagnosticStudyRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Diagnostic Study, Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveDiagnosticStudyRecommended';
 
 
 }

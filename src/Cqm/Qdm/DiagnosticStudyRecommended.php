@@ -15,19 +15,42 @@ namespace OpenEMR\Cqm\Qdm;
 class DiagnosticStudyRecommended extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.Code $negationRationale
+     */
     public $negationRationale = null;
 
+    /**
+     * @property System.Any $requester
+     */
     public $requester = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.24';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.19';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'diagnostic_study';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'recommended';
+
+    public $_type = 'QDM::DiagnosticStudyRecommended';
 
 
 }

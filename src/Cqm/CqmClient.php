@@ -74,11 +74,17 @@ class CqmClient extends HttpClient
      * @return StreamInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function calculate(StreamInterface $patients, StreamInterface $measure, StreamInterface $valueSets)
+    public function calculate(
+        StreamInterface $patients,
+        StreamInterface $measure,
+        StreamInterface $valueSets,
+        StreamInterface $options = null
+    )
     {
         $patients = (string)str_replace( ["\r\n", "\n", "\r"], '', (string)$patients);
         $measure = (string)str_replace( ["\r\n", "\n", "\r"], '', (string)$measure);
         $valueSets = (string)str_replace( ["\r\n", "\n", "\r"], '', (string)$valueSets);
+        $options = (string)$options;
         try {
             return json_decode(
                 Utils::copyToString(
@@ -86,7 +92,8 @@ class CqmClient extends HttpClient
                         'form_params' => [
                             'patients' => $patients,
                             'measure' => $measure,
-                            'valueSets' => $valueSets
+                            'valueSets' => $valueSets,
+                            'options' => $options
                         ]]
                     )->getBody()
                 ), true);

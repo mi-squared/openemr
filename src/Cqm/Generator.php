@@ -5,8 +5,10 @@ namespace OpenEMR\Cqm;
 
 
 use Laminas\Code\Generator\ClassGenerator;
+use Laminas\Code\Generator\DocBlock\Tag\PropertyTag;
 use Laminas\Code\Generator\DocBlockGenerator;
 use Laminas\Code\Generator\FileGenerator;
+use Laminas\Code\Generator\PropertyGenerator;
 
 class Generator
 {
@@ -211,13 +213,28 @@ class Generator
                 $class->setExtendedClass($base_module . '\\' . $extends[$datatype]);
             }
 
+            // Add each property along with a docblock that specifies the type
             foreach ($attributes as $attribute) {
+                $property = new PropertyGenerator();
+                $property->setDocBlock(DocBlockGenerator::fromArray([
+                    'shortDescription' => null,
+                    'longDescription'  => null,
+                    'tags'             => [
+                        new PropertyTag(
+                            $attribute['name'],
+                            [$attribute['type']]
+                        )
+                    ]
+                ]));
+                $property->setName($attribute['name']);
                 if (isset($attribute['default'])) {
-                    $class->addProperty($attribute['name'], $attribute['default']);
-                } else {
-                    $class->addProperty($attribute['name']);
+                    $property->setDefaultValue($attribute['default']);
                 }
+                $class->addPropertyFromGenerator($property);
             }
+
+            // For cqm-execution, each model must have the _type field set in this format with QDM:: prefix
+            $class->addProperty('_type', "QDM::$datatype");
 
             // Special cases
             if ($datatype == 'Patient') {

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveMedicationOrder extends MedicationOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Medication, Order';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveMedicationOrder';
 
 
 }

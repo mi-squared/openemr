@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeEncounterRecommended extends EncounterRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Encounter, Not Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeEncounterRecommended';
 
 
 }

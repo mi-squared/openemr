@@ -15,13 +15,27 @@ namespace OpenEMR\Cqm\Qdm;
 class QDMBaseType extends \OpenEMR\Cqm\Qdm\BaseTypes\DataElement
 {
 
+    /**
+     * @property System.String $id
+     */
     public $id = null;
 
+    /**
+     * @property System.Code $code
+     */
     public $code = null;
 
+    /**
+     * @property System.String $patientId
+     */
     public $patientId = null;
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::QDMBaseType';
 
 
 }

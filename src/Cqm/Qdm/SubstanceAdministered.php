@@ -15,29 +15,67 @@ namespace OpenEMR\Cqm\Qdm;
 class SubstanceAdministered extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.DateTime $relevantDatetime
+     */
     public $relevantDatetime = null;
 
+    /**
+     * @property interval<System.DateTime> $relevantPeriod
+     */
     public $relevantPeriod = null;
 
+    /**
+     * @property System.Quantity $dosage
+     */
     public $dosage = null;
 
+    /**
+     * @property System.Code $frequency
+     */
     public $frequency = null;
 
+    /**
+     * @property System.Code $route
+     */
     public $route = null;
 
+    /**
+     * @property System.Code $negationRationale
+     */
     public $negationRationale = null;
 
+    /**
+     * @property System.Any $performer
+     */
     public $performer = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.73';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'substance';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'administered';
+
+    public $_type = 'QDM::SubstanceAdministered';
 
 
 }

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveInterventionRecommended extends InterventionRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Intervention, Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveInterventionRecommended';
 
 
 }

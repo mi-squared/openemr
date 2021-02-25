@@ -15,37 +15,81 @@ namespace OpenEMR\Cqm\Qdm;
 class EncounterPerformed extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.Code $admissionSource
+     */
     public $admissionSource = null;
 
+    /**
+     * @property interval<System.DateTime> $relevantPeriod
+     */
     public $relevantPeriod = null;
 
+    /**
+     * @property System.Code $dischargeDisposition
+     */
     public $dischargeDisposition = null;
 
+    /**
+     * @property list<QDM.FacilityLocation> $facilityLocations
+     */
     public $facilityLocations = [
         
     ];
 
+    /**
+     * @property list<QDM.DiagnosisComponent> $diagnoses
+     */
     public $diagnoses = [
         
     ];
 
+    /**
+     * @property System.Code $negationRationale
+     */
     public $negationRationale = null;
 
+    /**
+     * @property System.Quantity $lengthOfStay
+     */
     public $lengthOfStay = null;
 
+    /**
+     * @property System.Code $priority
+     */
     public $priority = null;
 
+    /**
+     * @property System.Any $participant
+     */
     public $participant = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.5';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'encounter';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'performed';
+
+    public $_type = 'QDM::EncounterPerformed';
 
 
 }

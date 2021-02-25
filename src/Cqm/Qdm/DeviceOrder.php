@@ -15,21 +15,47 @@ namespace OpenEMR\Cqm\Qdm;
 class DeviceOrder extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.Code $negationRationale
+     */
     public $negationRationale = null;
 
+    /**
+     * @property System.Code $reason
+     */
     public $reason = null;
 
+    /**
+     * @property System.Any $requester
+     */
     public $requester = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.15';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'device';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'order';
+
+    public $_type = 'QDM::DeviceOrder';
 
 
 }

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeMedicationAdministered extends MedicationAdministered
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Medication, Not Administered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeMedicationAdministered';
 
 
 }

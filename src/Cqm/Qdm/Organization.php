@@ -15,11 +15,22 @@ namespace OpenEMR\Cqm\Qdm;
 class Organization extends Entity
 {
 
+    /**
+     * @property System.Code $type
+     */
     public $type = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.135';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.163';
+
+    public $_type = 'QDM::Organization';
 
 
 }

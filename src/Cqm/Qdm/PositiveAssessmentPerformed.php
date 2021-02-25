@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveAssessmentPerformed extends AssessmentPerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Assessment, Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveAssessmentPerformed';
 
 
 }

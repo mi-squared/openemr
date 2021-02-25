@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeCommunicationPerformed extends CommunicationPerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Communication, Not Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeCommunicationPerformed';
 
 
 }

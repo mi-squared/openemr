@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveEncounterOrder extends EncounterOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Encounter, Order';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveEncounterOrder';
 
 
 }

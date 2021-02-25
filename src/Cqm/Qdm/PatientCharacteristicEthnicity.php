@@ -15,15 +15,32 @@ namespace OpenEMR\Cqm\Qdm;
 class PatientCharacteristicEthnicity extends QDMBaseType
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Patient Characteristic Ethnicity';
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.56';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'patient_characteristic';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'ethnicity';
+
+    public $_type = 'QDM::PatientCharacteristicEthnicity';
 
 
 }

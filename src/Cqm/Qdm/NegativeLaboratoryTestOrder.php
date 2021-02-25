@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeLaboratoryTestOrder extends LaboratoryTestOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Laboratory Test, Not Ordered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeLaboratoryTestOrder';
 
 
 }

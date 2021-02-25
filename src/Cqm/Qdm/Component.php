@@ -15,11 +15,22 @@ namespace OpenEMR\Cqm\Qdm;
 class Component extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
+    /**
+     * @property System.Code $code
+     */
     public $code = null;
 
+    /**
+     * @property System.Any $result
+     */
     public $result = null;
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::Component';
 
 
 }

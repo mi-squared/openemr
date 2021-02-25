@@ -15,29 +15,67 @@ namespace OpenEMR\Cqm\Qdm;
 class ImmunizationOrder extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $activeDatetime
+     */
     public $activeDatetime = null;
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.Quantity $dosage
+     */
     public $dosage = null;
 
+    /**
+     * @property System.Quantity $supply
+     */
     public $supply = null;
 
+    /**
+     * @property System.Code $reason
+     */
     public $reason = null;
 
+    /**
+     * @property System.Code $route
+     */
     public $route = null;
 
+    /**
+     * @property System.Code $negationRationale
+     */
     public $negationRationale = null;
 
+    /**
+     * @property System.Any $requester
+     */
     public $requester = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.113';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'immunization';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'order';
+
+    public $_type = 'QDM::ImmunizationOrder';
 
 
 }

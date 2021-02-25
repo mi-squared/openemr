@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveLaboratoryTestOrder extends LaboratoryTestOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Laboratory Test, Order';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveLaboratoryTestOrder';
 
 
 }

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveDeviceOrder extends DeviceOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Device, Order';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveDeviceOrder';
 
 
 }

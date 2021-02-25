@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeProcedureOrder extends ProcedureOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Procedure, Not Ordered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeProcedureOrder';
 
 
 }

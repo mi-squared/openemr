@@ -3888,7 +3888,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mi-squared/oe-cqm.git",
-                "reference": "156f552489e03320ab3da4c90b4e6182b13a7510"
+                "reference": "f538ce707be92e97616863f838d7fa55a9ad8319"
             },
             "require": {
                 "mi-squared/mi-framework": "^0.1.0",
@@ -3908,7 +3908,7 @@
                 }
             ],
             "description": "Test CQM Services.",
-            "time": "2021-02-21T19:59:12+00:00"
+            "time": "2021-02-24T15:15:45+00:00"
         },
         {
             "name": "mi-squared/oe-module-installer-plugin",

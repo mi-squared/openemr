@@ -15,21 +15,47 @@ namespace OpenEMR\Cqm\Qdm;
 class FamilyHistory extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.Code $relationship
+     */
     public $relationship = null;
 
+    /**
+     * @property System.Any $recorder
+     */
     public $recorder = null;
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Family History';
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.111';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.12';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'family_history';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = '';
+
+    public $_type = 'QDM::FamilyHistory';
 
 
 }

@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeSubstanceAdministered extends SubstanceAdministered
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Substance, Not Administered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeSubstanceAdministered';
 
 
 }

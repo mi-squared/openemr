@@ -6,13 +6,12 @@ namespace OpenEMR\Cqm\Qdm\BaseTypes;
 
 class DataElement extends AbstractType
 {
-    public $bundleId;
     public $_type;
+    public $bundleId;
     public $dataElementCodes = [];
 
     public function __construct(array $properties = [])
     {
-        $this->_type = get_class($this);
         parent::__construct($properties);
     }
 

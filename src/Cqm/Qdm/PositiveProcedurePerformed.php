@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveProcedurePerformed extends ProcedurePerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Procedure, Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveProcedurePerformed';
 
 
 }

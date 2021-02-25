@@ -15,17 +15,37 @@ namespace OpenEMR\Cqm\Qdm;
 class PatientCharacteristicPayer extends QDMBaseType
 {
 
+    /**
+     * @property interval<System.DateTime> $relevantPeriod
+     */
     public $relevantPeriod = null;
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Patient Characteristic Payer';
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.58';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'patient_characteristic';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'payer';
+
+    public $_type = 'QDM::PatientCharacteristicPayer';
 
 
 }

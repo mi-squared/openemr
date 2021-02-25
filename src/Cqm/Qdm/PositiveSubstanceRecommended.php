@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveSubstanceRecommended extends SubstanceRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Substance, Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveSubstanceRecommended';
 
 
 }

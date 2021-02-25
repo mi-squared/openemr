@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeProcedurePerformed extends ProcedurePerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Procedure, Not Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeProcedurePerformed';
 
 
 }

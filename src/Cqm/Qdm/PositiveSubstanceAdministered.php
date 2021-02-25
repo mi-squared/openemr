@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveSubstanceAdministered extends SubstanceAdministered
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Substance, Administered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveSubstanceAdministered';
 
 
 }

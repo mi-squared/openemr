@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeSubstanceOrder extends SubstanceOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Substance, Not Ordered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeSubstanceOrder';
 
 
 }

@@ -15,19 +15,42 @@ namespace OpenEMR\Cqm\Qdm;
 class RelatedPerson extends QDMBaseType
 {
 
+    /**
+     * @property QDM.Identifier $identifier
+     */
     public $identifier = null;
 
+    /**
+     * @property System.String $linkedPatientId
+     */
     public $linkedPatientId = null;
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Related Person';
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.141';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'related_person';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = '';
+
+    public $_type = 'QDM::RelatedPerson';
 
 
 }

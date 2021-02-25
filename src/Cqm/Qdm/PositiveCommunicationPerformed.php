@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveCommunicationPerformed extends CommunicationPerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Communication, Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveCommunicationPerformed';
 
 
 }

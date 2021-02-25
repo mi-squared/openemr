@@ -15,17 +15,37 @@ namespace OpenEMR\Cqm\Qdm;
 class PatientCharacteristicBirthdate extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $birthDatetime
+     */
     public $birthDatetime = null;
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Patient Characteristic Birthdate';
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.54';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'patient_characteristic';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'birthdate';
+
+    public $_type = 'QDM::PatientCharacteristicBirthdate';
 
 
 }

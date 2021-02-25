@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositivePhysicalExamRecommended extends PhysicalExamRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Physical Exam, Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositivePhysicalExamRecommended';
 
 
 }

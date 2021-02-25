@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveDiagnosticStudyOrder extends DiagnosticStudyOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Diagnostic Study, Order';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveDiagnosticStudyOrder';
 
 
 }

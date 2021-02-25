@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeDeviceOrder extends DeviceOrder
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Device, Not Ordered';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeDeviceOrder';
 
 
 }

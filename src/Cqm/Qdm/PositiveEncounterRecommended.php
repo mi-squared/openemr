@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveEncounterRecommended extends EncounterRecommended
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Encounter, Recommended';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveEncounterRecommended';
 
 
 }

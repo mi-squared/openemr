@@ -15,11 +15,22 @@ namespace OpenEMR\Cqm\Qdm;
 class Entity extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
+    /**
+     * @property System.String $id
+     */
     public $id = null;
 
+    /**
+     * @property QDM.Identifier $identifier
+     */
     public $identifier = null;
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::Entity';
 
 
 }

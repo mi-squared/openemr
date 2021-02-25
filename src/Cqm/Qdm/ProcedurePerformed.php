@@ -15,43 +15,99 @@ namespace OpenEMR\Cqm\Qdm;
 class ProcedurePerformed extends QDMBaseType
 {
 
+    /**
+     * @property System.DateTime $authorDatetime
+     */
     public $authorDatetime = null;
 
+    /**
+     * @property System.DateTime $relevantDatetime
+     */
     public $relevantDatetime = null;
 
+    /**
+     * @property interval<System.DateTime> $relevantPeriod
+     */
     public $relevantPeriod = null;
 
+    /**
+     * @property System.Code $reason
+     */
     public $reason = null;
 
+    /**
+     * @property System.Code $method
+     */
     public $method = null;
 
+    /**
+     * @property System.Any $result
+     */
     public $result = null;
 
+    /**
+     * @property System.Code $status
+     */
     public $status = null;
 
+    /**
+     * @property System.Code $anatomicalLocationSite
+     */
     public $anatomicalLocationSite = null;
 
+    /**
+     * @property System.Integer $rank
+     */
     public $rank = null;
 
+    /**
+     * @property System.Code $priority
+     */
     public $priority = null;
 
+    /**
+     * @property System.DateTime $incisionDatetime
+     */
     public $incisionDatetime = null;
 
+    /**
+     * @property System.Code $negationRationale
+     */
     public $negationRationale = null;
 
+    /**
+     * @property list<QDM.Component> $components
+     */
     public $components = [
         
     ];
 
+    /**
+     * @property System.Any $performer
+     */
     public $performer = null;
 
+    /**
+     * @property System.String $hqmfOid
+     */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.67';
 
+    /**
+     * @property System.String $qrdaOid
+     */
     public $qrdaOid = '';
 
+    /**
+     * @property System.String $qdmCategory
+     */
     public $qdmCategory = 'procedure';
 
+    /**
+     * @property System.String $qdmStatus
+     */
     public $qdmStatus = 'performed';
+
+    public $_type = 'QDM::ProcedurePerformed';
 
 
 }

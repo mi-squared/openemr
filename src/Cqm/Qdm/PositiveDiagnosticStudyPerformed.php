@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class PositiveDiagnosticStudyPerformed extends DiagnosticStudyPerformed
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Diagnostic Study, Performed';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::PositiveDiagnosticStudyPerformed';
 
 
 }

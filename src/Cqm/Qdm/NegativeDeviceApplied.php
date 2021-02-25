@@ -15,9 +15,17 @@ namespace OpenEMR\Cqm\Qdm;
 class NegativeDeviceApplied extends DeviceApplied
 {
 
+    /**
+     * @property System.String $qdmTitle
+     */
     public $qdmTitle = 'Device, Not Applied';
 
+    /**
+     * @property System.String $qdmVersion
+     */
     public $qdmVersion = '5.5';
+
+    public $_type = 'QDM::NegativeDeviceApplied';
 
 
 }

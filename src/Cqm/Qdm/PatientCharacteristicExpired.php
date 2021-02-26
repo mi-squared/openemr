@@ -16,37 +16,37 @@ class PatientCharacteristicExpired extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $expiredDatetime
+     * @property BaseTypes\DateTime $expiredDatetime
      */
     public $expiredDatetime = null;
 
     /**
-     * @property System.Code $cause
+     * @property BaseTypes\Code $cause
      */
     public $cause = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Patient Characteristic Expired';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.57';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'patient_characteristic';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'expired';
 

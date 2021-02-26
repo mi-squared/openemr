@@ -16,12 +16,12 @@ class NegativeInterventionOrder extends InterventionOrder
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Intervention, Not Ordered';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

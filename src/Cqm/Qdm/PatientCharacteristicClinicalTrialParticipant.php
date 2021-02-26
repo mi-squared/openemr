@@ -16,37 +16,37 @@ class PatientCharacteristicClinicalTrialParticipant extends QDMBaseType
 {
 
     /**
-     * @property System.Code $reason
+     * @property BaseTypes\Code $reason
      */
     public $reason = null;
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Patient Characteristic Clinical Trial Participant';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.6';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.51';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'patient_characteristic';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'clinical_trial_participant';
 

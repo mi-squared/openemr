@@ -16,12 +16,12 @@ class PositiveMedicationDischarge extends MedicationDischarge
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Medication, Discharge';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

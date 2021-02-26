@@ -16,76 +16,76 @@ class EncounterPerformed extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.Code $admissionSource
+     * @property BaseTypes\Code $admissionSource
      */
     public $admissionSource = null;
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property System.Code $dischargeDisposition
+     * @property BaseTypes\Code $dischargeDisposition
      */
     public $dischargeDisposition = null;
 
     /**
-     * @property list<QDM.FacilityLocation> $facilityLocations
+     * @property array $facilityLocations
      */
     public $facilityLocations = [
         
     ];
 
     /**
-     * @property list<QDM.DiagnosisComponent> $diagnoses
+     * @property array $diagnoses
      */
     public $diagnoses = [
         
     ];
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property System.Quantity $lengthOfStay
+     * @property BaseTypes\Quantity $lengthOfStay
      */
     public $lengthOfStay = null;
 
     /**
-     * @property System.Code $priority
+     * @property BaseTypes\Code $priority
      */
     public $priority = null;
 
     /**
-     * @property System.Any $participant
+     * @property BaseTypes\Any $participant
      */
     public $participant = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.5';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'encounter';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'performed';
 

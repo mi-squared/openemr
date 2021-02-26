@@ -16,12 +16,12 @@ class PositiveDeviceApplied extends DeviceApplied
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Device, Applied';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

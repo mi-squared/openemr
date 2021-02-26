@@ -16,12 +16,12 @@ class NegativeDeviceRecommended extends DeviceRecommended
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Device, Not Recommended';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

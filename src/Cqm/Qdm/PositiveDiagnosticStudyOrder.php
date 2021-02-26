@@ -16,12 +16,12 @@ class PositiveDiagnosticStudyOrder extends DiagnosticStudyOrder
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Diagnostic Study, Order';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

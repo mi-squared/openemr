@@ -16,12 +16,12 @@ class NegativeSubstanceAdministered extends SubstanceAdministered
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Substance, Not Administered';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

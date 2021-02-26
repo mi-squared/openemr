@@ -22,14 +22,14 @@ class Generator
         'System.Any' => 'BaseTypes\\Any',
         'interval<System.DateTime>' => 'BaseTypes\\Interval',
         'interval<System.Quantity>' => 'BaseTypes\\Interval',
-        'list<QDM.Component>' => 'BaseTypes\\Array',
-        'System.String' => 'BaseTypes\\String',
-        'list<QDM.Id>' => 'BaseTypes\\Array',
-        'list<QDM.ResultComponent>' => 'BaseTypes\\Array',
-        'list<QDM.FacilityLocation>' => 'BaseTypes\\Array',
-        'list<QDM.DiagnosisComponent>' => 'BaseTypes\\Array',
-        'list<System.String>' => 'BaseTypes\\Array',
-        'list<System.Code>' => 'BaseTypes\\Array',
+        'list<QDM.Component>' => 'array',
+        'System.String' => 'string',
+        'list<QDM.Id>' => 'array',
+        'list<QDM.ResultComponent>' => 'array',
+        'list<QDM.FacilityLocation>' => 'array',
+        'list<QDM.DiagnosisComponent>' => 'array',
+        'list<System.String>' => 'array',
+        'list<System.Code>' => 'array',
         'System.Decimal' => 'BaseTypes\\Float',
         'System.Time' => 'BaseTypes\\Time',
         'System.Concept' => 'BaseTypes\\Any'
@@ -43,6 +43,7 @@ class Generator
         'list<QDM.DiagnosisComponent>' => [],
         'list<System.String>' => [],
         'list<System.Code>' => [],
+        'System.String' => ''
     ];
 
     public function execute()
@@ -222,7 +223,7 @@ class Generator
                     'tags'             => [
                         new PropertyTag(
                             $attribute['name'],
-                            [$attribute['type']]
+                            [self::$type_lookup[$attribute['type']]]
                         )
                     ]
                 ]));
@@ -249,8 +250,8 @@ class Generator
                 'classes' => [$class]
             ]);
             $code = $file->generate();
-            // $dir = __DIR__;
-            $dir = '/Users/kchapple/Dev/openemr/openemr/src/Cqm';
+            $dir = __DIR__;
+            // $dir = '/Users/kchapple/Dev/openemr/openemr/src/Cqm';
             mkdir($dir . '/Qdm');
             $filename = $dir . '/Qdm/' . $datatype . '.php';
             file_put_contents($filename, $code);

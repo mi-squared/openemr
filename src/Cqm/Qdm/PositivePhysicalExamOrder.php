@@ -16,12 +16,12 @@ class PositivePhysicalExamOrder extends PhysicalExamOrder
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Physical Exam, Order';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

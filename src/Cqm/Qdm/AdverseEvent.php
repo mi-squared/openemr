@@ -16,57 +16,57 @@ class AdverseEvent extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.DateTime $relevantDatetime
+     * @property BaseTypes\DateTime $relevantDatetime
      */
     public $relevantDatetime = null;
 
     /**
-     * @property System.Code $severity
+     * @property BaseTypes\Code $severity
      */
     public $severity = null;
 
     /**
-     * @property System.Code $facilityLocation
+     * @property BaseTypes\Code $facilityLocation
      */
     public $facilityLocation = null;
 
     /**
-     * @property System.Code $type
+     * @property BaseTypes\Code $type
      */
     public $type = null;
 
     /**
-     * @property System.Any $recorder
+     * @property BaseTypes\Any $recorder
      */
     public $recorder = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Adverse Event';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.120';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'adverse_event';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = '';
 

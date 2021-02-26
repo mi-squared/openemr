@@ -16,32 +16,32 @@ class PatientCharacteristic extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Patient Characteristic';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.53';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'patient_characteristic';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = '';
 

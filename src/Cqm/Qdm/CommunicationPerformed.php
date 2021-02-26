@@ -16,69 +16,69 @@ class CommunicationPerformed extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.Code $category
+     * @property BaseTypes\Code $category
      */
     public $category = null;
 
     /**
-     * @property System.Code $medium
+     * @property BaseTypes\Code $medium
      */
     public $medium = null;
 
     /**
-     * @property System.Any $sender
+     * @property BaseTypes\Any $sender
      */
     public $sender = null;
 
     /**
-     * @property System.Any $recipient
+     * @property BaseTypes\Any $recipient
      */
     public $recipient = null;
 
     /**
-     * @property list<System.String> $relatedTo
+     * @property array $relatedTo
      */
     public $relatedTo = [
         
     ];
 
     /**
-     * @property System.DateTime $sentDatetime
+     * @property BaseTypes\DateTime $sentDatetime
      */
     public $sentDatetime = null;
 
     /**
-     * @property System.DateTime $receivedDatetime
+     * @property BaseTypes\DateTime $receivedDatetime
      */
     public $receivedDatetime = null;
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.132';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'communication';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'performed';
 

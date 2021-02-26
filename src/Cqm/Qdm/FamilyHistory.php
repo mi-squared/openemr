@@ -16,42 +16,42 @@ class FamilyHistory extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.Code $relationship
+     * @property BaseTypes\Code $relationship
      */
     public $relationship = null;
 
     /**
-     * @property System.Any $recorder
+     * @property BaseTypes\Any $recorder
      */
     public $recorder = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Family History';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.111';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.12';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'family_history';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = '';
 

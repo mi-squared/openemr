@@ -18,12 +18,12 @@ class Patient extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
     use Traits\PatientExtension;
 
     /**
-     * @property System.DateTime $birthDatetime
+     * @property BaseTypes\DateTime $birthDatetime
      */
     public $birthDatetime = null;
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

@@ -16,17 +16,17 @@ class Identifier extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
     /**
-     * @property System.String $namingSystem
+     * @property string $namingSystem
      */
-    public $namingSystem = null;
+    public $namingSystem = '';
 
     /**
-     * @property System.String $value
+     * @property string $value
      */
-    public $value = null;
+    public $value = '';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

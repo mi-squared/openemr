@@ -16,22 +16,22 @@ class DiagnosisComponent extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
     /**
-     * @property System.Code $code
+     * @property BaseTypes\Code $code
      */
     public $code = null;
 
     /**
-     * @property System.Code $presentOnAdmissionIndicator
+     * @property BaseTypes\Code $presentOnAdmissionIndicator
      */
     public $presentOnAdmissionIndicator = null;
 
     /**
-     * @property System.Integer $rank
+     * @property BaseTypes\Integer $rank
      */
     public $rank = null;
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

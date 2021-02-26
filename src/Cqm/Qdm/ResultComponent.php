@@ -16,7 +16,7 @@ class ResultComponent extends Component
 {
 
     /**
-     * @property interval<System.Quantity> $referenceRange
+     * @property BaseTypes\Interval $referenceRange
      */
     public $referenceRange = null;
 

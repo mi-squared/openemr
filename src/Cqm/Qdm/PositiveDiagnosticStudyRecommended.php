@@ -16,12 +16,12 @@ class PositiveDiagnosticStudyRecommended extends DiagnosticStudyRecommended
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Diagnostic Study, Recommended';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

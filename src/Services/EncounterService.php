@@ -185,11 +185,11 @@ class EncounterService extends BaseService
 
         if (!empty($puuidBind)) {
             // code to support patient binding
-            $isValidPatient = $this->encounterValidator->validateId('uuid', self::PATIENT_TABLE, $puuidBind, true);
+            $isValidPatient = $this->encounterValidator->validateId('uuid', self::PATIENT_TABLE, $puuidBytes, true);
             if ($isValidPatient != true) {
                 return $isValidPatient;
             }
-            $pid = $this->getIdByUuid(UuidRegistry::uuidToBytes($puuidBind), self::PATIENT_TABLE, "pid");
+            $pid = $this->getIdByUuid($puuidBytes, self::PATIENT_TABLE, "pid");
             if (empty($pid)) {
                 $processingResult->setValidationMessages("Invalid pid");
                 return $processingResult;

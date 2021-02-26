@@ -16,54 +16,54 @@ class CareGoal extends QDMBaseType
 {
 
     /**
-     * @property System.Date $statusDate
+     * @property BaseTypes\Date $statusDate
      */
     public $statusDate = null;
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property list<System.String> $relatedTo
+     * @property array $relatedTo
      */
     public $relatedTo = [
         
     ];
 
     /**
-     * @property System.Any $targetOutcome
+     * @property BaseTypes\Any $targetOutcome
      */
     public $targetOutcome = null;
 
     /**
-     * @property System.Any $performer
+     * @property BaseTypes\Any $performer
      */
     public $performer = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Care Goal';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.7';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'care_goal';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = '';
 

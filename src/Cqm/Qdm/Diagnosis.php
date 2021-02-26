@@ -16,52 +16,52 @@ class Diagnosis extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property interval<System.DateTime> $prevalencePeriod
+     * @property BaseTypes\Interval $prevalencePeriod
      */
     public $prevalencePeriod = null;
 
     /**
-     * @property System.Code $anatomicalLocationSite
+     * @property BaseTypes\Code $anatomicalLocationSite
      */
     public $anatomicalLocationSite = null;
 
     /**
-     * @property System.Code $severity
+     * @property BaseTypes\Code $severity
      */
     public $severity = null;
 
     /**
-     * @property System.Any $recorder
+     * @property BaseTypes\Any $recorder
      */
     public $recorder = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Diagnosis';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.110';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.135';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'condition';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = '';
 

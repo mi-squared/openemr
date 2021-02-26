@@ -16,12 +16,12 @@ class PatientEntity extends Entity
 {
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.136';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.161';
 

@@ -1,0 +1,601 @@
+{
+   "library" : {
+      "identifier" : {
+         "id" : "Hospice",
+         "version" : "2.2.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "3:1-3:23",
+            "localIdentifier" : "QDM",
+            "uri" : "urn:healthit-gov:qdm:v5_5",
+            "version" : "5.5"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "11",
+            "locator" : "13:1-13:49",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "parameterTypeSpecifier" : {
+               "localId" : "10",
+               "locator" : "13:32-13:49",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "9",
+                  "locator" : "13:41-13:48",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "5:1-5:55",
+            "name" : "SNOMEDCT",
+            "id" : "urn:oid:2.16.840.1.113883.6.96",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "3",
+            "locator" : "7:1-7:71",
+            "name" : "Encounter Inpatient",
+            "id" : "urn:oid:2.16.840.1.113883.3.666.5.307",
+            "accessLevel" : "Public"
+         }, {
+            "localId" : "4",
+            "locator" : "8:1-8:75",
+            "name" : "Hospice care ambulatory",
+            "id" : "urn:oid:2.16.840.1.113762.1.4.1108.15",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "6",
+            "locator" : "10:1-10:175",
+            "name" : "Discharge to healthcare facility for hospice care (procedure)",
+            "id" : "428371000124100",
+            "display" : "Discharge to healthcare facility for hospice care (procedure)",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "localId" : "5",
+               "locator" : "10:94-10:103",
+               "name" : "SNOMEDCT"
+            }
+         }, {
+            "localId" : "8",
+            "locator" : "11:1-11:145",
+            "name" : "Discharge to home for hospice care (procedure)",
+            "id" : "428361000124107",
+            "display" : "Discharge to home for hospice care (procedure)",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "localId" : "7",
+               "locator" : "11:79-11:88",
+               "name" : "SNOMEDCT"
+            }
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "15:1-15:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "15:1-15:15",
+                  "dataType" : "{urn:healthit-gov:qdm:v5_5}Patient",
+                  "templateId" : "Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "48",
+            "locator" : "17:1-29:5",
+            "name" : "Has Hospice",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "48",
+                  "s" : [ {
+                     "value" : [ "define ","\"Has Hospice\"",":\n  " ]
+                  }, {
+                     "r" : "47",
+                     "s" : [ {
+                        "r" : "38",
+                        "s" : [ {
+                           "r" : "29",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "28",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "28",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "r" : "13",
+                                       "s" : [ {
+                                          "r" : "12",
+                                          "s" : [ {
+                                             "r" : "12",
+                                             "s" : [ {
+                                                "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Encounter Inpatient\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","DischargeHospice" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n      " ]
+                                 }, {
+                                    "r" : "27",
+                                    "s" : [ {
+                                       "value" : [ "where " ]
+                                    }, {
+                                       "r" : "27",
+                                       "s" : [ {
+                                          "r" : "22",
+                                          "s" : [ {
+                                             "value" : [ "( " ]
+                                          }, {
+                                             "r" : "22",
+                                             "s" : [ {
+                                                "r" : "17",
+                                                "s" : [ {
+                                                   "r" : "15",
+                                                   "s" : [ {
+                                                      "r" : "14",
+                                                      "s" : [ {
+                                                         "value" : [ "DischargeHospice" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "15",
+                                                      "s" : [ {
+                                                         "value" : [ "dischargeDisposition" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " ","~"," " ]
+                                                }, {
+                                                   "r" : "16",
+                                                   "s" : [ {
+                                                      "value" : [ "\"Discharge to home for hospice care (procedure)\"" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "\n          or " ]
+                                             }, {
+                                                "r" : "21",
+                                                "s" : [ {
+                                                   "r" : "19",
+                                                   "s" : [ {
+                                                      "r" : "18",
+                                                      "s" : [ {
+                                                         "value" : [ "DischargeHospice" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "19",
+                                                      "s" : [ {
+                                                         "value" : [ "dischargeDisposition" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " ","~"," " ]
+                                                }, {
+                                                   "r" : "20",
+                                                   "s" : [ {
+                                                      "value" : [ "\"Discharge to healthcare facility for hospice care (procedure)\"" ]
+                                                   } ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "\n      )" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n        and " ]
+                                       }, {
+                                          "r" : "26",
+                                          "s" : [ {
+                                             "r" : "24",
+                                             "s" : [ {
+                                                "r" : "23",
+                                                "s" : [ {
+                                                   "value" : [ "DischargeHospice" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "24",
+                                                "s" : [ {
+                                                   "value" : [ "relevantPeriod" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "r" : "26",
+                                             "value" : [ " ","ends during"," " ]
+                                          }, {
+                                             "r" : "25",
+                                             "s" : [ {
+                                                "value" : [ "\"Measurement Period\"" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n  )" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    or " ]
+                        }, {
+                           "r" : "37",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "36",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "36",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "r" : "31",
+                                       "s" : [ {
+                                          "r" : "30",
+                                          "s" : [ {
+                                             "r" : "30",
+                                             "s" : [ {
+                                                "value" : [ "[","\"Intervention, Order\"",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Hospice care ambulatory\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","HospiceOrder" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n        " ]
+                                 }, {
+                                    "r" : "35",
+                                    "s" : [ {
+                                       "value" : [ "where " ]
+                                    }, {
+                                       "r" : "35",
+                                       "s" : [ {
+                                          "r" : "33",
+                                          "s" : [ {
+                                             "r" : "32",
+                                             "s" : [ {
+                                                "value" : [ "HospiceOrder" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "33",
+                                             "s" : [ {
+                                                "value" : [ "authorDatetime" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "r" : "35",
+                                          "value" : [ " ","during"," " ]
+                                       }, {
+                                          "r" : "34",
+                                          "s" : [ {
+                                             "value" : [ "\"Measurement Period\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n    )" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    or " ]
+                     }, {
+                        "r" : "46",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "45",
+                           "s" : [ {
+                              "value" : [ "( " ]
+                           }, {
+                              "r" : "45",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "40",
+                                    "s" : [ {
+                                       "r" : "39",
+                                       "s" : [ {
+                                          "r" : "39",
+                                          "s" : [ {
+                                             "value" : [ "[","\"Intervention, Performed\"",": " ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "\"Hospice care ambulatory\"" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","HospicePerformed" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n        " ]
+                              }, {
+                                 "r" : "44",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "44",
+                                    "s" : [ {
+                                       "r" : "42",
+                                       "s" : [ {
+                                          "r" : "41",
+                                          "s" : [ {
+                                             "value" : [ "HospicePerformed" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "42",
+                                          "s" : [ {
+                                             "value" : [ "relevantPeriod" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "r" : "44",
+                                       "value" : [ " ","overlaps"," " ]
+                                    }, {
+                                       "r" : "43",
+                                       "s" : [ {
+                                          "value" : [ "\"Measurement Period\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    )" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "47",
+               "locator" : "18:3-29:5",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "38",
+                  "locator" : "18:3-26:5",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "29",
+                     "locator" : "18:3-23:3",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "28",
+                        "locator" : "18:10-23:3",
+                        "type" : "Query",
+                        "source" : [ {
+                           "localId" : "13",
+                           "locator" : "18:12-18:75",
+                           "alias" : "DischargeHospice",
+                           "expression" : {
+                              "localId" : "12",
+                              "locator" : "18:12-18:58",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_5}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "locator" : "18:37-18:57",
+                                 "name" : "Encounter Inpatient",
+                                 "type" : "ValueSetRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "27",
+                           "locator" : "19:7-22:76",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "22",
+                              "locator" : "19:13-21:7",
+                              "type" : "Or",
+                              "operand" : [ {
+                                 "localId" : "17",
+                                 "locator" : "19:15-19:102",
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "localId" : "15",
+                                    "locator" : "19:15-19:51",
+                                    "path" : "dischargeDisposition",
+                                    "scope" : "DischargeHospice",
+                                    "type" : "Property"
+                                 }, {
+                                    "localId" : "16",
+                                    "locator" : "19:55-19:102",
+                                    "name" : "Discharge to home for hospice care (procedure)",
+                                    "type" : "CodeRef"
+                                 } ]
+                              }, {
+                                 "localId" : "21",
+                                 "locator" : "20:14-20:116",
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "localId" : "19",
+                                    "locator" : "20:14-20:50",
+                                    "path" : "dischargeDisposition",
+                                    "scope" : "DischargeHospice",
+                                    "type" : "Property"
+                                 }, {
+                                    "localId" : "20",
+                                    "locator" : "20:54-20:116",
+                                    "name" : "Discharge to healthcare facility for hospice care (procedure)",
+                                    "type" : "CodeRef"
+                                 } ]
+                              } ]
+                           }, {
+                              "localId" : "26",
+                              "locator" : "22:13-22:76",
+                              "type" : "In",
+                              "operand" : [ {
+                                 "locator" : "22:45-22:48",
+                                 "type" : "End",
+                                 "operand" : {
+                                    "localId" : "24",
+                                    "locator" : "22:13-22:43",
+                                    "path" : "relevantPeriod",
+                                    "scope" : "DischargeHospice",
+                                    "type" : "Property"
+                                 }
+                              }, {
+                                 "localId" : "25",
+                                 "locator" : "22:57-22:76",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef"
+                              } ]
+                           } ]
+                        }
+                     }
+                  }, {
+                     "localId" : "37",
+                     "locator" : "24:8-26:5",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "36",
+                        "locator" : "24:15-26:5",
+                        "type" : "Query",
+                        "source" : [ {
+                           "localId" : "31",
+                           "locator" : "24:17-24:79",
+                           "alias" : "HospiceOrder",
+                           "expression" : {
+                              "localId" : "30",
+                              "locator" : "24:17-24:66",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_5}PositiveInterventionOrder",
+                              "templateId" : "PositiveInterventionOrder",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "locator" : "24:41-24:65",
+                                 "name" : "Hospice care ambulatory",
+                                 "type" : "ValueSetRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "35",
+                           "locator" : "25:9-25:69",
+                           "type" : "In",
+                           "operand" : [ {
+                              "localId" : "33",
+                              "locator" : "25:15-25:41",
+                              "path" : "authorDatetime",
+                              "scope" : "HospiceOrder",
+                              "type" : "Property"
+                           }, {
+                              "localId" : "34",
+                              "locator" : "25:50-25:69",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef"
+                           } ]
+                        }
+                     }
+                  } ]
+               }, {
+                  "localId" : "46",
+                  "locator" : "27:8-29:5",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "45",
+                     "locator" : "27:15-29:5",
+                     "type" : "Query",
+                     "source" : [ {
+                        "localId" : "40",
+                        "locator" : "27:17-27:87",
+                        "alias" : "HospicePerformed",
+                        "expression" : {
+                           "localId" : "39",
+                           "locator" : "27:17-27:70",
+                           "dataType" : "{urn:healthit-gov:qdm:v5_5}PositiveInterventionPerformed",
+                           "templateId" : "PositiveInterventionPerformed",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "locator" : "27:45-27:69",
+                              "name" : "Hospice care ambulatory",
+                              "type" : "ValueSetRef"
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "44",
+                        "locator" : "28:9-28:75",
+                        "type" : "Overlaps",
+                        "operand" : [ {
+                           "localId" : "42",
+                           "locator" : "28:15-28:45",
+                           "path" : "relevantPeriod",
+                           "scope" : "HospicePerformed",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "43",
+                           "locator" : "28:56-28:75",
+                           "name" : "Measurement Period",
+                           "type" : "ParameterRef"
+                        } ]
+                     }
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}

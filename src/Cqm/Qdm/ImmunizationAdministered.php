@@ -16,57 +16,57 @@ class ImmunizationAdministered extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.DateTime $relevantDatetime
+     * @property BaseTypes\DateTime $relevantDatetime
      */
     public $relevantDatetime = null;
 
     /**
-     * @property System.Code $reason
+     * @property BaseTypes\Code $reason
      */
     public $reason = null;
 
     /**
-     * @property System.Quantity $dosage
+     * @property BaseTypes\Quantity $dosage
      */
     public $dosage = null;
 
     /**
-     * @property System.Code $route
+     * @property BaseTypes\Code $route
      */
     public $route = null;
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property System.Any $performer
+     * @property BaseTypes\Any $performer
      */
     public $performer = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.112';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.140';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'immunization';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'administered';
 

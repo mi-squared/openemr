@@ -16,62 +16,62 @@ class SubstanceRecommended extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.Code $reason
+     * @property BaseTypes\Code $reason
      */
     public $reason = null;
 
     /**
-     * @property System.Quantity $dosage
+     * @property BaseTypes\Quantity $dosage
      */
     public $dosage = null;
 
     /**
-     * @property System.Code $frequency
+     * @property BaseTypes\Code $frequency
      */
     public $frequency = null;
 
     /**
-     * @property System.Integer $refills
+     * @property BaseTypes\Integer $refills
      */
     public $refills = null;
 
     /**
-     * @property System.Code $route
+     * @property BaseTypes\Code $route
      */
     public $route = null;
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property System.Any $requester
+     * @property BaseTypes\Any $requester
      */
     public $requester = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.78';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'substance';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'recommended';
 

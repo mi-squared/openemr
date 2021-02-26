@@ -16,12 +16,12 @@ class NegativeSubstanceRecommended extends SubstanceRecommended
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Substance, Not Recommended';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

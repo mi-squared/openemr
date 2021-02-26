@@ -16,17 +16,17 @@ class Organization extends Entity
 {
 
     /**
-     * @property System.Code $type
+     * @property BaseTypes\Code $type
      */
     public $type = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.135';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.163';
 

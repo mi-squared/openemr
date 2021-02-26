@@ -16,12 +16,12 @@ class PositiveLaboratoryTestOrder extends LaboratoryTestOrder
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Laboratory Test, Order';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

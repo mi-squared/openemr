@@ -16,12 +16,12 @@ class NegativeImmunizationAdministered extends ImmunizationAdministered
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Immunization, Not Administered';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

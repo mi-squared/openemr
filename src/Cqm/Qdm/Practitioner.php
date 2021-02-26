@@ -16,27 +16,27 @@ class Practitioner extends Entity
 {
 
     /**
-     * @property System.Code $role
+     * @property BaseTypes\Code $role
      */
     public $role = null;
 
     /**
-     * @property System.Code $specialty
+     * @property BaseTypes\Code $specialty
      */
     public $specialty = null;
 
     /**
-     * @property System.Code $qualification
+     * @property BaseTypes\Code $qualification
      */
     public $qualification = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.137';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.162';
 

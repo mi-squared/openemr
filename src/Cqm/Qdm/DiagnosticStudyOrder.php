@@ -16,42 +16,42 @@ class DiagnosticStudyOrder extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.Code $reason
+     * @property BaseTypes\Code $reason
      */
     public $reason = null;
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property System.Any $requester
+     * @property BaseTypes\Any $requester
      */
     public $requester = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.22';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'diagnostic_study';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'order';
 

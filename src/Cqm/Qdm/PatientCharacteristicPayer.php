@@ -16,32 +16,32 @@ class PatientCharacteristicPayer extends QDMBaseType
 {
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Patient Characteristic Payer';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.58';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'patient_characteristic';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'payer';
 

@@ -23,11 +23,24 @@ class PatientService extends BaseService
         $conditionService = new ConditionService();
         $conditions = $conditionService->fetchAllByPid($pid);
         foreach ($conditions as $condition) {
-            $qdmCondition = $conditionService->makeQdmRecord($condition);
+            $qdmCondition = $conditionService->makeQdmModel($condition);
             $qdmPatient->add_data_element($qdmCondition);
         }
 
-        return $qdmPatient;
+        $allergyIntoleranceService = new AllergyIntoleranceService();
+        $allergies = $allergyIntoleranceService->fetchAllByPid($pid);
+        foreach ($allergies as $allergy) {
+            $qdmAllergy = $allergyIntoleranceService->makeQdmModel($allergy);
+            $qdmPatient->add_data_element($qdmAllergy);
+        }
 
+        $encounterService = new EncounterService();
+        $encounters = $encounterService->fetchAllByPid($pid);
+        foreach ($encounters as $encounter) {
+            $qdmEncounterPerformed = $encounterService->makeQdmModel($encounter);
+            $qdmPatient->add_data_element($qdmEncounterPerformed);
+        }
+
+        return $qdmPatient;
     }
 }

@@ -16,12 +16,12 @@ class PositivePhysicalExamRecommended extends PhysicalExamRecommended
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Physical Exam, Recommended';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

@@ -16,17 +16,17 @@ class FacilityLocation extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
     /**
-     * @property System.Code $code
+     * @property BaseTypes\Code $code
      */
     public $code = null;
 
     /**
-     * @property interval<System.DateTime> $locationPeriod
+     * @property BaseTypes\Interval $locationPeriod
      */
     public $locationPeriod = null;
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

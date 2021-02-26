@@ -16,17 +16,17 @@ class Component extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
     /**
-     * @property System.Code $code
+     * @property BaseTypes\Code $code
      */
     public $code = null;
 
     /**
-     * @property System.Any $result
+     * @property BaseTypes\Any $result
      */
     public $result = null;
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

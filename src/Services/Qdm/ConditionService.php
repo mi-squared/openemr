@@ -7,32 +7,40 @@ use OpenEMR\Common\Uuid\UuidRegistry;
 use OpenEMR\Cqm\Qdm\BaseTypes\Interval;
 use OpenEMR\Cqm\Qdm\Diagnosis;
 use OpenEMR\Services\ConditionService as BaseService;
+use OpenEMR\Services\Qdm\Interfaces\MakesQdmModelInterface;
 
-class ConditionService extends BaseService
+class ConditionService extends BaseService implements MakesQdmModelInterface
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function fetchAllByPid($pid)
     {
         $result = sqlQuery("SELECT uuid from patient_data where pid = ?", [$pid]);
         $uuid = UuidRegistry::uuidToString($result['uuid']);
         $processingResult = $this->getAll(['lists.pid' => $uuid]);
-        $conditions = $processingResult->getData();
-        return $conditions;
+        $records = $processingResult->getData();
+        return $records;
     }
 
-    public function makeQdmRecord(array $record)
+    /**
+     * Map an OpenEMR record into a QDM model
+     *
+     * This
+     *
+     * @param array $record
+     * @return Diagnosis|null
+     * @throws \Exception
+     */
+    public function makeQdmModel(array $record)
     {
         $qdmRecord = null;
         if ($record['type'] === 'medical_problem') {
-            $diagnosis = [];
             if ($record['diagnosis']) {
                 // Get diagnosis
                 $qdmRecord = new Diagnosis([
-                    'prevalencePeriod' => new Interval(['low' => $record['begdate'], 'high' => $record['enddate'], 'lowClosed' => true, 'highClosed' => true]),
+                    'prevalencePeriod' => new Interval([
+                        'low' => $record['begdate'],
+                        'high' => $record['enddate'],
+                        'lowClosed' => $record['begdate'] ? true : false,
+                        'highClosed' => $record['enddate'] ? true : false]),
                     'dataElementCodes' => $record['diagnosis']
                 ]);
             }

@@ -16,12 +16,12 @@ class NegativeDiagnosticStudyPerformed extends DiagnosticStudyPerformed
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Diagnostic Study, Not Performed';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

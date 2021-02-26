@@ -16,12 +16,12 @@ class NegativeLaboratoryTestRecommended extends LaboratoryTestRecommended
 {
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Laboratory Test, Not Recommended';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

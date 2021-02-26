@@ -16,17 +16,17 @@ class Entity extends \OpenEMR\Cqm\Qdm\BaseTypes\Any
 {
 
     /**
-     * @property System.String $id
+     * @property string $id
      */
-    public $id = null;
+    public $id = '';
 
     /**
-     * @property QDM.Identifier $identifier
+     * @property BaseTypes\Identifier $identifier
      */
     public $identifier = null;
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

@@ -16,94 +16,94 @@ class ProcedurePerformed extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property System.DateTime $relevantDatetime
+     * @property BaseTypes\DateTime $relevantDatetime
      */
     public $relevantDatetime = null;
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property System.Code $reason
+     * @property BaseTypes\Code $reason
      */
     public $reason = null;
 
     /**
-     * @property System.Code $method
+     * @property BaseTypes\Code $method
      */
     public $method = null;
 
     /**
-     * @property System.Any $result
+     * @property BaseTypes\Any $result
      */
     public $result = null;
 
     /**
-     * @property System.Code $status
+     * @property BaseTypes\Code $status
      */
     public $status = null;
 
     /**
-     * @property System.Code $anatomicalLocationSite
+     * @property BaseTypes\Code $anatomicalLocationSite
      */
     public $anatomicalLocationSite = null;
 
     /**
-     * @property System.Integer $rank
+     * @property BaseTypes\Integer $rank
      */
     public $rank = null;
 
     /**
-     * @property System.Code $priority
+     * @property BaseTypes\Code $priority
      */
     public $priority = null;
 
     /**
-     * @property System.DateTime $incisionDatetime
+     * @property BaseTypes\DateTime $incisionDatetime
      */
     public $incisionDatetime = null;
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property list<QDM.Component> $components
+     * @property array $components
      */
     public $components = [
         
     ];
 
     /**
-     * @property System.Any $performer
+     * @property BaseTypes\Any $performer
      */
     public $performer = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.67';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'procedure';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'performed';
 

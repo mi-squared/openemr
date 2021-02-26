@@ -16,17 +16,17 @@ class CarePartner extends Entity
 {
 
     /**
-     * @property System.Code $relationship
+     * @property BaseTypes\Code $relationship
      */
     public $relationship = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.134';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.160';
 

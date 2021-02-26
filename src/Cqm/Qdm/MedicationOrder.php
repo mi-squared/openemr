@@ -16,82 +16,82 @@ class MedicationOrder extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $authorDatetime
+     * @property BaseTypes\DateTime $authorDatetime
      */
     public $authorDatetime = null;
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property System.Integer $refills
+     * @property BaseTypes\Integer $refills
      */
     public $refills = null;
 
     /**
-     * @property System.Quantity $dosage
+     * @property BaseTypes\Quantity $dosage
      */
     public $dosage = null;
 
     /**
-     * @property System.Quantity $supply
+     * @property BaseTypes\Quantity $supply
      */
     public $supply = null;
 
     /**
-     * @property System.Code $frequency
+     * @property BaseTypes\Code $frequency
      */
     public $frequency = null;
 
     /**
-     * @property System.Integer $daysSupplied
+     * @property BaseTypes\Integer $daysSupplied
      */
     public $daysSupplied = null;
 
     /**
-     * @property System.Code $route
+     * @property BaseTypes\Code $route
      */
     public $route = null;
 
     /**
-     * @property System.Code $setting
+     * @property BaseTypes\Code $setting
      */
     public $setting = null;
 
     /**
-     * @property System.Code $reason
+     * @property BaseTypes\Code $reason
      */
     public $reason = null;
 
     /**
-     * @property System.Code $negationRationale
+     * @property BaseTypes\Code $negationRationale
      */
     public $negationRationale = null;
 
     /**
-     * @property System.Any $prescriber
+     * @property BaseTypes\Any $prescriber
      */
     public $prescriber = null;
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.51';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'medication';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'order';
 

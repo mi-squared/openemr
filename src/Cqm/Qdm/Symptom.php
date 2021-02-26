@@ -16,42 +16,42 @@ class Symptom extends QDMBaseType
 {
 
     /**
-     * @property interval<System.DateTime> $prevalencePeriod
+     * @property BaseTypes\Interval $prevalencePeriod
      */
     public $prevalencePeriod = null;
 
     /**
-     * @property System.Code $severity
+     * @property BaseTypes\Code $severity
      */
     public $severity = null;
 
     /**
-     * @property System.Any $recorder
+     * @property BaseTypes\Any $recorder
      */
     public $recorder = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Symptom';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.116';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '2.16.840.1.113883.10.20.24.3.136';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'symptom';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = '';
 

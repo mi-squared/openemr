@@ -16,22 +16,22 @@ class QDMBaseType extends \OpenEMR\Cqm\Qdm\BaseTypes\DataElement
 {
 
     /**
-     * @property System.String $id
+     * @property string $id
      */
-    public $id = null;
+    public $id = '';
 
     /**
-     * @property System.Code $code
+     * @property BaseTypes\Code $code
      */
     public $code = null;
 
     /**
-     * @property System.String $patientId
+     * @property string $patientId
      */
-    public $patientId = null;
+    public $patientId = '';
 
     /**
-     * @property System.String $qdmVersion
+     * @property string $qdmVersion
      */
     public $qdmVersion = '5.5';
 

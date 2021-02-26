@@ -16,57 +16,57 @@ class MedicationActive extends QDMBaseType
 {
 
     /**
-     * @property System.DateTime $relevantDatetime
+     * @property BaseTypes\DateTime $relevantDatetime
      */
     public $relevantDatetime = null;
 
     /**
-     * @property interval<System.DateTime> $relevantPeriod
+     * @property BaseTypes\Interval $relevantPeriod
      */
     public $relevantPeriod = null;
 
     /**
-     * @property System.Quantity $dosage
+     * @property BaseTypes\Quantity $dosage
      */
     public $dosage = null;
 
     /**
-     * @property System.Code $frequency
+     * @property BaseTypes\Code $frequency
      */
     public $frequency = null;
 
     /**
-     * @property System.Code $route
+     * @property BaseTypes\Code $route
      */
     public $route = null;
 
     /**
-     * @property System.Any $recorder
+     * @property BaseTypes\Any $recorder
      */
     public $recorder = null;
 
     /**
-     * @property System.String $qdmTitle
+     * @property string $qdmTitle
      */
     public $qdmTitle = 'Medication, Active';
 
     /**
-     * @property System.String $hqmfOid
+     * @property string $hqmfOid
      */
     public $hqmfOid = '2.16.840.1.113883.10.20.28.4.44';
 
     /**
-     * @property System.String $qrdaOid
+     * @property string $qrdaOid
      */
     public $qrdaOid = '';
 
     /**
-     * @property System.String $qdmCategory
+     * @property string $qdmCategory
      */
     public $qdmCategory = 'medication';
 
     /**
-     * @property System.String $qdmStatus
+     * @property string $qdmStatus
      */
     public $qdmStatus = 'active';
 

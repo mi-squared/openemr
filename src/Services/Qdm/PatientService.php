@@ -3,9 +3,11 @@
 
 namespace OpenEMR\Services\Qdm;
 
+use OpenEMR\Cqm\Qdm\BaseTypes\Code;
 use OpenEMR\Cqm\Qdm\BaseTypes\Interval;
 use OpenEMR\Cqm\Qdm\Diagnosis;
 use OpenEMR\Cqm\Qdm\Patient;
+use OpenEMR\Cqm\Qdm\PatientCharacteristicBirthdate;
 use OpenEMR\Services\PatientService as BaseService;
 
 class PatientService extends BaseService
@@ -18,6 +20,16 @@ class PatientService extends BaseService
             'bundleId' => 1,
             '_fullName' => $patient['fname'] . ' ' . $patient['lname'],
             '_openEmrPid' => $patient['pid']
+        ]);
+
+        $patientCharacteristic = new PatientCharacteristicBirthdate([
+            'birthDatetime' => $patient['DOB'], // TODO should format include timezone offset and actual "time"
+            'dataElementCodes' => [
+                new Code([
+                    'code' => '21112-8',
+                    'system' => '2.16.840.1.113883.6.1'
+                ])
+            ]
         ]);
 
         $conditionService = new ConditionService();

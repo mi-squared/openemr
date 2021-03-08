@@ -23,14 +23,25 @@ class EncounterService extends BaseService implements MakesQdmModelInterface
 
     public function makeQdmModel(array $record)
     {
-       $qdmRecord = new EncounterPerformed([
-           'id' => $record['uuid'],
+        $qdmRecord = new EncounterPerformed([
+            'id' => $record['uuid'],
             'relevantPeriod' => new Interval([
                 'low' => $record['date'],
                 'high' => $record['date'],
                 'lowClosed' => $record['date'] ? true : false,
                 'highClosed' => $record['date'] ? true : false
-            ])
+            ]),
+            // TODO figure out what the code and system are for these, CPT codes?
+            'dataElementCodes' => [
+                'code' => '424589009',
+                'system' => '2.16.840.1.113883.6.96'
+           ],
+           'admissionSource' => null,
+           'dischargeDisposition' => null,
+           'facilityLocations' => [],
+           'lengthOfStay' => new Interval(),
+           'negationRationale' => null,
+           'principalDiagnosis' => null
        ]);
 
        return $qdmRecord;

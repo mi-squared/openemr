@@ -41,7 +41,7 @@ class ConditionService extends BaseService implements MakesQdmModelInterface
                         'high' => $record['enddate'],
                         'lowClosed' => $record['begdate'] ? true : false,
                         'highClosed' => $record['enddate'] ? true : false]),
-                    'dataElementCodes' => $record['diagnosis']
+                    'dataElementCodes' => $record['diagnosis'] // diagnosis contains code and system
                 ]);
             }
         }

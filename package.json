@@ -69,7 +69,6 @@
     "chart.js": "2.9.3",
     "checklist-model": "1.0.0",
     "ckeditor4": "4.15.0",
-    "cqm-service": "github:mi-squared/cqm-service",
     "datatables.net": "1.10.21",
     "datatables.net-bs4": "1.10.21",
     "datatables.net-colreorder": "1.5.2",
@@ -96,6 +95,8 @@
     "magic-wand-js": "1.0.0",
     "moment": "2.27.0",
     "numeral": "2.0.6",
+    "oe-cqm-parsers": "github:mi-squared/oe-cqm-parsers",
+    "oe-cqm-service": "github:mi-squared/oe-cqm-service",
     "purecss": "2.0.3",
     "select2": "4.0.13",
     "summernote": "0.8.18",
@@ -104,7 +105,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mi-squared/cqm-service.git"
+    "url": "https://github.com/mi-squared/oe-cqm-service.git"
   },
   "napa": {
     "bootstrap-rtl": "https://github.com/PerseusTheGreat/bootstrap-4-rtl/archive/24455eb4e0e675e82c40f30a911a5508ae09d846.zip",

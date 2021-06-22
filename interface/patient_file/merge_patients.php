@@ -93,6 +93,36 @@ function updateRows($tblname, $colname, $source_pid, $target_pid)
     }
 }
 
+/**
+ * Add a line into the audit log for a merge event.
+ *
+ * @param [type] $target_pid  the target patient id.
+ * @param [type] $log_message the message to log
+ * 
+ * @return void
+ */
+function logMergeEvent($target_pid, $log_message)
+{
+    EventAuditLogger::instance()->newEvent(
+        "patient-merge", $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
+        $log_message, $target_pid
+    );
+}
+
+/**
+ * Merge rows by changing the given colum of the given table 
+ * from source_pid to target_pid.
+ * 
+ * Gets the list of records with source, and list of records with target.
+ * for each 
+ * 
+ * @param [type] $tblname    the table to operate on.
+ * @param [type] $colname    the column name of the data to change.
+ * @param [type] $source_pid the data to be changed from.
+ * @param [type] $target_pid the data to be changed to.
+ * 
+ * @return void
+ */
 function mergeRows($tblname, $colname, $source_pid, $target_pid)
 {
     global $PRODUCTION;
@@ -112,7 +142,7 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
             while ($target_row = sqlFetchArray($target_res)) {
                 if ($source_row['type'] == $target_row['type']) {
                     if (strcmp($source_row['date'], $target_row['date']) < 0) {
-                        // we delete the entry from the target since the source has an older date
+                        // we delete the entry from the target since the source has an older date, then update source to target.
                         $sql1 = "DELETE FROM " . escape_table_name($tblname) . " WHERE " . escape_sql_column_name($colname, array($tblname)) . " = ? AND `type` = ?";
                         $sql2 = "UPDATE " . escape_table_name($tblname) . " SET " . escape_sql_column_name($colname, array($tblname)) .
                             " = ? WHERE " . escape_sql_column_name($colname, array($tblname)) . " = ?  AND `type` = ?";
@@ -121,18 +151,31 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                         if ($PRODUCTION) {
                             sqlStatement($sql1, array($target_pid, $source_row['type']));
                             sqlStatement($sql2, array($target_pid, $source_pid, $source_row['type']));
+                            logMergeEvent(
+                                $target_pid,
+                                "Deleted " . $target_pid. " row of type ". $source_row['type'] .
+                                " and Updated " . $source_pid . " to " . $target_pid .
+                                " in table ". $tblname
+                            );
                         }
                     } else {
+                        // we just delete the entry from the source.
                         $sql = "DELETE FROM " . escape_table_name($tblname) . " WHERE " . escape_sql_column_name($colname, array($tblname)) . " = ? AND `type` = ?";
                         echo "<br />$sql";
                         if ($PRODUCTION) {
                             sqlStatement($sql, array($source_pid, $source_row['type']));
+                            logMergeEvent(
+                                $target_pid,
+                                "Deleted " . $source_pid. " row of type ". $source_row['type'] .
+                                " in table ". $tblname
+                            );
                         }
                     }
                 }
             }
         }
-        // if there was no target but a source then check count again
+        // if there was no target but a source then check count again 
+        // ^^ should read : Check count again for the case of no target_rows.
         $crow = sqlQuery("SELECT COUNT(*) AS count FROM " . escape_table_name($tblname) . " WHERE " . escape_sql_column_name($colname, array($tblname)) . " = ?", array($source_pid));
         $count = $crow['count'];
         if ($count) {
@@ -140,6 +183,14 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
             echo "<br />$sql ($count)";
             if ($PRODUCTION) {
                 sqlStatement($sql, array($target_pid, $source_pid));
+                logMergeEvent(
+                    $target_pid,
+                    "Updated " . $source_pid. " rows of type ". $source_row['type'] .
+                    " to " . $target_pid . 
+                    " in table ". $tblname
+                );
+
+                // could log here : updated all [source] to [target] in [table]
             }
         }
     }

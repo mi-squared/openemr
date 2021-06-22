@@ -113,9 +113,6 @@ function logMergeEvent($target_pid, $log_message)
  * Merge rows by changing the given colum of the given table 
  * from source_pid to target_pid.
  * 
- * Gets the list of records with source, and list of records with target.
- * for each 
- * 
  * @param [type] $tblname    the table to operate on.
  * @param [type] $colname    the column name of the data to change.
  * @param [type] $source_pid the data to be changed from.
@@ -189,8 +186,6 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                     " to " . $target_pid . 
                     " in table ". $tblname
                 );
-
-                // could log here : updated all [source] to [target] in [table]
             }
         }
     }

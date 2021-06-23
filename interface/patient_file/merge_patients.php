@@ -65,7 +65,7 @@ function sel_patient(ename, epid) {
 
 <?php
 
-function deleteRows($tblname, $colname, $source_pid)
+function deleteRows($tblname, $colname, $source_pid, $target_pid)
 {
     global $PRODUCTION;
     $crow = sqlQuery("SELECT COUNT(*) AS count FROM " . escape_table_name($tblname) . " WHERE " . escape_sql_column_name($colname, array($tblname)) . " = ?", array($source_pid));
@@ -75,6 +75,10 @@ function deleteRows($tblname, $colname, $source_pid)
         echo "<br />$sql ($count)";
         if ($PRODUCTION) {
             sqlStatement($sql, array($source_pid));
+            logMergeEvent(
+                $target_pid,
+                "Deleted " . $source_pid . " in table ". $tblname
+            );
         }
     }
 }
@@ -89,6 +93,10 @@ function updateRows($tblname, $colname, $source_pid, $target_pid)
         echo "<br />$sql ($count)";
         if ($PRODUCTION) {
             sqlStatement($sql, array($target_pid, $source_pid));
+            logMergeEvent(
+                $target_pid,
+                "Updated column " . $colname . " from " . $source_pid . " to " . $target_pid . " in table ". $tblname
+            );
         }
     }
 }
@@ -300,7 +308,7 @@ if (!empty($_POST['form_submit'])) {
     while ($trow = sqlFetchArray($tres)) {
         $tblname = array_shift($trow);
         if ($tblname == 'patient_data' || $tblname == 'history_data' || $tblname == 'insurance_data') {
-            deleteRows($tblname, 'pid', $source_pid);
+            deleteRows($tblname, 'pid', $source_pid, $target_pid);
         } elseif ($tblname == 'chart_tracker') {
             updateRows($tblname, 'ct_pid', $source_pid, $target_pid);
         } elseif ($tblname == 'documents') {

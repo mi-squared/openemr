@@ -17,9 +17,9 @@ class CqmServiceManager
             'server.js';
         $client = new CqmClient(
             new System(),
-            '/Users/kchapple/Dev/www/openemr/master/node_modules/cqm-service/server.js',
-            'http://localhost',
-            '8089'
+            $servicePath,
+            'http://localhost', // should be 127.0.0.1 loopback
+            '8089' // make customizable?
         );
 
         return $client;

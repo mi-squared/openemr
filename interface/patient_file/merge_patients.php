@@ -102,22 +102,6 @@ function updateRows($tblname, $colname, $source_pid, $target_pid)
 }
 
 /**
- * Add a line into the audit log for a merge event.
- *
- * @param [type] $target_pid  the target patient id.
- * @param [type] $log_message the message to log
- * 
- * @return void
- */
-function logMergeEvent($target_pid, $log_message)
-{
-    EventAuditLogger::instance()->newEvent(
-        "patient-merge", $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
-        $log_message, $target_pid
-    );
-}
-
-/**
  * Merge rows by changing the given colum of the given table 
  * from source_pid to target_pid.
  * 
@@ -197,6 +181,22 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
             }
         }
     }
+}
+
+/**
+ * Add a line into the audit log for a merge event.
+ *
+ * @param [type] $target_pid  the target patient id.
+ * @param [type] $log_message the message to log
+ * 
+ * @return void
+ */
+function logMergeEvent($target_pid, $log_message)
+{
+    EventAuditLogger::instance()->newEvent(
+        "patient-merge", $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
+        $log_message, $target_pid
+    );
 }
 
 if (!empty($_POST['form_submit'])) {

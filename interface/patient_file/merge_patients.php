@@ -78,7 +78,7 @@ function deleteRows($tblname, $colname, $source_pid, $target_pid)
             sqlStatement($sql, array($source_pid));
             logMergeEvent(
                 $target_pid,
-                "Deleted " . $source_pid . " in table ". $tblname
+                "Deleted rows with " .$colname . " = " . $source_pid . " in table " . $tblname
             );
         }
     }
@@ -96,7 +96,7 @@ function updateRows($tblname, $colname, $source_pid, $target_pid)
             sqlStatement($sql, array($target_pid, $source_pid));
             logMergeEvent(
                 $target_pid,
-                "Updated column " . $colname . " from " . $source_pid . " to " . $target_pid . " in table ". $tblname
+                "Updated rows with " . $colname . " = " . $source_pid . " to " . $target_pid . " in table ". $tblname
             );
         }
     }
@@ -143,8 +143,8 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                             sqlStatement($sql2, array($target_pid, $source_pid, $source_row['type']));
                             logMergeEvent(
                                 $target_pid,
-                                "Deleted " . $target_pid. " row of type ". $source_row['type'] .
-                                " and Updated " . $source_pid . " to " . $target_pid .
+                                "Deleted rows with " . $colname . " = " . $target_pid. " and type = ". $source_row['type'] .
+                                " and Updated rows with " . $colname . " = " . $source_pid . " to " . $target_pid .
                                 " in table ". $tblname
                             );
                         }
@@ -156,7 +156,7 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                             sqlStatement($sql, array($source_pid, $source_row['type']));
                             logMergeEvent(
                                 $target_pid,
-                                "Deleted " . $source_pid. " row of type ". $source_row['type'] .
+                                "Deleted rows with " . $colname . " = " . $source_pid. " and type = ". $source_row['type'] .
                                 " in table ". $tblname
                             );
                         }
@@ -175,9 +175,8 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                 sqlStatement($sql, array($target_pid, $source_pid));
                 logMergeEvent(
                     $target_pid,
-                    "Updated " . $source_pid. " rows of type ". $source_row['type'] .
-                    " to " . $target_pid . 
-                    " in table ". $tblname
+                    "Updated rows with " . $colname . " = " . $source_pid. " and type = ". $source_row['type'] .
+                    " to " . $target_pid . " in table ". $tblname
                 );
             }
         }

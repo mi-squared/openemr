@@ -20,6 +20,7 @@ require_once("../globals.php");
 use OpenEMR\Common\Acl\AclMain;
 use OpenEMR\Common\Csrf\CsrfUtils;
 use OpenEMR\Core\Header;
+use OpenEMR\Common\Logging\EventAuditLogger;
 
 // Set this to true for production use. If false you will get a "dry run" with no updates.
 $PRODUCTION = true;

@@ -77,7 +77,7 @@ function deleteRows($tblname, $colname, $source_pid, $target_pid)
         if ($PRODUCTION) {
             sqlStatement($sql, array($source_pid));
             logMergeEvent(
-                $target_pid,
+                $target_pid, "delete",
                 "Deleted rows with " .$colname . " = " . $source_pid . " in table " . $tblname
             );
         }
@@ -95,7 +95,7 @@ function updateRows($tblname, $colname, $source_pid, $target_pid)
         if ($PRODUCTION) {
             sqlStatement($sql, array($target_pid, $source_pid));
             logMergeEvent(
-                $target_pid,
+                $target_pid, "update",
                 "Updated rows with " . $colname . " = " . $source_pid . " to " . $target_pid . " in table ". $tblname
             );
         }
@@ -142,9 +142,13 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                             sqlStatement($sql1, array($target_pid, $source_row['type']));
                             sqlStatement($sql2, array($target_pid, $source_pid, $source_row['type']));
                             logMergeEvent(
-                                $target_pid,
+                                $target_pid, "delete",
                                 "Deleted rows with " . $colname . " = " . $target_pid. " and type = ". $source_row['type'] .
-                                " and Updated rows with " . $colname . " = " . $source_pid . " to " . $target_pid .
+                                " in table ". $tblname
+                            );
+                            logMergeEvent(
+                                $target_pid, "update",
+                                "Updated rows with " . $colname . " = " . $source_pid . " to " . $target_pid .
                                 " in table ". $tblname
                             );
                         }
@@ -155,7 +159,7 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
                         if ($PRODUCTION) {
                             sqlStatement($sql, array($source_pid, $source_row['type']));
                             logMergeEvent(
-                                $target_pid,
+                                $target_pid, "delete",
                                 "Deleted rows with " . $colname . " = " . $source_pid. " and type = ". $source_row['type'] .
                                 " in table ". $tblname
                             );
@@ -174,7 +178,7 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
             if ($PRODUCTION) {
                 sqlStatement($sql, array($target_pid, $source_pid));
                 logMergeEvent(
-                    $target_pid,
+                    $target_pid, "update",
                     "Updated rows with " . $colname . " = " . $source_pid. " and type = ". $source_row['type'] .
                     " to " . $target_pid . " in table ". $tblname
                 );
@@ -187,14 +191,15 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
  * Add a line into the audit log for a merge event.
  *
  * @param [type] $target_pid  the target patient id.
+ * @param [type] $event_type  the type of db change (update,delete,etc.)
  * @param [type] $log_message the message to log
  * 
  * @return void
  */
-function logMergeEvent($target_pid, $log_message)
+function logMergeEvent($target_pid, $event_type, $log_message)
 {
     EventAuditLogger::instance()->newEvent(
-        "patient_merge", $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
+        "patient-merge-".$event_type, $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
         $log_message, $target_pid
     );
 }

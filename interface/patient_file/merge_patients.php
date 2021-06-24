@@ -195,7 +195,7 @@ function mergeRows($tblname, $colname, $source_pid, $target_pid)
 function logMergeEvent($target_pid, $log_message)
 {
     EventAuditLogger::instance()->newEvent(
-        "patient-merge", $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
+        "patient_merge", $_SESSION['authUser'], $_SESSION['authProvider'], 1, 
         $log_message, $target_pid
     );
 }

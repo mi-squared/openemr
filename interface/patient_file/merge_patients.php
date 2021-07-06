@@ -4,15 +4,13 @@
  * This script merges two patient charts into a single patient chart.
  * It is to correct the error of creating a duplicate patient.
  *
- * @category  Patient_Data
  * @package   OpenEMR
+ * @link      http://www.open-emr.org
  * @author    Rod Roark <rod@sunsetsystems.com>
  * @author    Brady Miller <brady.g.miller@gmail.com>
- * @copyright 2013 Rod Roark <rod@sunsetsystems.com>
- * @copyright 2018 Brady Miller <brady.g.miller@gmail.com>
- * @license   https://github.com/openemr/openemr/blob/master/LICENSE
- * GNU General Public License 3
- * @link      http://www.open-emr.org
+ * @copyright Copyright (c) 2013 Rod Roark <rod@sunsetsystems.com>
+ * @copyright Copyright (c) 2018 Brady Miller <brady.g.miller@gmail.com>
+ * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
 set_time_limit(0);
@@ -452,8 +450,7 @@ if (!empty($_POST['form_submit'])) {
 </p>
 
 <form method='post' action='merge_patients.php'>
-<input type="hidden" name="csrf_token_form" 
-    value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
+<input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
 <div class="table-responsive">
 <table class="table w-100">
  <tr>
@@ -461,14 +458,11 @@ if (!empty($_POST['form_submit'])) {
     <?php echo xlt('Target Patient') ?>
   </td>
   <td>
-   <input type='text' class="form-control" size='30' name='form_target_patient' 
-        value=' (<?php echo xla('Click to select'); ?>)' 
-        onclick='sel_patient(this, this.form.form_target_pid)' 
-        title='<?php echo xla('Click to select patient'); ?>' readonly />
+  <input type='text' class="form-control" size='30' name='form_target_patient' value=' (<?php echo xla('Click to select'); ?>)' onclick='sel_patient(this, this.form.form_target_pid)' title='<?php echo xla('Click to select patient'); ?>' readonly />
    <input type='hidden' name='form_target_pid' value='0' />
   </td>
   <td>
-    <?php echo xlt('This is the main chart that is to receive the merged data.'); ?>
+  <?php echo xlt('This is the main chart that is to receive the merged data.'); ?>
   </td>
  </tr>
  <tr>
@@ -483,49 +477,27 @@ if (!empty($_POST['form_submit'])) {
    <input type='hidden' name='form_source_pid' value='0' />
   </td>
   <td>
-    <?php echo xlt(
-        'This is the chart that is to be merged into the main chart 
-        and then deleted.'
-    ); ?>
+    <?php echo xlt('This is the chart that is to be merged into the main chart and then deleted.'); ?>
   </td>
  </tr>
 </table>
-<p><input type='submit' class="btn btn-primary" name='form_submit' 
-    value='<?php echo xla('Merge'); ?>' /></p>
+<p><input type='submit' class="btn btn-primary" name='form_submit' value='<?php echo xla('Merge'); ?>' /></p>
 </div>
 </form>
 <div class="jumbotron">
-    <p class="font-weight-bold"><?php echo xlt(
-        'This utility is experimental. 
-    Back up your database and documents before using it!'
-    ); ?></p>
+    <p class="font-weight-bold"><?php echo xlt('This utility is experimental. Back up your database and documents before using it!'); ?></p>
 
 <?php if (!$PRODUCTION) { ?>
 <p><?php echo xlt('This will be a "dry run" with no physical data updates.'); ?></p>
 <?php } ?>
 
-<p><?php echo xlt(
-    'This will merge two patient charts into one.  
-    It is useful when a patient has been duplicated by mistake.  
-    If that happens often, fix your office procedures - do not run this routinely!'
-); ?></p>
+<p><?php echo xlt('This will merge two patient charts into one.  It is useful when a patient has been duplicated by mistake.  If that happens often, fix your office procedures - do not run this routinely!'); ?></p>
 
-<p><?php echo xlt(
-    'The first ("target") chart is the one that is considered 
-    the most complete and accurate. 
-    Demographics, history and insurance sections for this one will be retained.'
-); ?></p>
+<p><?php echo xlt('The first ("target") chart is the one that is considered the most complete and accurate. Demographics, history and insurance sections for this one will be retained.'); ?></p>
 
-<p><?php echo xlt(
-    'The second ("source") chart will have its demographics, 
-    history and insurance sections discarded.  
-    Its other data will be merged into the target chart.'
-); ?></p>
+<p><?php echo xlt('The second ("source") chart will have its demographics, history and insurance sections discarded.  Its other data will be merged into the target chart.'); ?></p>
 
-<p><?php echo xlt(
-    'The merge will not run unless SSN and DOB for the two charts are identical.
-     DOBs cannot be empty.'
-); ?></p>
+<p><?php echo xlt('The merge will not run unless SSN and DOB for the two charts are identical. DOBs cannot be empty.'); ?></p>
 </div>
 </div>
 </body>

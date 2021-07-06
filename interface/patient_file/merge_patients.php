@@ -458,11 +458,11 @@ if (!empty($_POST['form_submit'])) {
     <?php echo xlt('Target Patient') ?>
   </td>
   <td>
-  <input type='text' class="form-control" size='30' name='form_target_patient' value=' (<?php echo xla('Click to select'); ?>)' onclick='sel_patient(this, this.form.form_target_pid)' title='<?php echo xla('Click to select patient'); ?>' readonly />
+   <input type='text' class="form-control" size='30' name='form_target_patient' value=' (<?php echo xla('Click to select'); ?>)' onclick='sel_patient(this, this.form.form_target_pid)' title='<?php echo xla('Click to select patient'); ?>' readonly />
    <input type='hidden' name='form_target_pid' value='0' />
   </td>
   <td>
-  <?php echo xlt('This is the main chart that is to receive the merged data.'); ?>
+    <?php echo xlt('This is the main chart that is to receive the merged data.'); ?>
   </td>
  </tr>
  <tr>
